@@ -1,0 +1,296 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=5 format=3 uid="uid://c6s087iv32oba"]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_7hrog"]
+script = ExtResource("1_7hrog")
+id = "OOP1"
+term = "Encapsulation"
+keyword = "hides"
+definition = "the pillar that hides data, preventing users from accessing it"
+simple_terms = "public = access, private = no access"
+examples = ["public", "private"]
+difficulty = 1
+related_to = ["pillars"]
+type_of_information = ["list", "defined", "definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_bkryn"]
+script = ExtResource("1_7hrog")
+id = "OOP2"
+term = "Inheritance"
+keyword = "classes"
+definition = "makes use of class heirarchy to access functions and variables native to other classes"
+simple_terms = "children gets parent behavior"
+examples = ["public", "private"]
+difficulty = 2
+related_to = ["pillars"]
+type_of_information = ["list", "defined", "definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop3"]
+script = ExtResource("1_7hrog")
+id = "OOP3"
+term = "Polymorphism"
+keyword = "forms"
+definition = "ability for different classes to be treated via the same interface or parent type"
+simple_terms = "many forms, one interface"
+examples = ["method override", "interface implementation"]
+difficulty = 2
+related_to = ["pillars", "inheritance"]
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop4"]
+script = ExtResource("1_7hrog")
+id = "OOP4"
+term = "Abstraction"
+keyword = "simplify"
+definition = "exposing only necessary details while hiding complex implementation"
+simple_terms = "show what, hide how"
+examples = ["abstract class", "interfaces"]
+difficulty = 2
+related_to = ["pillars"]
+type_of_information = ["definition", "explain"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop5"]
+script = ExtResource("1_7hrog")
+id = "OOP5"
+term = "Class"
+keyword = "blueprint"
+definition = "a blueprint that defines attributes and behavior for objects"
+simple_terms = "template for objects"
+examples = ["Player", "Enemy"]
+difficulty = 1
+related_to = ["objects"]
+type_of_information = ["list", "definition", "explain"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop6"]
+script = ExtResource("1_7hrog")
+id = "OOP6"
+term = "Object"
+keyword = "instance"
+definition = "a concrete instance of a class with state and behavior"
+simple_terms = "real example of a class"
+examples = ["player1", "enemy_boss"]
+difficulty = 1
+related_to = ["class"]
+type_of_information = ["definition", "explain"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop7"]
+script = ExtResource("1_7hrog")
+id = "OOP7"
+term = "Constructor"
+keyword = "init"
+definition = "special method that runs when an object is created to initialize state"
+simple_terms = "setup when created"
+examples = ["__init__", "new()"]
+difficulty = 1
+related_to = ["objects", "class"]
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop8"]
+script = ExtResource("1_7hrog")
+id = "OOP8"
+term = "Destructor"
+keyword = "cleanup"
+definition = "optional method called when an object is destroyed to free resources"
+simple_terms = "cleanup on delete"
+examples = ["__del__", "finalize()"]
+difficulty = 2
+related_to = ["memory", "lifecycle"]
+type_of_information = ["definition", "explain"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop9"]
+script = ExtResource("1_7hrog")
+id = "OOP9"
+term = "Method"
+keyword = "function"
+definition = "a function defined inside a class that operates on objects' data"
+simple_terms = "class function"
+examples = ["move()", "attack()"]
+difficulty = 1
+related_to = ["class", "object"]
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop10"]
+script = ExtResource("1_7hrog")
+id = "OOP10"
+term = "Attribute"
+keyword = "property"
+definition = "data stored in an object describing its state"
+simple_terms = "variables on objects"
+examples = ["health", "position"]
+difficulty = 1
+related_to = ["object", "class"]
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop11"]
+script = ExtResource("1_7hrog")
+id = "OOP11"
+term = "Interface"
+keyword = "contract"
+definition = "a contract that defines methods a class must implement without providing implementation"
+simple_terms = "what methods must do"
+examples = ["IPrintable", "IDamageable"]
+difficulty = 2
+related_to = ["abstraction"]
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop12"]
+script = ExtResource("1_7hrog")
+id = "OOP12"
+term = "Composition"
+keyword = "has-a"
+definition = "building complex objects by combining simpler ones (has-a relationship)"
+simple_terms = "objects contain other objects"
+examples = ["Car has Engine"]
+difficulty = 2
+related_to = ["design"]
+type_of_information = ["definition", "explain"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop13"]
+script = ExtResource("1_7hrog")
+id = "OOP13"
+term = "Aggregation"
+keyword = "shared"
+definition = "a weaker form of composition where parts can exist independently"
+simple_terms = "objects use other objects"
+examples = ["Team has Players"]
+difficulty = 2
+related_to = ["composition"]
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop14"]
+script = ExtResource("1_7hrog")
+id = "OOP14"
+term = "Association"
+keyword = "linked"
+definition = "a relationship where objects are aware of each other but no ownership implied"
+simple_terms = "objects reference each other"
+examples = ["Teacher <-> Student"]
+difficulty = 2
+related_to = ["design"]
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop15"]
+script = ExtResource("1_7hrog")
+id = "OOP15"
+term = "Method Overriding"
+keyword = "override"
+definition = "a child class provides its own implementation of a parent method"
+simple_terms = "replace parent method"
+examples = ["draw() in Shape subclasses"]
+difficulty = 2
+related_to = ["polymorphism", "inheritance"]
+type_of_information = ["explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop16"]
+script = ExtResource("1_7hrog")
+id = "OOP16"
+term = "Method Overloading"
+keyword = "overload"
+definition = "defining multiple methods with the same name but different parameters"
+simple_terms = "same name, different args"
+examples = ["print(int)", "print(string)"]
+difficulty = 2
+related_to = ["methods"]
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop17"]
+script = ExtResource("1_7hrog")
+id = "OOP17"
+term = "Design Pattern: Singleton"
+keyword = "single"
+definition = "a pattern ensuring only one instance of a class exists"
+simple_terms = "one global instance"
+examples = ["GameManager"]
+difficulty = 3
+related_to = ["patterns"]
+type_of_information = ["list", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop18"]
+script = ExtResource("1_7hrog")
+id = "OOP18"
+term = "Design Pattern: Factory"
+keyword = "create"
+definition = "a pattern that encapsulates object creation logic"
+simple_terms = "use factory to make objects"
+examples = ["EnemyFactory"]
+difficulty = 3
+related_to = ["patterns"]
+type_of_information = ["list", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop19"]
+script = ExtResource("1_7hrog")
+id = "OOP19"
+term = "Design Pattern: Observer"
+keyword = "notify"
+definition = "a pattern where observers subscribe to and react to events from a subject"
+simple_terms = "publish-subscribe"
+examples = ["UI listens to model changes"]
+difficulty = 3
+related_to = ["patterns", "events"]
+type_of_information = ["explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop20"]
+script = ExtResource("1_7hrog")
+id = "OOP20"
+term = "SOLID: Single Responsibility"
+keyword = "SRP"
+definition = "a class should have only one reason to change"
+simple_terms = "one job per class"
+examples = ["Logger separate from Parser"]
+difficulty = 3
+related_to = ["principles"]
+type_of_information = ["list", "explain"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop21"]
+script = ExtResource("1_7hrog")
+id = "OOP21"
+term = "Coupling"
+keyword = "dependency"
+definition = "degree to which one component depends on another"
+simple_terms = "less coupling is better"
+examples = ["tight vs loose coupling"]
+difficulty = 2
+related_to = ["design"]
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_oop22"]
+script = ExtResource("1_7hrog")
+id = "OOP22"
+term = "Cohesion"
+keyword = "relatedness"
+definition = "how closely-related the responsibilities of a module are"
+simple_terms = "high cohesion is good"
+examples = ["utility class vs focused class"]
+difficulty = 2
+related_to = ["design"]
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Object Oriented Programming"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_7hrog"), SubResource("Resource_bkryn"), SubResource("Resource_oop3"), SubResource("Resource_oop4"), SubResource("Resource_oop5"), SubResource("Resource_oop6"), SubResource("Resource_oop7"), SubResource("Resource_oop8"), SubResource("Resource_oop9"), SubResource("Resource_oop10"), SubResource("Resource_oop11"), SubResource("Resource_oop12"), SubResource("Resource_oop13"), SubResource("Resource_oop14"), SubResource("Resource_oop15"), SubResource("Resource_oop16"), SubResource("Resource_oop17"), SubResource("Resource_oop18"), SubResource("Resource_oop19"), SubResource("Resource_oop20"), SubResource("Resource_oop21"), SubResource("Resource_oop22")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"
