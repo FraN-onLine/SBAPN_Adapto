@@ -15,13 +15,15 @@ var selected_option: int = -1  # 0 for option1, 1 for option2
 var question_type: int = 0  # 0=keyword, 1=simple_terms, 2=definition
 var option1_value: String = ""
 var option2_value: String = ""
-var hp: int = 100
-var max_hp: int = 100
+var hp: int = 5
+var max_hp: int = 5
 var time_remaining: int = 30
 var max_time: int = 30
+@onready var player_sprite = $Player
 
 func _ready() -> void:
 	# Load the OOP lesson
+	$HPItem.size.x = hp * 32
 	lesson = load("res://Lessons/lesson_files/Object Oriented/oop.tres")
 	
 	# Connect button signals
@@ -117,7 +119,6 @@ func answer_check() -> void:
 	option1_button.disabled = true
 	option2_button.disabled = true
 	question_timer.stop()
-	
 	var selected_value = option1_value if selected_option == 0 else option2_value
 	var is_correct = (selected_value == current_item.term)
 	
@@ -127,9 +128,14 @@ func answer_check() -> void:
 		option2_button.disabled = false
 		load_next_question()
 	else:
-		hp -= 10
+		hp -= 1
+		$HPItem.size.x = hp * 32
+		player_sprite.modulate = Color(1, 0, 0, 0.75)
+		await get_tree().create_timer(0.1).timeout
+		player_sprite.modulate = Color(1, 1, 1)
 		update_hp_display()
 		if hp <= 0:
+			player_sprite.play("death")
 			await get_tree().create_timer(2.0).timeout
 			game_over()
 		else:
