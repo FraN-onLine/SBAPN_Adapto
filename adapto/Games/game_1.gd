@@ -35,13 +35,12 @@ func _ready() -> void:
 	load_next_question()
 
 func load_next_question() -> void:
-	# Clear feedback and reset selection
 	feedback_label.text = ""
 	selected_option = -1
 	option1_button.modulate = Color.WHITE
 	option2_button.modulate = Color.WHITE
 	
-	# Get random lesson item
+	#Get random lesson item
 	current_item = lesson.get_random_lesson_item()
 	if current_item == null:
 		question.text = "No lesson items available!"
@@ -53,11 +52,11 @@ func load_next_question() -> void:
 	# Set up the question text
 	var display_text = ""
 	match question_type:
-		0:  # Show keyword
+		0:  #keyword
 			display_text = current_item.keyword
-		1:  # Show simple_terms
+		1:  #st
 			display_text = current_item.simple_terms
-		2:  # Show definition
+		2:  #def
 			display_text = current_item.definition
 	
 	# Find second term (either related or random)
@@ -104,11 +103,11 @@ func find_related_or_random_term() -> String:
 				candidates.append(item.term)
 				break
 	
-	# If we found candidates with shared related_to, pick a random one
+	#random related term
 	if not candidates.is_empty():
 		return candidates[randi() % candidates.size()]
 	
-	# Otherwise, pick a random term from the lesson
+	#random term
 	var random_item = lesson.get_random_lesson_item()
 	while random_item.id == current_item.id:
 		random_item = lesson.get_random_lesson_item()
@@ -135,8 +134,7 @@ func _on_submit_pressed() -> void:
 		update_hp_display()
 		feedback_label.text = "✗ Incorrect! (-10 HP) The answer was: " + current_item.term
 		feedback_label.modulate = Color.RED
-		
-		# Check for game over
+	
 		if hp <= 0:
 			await get_tree().create_timer(2.0).timeout
 			game_over()
@@ -150,8 +148,8 @@ func _on_timer_tick() -> void:
 	
 	if time_remaining <= 0:
 		question_timer.stop()
-		# Time's up, treat as incorrect
-		selected_option = 0  # Fake select for the check
+		#TO
+		selected_option = 0  #wrong answer
 		hp -= 10
 		update_hp_display()
 		feedback_label.text = "⏱ Time's up! (-10 HP) The answer was: " + current_item.term
