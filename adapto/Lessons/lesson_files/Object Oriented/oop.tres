@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Lesson" load_steps=5 format=3 uid="uid://c6s087iv32oba"]
+[gd_resource type="Resource" script_class="Lesson" load_steps=25 format=3 uid="uid://c6s087iv32oba"]
 
 [ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://Lessons/lesson_item.gd" id="1_7hrog"]
 [ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://Lessons/lesson.gd" id="2_bkryn"]

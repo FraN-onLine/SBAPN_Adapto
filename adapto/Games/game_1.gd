@@ -3,7 +3,6 @@ extends Node2D
 @onready var question = $Question
 @onready var option1_button = $Option1Button
 @onready var option2_button = $Option2Button
-@onready var submit_button = $SubmitButton
 @onready var feedback_label = $FeedbackLabel
 @onready var hp_label = $HPLabel
 @onready var timer_label = $TimerLabel
@@ -28,7 +27,6 @@ func _ready() -> void:
 	# Connect button signals
 	option1_button.pressed.connect(_on_option1_pressed)
 	option2_button.pressed.connect(_on_option2_pressed)
-	submit_button.pressed.connect(_on_submit_pressed)
 	question_timer.timeout.connect(_on_timer_tick)
 	
 	# Load first question
@@ -71,7 +69,7 @@ func load_next_question() -> void:
 	option2_value = options[1]
 	
 	# Set UI text
-	question.text = "What is this?\n\n" + display_text
+	question.text =  display_text
 	option1_button.text = option1_value
 	option2_button.text = option2_value
 	
@@ -83,11 +81,13 @@ func _on_option1_pressed() -> void:
 	selected_option = 0
 	option1_button.modulate = Color.YELLOW
 	option2_button.modulate = Color.WHITE
+	answer_check()
 
 func _on_option2_pressed() -> void:
 	selected_option = 1
 	option2_button.modulate = Color.YELLOW
 	option1_button.modulate = Color.WHITE
+	answer_check()
 
 func find_related_or_random_term() -> String:
 	# Try to find a term with shared related_to values
@@ -113,33 +113,29 @@ func find_related_or_random_term() -> String:
 		random_item = lesson.get_random_lesson_item()
 	return random_item.term
 
-func _on_submit_pressed() -> void:
-	if selected_option == -1:
-		feedback_label.text = "Please select an option!"
-		feedback_label.modulate = Color.WHITE
-		return
-	
+func answer_check() -> void:
+	option1_button.disabled = true
+	option2_button.disabled = true
 	question_timer.stop()
 	
 	var selected_value = option1_value if selected_option == 0 else option2_value
 	var is_correct = (selected_value == current_item.term)
 	
 	if is_correct:
-		feedback_label.text = "✓ Correct! Loading next question..."
-		feedback_label.modulate = Color.GREEN
 		await get_tree().create_timer(1.5).timeout
+		option1_button.disabled = false
+		option2_button.disabled = false
 		load_next_question()
 	else:
 		hp -= 10
 		update_hp_display()
-		feedback_label.text = "✗ Incorrect! (-10 HP) The answer was: " + current_item.term
-		feedback_label.modulate = Color.RED
-	
 		if hp <= 0:
 			await get_tree().create_timer(2.0).timeout
 			game_over()
 		else:
 			await get_tree().create_timer(2.0).timeout
+			option1_button.disabled = false
+			option2_button.disabled = false
 			load_next_question()
 
 func _on_timer_tick() -> void:
@@ -169,7 +165,6 @@ func game_over() -> void:
 	question.text = "GAME OVER!"
 	option1_button.disabled = true
 	option2_button.disabled = true
-	submit_button.disabled = true
 	feedback_label.text = "Final HP: " + str(hp) + "\n\nReturning to menu..."
 	feedback_label.modulate = Color.RED
 	await get_tree().create_timer(3.0).timeout

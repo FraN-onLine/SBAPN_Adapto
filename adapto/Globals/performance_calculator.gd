@@ -4,4 +4,7 @@ extends Node
 var average_completion_time = {}
 var best_completion_time = {}
 var worst_completion_time = {}
+
 #var 
+#goods
+#oka
