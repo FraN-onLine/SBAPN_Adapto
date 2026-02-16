@@ -13,6 +13,8 @@ simple_terms = "public = access, private = no access"
 examples = ["public", "private"]
 difficulty = 1
 related_to = ["pillars"]
+tof_statement ={"true": "Encapsulation is the pillar that hides data, preventing users from accessing it.", 
+"false": "Encapsulation is the pillar that allows users to access data."}
 type_of_information = ["list", "defined", "definition", "explain", "apply"]
 metadata/_custom_type_script = "uid://dadne10e1geqd"
 
@@ -26,6 +28,8 @@ simple_terms = "children gets parent behavior"
 examples = ["public", "private"]
 difficulty = 2
 related_to = ["pillars"]
+tof_statement ={"true": "Inheritance allows classes to access functions and variables of other classes through a hierarchy.", 
+"false": "Inheritance prevents classes from accessing functions and variables of other classes."}
 type_of_information = ["list", "defined", "definition", "explain", "apply"]
 metadata/_custom_type_script = "uid://dadne10e1geqd"
 
@@ -39,6 +43,8 @@ simple_terms = "many forms, one interface"
 examples = ["method override", "interface implementation"]
 difficulty = 2
 related_to = ["pillars", "inheritance"]
+tof_statement ={"true": "Polymorphism allows different classes to be treated through the same interface or parent type.", 
+"false": "Polymorphism prevents different classes from being treated through the same interface or parent type."}
 type_of_information = ["definition", "explain", "apply"]
 metadata/_custom_type_script = "uid://dadne10e1geqd"
 
@@ -52,6 +58,8 @@ simple_terms = "show what, hide how"
 examples = ["abstract class", "interfaces"]
 difficulty = 2
 related_to = ["pillars"]
+tof_statement ={"true": "Abstraction simplifies complex systems by exposing only necessary details and hiding complex implementation.", 
+"false": "Abstraction complicates systems by exposing all details and hiding nothing."}
 type_of_information = ["definition", "explain"]
 metadata/_custom_type_script = "uid://dadne10e1geqd"
 
@@ -65,6 +73,8 @@ simple_terms = "template for objects"
 examples = ["Player", "Enemy"]
 difficulty = 1
 related_to = ["objects"]
+tof_statement ={"true": "A class is a blueprint that defines attributes and behavior for objects.", 
+"false": "A class is an instance of an object."}
 type_of_information = ["list", "definition", "explain"]
 metadata/_custom_type_script = "uid://dadne10e1geqd"
 
@@ -78,6 +88,8 @@ simple_terms = "real example of a class"
 examples = ["player1", "enemy_boss"]
 difficulty = 1
 related_to = ["class"]
+tof_statement ={"true": "An object is a concrete instance of a class with state and behavior.", 
+"false": "An object is a blueprint that defines attributes and behavior for classes."}
 type_of_information = ["definition", "explain"]
 metadata/_custom_type_script = "uid://dadne10e1geqd"
 
@@ -91,6 +103,8 @@ simple_terms = "setup when created"
 examples = ["__init__", "new()"]
 difficulty = 1
 related_to = ["objects", "class"]
+tof_statement ={"true": "A constructor is a special method that runs when an object is created to initialize its state.", 
+"false": "A constructor is a method that runs when an object is destroyed to clean up resources."}
 type_of_information = ["definition", "apply"]
 metadata/_custom_type_script = "uid://dadne10e1geqd"
 
@@ -104,6 +118,8 @@ simple_terms = "cleanup on delete"
 examples = ["__del__", "finalize()"]
 difficulty = 2
 related_to = ["memory", "lifecycle"]
+tof_statement ={"true": "A destructor is an optional method called when an object is destroyed to free resources.", 
+"false": "A destructor is a method that runs when an object is created to initialize its state."}
 type_of_information = ["definition", "explain"]
 metadata/_custom_type_script = "uid://dadne10e1geqd"
 
@@ -117,6 +133,8 @@ simple_terms = "class function"
 examples = ["move()", "attack()"]
 difficulty = 1
 related_to = ["class", "object"]
+tof_statement ={"true": "A method is a function defined inside a class that operates on objects' data.", 
+"false": "A method is a variable defined inside a class that stores data."}
 type_of_information = ["definition", "apply"]
 metadata/_custom_type_script = "uid://dadne10e1geqd"
 

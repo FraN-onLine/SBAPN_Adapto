@@ -11,4 +11,5 @@ class_name LessonItem
 @export var image: Texture2D
 @export var difficulty = 2
 @export var related_to = ["pillars"]
+@export var tof_statement ={"true": "Encapsulation is the pillar that hides data, preventing users from accessing it.", "false": "Encapsulation is the pillar that allows users to access data."}
 @export var type_of_information = ["list", "defined", "definition", "explain", "apply"] #more or less
