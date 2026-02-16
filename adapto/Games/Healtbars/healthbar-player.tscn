@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2hxhom57jt5v"]
+
+[ext_resource type="Texture2D" uid="uid://cyvivr746hdw5" path="res://Assets/Healthbar-Player-Sheet.png" id="1_qnwb8"]
+[ext_resource type="Script" uid="uid://cuq1j5r4jjhuw" path="res://Markers/Healtbars/Healthbar.gd" id="2_vx8vu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gccij"]
+atlas = ExtResource("1_qnwb8")
+region = Rect2(0, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfxlc"]
+atlas = ExtResource("1_qnwb8")
+region = Rect2(96, 0, 96, 32)
+
+[node name="Healthbar" type="TextureProgressBar"]
+z_index = 1
+offset_right = 56.0
+offset_bottom = 21.0
+max_value = 200.0
+value = 92.0
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_gccij")
+texture_progress = SubResource("AtlasTexture_tfxlc")
+script = ExtResource("2_vx8vu")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
