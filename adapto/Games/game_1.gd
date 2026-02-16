@@ -53,11 +53,11 @@ func load_next_question() -> void:
 	var display_text = ""
 	match question_type:
 		0:  #keyword
-			display_text = current_item.keyword
+			display_text = "Keyword: " + current_item.keyword
 		1:  #st
-			display_text = current_item.simple_terms
+			display_text = "In Simple Terms: " + current_item.simple_terms
 		2:  #def
-			display_text = current_item.definition
+			display_text = "Definition: " + current_item.definition
 	
 	# Find second term (either related or random)
 	var second_term = find_related_or_random_term()
