@@ -434,7 +434,7 @@ theme_override_font_sizes/font_size = 20
 [node name="QuestionTimer" type="Timer" parent="."]
 
 [node name="Player" type="AnimatedSprite2D" parent="."]
-position = Vector2(212, 226)
+position = Vector2(213, 231)
 scale = Vector2(5.51562, 5.54688)
 sprite_frames = SubResource("SpriteFrames_w14is")
 animation = &"attack"

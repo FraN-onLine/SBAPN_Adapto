@@ -39,7 +39,7 @@ func _ready() -> void:
 	hp_bar.init_health(5) #first enemy 5 hp?
 
 func load_next_question() -> void:
-	timer_label.text = "Time: " + str(time_remaining) + "s"
+	timer_label.text = "Time: " + str(max_time) + "s"
 	feedback_label.text = ""
 	selected_option = -1
 	option1_button.modulate = Color.WHITE
