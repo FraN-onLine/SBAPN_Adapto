@@ -22,6 +22,7 @@ var max_hp: int = 5
 var time_remaining: int = 30
 var max_time: int = 30
 @onready var player_sprite = $Player
+@onready var enemy_sprite = $Enemy
 
 func _ready() -> void:
 	# Load the OOP lesson
@@ -38,6 +39,7 @@ func _ready() -> void:
 	hp_bar.init_health(5) #first enemy 5 hp?
 
 func load_next_question() -> void:
+	timer_label.text = "Time: " + str(time_remaining) + "s"
 	feedback_label.text = ""
 	selected_option = -1
 	option1_button.modulate = Color.WHITE
@@ -126,7 +128,13 @@ func answer_check() -> void:
 	var is_correct = (selected_value == current_item.term)
 	
 	if is_correct:
+		player_sprite.play("attack")
+		enemy_sprite.modulate = Color(1, 0, 0, 0.75)
+		await get_tree().create_timer(0.1).timeout
+		enemy_sprite.modulate = Color(1, 1, 1)
 		hp_bar._set_health(hp_bar.health - 1)
+		await player_sprite.animation_finished
+		player_sprite.play("default")
 		await get_tree().create_timer(1.5).timeout
 		option1_button.disabled = false
 		option2_button.disabled = false
@@ -156,11 +164,8 @@ func _on_timer_tick() -> void:
 		question_timer.stop()
 		#TO
 		selected_option = 0  #wrong answer
-		hp -= 10
+		hp -= 1
 		update_hp_display()
-		feedback_label.text = "⏱ Time's up! (-10 HP) The answer was: " + current_item.term
-		feedback_label.modulate = Color.RED
-		
 		if hp <= 0:
 			await get_tree().create_timer(2.0).timeout
 			game_over()
@@ -175,7 +180,7 @@ func game_over() -> void:
 	question.text = "GAME OVER!"
 	option1_button.disabled = true
 	option2_button.disabled = true
-	feedback_label.text = "Final HP: " + str(hp) + "\n\nReturning to menu..."
-	feedback_label.modulate = Color.RED
-	await get_tree().create_timer(3.0).timeout
+	#feedback_label.text = "Final HP: " + str(hp) + "\n\nReturning to menu..."
+	#feedback_label.modulate = Color.RED
+	await get_tree().create_timer(2.0).timeout
 	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
