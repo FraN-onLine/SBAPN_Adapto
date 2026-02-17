@@ -1,28 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://ygi0h704mijm"]
+[gd_scene load_steps=5 format=3 uid="uid://br1qr3dy734ud"]
 
-[ext_resource type="Texture2D" uid="uid://cg7xky3l0h4ed" path="res://Assets/Healthbar-Enemy-Sheet.png" id="1_iqsc6"]
-[ext_resource type="Script" uid="uid://cuq1j5r4jjhuw" path="res://Markers/Healtbars/Healthbar.gd" id="2_r3cde"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gccij"]
-atlas = ExtResource("1_iqsc6")
-region = Rect2(0, 0, 64, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tfxlc"]
-atlas = ExtResource("1_iqsc6")
-region = Rect2(64, 0, 64, 32)
+[ext_resource type="Texture2D" uid="uid://dcryogeq6jy1i" path="res://Assets/HB/Healthvalue1.png" id="1_jeuct"]
+[ext_resource type="Script" uid="uid://cuq1j5r4jjhuw" path="res://Games/Healtbars/Healthbar.gd" id="2_4tlkq"]
+[ext_resource type="Texture2D" uid="uid://bcdryatt1m7v" path="res://Assets/HB/Healthvalue2.png" id="2_40j4n"]
+[ext_resource type="Texture2D" uid="uid://dgw8tlghccsij" path="res://Assets/HB/Healthbar-Boss.png" id="4_r8e1e"]
 
 [node name="Healthbar" type="TextureProgressBar"]
 z_index = 1
-offset_right = 56.0
-offset_bottom = 21.0
-value = 92.0
+offset_top = 4.0
+offset_right = 52.0
+offset_bottom = 18.0
+max_value = 1000.0
+value = 1000.0
 nine_patch_stretch = true
-texture_under = SubResource("AtlasTexture_gccij")
-texture_progress = SubResource("AtlasTexture_tfxlc")
-script = ExtResource("2_r3cde")
+texture_under = ExtResource("1_jeuct")
+texture_progress = ExtResource("2_40j4n")
+script = ExtResource("2_4tlkq")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="TextureRect" type="Sprite2D" parent="."]
+position = Vector2(19, 6)
+texture = ExtResource("4_r8e1e")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

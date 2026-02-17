@@ -8,6 +8,8 @@ extends Node2D
 @onready var timer_label = $TimerLabel
 @onready var question_timer = $QuestionTimer
 
+@onready var hp_bar = $Healthbar
+
 
 var lesson: Lesson
 var current_item: LessonItem
@@ -33,6 +35,7 @@ func _ready() -> void:
 	
 	# Load first question
 	load_next_question()
+	hp_bar.init_health(5) #first enemy 5 hp?
 
 func load_next_question() -> void:
 	feedback_label.text = ""
@@ -123,6 +126,7 @@ func answer_check() -> void:
 	var is_correct = (selected_value == current_item.term)
 	
 	if is_correct:
+		hp_bar._set_health(hp_bar.health - 1)
 		await get_tree().create_timer(1.5).timeout
 		option1_button.disabled = false
 		option2_button.disabled = false
