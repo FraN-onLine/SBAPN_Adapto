@@ -1,16 +1,87 @@
-[gd_scene load_steps=2 format=3 uid="uid://b61w5vaor706u"]
+[gd_scene load_steps=3 format=3 uid="uid://b2u857aibo7c7"]
 
-[ext_resource type="Script" uid="uid://dul8ol2xok5ng" path="res://main_menu.gd" id="1_jf8mj"]
+[ext_resource type="FontFile" uid="uid://baytxhdq2ypfi" path="res://Assets/Fonts/Melon Pop.ttf" id="1_uq4jx"]
 
-[node name="MainMenu" type="Node2D"]
-script = ExtResource("1_jf8mj")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhx3u"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
-[node name="StartButton" type="Button" parent="."]
-offset_left = 483.0
-offset_top = 288.0
-offset_right = 654.0
-offset_bottom = 376.0
-text = "Start
+[node name="ColorRect" type="ColorRect"]
+offset_right = 1149.0
+offset_bottom = 644.0
+color = Color(0.860369, 0.860369, 0.860369, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.5
+offset_top = -85.5
+offset_right = 188.5
+offset_bottom = 181.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Button" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
+text = "Start Button"
+
+[node name="Button2" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
+text = "Options
 "
 
-[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[node name="Button3" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
+text = "Exit
+"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -129.5
+offset_top = -230.0
+offset_right = 129.5
+offset_bottom = -166.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_uq4jx")
+theme_override_font_sizes/font_size = 100
+text = "AdapTo"
+horizontal_alignment = 1
