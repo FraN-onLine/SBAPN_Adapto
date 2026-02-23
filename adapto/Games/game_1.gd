@@ -14,7 +14,7 @@ extends Node2D
 var lesson: Lesson
 var current_item: LessonItem
 var selected_option: int = -1  # 0 for option1, 1 for option2
-var question_type: int = 0  # 0=keyword, 1=simple_terms, 2=definition
+var question_type: int = 0  # 0=keyword, 1=simple_terms, 2=definition, 3=tof
 var option1_value: String = ""
 var option2_value: String = ""
 var hp: int = 5
@@ -23,6 +23,8 @@ var time_remaining: int = 30
 var max_time: int = 30
 @onready var player_sprite = $Player
 @onready var enemy_sprite = $Enemy
+var correct_items = 0
+var correct_ans
 
 func _ready() -> void:
 	# Load the OOP lesson
@@ -52,7 +54,7 @@ func load_next_question() -> void:
 		return
 	
 	# Randomly choose what to display (0=keyword, 1=simple_terms, 2=definition)
-	question_type = randi() % 3
+	question_type = randi() % 4
 	
 	# Set up the question text
 	var display_text = ""
@@ -63,13 +65,26 @@ func load_next_question() -> void:
 			display_text = "In Simple Terms: " + current_item.simple_terms
 		2:  #def
 			display_text = "Definition: " + current_item.definition
+		3: #tof
+			var to_display = randi() % 2
+			if to_display == 0:
+				display_text = "TOF: " + current_item.tof_statement["true"]
+				correct_ans = "True"
+			else:
+				display_text = "TOF: " + current_item.tof_statement["false"]
+				correct_ans = "False"
 	
 	# Find second term (either related or random)
 	var second_term = find_related_or_random_term()
 	
 	# Create options array with terms
-	var options = [current_item.term, second_term]
-	options.shuffle()
+	var options
+	if question_type != 3: #if TOF, second term is the opposite statement
+		options = [current_item.term, second_term]
+		options.shuffle()
+	else: 
+		options = ["True", "False"]
+	
 	
 	# Store the option values for answer checking
 	option1_value = options[0]
@@ -125,7 +140,7 @@ func answer_check() -> void:
 	option2_button.disabled = true
 	question_timer.stop()
 	var selected_value = option1_value if selected_option == 0 else option2_value
-	var is_correct = (selected_value == current_item.term)
+	var is_correct = (selected_value == current_item.term or selected_value == correct_ans)
 	
 	if is_correct:
 		player_sprite.play("attack")
@@ -135,7 +150,7 @@ func answer_check() -> void:
 		hp_bar._set_health(hp_bar.health - 1)
 		await player_sprite.animation_finished
 		player_sprite.play("default")
-		await get_tree().create_timer(1.5).timeout
+		await get_tree().create_timer(0.5).timeout
 		option1_button.disabled = false
 		option2_button.disabled = false
 		load_next_question()
@@ -180,7 +195,5 @@ func game_over() -> void:
 	question.text = "GAME OVER!"
 	option1_button.disabled = true
 	option2_button.disabled = true
-	#feedback_label.text = "Final HP: " + str(hp) + "\n\nReturning to menu..."
-	#feedback_label.modulate = Color.RED
 	await get_tree().create_timer(2.0).timeout
 	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")

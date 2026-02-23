@@ -8,3 +8,15 @@ var player_stats = {
 func update_stats(game_type, accuracy, time):
 	player_stats[game_type]["accuracy"] = accuracy
 	player_stats[game_type]["time"] = time
+
+var game_stats = {
+	"game1" : {
+		"type": [""], #arr of 4
+		"accuracy": [""], #arr of 4
+		#......
+	}
+}
+
+var overall_stats = {
+	
+}
