@@ -33,7 +33,7 @@ theme_override_fonts/font = ExtResource("1_pt3wx")
 theme_override_font_sizes/font_size = 24
 text = "definition:  5 correct | 23%acc | 9.03s ct"
 
-[node name="Definition2" type="Label" parent="."]
+[node name="Keyword" type="Label" parent="."]
 offset_left = 251.0
 offset_top = 221.0
 offset_right = 923.0
@@ -43,7 +43,7 @@ theme_override_fonts/font = ExtResource("1_pt3wx")
 theme_override_font_sizes/font_size = 24
 text = "KEYWORD:    5 correct | 23%acc | 9.03s ct"
 
-[node name="Definition3" type="Label" parent="."]
+[node name="SimpleTerm" type="Label" parent="."]
 offset_left = 251.0
 offset_top = 261.0
 offset_right = 923.0
@@ -53,7 +53,7 @@ theme_override_fonts/font = ExtResource("1_pt3wx")
 theme_override_font_sizes/font_size = 24
 text = "simplterm:  5 correct | 23%acc | 9.03s ct"
 
-[node name="Definition4" type="Label" parent="."]
+[node name="TOF" type="Label" parent="."]
 offset_left = 251.0
 offset_top = 302.0
 offset_right = 923.0
@@ -62,3 +62,12 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_pt3wx")
 theme_override_font_sizes/font_size = 24
 text = "TOF:           5 correct | 23%acc | 9.03s ct"
+
+[node name="Menu" type="Button" parent="."]
+offset_left = 459.0
+offset_top = 419.0
+offset_right = 723.0
+offset_bottom = 549.0
+text = "RETURN"
+
+[connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]

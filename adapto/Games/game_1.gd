@@ -55,6 +55,7 @@ func load_next_question() -> void:
 	
 	# Randomly choose what to display (0=keyword, 1=simple_terms, 2=definition)
 	question_type = randi() % 4
+	#check performance at analyze_stats.gd, if they're poor at something
 	
 	# Set up the question text
 	var display_text = ""
@@ -143,6 +144,7 @@ func answer_check() -> void:
 	var is_correct = (selected_value == current_item.term or selected_value == correct_ans)
 	
 	if is_correct:
+		correct_items += 1
 		player_sprite.play("attack")
 		enemy_sprite.modulate = Color(1, 0, 0, 0.75)
 		await get_tree().create_timer(0.1).timeout
@@ -153,6 +155,8 @@ func answer_check() -> void:
 		await get_tree().create_timer(0.5).timeout
 		option1_button.disabled = false
 		option2_button.disabled = false
+		if correct_items > 5:
+			get_tree().change_scene_to_file("res://Menus/game1_stats.tscn")
 		load_next_question()
 	else:
 		hp -= 1
@@ -196,4 +200,4 @@ func game_over() -> void:
 	option1_button.disabled = true
 	option2_button.disabled = true
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+	get_tree().change_scene_to_file("res://Menus/game1_stats.tscn")
