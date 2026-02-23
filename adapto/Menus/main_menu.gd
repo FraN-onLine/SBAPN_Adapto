@@ -1,5 +1,4 @@
-extends Node2D
-
+extends ColorRect
 
 
 func _on_start_button_pressed() -> void:

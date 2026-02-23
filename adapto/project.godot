@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="AdapTo"
-run/main_scene="uid://c8m67p3f82wx0"
+run/main_scene="uid://b61w5vaor706u"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -148,10 +148,10 @@ func answer_check() -> void:
 		update_hp_display()
 		if hp <= 0:
 			player_sprite.play("death")
-			await get_tree().create_timer(2.0).timeout
+			await get_tree().create_timer(1).timeout
 			game_over()
 		else:
-			await get_tree().create_timer(2.0).timeout
+			await get_tree().create_timer(0.3).timeout
 			option1_button.disabled = false
 			option2_button.disabled = false
 			load_next_question()

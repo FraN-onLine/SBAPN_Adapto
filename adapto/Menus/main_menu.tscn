@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2u857aibo7c7"]
+[gd_scene load_steps=4 format=3 uid="uid://b61w5vaor706u"]
 
-[ext_resource type="FontFile" uid="uid://baytxhdq2ypfi" path="res://Assets/Fonts/Melon Pop.ttf" id="1_uq4jx"]
+[ext_resource type="Script" uid="uid://dul8ol2xok5ng" path="res://Menus/main_menu.gd" id="1_p3jrs"]
+[ext_resource type="FontFile" uid="uid://dpv6lg50yw7q5" path="res://Assets/Fonts/Melon Pop.ttf" id="1_uq4jx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhx3u"]
 bg_color = Color(1, 1, 1, 1)
@@ -13,6 +14,7 @@ corner_radius_bottom_left = 20
 offset_right = 1149.0
 offset_bottom = 644.0
 color = Color(0.860369, 0.860369, 0.860369, 1)
+script = ExtResource("1_p3jrs")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
@@ -85,3 +87,5 @@ theme_override_fonts/font = ExtResource("1_uq4jx")
 theme_override_font_sizes/font_size = 100
 text = "AdapTo"
 horizontal_alignment = 1
+
+[connection signal="pressed" from="Control/VBoxContainer/Button" to="." method="_on_start_button_pressed"]
