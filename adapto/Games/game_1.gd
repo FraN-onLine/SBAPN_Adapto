@@ -36,6 +36,10 @@ func _ready() -> void:
 	option2_button.pressed.connect(_on_option2_pressed)
 	question_timer.timeout.connect(_on_timer_tick)
 	
+	# Reset game stats
+	
+	UserStats.reset_game_stats()
+	
 	# Load first question
 	load_next_question()
 	hp_bar.init_health(5) #first enemy 5 hp?
@@ -55,6 +59,8 @@ func load_next_question() -> void:
 	
 	# Randomly choose what to display (0=keyword, 1=simple_terms, 2=definition)
 	question_type = randi() % 4
+
+	print("Current question type: " + str(question_type) + " (" + UserStats.game_stats["game1"]["type"][question_type] + ")")
 	#check performance at analyze_stats.gd, if they're poor at something
 	
 	# Set up the question text
@@ -140,10 +146,17 @@ func answer_check() -> void:
 	option1_button.disabled = true
 	option2_button.disabled = true
 	question_timer.stop()
+	var time_taken = max_time - time_remaining
+	
 	var selected_value = option1_value if selected_option == 0 else option2_value
 	var is_correct = (selected_value == current_item.term or selected_value == correct_ans)
 	
+	# Update stats
+	UserStats.game_stats["game1"]["questions"][question_type] += 1
+	UserStats.game_stats["game1"]["sum_time"][question_type] += time_taken
+	
 	if is_correct:
+		UserStats.game_stats["game1"]["correct"][question_type] += 1
 		correct_items += 1
 		player_sprite.play("attack")
 		enemy_sprite.modulate = Color(1, 0, 0, 0.75)
@@ -155,10 +168,12 @@ func answer_check() -> void:
 		await get_tree().create_timer(0.5).timeout
 		option1_button.disabled = false
 		option2_button.disabled = false
-		if correct_items > 5:
+		if correct_items >= 5:
+			UserStats.update_overall_stats()
 			get_tree().change_scene_to_file("res://Menus/game1_stats.tscn")
 		load_next_question()
 	else:
+		UserStats.game_stats["game1"]["incorrect"][question_type] += 1
 		hp -= 1
 		$HPItem.size.x = hp * 32
 		player_sprite.modulate = Color(1, 0, 0, 0.75)
@@ -168,6 +183,7 @@ func answer_check() -> void:
 		if hp <= 0:
 			player_sprite.play("death")
 			await get_tree().create_timer(1).timeout
+			UserStats.update_overall_stats()
 			game_over()
 		else:
 			await get_tree().create_timer(0.3).timeout
@@ -182,11 +198,16 @@ func _on_timer_tick() -> void:
 	if time_remaining <= 0:
 		question_timer.stop()
 		#TO
+		
+		UserStats.game_stats["game1"]["questions"][question_type] += 1
+		UserStats.game_stats["game1"]["sum_time"][question_type] += max_time
+		UserStats.game_stats["game1"]["timeout"][question_type] += 1
 		selected_option = 0  #wrong answer
 		hp -= 1
 		update_hp_display()
 		if hp <= 0:
 			await get_tree().create_timer(2.0).timeout
+			UserStats.update_overall_stats()
 			game_over()
 		else:
 			await get_tree().create_timer(2.0).timeout
