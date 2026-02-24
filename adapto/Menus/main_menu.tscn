@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://b61w5vaor706u"]
+[gd_scene load_steps=20 format=3 uid="uid://b61w5vaor706u"]
 
 [ext_resource type="Texture2D" uid="uid://bvt3jdobtlf5c" path="res://Assets/Background/Classroom.png" id="1_11gta"]
 [ext_resource type="Script" uid="uid://dul8ol2xok5ng" path="res://Menus/main_menu.gd" id="1_p3jrs"]
 [ext_resource type="Texture2D" uid="uid://c47ilaj8vd01t" path="res://Assets/UI/Title.png" id="2_at0u2"]
 [ext_resource type="Texture2D" uid="uid://c05iws3osvnhs" path="res://Assets/Sabine/Sabine-Sheet.png" id="3_11gta"]
+[ext_resource type="FontFile" uid="uid://bgrgca3qc6dxo" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="3_cxdly"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhx3u"]
 bg_color = Color(1, 1, 1, 1)
@@ -161,6 +162,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "Start "
@@ -169,6 +171,7 @@ text = "Start "
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "Options
@@ -178,10 +181,43 @@ text = "Options
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "Exit
 "
+
+[node name="Button4" type="Button" parent="Control/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
+text = "Diagnostic test
+"
+
+[node name="Button5" type="Button" parent="Control/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
+text = "adaptive test
+"
+
+[node name="Button6" type="Button" parent="Control/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
+text = "select topic"
 
 [node name="Title" type="Sprite2D" parent="."]
 position = Vector2(579, 123)
@@ -202,3 +238,4 @@ autoplay = "default"
 frame_progress = 0.630091
 
 [connection signal="pressed" from="Control/VBoxContainer/Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button4" to="." method="on_diagnostic_button_pressed"]
