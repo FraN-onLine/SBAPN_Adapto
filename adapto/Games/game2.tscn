@@ -5,16 +5,132 @@
 [node name="Game2" type="Node2D"]
 
 [node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 92.0
+offset_top = 617.0
+offset_right = 328.0
+offset_bottom = 687.0
 theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 54
 text = "Money:"
 
-[node name="Category1" type="Label" parent="."]
-offset_left = 498.0
-offset_top = 70.0
-offset_right = 690.0
-offset_bottom = 152.0
+[node name="Category" type="Node" parent="."]
+
+[node name="Category1" type="Label" parent="Category"]
+offset_left = 63.0
+offset_top = 64.0
+offset_right = 314.0
+offset_bottom = 126.0
 theme_override_fonts/font = ExtResource("1_d3qvd")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 48
 text = "DOGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Category2" type="Label" parent="Category"]
+offset_left = 510.0
+offset_top = 71.0
+offset_right = 761.0
+offset_bottom = 133.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 48
+text = "DOGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Category3" type="Label" parent="Category"]
+offset_left = 952.0
+offset_top = 69.0
+offset_right = 1203.0
+offset_bottom = 131.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 48
+text = "DOGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Node" type="Node" parent="."]
+
+[node name="100" type="Button" parent="Node"]
+offset_left = 85.0
+offset_top = 173.0
+offset_right = 320.0
+offset_bottom = 273.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 48
+text = "$100"
+
+[node name="250" type="Button" parent="Node"]
+offset_left = 91.0
+offset_top = 321.0
+offset_right = 326.0
+offset_bottom = 421.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 48
+text = "$250"
+
+[node name="500" type="Button" parent="Node"]
+offset_left = 87.0
+offset_top = 473.0
+offset_right = 322.0
+offset_bottom = 573.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 48
+text = "$500"
+
+[node name="Node2" type="Node" parent="."]
+
+[node name="100" type="Button" parent="Node2"]
+offset_left = 518.0
+offset_top = 176.0
+offset_right = 753.0
+offset_bottom = 276.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 48
+text = "$100"
+
+[node name="250" type="Button" parent="Node2"]
+offset_left = 523.0
+offset_top = 329.0
+offset_right = 758.0
+offset_bottom = 429.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 48
+text = "$250"
+
+[node name="500" type="Button" parent="Node2"]
+offset_left = 532.0
+offset_top = 471.0
+offset_right = 767.0
+offset_bottom = 571.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 48
+text = "$500"
+
+[node name="Node3" type="Node" parent="."]
+
+[node name="100" type="Button" parent="Node3"]
+offset_left = 946.0
+offset_top = 176.0
+offset_right = 1181.0
+offset_bottom = 276.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 48
+text = "$100"
+
+[node name="250" type="Button" parent="Node3"]
+offset_left = 958.0
+offset_top = 327.0
+offset_right = 1193.0
+offset_bottom = 427.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 48
+text = "$250"
+
+[node name="500" type="Button" parent="Node3"]
+offset_left = 967.0
+offset_top = 473.0
+offset_right = 1202.0
+offset_bottom = 573.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 48
+text = "$500"
