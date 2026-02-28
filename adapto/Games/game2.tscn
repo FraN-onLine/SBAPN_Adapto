@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://fw7a21mnd67y"]
+[gd_scene load_steps=3 format=3 uid="uid://fw7a21mnd67y"]
 
 [ext_resource type="FontFile" uid="uid://bgrgca3qc6dxo" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="1_d3qvd"]
+[ext_resource type="Script" uid="uid://bv4ehp7fldo7d" path="res://Games/game_2.gd" id="1_yhycf"]
 
 [node name="Game2" type="Node2D"]
+script = ExtResource("1_yhycf")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 92.0
@@ -48,9 +50,9 @@ text = "DOGS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Node" type="Node" parent="."]
+[node name="Cat1" type="Node" parent="."]
 
-[node name="100" type="Button" parent="Node"]
+[node name="100" type="Button" parent="Cat1"]
 offset_left = 85.0
 offset_top = 173.0
 offset_right = 320.0
@@ -59,7 +61,7 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$100"
 
-[node name="250" type="Button" parent="Node"]
+[node name="250" type="Button" parent="Cat1"]
 offset_left = 91.0
 offset_top = 321.0
 offset_right = 326.0
@@ -68,7 +70,7 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$250"
 
-[node name="500" type="Button" parent="Node"]
+[node name="500" type="Button" parent="Cat1"]
 offset_left = 87.0
 offset_top = 473.0
 offset_right = 322.0
@@ -77,18 +79,18 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$500"
 
-[node name="Node2" type="Node" parent="."]
+[node name="Cat2" type="Node" parent="."]
 
-[node name="100" type="Button" parent="Node2"]
-offset_left = 518.0
+[node name="100" type="Button" parent="Cat2"]
+offset_left = 533.0
 offset_top = 176.0
-offset_right = 753.0
+offset_right = 768.0
 offset_bottom = 276.0
 theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$100"
 
-[node name="250" type="Button" parent="Node2"]
+[node name="250" type="Button" parent="Cat2"]
 offset_left = 523.0
 offset_top = 329.0
 offset_right = 758.0
@@ -97,27 +99,27 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$250"
 
-[node name="500" type="Button" parent="Node2"]
-offset_left = 532.0
-offset_top = 471.0
-offset_right = 767.0
-offset_bottom = 571.0
+[node name="500" type="Button" parent="Cat2"]
+offset_left = 525.0
+offset_top = 467.0
+offset_right = 760.0
+offset_bottom = 567.0
 theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$500"
 
-[node name="Node3" type="Node" parent="."]
+[node name="Cat3" type="Node" parent="."]
 
-[node name="100" type="Button" parent="Node3"]
-offset_left = 946.0
+[node name="100" type="Button" parent="Cat3"]
+offset_left = 961.0
 offset_top = 176.0
-offset_right = 1181.0
+offset_right = 1196.0
 offset_bottom = 276.0
 theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$100"
 
-[node name="250" type="Button" parent="Node3"]
+[node name="250" type="Button" parent="Cat3"]
 offset_left = 958.0
 offset_top = 327.0
 offset_right = 1193.0
@@ -126,11 +128,11 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$250"
 
-[node name="500" type="Button" parent="Node3"]
-offset_left = 967.0
-offset_top = 473.0
-offset_right = 1202.0
-offset_bottom = 573.0
+[node name="500" type="Button" parent="Cat3"]
+offset_left = 960.0
+offset_top = 469.0
+offset_right = 1195.0
+offset_bottom = 569.0
 theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$500"
