@@ -15,6 +15,15 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 54
 text = "Money:"
 
+[node name="QuestionDialog" type="Label" parent="."]
+offset_left = 9.0
+offset_top = 3.0
+offset_right = 245.0
+offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 54
+text = "Money:"
+
 [node name="Category" type="Node" parent="."]
 
 [node name="Category1" type="Label" parent="Category"]
@@ -136,3 +145,9 @@ offset_bottom = 569.0
 theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$500"
+
+[node name="AnswerInput" type="TextEdit" parent="."]
+offset_left = 321.0
+offset_top = 590.0
+offset_right = 1000.0
+offset_bottom = 652.0
