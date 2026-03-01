@@ -25,8 +25,6 @@ func _ready() -> void:
 			selected_rel.append(rel)
 			if selected_rel.size() == 3:
 				break
-	#if selected_rel.size() < 3:
-		
 
 	# sort each chosen group by difficulty
 	var categories = []
@@ -60,6 +58,7 @@ func _on_button_pressed(key: String) -> void:
 	if answered.has(key):
 		return
 	current_key = key
+	$QuestionBackground.visible = true
 	$QuestionDialog.text = questions[key].question
 	$AnswerInput.text = ""
 

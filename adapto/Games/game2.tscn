@@ -15,14 +15,26 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 54
 text = "Money:"
 
+[node name="QuestionBackground" type="ColorRect" parent="."]
+visible = false
+z_index = 1
+offset_left = 81.0
+offset_top = 62.0
+offset_right = 1191.0
+offset_bottom = 572.0
+color = Color(0.701411, 0.256031, 0.186654, 1)
+
 [node name="QuestionDialog" type="Label" parent="."]
-offset_left = 9.0
-offset_top = 3.0
-offset_right = 245.0
-offset_bottom = 73.0
+z_index = 1
+offset_left = 75.0
+offset_top = 129.0
+offset_right = 1191.0
+offset_bottom = 528.0
 theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 54
-text = "Money:"
+text = "Money:dffdfdfdfddddddddddddddddddddddddddddd"
+autowrap_mode = 3
+justification_flags = 162
 
 [node name="Category" type="Node" parent="."]
 
@@ -69,6 +81,7 @@ offset_bottom = 273.0
 theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$100"
+metadata/_edit_lock_ = true
 
 [node name="250" type="Button" parent="Cat1"]
 offset_left = 91.0
