@@ -188,7 +188,6 @@ text = "Exit
 "
 
 [node name="Button4" type="Button" parent="Control/VBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
@@ -199,7 +198,6 @@ text = "Diagnostic test
 "
 
 [node name="Button5" type="Button" parent="Control/VBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
@@ -209,8 +207,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "adaptive test
 "
 
-[node name="Button6" type="Button" parent="Control/VBoxContainer"]
-visible = false
+[node name="TopicSelect" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
@@ -218,6 +215,25 @@ theme_override_fonts/font = ExtResource("3_cxdly")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "select topic"
+
+[node name="TopicImport" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
+text = "Import topic"
+
+[node name="Back" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
+text = "Back
+"
 
 [node name="Title" type="Sprite2D" parent="."]
 position = Vector2(579, 123)
@@ -238,4 +254,6 @@ autoplay = "default"
 frame_progress = 0.630091
 
 [connection signal="pressed" from="Control/VBoxContainer/Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Button4" to="." method="on_diagnostic_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Back" to="." method="_on_back_pressed"]
