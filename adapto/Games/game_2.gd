@@ -66,10 +66,11 @@ func _on_button_pressed(key: String) -> void:
 	for btn_key in button_by_key.keys():
 		if btn_key != key:
 			button_by_key[btn_key].disabled = true
+	$Submit.disabled = false
 
 
 func check_answer() -> void:
-	if current_key != "":
+	if current_key == "":
 		return
 	var user_answer = $AnswerInput.text.strip_edges().to_lower()
 	var correct_answer = questions[current_key].answer.strip_edges().to_lower()
@@ -87,6 +88,7 @@ func check_answer() -> void:
 	for btn_key in button_by_key.keys():
 		if not answered.has(btn_key):
 			button_by_key[btn_key].disabled = false
+	$AnswerInput.text = ""
 	_check_game_end()
 
 

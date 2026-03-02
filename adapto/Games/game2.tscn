@@ -18,11 +18,12 @@ theme_override_font_sizes/font_size = 54
 text = "Money:"
 
 [node name="QuestionBackground" type="TextureRect" parent="."]
+visible = false
 z_index = 1
 offset_left = 82.0
 offset_top = 114.0
 offset_right = 1192.0
-offset_bottom = 624.0
+offset_bottom = 581.0
 texture = ExtResource("3_3pyle")
 
 [node name="QuestionDialog" type="Label" parent="."]
@@ -33,7 +34,6 @@ offset_right = 1128.0
 offset_bottom = 578.0
 theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
-text = "adasdad"
 autowrap_mode = 3
 justification_flags = 162
 
@@ -166,6 +166,8 @@ offset_left = 510.0
 offset_top = 578.0
 offset_right = 1189.0
 offset_bottom = 640.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 32
 
 [node name="Submit" type="Button" parent="."]
 offset_left = 987.0
