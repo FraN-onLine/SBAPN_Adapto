@@ -8,7 +8,7 @@ var button_by_key = {}
 
 func _ready() -> void:
 	randomize()
-	# gather and group lesson items
+	#gather and group lesson items
 	var lesson = load("res://Lessons/lesson_files/Object Oriented/oop.tres")
 	var items = lesson.lesson_items
 	var groups = {}
@@ -20,7 +20,10 @@ func _ready() -> void:
 
 	# pick three related groups with >=3 items
 	var selected_rel = []
-	for rel in groups.keys():
+	#shuffle groups.keys,
+	var keys = groups.keys()
+	keys.shuffle()
+	for rel in keys:
 		if groups[rel].size() >= 3:
 			selected_rel.append(rel)
 			if selected_rel.size() == 3:
@@ -46,11 +49,9 @@ func _ready() -> void:
 			var btn = btns[col]
 			var key = "%d_%d" % [row, col]
 			button_by_key[key] = btn
-			var value = int(btn.text)
+			var value = int(btn.text.lstrip("$ "))
 			var item = categories[row][col]
 			var qtext = item.definition
-			if item.tof_statement and randi() % 2 == 0:
-				qtext = item.tof_statement["true"]
 			questions[key] = {"question": qtext, "answer": item.term, "value": value}
 			btn.connect("pressed", Callable(self, "_on_button_pressed").bind(key))
 
@@ -62,21 +63,21 @@ func _on_button_pressed(key: String) -> void:
 	$QuestionDialog.text = questions[key].question
 	$AnswerInput.text = ""
 
-func _on_question_confirmed() -> void:
-	var key = current_key
+func check_answer() -> void:
 	var user_answer = $AnswerInput.text.strip_edges().to_lower()
-	var correct = questions[key].answer.strip_edges().to_lower()
-	if user_answer == correct or user_answer == "what is " + correct:
-		money += questions[key].value
-		$Label.text = "Money: $" + str(money)
-		button_by_key[key].text = "✓"
+	var correct_answer = questions[current_key].answer.strip_edges().to_lower()
+	if user_answer == correct_answer:
+		money += questions[current_key].value
 	else:
-		button_by_key[key].text = "✗"
-	answered[key] = true
+		money -= questions[current_key].value
+	answered[current_key] = true
+	$MoneyLabel.text = "Money: $" + str(money)
+	$QuestionBackground.visible = false
+	$QuestionDialog.text = ""
+	button_by_key[current_key].disabled = true
 	_check_game_end()
+
 
 func _check_game_end() -> void:
 	if answered.size() == 9:
-		$QuestionDialog.dialog_text = "Game Over! Final Money: $" + str(money)
-		$QuestionDialog.ok_button_text = "OK"
-		$QuestionDialog.popup_centered()
+		get_tree().change_scene_to_file("res://Menus/main_menu.tscn")

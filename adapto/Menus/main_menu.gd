@@ -30,3 +30,7 @@ func _on_back_pressed() -> void:
 	$Control/VBoxContainer/TopicSelect.visible = false
 	$Control/VBoxContainer/TopicImport.visible = false
 	$Control/VBoxContainer/Back.visible = false
+
+
+func _on_topic_select_pressed() -> void:
+	$ColorRect.visible = true

@@ -1,0 +1,180 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=12 format=3]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_ai_sys1"]
+script = ExtResource("1_7hrog")
+id = "AI_SYS1"
+term = "System Analysis"
+keyword = "understanding"
+definition = "The process of studying a system to understand its components, their interactions, and how it meets user needs."
+simple_terms = "Figuring out how things work now and what needs to change."
+examples = ["Interviewing users to gather requirements.", "Documenting current business processes."]
+difficulty = 1
+related_to = ["System Design", "Requirements Gathering", "Feasibility Study"]
+tof_statement = {
+"false": "System analysis focuses solely on designing the new system's architecture.", 
+"true": "System analysis involves deeply understanding the existing system before proposing solutions."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sys2"]
+script = ExtResource("1_7hrog")
+id = "AI_SYS2"
+term = "System Design"
+keyword = "blueprint"
+definition = "The process of defining the architecture, modules, interfaces, and data for a system to satisfy specified requirements."
+simple_terms = "Creating a plan or blueprint for the new system."
+examples = ["Designing the database schema.", "Defining the user interface layout."]
+difficulty = 1
+related_to = ["System Analysis", "Architecture", "Prototyping"]
+tof_statement = {
+"false": "System design is the phase where you discover what the user actually needs.", 
+"true": "System design translates requirements into a detailed plan for building the system."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sys3"]
+script = ExtResource("1_7hrog")
+id = "AI_SYS3"
+term = "Feasibility Study"
+keyword = "viability"
+definition = "An assessment of the practicality of a proposed plan or system, evaluating technical, economic, legal, operational, and scheduling aspects."
+simple_terms = "Checking if a new system idea is possible and worth doing."
+examples = ["Estimating the cost of developing a new software.", "Assessing if the organization has the technical expertise."]
+difficulty = 2
+related_to = ["System Analysis", "Project Management", "Risk Assessment"]
+tof_statement = {
+"false": "A feasibility study is performed after the system has been fully developed.", 
+"true": "A feasibility study helps decide whether to proceed with a system development project."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sys4"]
+script = ExtResource("1_7hrog")
+id = "AI_SYS4"
+term = "Requirements Gathering"
+keyword = "elicitation"
+definition = "The process of collecting and documenting the needs and constraints of stakeholders for a system."
+simple_terms = "Asking people what they want the system to do."
+examples = ["Conducting user interviews.", "Analyzing existing documentation."]
+difficulty = 1
+related_to = ["System Analysis", "Stakeholder Management", "Use Cases"]
+tof_statement = {
+"false": "Requirements gathering is a one-time activity done at the very beginning of the project.", 
+"true": "Effective requirements gathering is crucial for building a system that meets user expectations."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sys5"]
+script = ExtResource("1_7hrog")
+id = "AI_SYS5"
+term = "Use Case"
+keyword = "scenario"
+definition = "A description of how a system interacts with an external actor (user or another system) to achieve a specific goal."
+simple_terms = "A story of how someone uses the system to get something done."
+examples = ["Use Case: Customer Places Order.", "Use Case: Administrator Updates Inventory."]
+difficulty = 2
+related_to = ["Requirements Gathering", "User Stories", "Functional Requirements"]
+tof_statement = {
+"false": "Use cases describe the internal workings and algorithms of the system.", 
+"true": "Use cases help define the functional behavior of a system from an external perspective."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sys6"]
+script = ExtResource("1_7hrog")
+id = "AI_SYS6"
+term = "Data Flow Diagram (DFD)"
+keyword = "flow"
+definition = "A graphical representation of the flow of data through a system, showing processes, data stores, external entities, and data flows."
+simple_terms = "A map showing how information moves through a system."
+examples = ["Illustrating order processing from customer to warehouse.", "Mapping customer data input to the database."]
+difficulty = 2
+related_to = ["System Analysis", "Process Modeling", "Data Modeling"]
+tof_statement = {
+"false": "DFDs focus on the sequence and timing of events, not data movement.", 
+"true": "DFDs are useful for visualizing the transformations data undergoes within a system."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sys7"]
+script = ExtResource("1_7hrog")
+id = "AI_SYS7"
+term = "Entity-Relationship Diagram (ERD)"
+keyword = "relationships"
+definition = "A visual representation of the relationships between different entities (tables) in a database."
+simple_terms = "A diagram showing how different pieces of information are connected."
+examples = ["Mapping customers to their orders.", "Showing the link between products and their categories."]
+difficulty = 2
+related_to = ["Data Modeling", "Database Design", "System Design"]
+tof_statement = {
+"false": "ERDs are used to illustrate the sequence of user interactions with a system.", 
+"true": "ERDs are fundamental for designing relational databases by defining data structures and their links."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sys8"]
+script = ExtResource("1_7hrog")
+id = "AI_SYS8"
+term = "Prototyping"
+keyword = "mockup"
+definition = "Creating a preliminary model or sample of a system or its components to test concepts, gather feedback, and refine design."
+simple_terms = "Building a rough draft or early version to test ideas."
+examples = ["Developing a clickable wireframe for a website.", "Creating a functional mockup of a mobile app screen."]
+difficulty = 2
+related_to = ["System Design", "User Interface (UI)", "User Experience (UX)"]
+tof_statement = {
+"false": "Prototyping is the final stage of system development, used for testing the complete system.", 
+"true": "Prototyping allows for early user feedback and helps identify design flaws before full development."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sys9"]
+script = ExtResource("1_7hrog")
+id = "AI_SYS9"
+term = "Agile Methodology"
+keyword = "iterative"
+definition = "An iterative approach to project management and software development that emphasizes flexibility, collaboration, customer feedback, and rapid delivery of working software."
+simple_terms = "Building software in small, quick cycles, with constant adjustments."
+examples = ["Scrum sprints for developing features.", "Kanban boards for managing workflow."]
+difficulty = 3
+related_to = ["System Development Life Cycle (SDLC)", "Project Management", "Iterative Development"]
+tof_statement = {
+"false": "Agile methodologies require all requirements to be fixed and finalized at the project's start.", 
+"true": "Agile methodologies embrace change and continuous improvement throughout the development process."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sys10"]
+script = ExtResource("1_7hrog")
+id = "AI_SYS10"
+term = "Waterfall Model"
+keyword = "sequential"
+definition = "A linear, sequential approach to the System Development Life Cycle (SDLC) where progress flows downwards through distinct phases."
+simple_terms = "A step-by-step process where each stage must be completed before the next begins."
+examples = ["Completing all design work before starting coding.", "Finishing testing before deployment."]
+difficulty = 2
+related_to = ["System Development Life Cycle (SDLC)", "Project Management", "Phased Development"]
+tof_statement = {
+"false": "The Waterfall model encourages frequent changes and iterations throughout the development cycle.", 
+"true": "The Waterfall model is characterized by its rigid, sequential phases with little room for change once a phase is complete."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Systems Analysis and Design"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_ai_sys1"), SubResource("Resource_ai_sys2"), SubResource("Resource_ai_sys3"), SubResource("Resource_ai_sys4"), SubResource("Resource_ai_sys5"), SubResource("Resource_ai_sys6"), SubResource("Resource_ai_sys7"), SubResource("Resource_ai_sys8"), SubResource("Resource_ai_sys9"), SubResource("Resource_ai_sys10")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"

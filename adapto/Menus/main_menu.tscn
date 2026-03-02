@@ -188,6 +188,7 @@ text = "Exit
 "
 
 [node name="Button4" type="Button" parent="Control/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
@@ -198,6 +199,7 @@ text = "Diagnostic test
 "
 
 [node name="Button5" type="Button" parent="Control/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
@@ -208,6 +210,7 @@ text = "adaptive test
 "
 
 [node name="TopicSelect" type="Button" parent="Control/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
@@ -217,6 +220,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "select topic"
 
 [node name="TopicImport" type="Button" parent="Control/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
@@ -226,6 +230,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "Import topic"
 
 [node name="Back" type="Button" parent="Control/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
@@ -253,7 +258,16 @@ sprite_frames = SubResource("SpriteFrames_b716q")
 autoplay = "default"
 frame_progress = 0.630091
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 89.0
+offset_top = 65.0
+offset_right = 1161.0
+offset_bottom = 637.0
+
 [connection signal="pressed" from="Control/VBoxContainer/Button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Button4" to="." method="on_diagnostic_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/TopicSelect" to="." method="_on_topic_select_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Back" to="." method="_on_back_pressed"]

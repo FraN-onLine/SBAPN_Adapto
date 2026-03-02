@@ -1,73 +1,32 @@
-[gd_scene load_steps=36 format=3 uid="uid://c8m67p3f82wx0"]
+[gd_scene load_steps=25 format=3 uid="uid://c8m67p3f82wx0"]
 
 [ext_resource type="Script" uid="uid://n6ikjxkq238o" path="res://Games/game_1.gd" id="1_q5wpw"]
 [ext_resource type="FontFile" uid="uid://bgrgca3qc6dxo" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="2_4h6do"]
-[ext_resource type="Texture2D" uid="uid://xlmmb4ylfdf4" path="res://Assets/Pocholo-Sheet.png" id="2_5w41k"]
 [ext_resource type="Texture2D" uid="uid://blgnfxw53c6ia" path="res://Assets/Slime-Sheet.png" id="3_b80xg"]
 [ext_resource type="Texture2D" uid="uid://nkaakubn4nra" path="res://Assets/Sabine/Sabine-Sprite-Sheet.png" id="4_ant2b"]
 [ext_resource type="Texture2D" uid="uid://cni1kh18aowxm" path="res://Assets/UI/Heart.png" id="4_b80xg"]
 [ext_resource type="Texture2D" uid="uid://do6qelurv8g4w" path="res://Assets/Tilemaps/Room11-15Tilemap.png" id="6_gfijl"]
 [ext_resource type="PackedScene" uid="uid://br1qr3dy734ud" path="res://Games/Healtbars/healthbar-enemy.tscn" id="7_w14is"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7mjov"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(448, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yv7jk"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(480, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4y2jg"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(512, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kd8sk"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(544, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4nbcc"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(576, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5cqnt"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(608, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d1jsl"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(640, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b5k4k"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(672, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tpm7p"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(704, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c55eq"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(736, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5w41k"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(992, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b80xg"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(1024, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_w14is"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(1056, 0, 32, 32)
+atlas = ExtResource("4_ant2b")
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d2u18"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(1088, 0, 32, 32)
+atlas = ExtResource("4_ant2b")
+region = Rect2(384, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vlkqd"]
-atlas = ExtResource("2_5w41k")
-region = Rect2(1120, 0, 32, 32)
+atlas = ExtResource("4_ant2b")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnp8q"]
+atlas = ExtResource("4_ant2b")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j11ww"]
+atlas = ExtResource("4_ant2b")
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fpaoy"]
 atlas = ExtResource("4_ant2b")
@@ -85,47 +44,6 @@ region = Rect2(256, 0, 128, 128)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7mjov")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yv7jk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4y2jg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kd8sk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4nbcc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5cqnt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d1jsl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b5k4k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tpm7p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c55eq")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5w41k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b80xg")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_w14is")
 }, {
 "duration": 1.0,
@@ -134,8 +52,25 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vlkqd")
 }, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_cnp8q")
+}, {
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_vlkqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2u18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w14is")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j11ww")
 }],
 "loop": false,
 "name": &"death",
@@ -398,13 +333,13 @@ text = "HP: 5/5"
 metadata/_edit_use_anchors_ = true
 
 [node name="TimerLabel" type="Label" parent="."]
-offset_left = 1104.0
-offset_top = 11.0
-offset_right = 1254.0
-offset_bottom = 45.0
+offset_left = 582.0
+offset_top = 12.0
+offset_right = 732.0
+offset_bottom = 46.0
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("2_4h6do")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "Time: 30s"
 metadata/_edit_use_anchors_ = true
 
@@ -419,12 +354,24 @@ theme_override_font_sizes/font_size = 28
 text = "Loading... ghjhfhfghfhfghfghf hfghfghfghfgrtyryyrtyryry"
 autowrap_mode = 2
 
+[node name="ChallengeText" type="Label" parent="."]
+custom_minimum_size = Vector2(900, 70)
+offset_left = 10.0
+offset_top = 420.0
+offset_right = 910.0
+offset_bottom = 587.0
+theme_override_fonts/font = ExtResource("2_4h6do")
+theme_override_font_sizes/font_size = 28
+text = "the enemy slime challenges you to a battle"
+autowrap_mode = 2
+
 [node name="Option1Button" type="Button" parent="."]
 custom_minimum_size = Vector2(300, 70)
 offset_left = 856.0
 offset_top = 479.0
 offset_right = 1156.0
 offset_bottom = 549.0
+theme_override_fonts/font = ExtResource("2_4h6do")
 theme_override_font_sizes/font_size = 18
 text = "Option 1"
 
@@ -434,6 +381,7 @@ offset_left = 860.0
 offset_top = 571.0
 offset_right = 1160.0
 offset_bottom = 641.0
+theme_override_fonts/font = ExtResource("2_4h6do")
 theme_override_font_sizes/font_size = 18
 text = "Option 2"
 
@@ -451,8 +399,10 @@ theme_override_font_sizes/font_size = 20
 position = Vector2(262, 256)
 scale = Vector2(4.21094, 4.01172)
 sprite_frames = SubResource("SpriteFrames_w14is")
+animation = &"attack"
 autoplay = "default"
-frame_progress = 0.533168
+frame = 6
+frame_progress = 1.0
 
 [node name="Enemy" type="AnimatedSprite2D" parent="."]
 position = Vector2(1020, 325)
