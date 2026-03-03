@@ -250,7 +250,7 @@ definition = "a child class provides its own implementation of a parent method"
 simple_terms = "replace parent method"
 examples = ["draw() in Shape subclasses"]
 difficulty = 2
-related_to = ["polymorphism", "inheritance"]
+related_to = ["polymorphism", "inheritance", "methods"]
 tof_statement = {
 "false": "Encapsulation is the pillar that allows users to access data.",
 "true": "Encapsulation is the pillar that hides data, preventing users from accessing it."
@@ -278,13 +278,13 @@ metadata/_custom_type_script = "uid://dadne10e1geqd"
 [sub_resource type="Resource" id="Resource_oop17"]
 script = ExtResource("1_7hrog")
 id = "OOP17"
-term = "Design Pattern: Singleton"
-keyword = "single"
-definition = "a pattern ensuring only one instance of a class exists"
+term = "Objects"
+keyword = "class instance"
+definition = "key component of OOP, representing entities with state and behavior"
 simple_terms = "one global instance"
 examples = ["GameManager"]
-difficulty = 3
-related_to = ["patterns"]
+difficulty = 1
+related_to = ["OOP"]
 tof_statement = {
 "false": "Encapsulation is the pillar that allows users to access data.",
 "true": "Encapsulation is the pillar that hides data, preventing users from accessing it."
@@ -295,13 +295,13 @@ metadata/_custom_type_script = "uid://dadne10e1geqd"
 [sub_resource type="Resource" id="Resource_oop18"]
 script = ExtResource("1_7hrog")
 id = "OOP18"
-term = "Design Pattern: Factory"
-keyword = "create"
-definition = "a pattern that encapsulates object creation logic"
+term = "Classes"
+keyword = "object container"
+definition = "key component of OOP, serving as blueprints for creating objects"
 simple_terms = "use factory to make objects"
 examples = ["EnemyFactory"]
-difficulty = 3
-related_to = ["patterns"]
+difficulty = 1
+related_to = ["OOP"]
 tof_statement = {
 "false": "Encapsulation is the pillar that allows users to access data.",
 "true": "Encapsulation is the pillar that hides data, preventing users from accessing it."
@@ -312,13 +312,13 @@ metadata/_custom_type_script = "uid://dadne10e1geqd"
 [sub_resource type="Resource" id="Resource_oop19"]
 script = ExtResource("1_7hrog")
 id = "OOP19"
-term = "Design Pattern: Observer"
+term = "Accessors"
 keyword = "notify"
-definition = "a pattern where observers subscribe to and react to events from a subject"
+definition = "to get a value of a private field, also known as getter"
 simple_terms = "publish-subscribe"
 examples = ["UI listens to model changes"]
 difficulty = 3
-related_to = ["patterns", "events"]
+related_to = ["OOP", "encapsulation"]
 tof_statement = {
 "false": "Encapsulation is the pillar that allows users to access data.",
 "true": "Encapsulation is the pillar that hides data, preventing users from accessing it."
@@ -329,13 +329,13 @@ metadata/_custom_type_script = "uid://dadne10e1geqd"
 [sub_resource type="Resource" id="Resource_oop20"]
 script = ExtResource("1_7hrog")
 id = "OOP20"
-term = "SOLID: Single Responsibility"
+term = "Mutators"
 keyword = "SRP"
-definition = "a class should have only one reason to change"
+definition = "to set a value of a private field, also known as setter"
 simple_terms = "one job per class"
 examples = ["Logger separate from Parser"]
 difficulty = 3
-related_to = ["principles"]
+related_to = ["OOP", "encapsulation"]
 tof_statement = {
 "false": "Encapsulation is the pillar that allows users to access data.",
 "true": "Encapsulation is the pillar that hides data, preventing users from accessing it."
