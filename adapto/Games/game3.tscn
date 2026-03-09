@@ -1,0 +1,206 @@
+[gd_scene format=3 uid="uid://cxgame3scene7"]
+
+[ext_resource type="Script" uid="uid://cxgame3d5sc7t" path="res://Games/game_3.gd" id="1_g3sc"]
+[ext_resource type="FontFile" uid="uid://bgrgca3qc6dxo" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="2_g3fn"]
+[ext_resource type="Texture2D" uid="uid://bwefphu7rhxj8" path="res://Assets/Background/1.png" id="2_ma3p4"]
+[ext_resource type="Texture2D" uid="uid://d3cnxswr7rqur" path="res://Assets/Background/4.png" id="3_slpbq"]
+[ext_resource type="Texture2D" uid="uid://bvhx265qqihe6" path="res://Assets/Background/2.png" id="4_i8hbh"]
+[ext_resource type="Texture2D" uid="uid://cdoecq6a7hk05" path="res://Assets/Background/3.png" id="5_7jm4a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.06, 0.06, 0.11, 0.97)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.1, 0.1, 0.16, 0.9)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_answerbar"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.07, 0.07, 0.13, 0.93)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_submitbtn"]
+bg_color = Color(0.18, 0.55, 0.85, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Game3" type="Node2D" unique_id=1845614415]
+script = ExtResource("1_g3sc")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1131997352]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("2_ma3p4")
+stretch_mode = 1
+
+[node name="Background2" type="TextureRect" parent="Background" unique_id=1640941696]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("3_slpbq")
+stretch_mode = 1
+
+[node name="Background3" type="TextureRect" parent="Background" unique_id=1398188399]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("4_i8hbh")
+stretch_mode = 1
+
+[node name="Background4" type="TextureRect" parent="Background" unique_id=992300663]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("5_7jm4a")
+stretch_mode = 1
+
+[node name="GameTimer" type="Timer" parent="." unique_id=226376371]
+
+[node name="TopBar" type="PanelContainer" parent="." unique_id=990528351]
+offset_right = 1280.0
+offset_bottom = 65.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_header")
+
+[node name="TopBarHBox" type="HBoxContainer" parent="TopBar" unique_id=72837031]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="TopBar/TopBarHBox" unique_id=1408548598]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.92, 0.25, 1)
+theme_override_fonts/font = ExtResource("2_g3fn")
+theme_override_font_sizes/font_size = 32
+text = "CROSSWORD PUZZLE"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="TopBar/TopBarHBox" unique_id=659299531]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.95, 0.65, 1)
+theme_override_fonts/font = ExtResource("2_g3fn")
+theme_override_font_sizes/font_size = 24
+text = "Score: 0"
+horizontal_alignment = 2
+
+[node name="TimerLabel" type="Label" parent="TopBar/TopBarHBox" unique_id=1251478099]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.35, 1)
+theme_override_fonts/font = ExtResource("2_g3fn")
+theme_override_font_sizes/font_size = 24
+text = "Time: 180s"
+horizontal_alignment = 2
+
+[node name="FeedbackLabel" type="Label" parent="." unique_id=1383700620]
+offset_top = 68.0
+offset_right = 1280.0
+offset_bottom = 108.0
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_fonts/font = ExtResource("2_g3fn")
+theme_override_font_sizes/font_size = 18
+text = "Click a clue or a grid cell to select a word, then type and submit your answer!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="GridNode" type="Control" parent="." unique_id=830087412]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 112.0
+offset_right = 580.0
+offset_bottom = 714.0
+
+[node name="CluesPanel" type="PanelContainer" parent="." unique_id=653372944]
+offset_left = 585.0
+offset_top = 112.0
+offset_right = 1275.0
+offset_bottom = 582.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="CluesScroll" type="ScrollContainer" parent="CluesPanel" unique_id=1168564400]
+layout_mode = 2
+
+[node name="CluesVBox" type="VBoxContainer" parent="CluesPanel/CluesScroll" unique_id=532531975]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="AcrossHeader" type="Label" parent="CluesPanel/CluesScroll/CluesVBox" unique_id=1958086069]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.9, 1, 1)
+theme_override_fonts/font = ExtResource("2_g3fn")
+theme_override_font_sizes/font_size = 18
+text = "ACROSS"
+
+[node name="AcrossItems" type="VBoxContainer" parent="CluesPanel/CluesScroll/CluesVBox" unique_id=1963200703]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="DownHeader" type="Label" parent="CluesPanel/CluesScroll/CluesVBox" unique_id=827332388]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.75, 1)
+theme_override_fonts/font = ExtResource("2_g3fn")
+theme_override_font_sizes/font_size = 18
+text = "DOWN"
+
+[node name="DownItems" type="VBoxContainer" parent="CluesPanel/CluesScroll/CluesVBox" unique_id=361690674]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="AnswerBar" type="PanelContainer" parent="." unique_id=1997891736]
+offset_left = 585.0
+offset_top = 587.0
+offset_right = 1275.0
+offset_bottom = 714.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_answerbar")
+
+[node name="AnswerVBox" type="VBoxContainer" parent="AnswerBar" unique_id=1365940222]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ClueLabel" type="Label" parent="AnswerBar/AnswerVBox" unique_id=1033705596]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.7, 1)
+theme_override_fonts/font = ExtResource("2_g3fn")
+theme_override_font_sizes/font_size = 16
+text = "Select a word to see its clue here."
+autowrap_mode = 2
+
+[node name="AnswerHBox" type="HBoxContainer" parent="AnswerBar/AnswerVBox" unique_id=512554409]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="AnswerInput" type="LineEdit" parent="AnswerBar/AnswerVBox/AnswerHBox" unique_id=1802926060]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_g3fn")
+theme_override_font_sizes/font_size = 22
+placeholder_text = "Type your answer..."
+
+[node name="SubmitBtn" type="Button" parent="AnswerBar/AnswerVBox/AnswerHBox" unique_id=956484056]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g3fn")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_submitbtn")
+text = "SUBMIT"

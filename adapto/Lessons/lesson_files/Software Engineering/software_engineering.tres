@@ -1,0 +1,350 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=22 format=3]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://adapto/Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://adapto/Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_ai_sof1"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF1"
+term = "Agile Development"
+keyword = "iterative"
+definition = "an iterative approach to software development that emphasizes flexibility, collaboration, customer feedback, and rapid releases."
+simple_terms = "small steps, frequent updates"
+examples = ["Scrum", "Kanban"]
+difficulty = 1
+related_to = ["Software Development Life Cycle", "Project Management"]
+tof_statement = {
+"false": "Agile development strictly follows a long, detailed upfront plan with no room for changes.", 
+"true": "Agile development focuses on delivering working software in short cycles."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof2"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF2"
+term = "Waterfall Model"
+keyword = "linear"
+definition = "a sequential, linear project management approach where progress flows steadily downwards through distinct phases."
+simple_terms = "step-by-step, no going back"
+examples = ["Requirements Gathering", "Design", "Implementation", "Testing", "Deployment", "Maintenance"]
+difficulty = 1
+related_to = ["Software Development Life Cycle", "Project Management"]
+tof_statement = {
+"false": "The Waterfall model allows for frequent changes and feedback throughout the entire development process.", 
+"true": "In the Waterfall model, each phase must be completed before the next one begins."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof3"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF3"
+term = "Requirements Engineering"
+keyword = "gather"
+definition = "the process of defining, documenting, and maintaining requirements for a software system."
+simple_terms = "what the software should do"
+examples = ["Functional Requirements", "Non-Functional Requirements"]
+difficulty = 2
+related_to = ["Software Design", "User Stories"]
+tof_statement = {
+"false": "Requirements engineering is only concerned with the technical specifications of the software.", 
+"true": "Understanding user needs is a core part of requirements engineering."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof4"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF4"
+term = "Software Design"
+keyword = "blueprint"
+definition = "the process of planning the architecture, components, interfaces, and other characteristics of a software system."
+simple_terms = "how the software will be built"
+examples = ["Architectural Design", "Detailed Design"]
+difficulty = 2
+related_to = ["Requirements Engineering", "Software Architecture"]
+tof_statement = {
+"false": "Software design is the same as writing the actual code.", 
+"true": "Good software design aims for modularity and maintainability."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof5"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF5"
+term = "Software Architecture"
+keyword = "high-level"
+definition = "the fundamental structure of a software system, encompassing its components, their relationships, and the principles guiding its design and evolution."
+simple_terms = "the big picture of the system"
+examples = ["Microservices Architecture", "Monolithic Architecture", "Client-Server Architecture"]
+difficulty = 3
+related_to = ["Software Design", "System Design"]
+tof_statement = {
+"false": "Software architecture is only concerned with the user interface.", 
+"true": "Software architecture defines the major components and their interactions."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof6"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF6"
+term = "Coding/Implementation"
+keyword = "write"
+definition = "the process of translating the software design into actual computer code using a programming language."
+simple_terms = "writing the program"
+examples = ["Writing functions", "Implementing classes", "Debugging code"]
+difficulty = 1
+related_to = ["Software Design", "Testing"]
+tof_statement = {
+"false": "Coding is the first step in the software development process.", 
+"true": "Coding is where the design specifications are turned into executable instructions."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof7"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF7"
+term = "Software Testing"
+keyword = "verify"
+definition = "the process of evaluating a software system to determine whether it meets the specified requirements and to identify defects."
+simple_terms = "checking if the software works correctly"
+examples = ["Unit Testing", "Integration Testing", "System Testing", "User Acceptance Testing"]
+difficulty = 2
+related_to = ["Coding/Implementation", "Quality Assurance"]
+tof_statement = {
+"false": "Software testing is only performed after the software has been released to users.", 
+"true": "Software testing aims to find bugs and ensure the software functions as expected."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof8"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF8"
+term = "Debugging"
+keyword = "fix"
+definition = "the process of identifying, analyzing, and removing defects (bugs) from software code."
+simple_terms = "finding and fixing errors"
+examples = ["Using a debugger tool", "Reading error messages", "Tracing code execution"]
+difficulty = 1
+related_to = ["Software Testing", "Coding/Implementation"]
+tof_statement = {
+"false": "Debugging is the same as writing new features.", 
+"true": "Debugging is essential for ensuring software reliability."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof9"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF9"
+term = "Deployment"
+keyword = "release"
+definition = "the process of making a software application available for use in its target environment."
+simple_terms = "getting the software to users"
+examples = ["Deploying to a web server", "Publishing to an app store", "Installing on user machines"]
+difficulty = 2
+related_to = ["Maintenance", "Continuous Integration/Continuous Deployment (CI/CD)"]
+tof_statement = {
+"false": "Deployment involves writing the initial code for the software.", 
+"true": "Deployment is the stage where users can start interacting with the software."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof10"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF10"
+term = "Maintenance"
+keyword = "update"
+definition = "the process of modifying a software product after delivery to correct faults, improve performance, or adapt it to a changed environment."
+simple_terms = "keeping the software working and improving it"
+examples = ["Bug fixes", "Performance enhancements", "Adding new features"]
+difficulty = 2
+related_to = ["Deployment", "Software Evolution"]
+tof_statement = {
+"false": "Software maintenance is only performed if critical bugs are found.", 
+"true": "Software maintenance can include both corrective and adaptive changes."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof11"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF11"
+term = "Version Control"
+keyword = "track"
+definition = "a system that records changes to a file or set of files over time so that you can recall specific versions later."
+simple_terms = "saving history of code changes"
+examples = ["Git", "Subversion (SVN)"]
+difficulty = 1
+related_to = ["Collaboration", "Software Development"]
+tof_statement = {
+"false": "Version control is only useful for individual developers.", 
+"true": "Version control allows developers to revert to previous states of the code."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof12"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF12"
+term = "Continuous Integration (CI)"
+keyword = "merge"
+definition = "the practice of frequently merging code changes from multiple developers into a central repository, followed by automated builds and tests."
+simple_terms = "frequently combining code and testing it"
+examples = ["Jenkins", "GitLab CI/CD", "GitHub Actions"]
+difficulty = 2
+related_to = ["Continuous Deployment (CD)", "Version Control"]
+tof_statement = {
+"false": "Continuous Integration means only one developer works on the code at a time.", 
+"true": "Continuous Integration helps catch integration issues early in the development cycle."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof13"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF13"
+term = "Continuous Deployment (CD)"
+keyword = "automate"
+definition = "an extension of Continuous Integration where code changes that pass automated tests are automatically deployed to production."
+simple_terms = "automatically releasing code to users"
+examples = ["Automated deployment pipelines", "Canary releases", "Blue-green deployments"]
+difficulty = 3
+related_to = ["Continuous Integration (CI)", "DevOps"]
+tof_statement = {
+"false": "Continuous Deployment requires manual approval for every code release.", 
+"true": "Continuous Deployment aims to release new features to users as quickly and reliably as possible."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof14"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF14"
+term = "DevOps"
+keyword = "culture"
+definition = "a set of practices that combines software development (Dev) and IT operations (Ops) to shorten the systems development life cycle and provide continuous delivery with high software quality."
+simple_terms = "collaboration between development and operations"
+examples = ["Infrastructure as Code (IaC)", "Automated testing", "Monitoring"]
+difficulty = 2
+related_to = ["Continuous Integration (CI)", "Continuous Deployment (CD)", "Agile Development"]
+tof_statement = {
+"false": "DevOps is a specific tool used for software development.", 
+"true": "DevOps promotes collaboration and communication between development and operations teams."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof15"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF15"
+term = "Refactoring"
+keyword = "improve"
+definition = "the process of restructuring existing computer code without changing its external behavior."
+simple_terms = "cleaning up code without changing what it does"
+examples = ["Extracting methods", "Renaming variables", "Simplifying conditional logic"]
+difficulty = 2
+related_to = ["Coding/Implementation", "Maintainability"]
+tof_statement = {
+"false": "Refactoring is the process of adding new features to the software.", 
+"true": "Refactoring aims to make code more readable and easier to maintain."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof16"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF16"
+term = "Technical Debt"
+keyword = "shortcut"
+definition = "a metaphor in software development that expresses the implied cost of additional rework caused by choosing an easy (limited) solution now instead of using a better approach that would take longer."
+simple_terms = "quick fixes that cause problems later"
+examples = ["Poorly written code", "Lack of documentation", "Skipped tests"]
+difficulty = 3
+related_to = ["Refactoring", "Maintainability"]
+tof_statement = {
+"false": "Technical debt is a financial obligation incurred by software companies.", 
+"true": "Taking shortcuts in development can lead to technical debt."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof17"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF17"
+term = "Code Review"
+keyword = "inspect"
+definition = "a systematic examination of source code to find and fix mistakes overlooked in the earlier stages of software development."
+simple_terms = "other people checking your code"
+examples = ["Peer code reviews", "Pair programming"]
+difficulty = 1
+related_to = ["Quality Assurance", "Collaboration"]
+tof_statement = {
+"false": "Code reviews are only performed on the final version of the software.", 
+"true": "Code reviews help improve code quality and share knowledge among developers."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof18"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF18"
+term = "Scalability"
+keyword = "handle"
+definition = "the ability of a software system to handle a growing amount of work, or its potential to be enlarged to accommodate that growth."
+simple_terms = "how well software handles more users or data"
+examples = ["Horizontal scaling (adding more servers)", "Vertical scaling (increasing server power)"]
+difficulty = 2
+related_to = ["Performance", "System Design"]
+tof_statement = {
+"false": "Scalability refers to the user interface design of the software.", 
+"true": "A scalable application can serve more users without significant performance degradation."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof19"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF19"
+term = "Modularity"
+keyword = "independent"
+definition = "a design principle that divides a software system into independent, interchangeable modules, each performing a specific function."
+simple_terms = "breaking software into smaller parts"
+examples = ["Functions", "Classes", "Microservices"]
+difficulty = 1
+related_to = ["Software Design", "Maintainability"]
+tof_statement = {
+"false": "Modularity means all parts of the software are tightly coupled.", 
+"true": "Modularity makes software easier to understand, test, and maintain."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sof20"]
+script = ExtResource("1_7hrog")
+id = "AI_SOF20"
+term = "User Stories"
+keyword = "user"
+definition = "a simple, informal description of a feature told from the perspective of the person who desires the new capability, usually a user or customer of the system."
+simple_terms = "what a user wants the software to do"
+examples = ["As a shopper, I want to add items to my cart so that I can purchase them later.", "As an administrator, I want to reset user passwords so that I can help users regain access."]
+difficulty = 1
+related_to = ["Requirements Engineering", "Agile Development"]
+tof_statement = {
+"false": "User stories are detailed technical specifications for developers.", 
+"true": "User stories help prioritize features based on user value."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Software Engineering"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_ai_sof1"), SubResource("Resource_ai_sof2"), SubResource("Resource_ai_sof3"), SubResource("Resource_ai_sof4"), SubResource("Resource_ai_sof5"), SubResource("Resource_ai_sof6"), SubResource("Resource_ai_sof7"), SubResource("Resource_ai_sof8"), SubResource("Resource_ai_sof9"), SubResource("Resource_ai_sof10"), SubResource("Resource_ai_sof11"), SubResource("Resource_ai_sof12"), SubResource("Resource_ai_sof13"), SubResource("Resource_ai_sof14"), SubResource("Resource_ai_sof15"), SubResource("Resource_ai_sof16"), SubResource("Resource_ai_sof17"), SubResource("Resource_ai_sof18"), SubResource("Resource_ai_sof19"), SubResource("Resource_ai_sof20")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"

@@ -27,9 +27,12 @@ var correct_items = 0
 var correct_ans
 
 func _ready() -> void:
-	# Load the OOP lesson
+	# Load the selected lesson, fall back to OOP if none chosen
 	$HPItem.size.x = hp * 32
-	lesson = load("res://Lessons/lesson_files/Object Oriented/oop.tres")
+	if Global.selected_lesson != null:
+		lesson = Global.selected_lesson
+	else:
+		lesson = load("res://Lessons/lesson_files/Object Oriented/oop.tres")
 	
 	# Connect button signals
 	option1_button.pressed.connect(_on_option1_pressed)
@@ -171,6 +174,7 @@ func answer_check() -> void:
 		if correct_items >= 5:
 			UserStats.update_overall_stats()
 			get_tree().change_scene_to_file("res://Menus/game1_stats.tscn")
+			return
 		load_next_question()
 	else:
 		UserStats.game_stats["game1"]["incorrect"][question_type] += 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b61w5vaor706u"]
+[gd_scene load_steps=25 format=3 uid="uid://b61w5vaor706u"]
 
 [ext_resource type="Texture2D" uid="uid://bvt3jdobtlf5c" path="res://Assets/Background/Classroom.png" id="1_11gta"]
 [ext_resource type="Script" uid="uid://dul8ol2xok5ng" path="res://Menus/main_menu.gd" id="1_p3jrs"]
@@ -12,6 +12,38 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.957, 0.953, 0.918, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blue"]
+bg_color = Color(0.196, 0.435, 0.765, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_green"]
+bg_color = Color(0.18, 0.616, 0.306, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_red"]
+bg_color = Color(0.749, 0.188, 0.188, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
 
 [sub_resource type="Animation" id="Animation_vxn86"]
 length = 0.001
@@ -266,8 +298,271 @@ offset_top = 65.0
 offset_right = 1161.0
 offset_bottom = 637.0
 
+[node name="ImportChoicePanel" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChoiceBG" type="ColorRect" parent="ImportChoicePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="ChoiceBox" type="PanelContainer" parent="ImportChoicePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -195.0
+offset_right = 240.0
+offset_bottom = 195.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="ImportChoicePanel/ChoiceBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ChoiceTitle" type="Label" parent="ImportChoicePanel/ChoiceBox/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+horizontal_alignment = 1
+text = "Import Topic"
+
+[node name="ChoiceSubtitle" type="Label" parent="ImportChoicePanel/ChoiceBox/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+horizontal_alignment = 1
+text = "Choose how you want to import a topic"
+autowrap_mode = 2
+
+[node name="PDFBtn" type="Button" parent="ImportChoicePanel/ChoiceBox/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 68)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_blue")
+text = "Import by PDF"
+
+[node name="PromptBtn" type="Button" parent="ImportChoicePanel/ChoiceBox/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 68)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_green")
+text = "Import by Prompt"
+
+[node name="ChoiceCancelBtn" type="Button" parent="ImportChoicePanel/ChoiceBox/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 50)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_red")
+text = "Cancel"
+
+[node name="PromptImportPanel" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PromptBG" type="ColorRect" parent="PromptImportPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="PromptBox" type="PanelContainer" parent="PromptImportPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -265.0
+offset_top = -245.0
+offset_right = 265.0
+offset_bottom = 245.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="PromptImportPanel/PromptBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PromptTitle" type="Label" parent="PromptImportPanel/PromptBox/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+horizontal_alignment = 1
+text = "Import by Prompt"
+
+[node name="TopicLabel" type="Label" parent="PromptImportPanel/PromptBox/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+text = "Topic Name:"
+
+[node name="TopicInput" type="LineEdit" parent="PromptImportPanel/PromptBox/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 42)
+theme_override_font_sizes/font_size = 18
+placeholder_text = "e.g., Machine Learning"
+
+[node name="CountLabel" type="Label" parent="PromptImportPanel/PromptBox/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+text = "Number of Questions:"
+
+[node name="CountInput" type="SpinBox" parent="PromptImportPanel/PromptBox/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 38)
+min_value = 1
+max_value = 50
+value = 8
+
+[node name="FolderLabel" type="Label" parent="PromptImportPanel/PromptBox/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+text = "Folder Name (optional):"
+
+[node name="FolderInput" type="LineEdit" parent="PromptImportPanel/PromptBox/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 42)
+theme_override_font_sizes/font_size = 18
+placeholder_text = "Leave empty to use topic name"
+
+[node name="GenerateBtn" type="Button" parent="PromptImportPanel/PromptBox/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 58)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_green")
+text = "Generate Lesson"
+
+[node name="PromptBackBtn" type="Button" parent="PromptImportPanel/PromptBox/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_red")
+text = "Back"
+
+[node name="PDFFileDialog" type="FileDialog" parent="."]
+title = "Select a PDF File"
+access = 2
+filters = PackedStringArray("*.pdf ; PDF Files")
+
+[node name="TopicSelectPanel" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopicBG" type="ColorRect" parent="TopicSelectPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="TopicBox" type="PanelContainer" parent="TopicSelectPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -280.0
+offset_right = 300.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="TopicSelectPanel/TopicBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TopicTitle" type="Label" parent="TopicSelectPanel/TopicBox/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+horizontal_alignment = 1
+text = "Select a Topic"
+
+[node name="CurrentLabel" type="Label" parent="TopicSelectPanel/TopicBox/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+horizontal_alignment = 1
+text = "No topic selected"
+
+[node name="Scroll" type="ScrollContainer" parent="TopicSelectPanel/TopicBox/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 350)
+
+[node name="TopicListVBox" type="VBoxContainer" parent="TopicSelectPanel/TopicBox/VBox/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="TopicCancelBtn" type="Button" parent="TopicSelectPanel/TopicBox/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 50)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_red")
+text = "Cancel"
+
 [connection signal="pressed" from="Control/VBoxContainer/Button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Button4" to="." method="on_diagnostic_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/TopicSelect" to="." method="_on_topic_select_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/TopicImport" to="." method="_on_topic_import_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="ImportChoicePanel/ChoiceBox/VBox/PDFBtn" to="." method="_on_import_by_pdf_pressed"]
+[connection signal="pressed" from="ImportChoicePanel/ChoiceBox/VBox/PromptBtn" to="." method="_on_import_by_prompt_pressed"]
+[connection signal="pressed" from="ImportChoicePanel/ChoiceBox/VBox/ChoiceCancelBtn" to="." method="_on_import_choice_cancel_pressed"]
+[connection signal="pressed" from="PromptImportPanel/PromptBox/VBox/GenerateBtn" to="." method="_on_prompt_generate_pressed"]
+[connection signal="pressed" from="PromptImportPanel/PromptBox/VBox/PromptBackBtn" to="." method="_on_prompt_back_pressed"]
+[connection signal="file_selected" from="PDFFileDialog" to="." method="_on_pdf_file_selected"]
+[connection signal="pressed" from="TopicSelectPanel/TopicBox/VBox/TopicCancelBtn" to="." method="_on_topic_select_cancel_pressed"]

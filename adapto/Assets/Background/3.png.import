@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do6qelurv8g4w"
-path="res://.godot/imported/Room11-15Tilemap.png-bb85d98aea5f84a67b99842f119d4d97.ctex"
+uid="uid://cdoecq6a7hk05"
+path="res://.godot/imported/3.png-d31db983f61eb7eb26bef17adb860ec3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilemaps/Room11-15Tilemap.png"
-dest_files=["res://.godot/imported/Room11-15Tilemap.png-bb85d98aea5f84a67b99842f119d4d97.ctex"]
+source_file="res://Assets/Background/3.png"
+dest_files=["res://.godot/imported/3.png-d31db983f61eb7eb26bef17adb860ec3.ctex"]
 
 [params]
 

@@ -9,7 +9,11 @@ var button_by_key = {}
 func _ready() -> void:
 	randomize()
 	#gather and group lesson items
-	var lesson = load("res://Lessons/lesson_files/Object Oriented/oop.tres")
+	var lesson: Lesson
+	if Global.selected_lesson != null:
+		lesson = Global.selected_lesson
+	else:
+		lesson = load("res://Lessons/lesson_files/Object Oriented/oop.tres")
 	var items = lesson.lesson_items
 	var groups = {}
 	for item in items:
@@ -49,6 +53,9 @@ func _ready() -> void:
 			var btn = btns[col]
 			var key = "%d_%d" % [row, col]
 			button_by_key[key] = btn
+			if row >= categories.size() or col >= categories[row].size():
+				btn.visible = false
+				continue
 			var value = int(btn.text.lstrip("$ "))
 			var item = categories[row][col]
 			var qtext = item.definition

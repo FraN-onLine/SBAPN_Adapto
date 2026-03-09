@@ -8,6 +8,7 @@ class_name LessonItem
 @export var definition = "the pillar that hides data, preventing users from accessing it"
 @export var simple_terms = "public = access, private = no access"
 @export var examples = ["public", "private"]
+@export var accepted_terms = [] # Alternate spellings/forms (e.g., ["method", "methods"])
 @export var image: Texture2D
 @export var difficulty = 2
 @export var related_to = ["pillars"]

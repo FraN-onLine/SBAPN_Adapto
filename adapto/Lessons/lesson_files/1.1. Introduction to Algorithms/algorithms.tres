@@ -1,0 +1,146 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=10 format=3]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://adapto/Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://adapto/Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_item1"]
+script = ExtResource("1_7hrog")
+id = "item1"
+term = "Algorithm"
+keyword = "Definition"
+definition = "A procedure used for solving a problem or performing a calculation, composed of an exact list of instructions that conduct specified actions step-by-step in hardware or software-based routines."
+simple_terms = "A set of step-by-step instructions to solve a problem."
+examples = ["Following a recipe", "Tying shoelaces"]
+difficulty = 1
+related_to = ["Problem Solving", "Calculations", "Computer Science"]
+tof_statement = {
+"false": "An algorithm is a random set of instructions with no clear purpose.", 
+"true": "An algorithm is a step-by-step procedure for solving a problem."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item2"]
+script = ExtResource("1_7hrog")
+id = "item2"
+term = "Bunny Rabbit Method"
+keyword = "Example"
+definition = "A specific set of 10 instructions for tying shoelaces, resembling the creation of bunny ears."
+simple_terms = "A way to tie your shoes that looks like bunny ears."
+examples = ["Step 1: Take a shoelace in each hand.", "Step 6: Make small loops for both laces, resembling \"bunny ears.\""]
+difficulty = 1
+related_to = ["Algorithms", "Tying Shoelaces", "Step-by-step instructions"]
+tof_statement = {
+"false": "The Bunny Rabbit Method is a complex mathematical formula.", 
+"true": "The Bunny Rabbit Method is an example of an algorithm for tying shoelaces."
+}
+type_of_information = ["apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item3"]
+script = ExtResource("1_7hrog")
+id = "item3"
+term = "Algorithm in Computer Science"
+keyword = "Context"
+definition = "A small procedure that solves a recurrent problem, used as specifications for performing data processing and playing a major role in automated systems. It includes initial input and a set of instructions that can be represented by numbers or words."
+simple_terms = "In computers, an algorithm is a set of instructions to solve a recurring problem, often involving data."
+examples = ["Sorting data", "Searching for information"]
+difficulty = 2
+related_to = ["Computer Science", "Data Processing", "Automated Systems"]
+tof_statement = {
+"false": "Algorithms in computer science are only used for creating video games.", 
+"true": "Algorithms in computer science are crucial for automated systems and data processing."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item4"]
+script = ExtResource("1_7hrog")
+id = "item4"
+term = "Recurrent Problem"
+keyword = "Definition"
+definition = "A problem that occurs often or repeatedly."
+simple_terms = "A problem that happens again and again."
+examples = ["Sorting a list of names alphabetically", "Finding the shortest path between two points"]
+difficulty = 1
+related_to = ["Algorithms", "Problem Solving", "Computer Science"]
+tof_statement = {
+"false": "Algorithms are typically designed for unique, one-time problems.", 
+"true": "Algorithms are often designed to solve recurrent problems efficiently."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item5"]
+script = ExtResource("1_7hrog")
+id = "item5"
+term = "Search Engine Algorithm"
+keyword = "Type of Algorithm"
+definition = "An algorithm that takes search strings, keywords, and operators as input, searches an associated database for relevant webpages, and returns results."
+simple_terms = "The instructions a search engine uses to find web pages based on what you type."
+examples = ["Input: \"best pizza near me\"", "Output: List of local pizza restaurants"]
+difficulty = 2
+related_to = ["Algorithms", "Internet", "Information Retrieval"]
+tof_statement = {
+"false": "Search engine algorithms are used to manage traffic lights.", 
+"true": "Search engine algorithms help users find information on the internet."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item6"]
+script = ExtResource("1_7hrog")
+id = "item6"
+term = "Encryption/Decryption Algorithm"
+keyword = "Type of Algorithm"
+definition = "An algorithm that transforms data according to specified actions, using a key in some instances, to protect its contents, allowing it to be encrypted or decrypted."
+simple_terms = "Algorithms that scramble and unscramble data to keep it secret."
+examples = ["Input: A secret message and a key", "Output: An unreadable coded message"]
+difficulty = 3
+related_to = ["Algorithms", "Security", "Cryptography"]
+tof_statement = {
+"false": "Encryption algorithms are used to make computer games more fun.", 
+"true": "Encryption algorithms are used to secure sensitive information."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item7"]
+script = ExtResource("1_7hrog")
+id = "item7"
+term = "Hashing Algorithm"
+keyword = "Type of Algorithm"
+definition = "An algorithm that takes data as input and converts it into a uniform message or code using a hashing process."
+simple_terms = "An algorithm that turns any data into a fixed-size code."
+examples = ["Input: A long password", "Output: A short, unique hash code"]
+difficulty = 3
+related_to = ["Algorithms", "Data Integrity", "Password Security"]
+tof_statement = {
+"false": "Hashing algorithms are used to create visual effects in movies.", 
+"true": "Hashing algorithms are used to create unique identifiers for data."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item8"]
+script = ExtResource("1_7hrog")
+id = "item8"
+term = "Input and Instructions"
+keyword = "Components of Algorithms"
+definition = "Algorithms include an initial input (data needed to make decisions) along with a set of instructions that process this input to achieve a desired outcome."
+simple_terms = "Algorithms need information to start with (input) and a list of steps (instructions) to follow."
+examples = ["Input: Ingredients for a cake. Instructions: Baking steps.", "Input: A search query. Instructions: Database search steps."]
+difficulty = 2
+related_to = ["Algorithms", "Input", "Instructions"]
+tof_statement = {
+"false": "An algorithm only requires a set of instructions, without any input data.", 
+"true": "Both input and instructions are essential components of an algorithm."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Algorithms"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_item1"), SubResource("Resource_item2"), SubResource("Resource_item3"), SubResource("Resource_item4"), SubResource("Resource_item5"), SubResource("Resource_item6"), SubResource("Resource_item7"), SubResource("Resource_item8")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"

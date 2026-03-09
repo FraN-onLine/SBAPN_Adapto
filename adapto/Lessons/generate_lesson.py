@@ -2,9 +2,24 @@ import requests
 import json
 import sys
 import os
+import base64
+from pathlib import Path
 
-API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyCTZeL8hcbWw8Gjof0RqmR6h2wmG0E3cT8")
+# Load .env from the project root (adapto/) regardless of where the script is run from
+_env_path = Path(__file__).resolve().parent.parent / ".env"
+try:
+    from dotenv import load_dotenv
+    load_dotenv(dotenv_path=_env_path)
+except ImportError:
+    # dotenv not installed — fall back to os.environ only (CI/CD / production)
+    pass
+
+API_KEY = os.environ.get("GEMINI_API_KEY", "")
+if not API_KEY:
+    print("Error: GEMINI_API_KEY is not set. Add it to adapto/.env or set it as an environment variable.")
+    sys.exit(1)
 MODEL = "gemini-2.5-flash-lite"
+PDF_MODEL = "gemini-2.5-flash-lite"  # same model used for prompt-based generation
 OUTPUT_DIR = "Lessons/lesson_files"
 
 SEED_EXAMPLES = [
@@ -108,13 +123,87 @@ def write_tres(topic: str, items: list, out_path: str):
     print(f"Saved: {out_path}")
 
 if __name__ == "__main__":
-    topic = sys.argv[1] if len(sys.argv) > 1 else "Object Oriented Programming"
-    count = int(sys.argv[2]) if len(sys.argv) > 2 else 8
-    folder = sys.argv[3] if len(sys.argv) > 3 else topic
+    if len(sys.argv) > 1 and sys.argv[1] == "--pdf":
+        if len(sys.argv) < 3:
+            print("Usage: generate_lesson.py --pdf <pdf_path> [count] [folder]")
+            sys.exit(1)
 
-    print(f"Generating {count} items for topic: {topic}")
-    items = call_gemini(topic, count)
-    print(f"Got {len(items)} items from Gemini")
+        pdf_path = sys.argv[2]
+        count = int(sys.argv[3]) if len(sys.argv) > 3 else 8
+        folder_arg = sys.argv[4] if len(sys.argv) > 4 else None
 
-    out_path = os.path.join(OUTPUT_DIR, folder, f"{sanitize_id(topic)}.tres")
-    write_tres(topic, items, out_path)
+        if not os.path.isfile(pdf_path):
+            print(f"PDF file not found: {pdf_path}")
+            sys.exit(1)
+
+        print(f"Generating {count} items from PDF: {pdf_path}")
+
+        # Read and base64-encode the PDF for Gemini's inline_data field
+        with open(pdf_path, "rb") as f:
+            pdf_b64 = base64.b64encode(f.read()).decode("utf-8")
+
+        pdf_name = os.path.splitext(os.path.basename(pdf_path))[0]
+        folder = folder_arg if folder_arg else pdf_name
+
+        pdf_prompt = f"""Analyze this PDF document and create {count} lesson items based on its content.
+Return ONLY valid JSON, no markdown fences.
+Schema:
+{{
+  "topic": "string (the main topic of the document)",
+  "items": [
+    {{
+      "id": "string",
+      "term": "string",
+      "keyword": "string",
+      "definition": "string",
+      "simple_terms": "string",
+      "examples": ["string", "string"],
+      "difficulty": 1,
+      "related_to": ["string"],
+      "type_of_information": ["definition", "apply"],
+      "tof_statement": {{
+        "true": "string",
+        "false": "string"
+      }}
+    }}
+  ]
+}}"""
+
+        body = {
+            "contents": [{
+                "parts": [
+                    {"inline_data": {"mime_type": "application/pdf", "data": pdf_b64}},
+                    {"text": pdf_prompt}
+                ]
+            }],
+            "generationConfig": {"temperature": 0.7, "response_mime_type": "application/json"}
+        }
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{PDF_MODEL}:generateContent?key={API_KEY}"
+        resp = requests.post(url, json=body)
+        if resp.status_code != 200:
+            print(f"HTTP {resp.status_code} error:")
+            print(resp.text)
+        resp.raise_for_status()
+
+        root = resp.json()
+        text_part = root["candidates"][0]["content"]["parts"][0]["text"]
+        parsed = json.loads(text_part)
+        topic = parsed.get("topic", pdf_name.replace("_", " ").replace("-", " ").title())
+        items = parsed["items"]
+        print(f"Detected topic: {topic}")
+        print(f"Got {len(items)} items from Gemini")
+
+        out_path = os.path.join(OUTPUT_DIR, folder, f"{sanitize_id(topic)}.tres")
+        write_tres(topic, items, out_path)
+
+    else:
+        topic = sys.argv[1] if len(sys.argv) > 1 else "Object Oriented Programming"
+        count = int(sys.argv[2]) if len(sys.argv) > 2 else 8
+        folder = sys.argv[3] if len(sys.argv) > 3 else topic
+
+        print(f"Generating {count} items for topic: {topic}")
+        items = call_gemini(topic, count)
+        print(f"Got {len(items)} items from Gemini")
+
+        out_path = os.path.join(OUTPUT_DIR, folder, f"{sanitize_id(topic)}.tres")
+        write_tres(topic, items, out_path)
