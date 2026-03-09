@@ -55,13 +55,14 @@ theme_override_font_sizes/font_size = 54
 text = "Money: $0"
 
 [node name="Jeopardy" type="Label" parent="."]
-offset_left = 47.0
-offset_top = 13.0
-offset_right = 391.0
-offset_bottom = 83.0
+offset_left = 279.0
+offset_top = 3.0
+offset_right = 1008.0
+offset_bottom = 73.0
 theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 54
-text = "Jeopardy"
+text = "WELCOME TO JEOPARDY"
+metadata/_edit_lock_ = true
 
 [node name="QuestionBackground" type="TextureRect" parent="."]
 z_index = 1
@@ -108,6 +109,7 @@ text = "DOGS"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+metadata/_edit_lock_ = true
 
 [node name="Category3" type="Label" parent="Category"]
 offset_left = 496.0
@@ -237,7 +239,7 @@ z_index = 1
 position = Vector2(1182, 494)
 scale = Vector2(4.84375, 4.75)
 sprite_frames = SubResource("SpriteFrames_0dedr")
-frame_progress = 0.741569
+frame_progress = 0.974094
 flip_h = true
 
 [connection signal="text_changed" from="AnswerInput" to="." method="_on_answer_input_text_changed"]

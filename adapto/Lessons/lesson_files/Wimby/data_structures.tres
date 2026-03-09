@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=3 format=3]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://adapto/Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://adapto/Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_ds_arr1"]
+script = ExtResource("1_7hrog")
+id = "DS_ARR1"
+term = "Array"
+keyword = "ordered collection"
+definition = "A data structure that stores a fixed-size sequential collection of elements of the same type."
+simple_terms = "A list where items are in a specific order and you know their position."
+examples = ["A list of student names in alphabetical order.", "A sequence of numbers representing daily temperatures."]
+difficulty = 1
+related_to = ["Data Structures", "Indexing", "Sequential Access"]
+tof_statement = {
+"false": "Arrays can dynamically resize to accommodate any number of elements.", 
+"true": "Arrays allow direct access to elements using their index."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Data Structures"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_ds_arr1")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"
