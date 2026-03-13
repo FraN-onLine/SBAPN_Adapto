@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://b5w5h5g5w5h5g"]
+
+[ext_resource type="Script" path="res://Menus/lesson_creator.gd" id="1_abcde"]
+[ext_resource type="PackedScene" uid="uid://c5w5h5g5w5h5g" path="res://Menus/question_entry.tscn" id="2_fghij"]
+
+[node name="LessonCreator" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_abcde")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+spacing = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+spacing = 10
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Lesson Title:"
+
+[node name="LessonTitleEdit" type="LineEdit" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter the lesson title"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="QuestionsVBox" type="VBoxContainer" parent="Panel/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+spacing = 10
+
+[node name="AddQuestionButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Add Question"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SaveButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Save Lesson"
+
+[node name="BackButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Back"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Save Lesson"
+ok_button_text = "Save"
+file_mode = 0
+access = 0
+filters = PackedStringArray("*.tres ; Godot Resource")
+
+[connection signal="pressed" from="Panel/VBoxContainer/AddQuestionButton" to="." method="_on_add_question_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer2/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer2/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

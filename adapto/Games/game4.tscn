@@ -1,0 +1,207 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://Games/game_4.gd" id="1_g4sc"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="2_g4fn"]
+[ext_resource type="Texture2D" path="res://Assets/Background/1.png" id="3_g4bg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.06, 0.06, 0.11, 0.97)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.1, 0.1, 0.16, 0.9)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_actionbar"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.07, 0.07, 0.13, 0.93)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_actionbtn"]
+bg_color = Color(0.18, 0.55, 0.85, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Game4" type="Node2D"]
+script = ExtResource("1_g4sc")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("3_g4bg")
+stretch_mode = 1
+
+[node name="GameTimer" type="Timer" parent="."]
+
+[node name="TopBar" type="PanelContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 65.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_header")
+
+[node name="TopBarHBox" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TitleLabel" type="Label" parent="TopBar/TopBarHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.92, 0.25, 1)
+theme_override_fonts/font = ExtResource("2_g4fn")
+theme_override_font_sizes/font_size = 32
+text = "CONCEPT MATCH RUSH"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="TopBar/TopBarHBox"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.95, 0.65, 1)
+theme_override_fonts/font = ExtResource("2_g4fn")
+theme_override_font_sizes/font_size = 22
+text = "Score: 0"
+horizontal_alignment = 2
+
+[node name="StreakLabel" type="Label" parent="TopBar/TopBarHBox"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.9, 1, 1)
+theme_override_fonts/font = ExtResource("2_g4fn")
+theme_override_font_sizes/font_size = 22
+text = "Streak: x0"
+horizontal_alignment = 2
+
+[node name="TimerLabel" type="Label" parent="TopBar/TopBarHBox"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.35, 1)
+theme_override_fonts/font = ExtResource("2_g4fn")
+theme_override_font_sizes/font_size = 22
+text = "Time: 120s"
+horizontal_alignment = 2
+
+[node name="FeedbackLabel" type="Label" parent="."]
+offset_top = 68.0
+offset_right = 1280.0
+offset_bottom = 108.0
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_fonts/font = ExtResource("2_g4fn")
+theme_override_font_sizes/font_size = 18
+text = "Pick two cards that match (term ↔ meaning)."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BoardPanel" type="PanelContainer" parent="."]
+offset_left = 10.0
+offset_top = 112.0
+offset_right = 925.0
+offset_bottom = 582.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="BoardGrid" type="GridContainer" parent="BoardPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 4
+
+[node name="SidePanel" type="PanelContainer" parent="."]
+offset_left = 935.0
+offset_top = 112.0
+offset_right = 1270.0
+offset_bottom = 582.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="SideVBox" type="VBoxContainer" parent="SidePanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 14
+
+[node name="ObjectiveLabel" type="Label" parent="SidePanel/SideVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.7, 1)
+theme_override_fonts/font = ExtResource("2_g4fn")
+theme_override_font_sizes/font_size = 20
+text = "Objective:\nMatch each term with its meaning before time runs out."
+autowrap_mode = 2
+
+[node name="ProgressLabel" type="Label" parent="SidePanel/SideVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.9, 1, 1)
+theme_override_fonts/font = ExtResource("2_g4fn")
+theme_override_font_sizes/font_size = 20
+text = "Matched: 0/8"
+autowrap_mode = 2
+
+[node name="MistakeLabel" type="Label" parent="SidePanel/SideVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.75, 1)
+theme_override_fonts/font = ExtResource("2_g4fn")
+theme_override_font_sizes/font_size = 20
+text = "Mistakes: 0 | Hints: 0"
+autowrap_mode = 2
+
+[node name="BottomBar" type="PanelContainer" parent="."]
+offset_left = 10.0
+offset_top = 587.0
+offset_right = 1270.0
+offset_bottom = 714.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_actionbar")
+
+[node name="BottomHBox" type="HBoxContainer" parent="BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="ShuffleBtn" type="Button" parent="BottomBar/BottomHBox"]
+custom_minimum_size = Vector2(210, 64)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g4fn")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_actionbtn")
+text = "SHUFFLE"
+
+[node name="HintBtn" type="Button" parent="BottomBar/BottomHBox"]
+custom_minimum_size = Vector2(210, 64)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g4fn")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_actionbtn")
+text = "HINT"
+
+[node name="SubmitPairBtn" type="Button" parent="BottomBar/BottomHBox"]
+custom_minimum_size = Vector2(210, 64)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g4fn")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_actionbtn")
+text = "SUBMIT"
+
+[node name="EndDialog" type="AcceptDialog" parent="."]
+title = "Round Complete"
+ok_button_text = "Back to Menu"
+
+[connection signal="timeout" from="GameTimer" to="." method="_on_timer_tick"]
+[connection signal="pressed" from="BottomBar/BottomHBox/ShuffleBtn" to="." method="_on_shuffle_pressed"]
+[connection signal="pressed" from="BottomBar/BottomHBox/HintBtn" to="." method="_on_hint_pressed"]
+[connection signal="pressed" from="BottomBar/BottomHBox/SubmitPairBtn" to="." method="_on_submit_pair_pressed"]

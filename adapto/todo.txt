@@ -1,0 +1,5 @@
+database-everytime they exit it saves the data from a specific user(user performance, saved lessons, and login)
+manual importing of lessons, export as tres and can be passed by instructor to other students
+2 games (suggest games to implement)
+login-usecase
+fix text validation for ai prompt(min 15 items)

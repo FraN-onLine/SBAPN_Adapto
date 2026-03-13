@@ -1,5 +1,11 @@
 extends TextureRect
 
+const DEFAULT_ACCESS_ALL_SAVED_LESSONS := true
+const ADMIN_USERNAMES := ["admin"]
+
+var access_all_saved_lessons := DEFAULT_ACCESS_ALL_SAVED_LESSONS
+var admin_all_lessons_toggle: CheckBox
+
 
 func _on_start_button_pressed() -> void:
 	$Control/VBoxContainer/Button.visible = false
@@ -20,6 +26,7 @@ func _on_button_2_pressed() -> void:
 	$Control/VBoxContainer/Button3.visible = false
 	$Control/VBoxContainer/TopicSelect.visible = true
 	$Control/VBoxContainer/TopicImport.visible = true
+	$Control/VBoxContainer/TopicExport.visible = true
 	$Control/VBoxContainer/Back.visible = true
 
 
@@ -31,9 +38,14 @@ func _on_back_pressed() -> void:
 	$Control/VBoxContainer/Button5.visible = false
 	$Control/VBoxContainer/TopicSelect.visible = false
 	$Control/VBoxContainer/TopicImport.visible = false
+	$Control/VBoxContainer/TopicExport.visible = false
 	$Control/VBoxContainer/Back.visible = false
 	$ImportChoicePanel.visible = false
 	$PromptImportPanel.visible = false
+
+
+func _on_button_3_pressed() -> void:
+	get_tree().change_scene_to_file("res://Menus/lesson_creator.tscn")
 
 
 func _on_topic_select_pressed() -> void:
@@ -88,6 +100,8 @@ func _populate_topic_list() -> void:
 		folder_name = dir.get_next()
 	dir.list_dir_end()
 
+	_append_saved_lesson_paths_from_database(tres_paths)
+
 	if tres_paths.is_empty():
 		var lbl = Label.new()
 		lbl.text = "No lesson files found."
@@ -111,6 +125,29 @@ func _populate_topic_list() -> void:
 		btn.add_theme_stylebox_override("normal", SubResource_white_rounded())
 		btn.pressed.connect(_on_topic_entry_selected.bind(path, label_text))
 		vbox.add_child(btn)
+
+
+func _append_saved_lesson_paths_from_database(tres_paths: Array[String]) -> void:
+	if Global.current_user == null:
+		return
+
+	var saved_lessons = Database.load_user_lessons(Global.current_user, _can_access_all_saved_lessons())
+	var known_paths := {}
+	for existing_path in tres_paths:
+		known_paths[existing_path] = true
+
+	for entry in saved_lessons:
+		if typeof(entry) != TYPE_DICTIONARY:
+			continue
+		if not entry.has("lesson_path"):
+			continue
+		var lesson_path = str(entry["lesson_path"])
+		if lesson_path == "" or known_paths.has(lesson_path):
+			continue
+		var file_access = FileAccess.open(lesson_path, FileAccess.READ)
+		if file_access != null and file_access.get_length() > 0:
+			tres_paths.append(lesson_path)
+			known_paths[lesson_path] = true
 
 
 func SubResource_white_rounded() -> StyleBoxFlat:
@@ -216,6 +253,44 @@ func generate_lesson_with_python(topic: String, count: int, folder: String) -> v
 		show_error_dialog(error_msg)
 
 
+# ── Manual Import/Export ──────────────────────────────────────────────────────
+
+func _on_topic_export_pressed() -> void:
+	if Global.selected_lesson == null:
+		show_error_dialog("Please select a topic to export first.")
+		return
+	$TresExportDialog.popup_centered_ratio(0.7)
+
+func _on_tres_export_file_selected(path: String) -> void:
+	var lesson = Global.selected_lesson
+	if lesson:
+		var error = ResourceSaver.save(lesson, path)
+		if error == OK:
+			show_success_dialog("Lesson exported successfully to:\n" + path)
+		else:
+			show_error_dialog("Failed to export lesson.\nError code: " + str(error))
+
+func _on_import_from_file_pressed() -> void:
+	$ImportChoicePanel.visible = false
+	$TresImportDialog.popup_centered_ratio(0.7)
+
+func _on_tres_import_file_selected(path: String) -> void:
+	var lesson = load(path) as Lesson
+	if lesson:
+		Global.selected_lesson = lesson
+		if Global.current_user != null:
+			Database.save_user_lesson(Global.current_user, {
+				"lesson_title": lesson.lesson_title,
+				"lesson_path": path,
+				"item_count": lesson.lesson_items.size(),
+				"saved_at": Time.get_unix_time_from_system()
+			})
+		_populate_topic_list()
+		show_success_dialog("Lesson imported successfully!\n" + lesson.lesson_title)
+	else:
+		show_error_dialog("Failed to load lesson from file:\n" + path)
+
+
 # ── Utility dialogs ───────────────────────────────────────────────────────────
 
 func show_error_dialog(message: String) -> void:
@@ -234,3 +309,73 @@ func show_success_dialog(message: String) -> void:
 	add_child(dialog)
 	dialog.popup_centered()
 	dialog.confirmed.connect(dialog.queue_free)
+
+
+@onready var login_screen = $LoginScreen
+@onready var register_screen = $RegisterScreen
+@onready var main_menu_control = $Control
+
+func _ready():
+	login_screen.visible = true
+	register_screen.visible = false
+	main_menu_control.visible = false
+
+func _on_login_successful():
+	login_screen.visible = false
+	main_menu_control.visible = true
+	_setup_admin_all_lessons_toggle()
+
+func _on_show_registration():
+	login_screen.visible = false
+	register_screen.visible = true
+	register_screen.clear_fields()
+
+func _on_registration_successful():
+	register_screen.visible = false
+	login_screen.visible = true
+	login_screen.clear_fields()
+
+func _on_show_login():
+	register_screen.visible = false
+	login_screen.visible = true
+	login_screen.clear_fields()
+
+
+func _is_current_user_admin() -> bool:
+	if Global.current_user == null:
+		return false
+	return ADMIN_USERNAMES.has(str(Global.current_user).to_lower())
+
+
+func _can_access_all_saved_lessons() -> bool:
+	return _is_current_user_admin() and access_all_saved_lessons
+
+
+# ========================= TEMP ADMIN TOGGLE START =========================
+# Remove this whole block if you want to disable the production admin toggle.
+func _setup_admin_all_lessons_toggle() -> void:
+	if not _is_current_user_admin():
+		access_all_saved_lessons = false
+		if admin_all_lessons_toggle != null:
+			admin_all_lessons_toggle.queue_free()
+			admin_all_lessons_toggle = null
+		return
+
+	if admin_all_lessons_toggle == null:
+		admin_all_lessons_toggle = CheckBox.new()
+		admin_all_lessons_toggle.name = "AdminAllLessonsToggle"
+		admin_all_lessons_toggle.text = "ADMIN: View all users' saved lessons"
+		admin_all_lessons_toggle.position = Vector2(20, 20)
+		admin_all_lessons_toggle.button_pressed = access_all_saved_lessons
+		admin_all_lessons_toggle.z_index = 50
+		main_menu_control.add_child(admin_all_lessons_toggle)
+		admin_all_lessons_toggle.toggled.connect(_on_admin_all_lessons_toggled)
+
+	admin_all_lessons_toggle.visible = true
+
+
+func _on_admin_all_lessons_toggled(enabled: bool) -> void:
+	access_all_saved_lessons = enabled
+	if $TopicSelectPanel.visible:
+		_populate_topic_list()
+# ========================== TEMP ADMIN TOGGLE END ==========================

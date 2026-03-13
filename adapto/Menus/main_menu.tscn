@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://c47ilaj8vd01t" path="res://Assets/UI/Title.png" id="2_at0u2"]
 [ext_resource type="Texture2D" uid="uid://c05iws3osvnhs" path="res://Assets/Sabine/Sabine-Sheet.png" id="3_11gta"]
 [ext_resource type="FontFile" uid="uid://bgrgca3qc6dxo" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="3_cxdly"]
+[ext_resource type="PackedScene" uid="uid://bu2s78n7p5ytv" path="res://Menus/login.tscn" id="5_abcde"]
+[ext_resource type="PackedScene" uid="uid://d1yqgq8h7g7w7" path="res://Menus/register.tscn" id="6_fghij"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhx3u"]
 bg_color = Color(1, 1, 1, 1)
@@ -165,15 +167,13 @@ texture = ExtResource("1_11gta")
 script = ExtResource("1_p3jrs")
 
 [node name="Control" type="Control" parent="."]
+visible = false
 layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 1.001
-offset_left = 1.0
-offset_top = 1.0
-offset_bottom = 2.27795
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
@@ -216,7 +216,7 @@ theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 
 theme_override_fonts/font = ExtResource("3_cxdly")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
-text = "Exit
+text = "Create Topic
 "
 
 [node name="Button4" type="Button" parent="Control/VBoxContainer"]
@@ -260,6 +260,16 @@ theme_override_fonts/font = ExtResource("3_cxdly")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "Import topic"
+
+[node name="TopicExport" type="Button" parent="Control/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
+text = "Export topic"
 
 [node name="Back" type="Button" parent="Control/VBoxContainer"]
 visible = false
@@ -369,6 +379,15 @@ theme_override_font_sizes/font_size = 26
 theme_override_styles/normal = SubResource("StyleBoxFlat_green")
 text = "Import by Prompt"
 
+[node name="FileBtn" type="Button" parent="ImportChoicePanel/ChoiceBox/VBox"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_blue")
+text = "Import from File"
+
 [node name="ChoiceCancelBtn" type="Button" parent="ImportChoicePanel/ChoiceBox/VBox"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -444,9 +463,9 @@ text = "Number of Questions:"
 [node name="CountInput" type="SpinBox" parent="PromptImportPanel/PromptBox/VBox"]
 custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
-min_value = 1.0
+min_value = 15.0
 max_value = 50.0
-value = 8.0
+value = 15.0
 
 [node name="FolderLabel" type="Label" parent="PromptImportPanel/PromptBox/VBox"]
 layout_mode = 2
@@ -482,6 +501,16 @@ text = "Back"
 title = "Select a PDF File"
 access = 2
 filters = PackedStringArray("*.pdf ; PDF Files")
+
+[node name="TresImportDialog" type="FileDialog" parent="."]
+title = "Select a .tres File"
+access = 2
+filters = PackedStringArray("*.tres ; TRES Files")
+
+[node name="TresExportDialog" type="FileDialog" parent="."]
+title = "Save Lesson as .tres"
+access = 0
+filters = PackedStringArray("*.tres ; TRES Files")
 
 [node name="TopicSelectPanel" type="Control" parent="."]
 visible = false
@@ -553,16 +582,32 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_red")
 text = "Cancel"
 
+[node name="LoginScreen" parent="." instance=ExtResource("5_abcde")]
+visible = false
+
+[node name="RegisterScreen" parent="." instance=ExtResource("6_fghij")]
+visible = false
+
+
 [connection signal="pressed" from="Control/VBoxContainer/Button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Button4" to="." method="on_diagnostic_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/TopicSelect" to="." method="_on_topic_select_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/TopicImport" to="." method="_on_topic_import_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/TopicExport" to="." method="_on_topic_export_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="ImportChoicePanel/ChoiceBox/VBox/PDFBtn" to="." method="_on_import_by_pdf_pressed"]
 [connection signal="pressed" from="ImportChoicePanel/ChoiceBox/VBox/PromptBtn" to="." method="_on_import_by_prompt_pressed"]
+[connection signal="pressed" from="ImportChoicePanel/ChoiceBox/VBox/FileBtn" to="." method="_on_import_from_file_pressed"]
 [connection signal="pressed" from="ImportChoicePanel/ChoiceBox/VBox/ChoiceCancelBtn" to="." method="_on_import_choice_cancel_pressed"]
 [connection signal="pressed" from="PromptImportPanel/PromptBox/VBox/GenerateBtn" to="." method="_on_prompt_generate_pressed"]
 [connection signal="pressed" from="PromptImportPanel/PromptBox/VBox/PromptBackBtn" to="." method="_on_prompt_back_pressed"]
 [connection signal="file_selected" from="PDFFileDialog" to="." method="_on_pdf_file_selected"]
+[connection signal="file_selected" from="TresImportDialog" to="." method="_on_tres_import_file_selected"]
+[connection signal="file_selected" from="TresExportDialog" to="." method="_on_tres_export_file_selected"]
 [connection signal="pressed" from="TopicSelectPanel/TopicBox/VBox/TopicCancelBtn" to="." method="_on_topic_select_cancel_pressed"]
+[connection signal="login_successful" from="LoginScreen" to="." method="_on_login_successful"]
+[connection signal="show_registration" from="LoginScreen" to="." method="_on_show_registration"]
+[connection signal="registration_successful" from="RegisterScreen" to="." method="_on_registration_successful"]
+[connection signal="show_login" from="RegisterScreen" to="." method="_on_show_login"]
