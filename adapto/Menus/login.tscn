@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu2s78n7p5ytv"]
+
+[ext_resource type="Script" path="res://Menus/login.gd" id="1_55555"]
+
+[node name="LoginScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_55555")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -60.0
+offset_right = 100.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+spacing = 10
+
+[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Login"
+horizontal_alignment = 1
+
+[node name="UsernameEdit" type="LineEdit" parent="Panel/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Username"
+
+[node name="PasswordEdit" type="LineEdit" parent="Panel/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Password"
+secret = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LoginButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Login"
+
+[node name="RegisterButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Register"
+
+[node name="FeedbackLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/LoginButton" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/RegisterButton" to="." method="_on_register_button_pressed"]

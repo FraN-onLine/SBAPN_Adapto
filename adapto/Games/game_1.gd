@@ -152,7 +152,7 @@ func answer_check() -> void:
 	var time_taken = max_time - time_remaining
 	
 	var selected_value = option1_value if selected_option == 0 else option2_value
-	var is_correct = (selected_value == current_item.term or selected_value == correct_ans)
+	var is_correct = (selected_value == current_item.term or selected_value in current_item.accepted_terms or selected_value == correct_ans)
 	
 	# Update stats
 	UserStats.game_stats["game1"]["questions"][question_type] += 1
