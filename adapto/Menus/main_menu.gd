@@ -316,9 +316,24 @@ func show_success_dialog(message: String) -> void:
 @onready var main_menu_control = $Control
 
 func _ready():
-	login_screen.visible = true
-	register_screen.visible = false
-	main_menu_control.visible = false
+	if not login_screen.login_successful.is_connected(_on_login_successful):
+		login_screen.login_successful.connect(_on_login_successful)
+	if not login_screen.show_registration.is_connected(_on_show_registration):
+		login_screen.show_registration.connect(_on_show_registration)
+	if not register_screen.registration_successful.is_connected(_on_registration_successful):
+		register_screen.registration_successful.connect(_on_registration_successful)
+	if not register_screen.show_login.is_connected(_on_show_login):
+		register_screen.show_login.connect(_on_show_login)
+
+	if Global.current_user != null and str(Global.current_user).strip_edges() != "":
+		login_screen.visible = false
+		register_screen.visible = false
+		main_menu_control.visible = true
+		_setup_admin_all_lessons_toggle()
+	else:
+		login_screen.visible = true
+		register_screen.visible = false
+		main_menu_control.visible = false
 
 func _on_login_successful():
 	login_screen.visible = false

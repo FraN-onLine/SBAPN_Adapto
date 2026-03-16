@@ -27,13 +27,13 @@ func _on_register_button_pressed():
 
 	if Database.add_user(username, password):
 		feedback_label.text = "Registration successful!"
-		emit_signal("registration_successful")
+		registration_successful.emit()
 	else:
 		feedback_label.text = "Registration failed."
 
 
 func _on_back_button_pressed():
-	emit_signal("show_login")
+	show_login.emit()
 
 func clear_fields():
 	username_edit.text = ""

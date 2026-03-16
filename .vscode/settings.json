@@ -1,3 +1,6 @@
 {
-    "godotTools.editorPath.godot4": "c:\\Users\\AROM\\Desktop\\Godot\\Godot_v4.6.1-stable_win64.exe"
+    "godotTools.editorPath.godot4": "c:\\Users\\AROM\\Desktop\\Godot\\Godot_v4.6.1-stable_win64.exe",
+    "chat.tools.terminal.autoApprove": {
+        "Set-Content": true
+    }
 }

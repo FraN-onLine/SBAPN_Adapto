@@ -21,6 +21,26 @@ func _ensure_schema() -> void:
 	if not db.has("global_saved_lessons") or typeof(db["global_saved_lessons"]) != TYPE_ARRAY:
 		db["global_saved_lessons"] = []
 
+
+func _ensure_user_schema(username: String) -> bool:
+	_ensure_schema()
+	if not db["users"].has(username):
+		return false
+
+	var user_record = db["users"][username]
+	if typeof(user_record) != TYPE_DICTIONARY:
+		return false
+
+	if not user_record.has("password") or typeof(user_record["password"]) != TYPE_STRING:
+		user_record["password"] = ""
+	if not user_record.has("performance") or typeof(user_record["performance"]) != TYPE_DICTIONARY:
+		user_record["performance"] = {}
+	if not user_record.has("saved_lessons") or typeof(user_record["saved_lessons"]) != TYPE_ARRAY:
+		user_record["saved_lessons"] = []
+
+	db["users"][username] = user_record
+	return true
+
 func _ready():
 	load_db()
 
@@ -38,7 +58,64 @@ func load_db():
 		db = _default_db()
 
 	_ensure_schema()
+	_migrate_and_deduplicate_lessons()
 	save_db()
+
+
+func _lesson_dedupe_key(lesson_data: Dictionary) -> String:
+	if lesson_data.has("lesson_path"):
+		var lesson_path = str(lesson_data["lesson_path"]).strip_edges()
+		if lesson_path != "":
+			return "path:" + lesson_path
+
+	return "payload:" + JSON.stringify(lesson_data, "")
+
+
+func _migrate_and_deduplicate_lessons() -> void:
+	_ensure_schema()
+
+	var user_saved_map := {}
+	for username in db["users"].keys():
+		if not _ensure_user_schema(username):
+			continue
+
+		var unique_user_lessons := []
+		var seen_user := {}
+		for lesson in db["users"][username]["saved_lessons"]:
+			if typeof(lesson) != TYPE_DICTIONARY:
+				continue
+			var dedupe_key = _lesson_dedupe_key(lesson)
+			if seen_user.has(dedupe_key):
+				continue
+			seen_user[dedupe_key] = true
+			unique_user_lessons.append(lesson)
+
+		db["users"][username]["saved_lessons"] = unique_user_lessons
+		user_saved_map[str(username)] = seen_user
+
+	var unique_global := []
+	var seen_global := {}
+	for entry in db["global_saved_lessons"]:
+		if typeof(entry) != TYPE_DICTIONARY:
+			continue
+
+		var username = str(entry.get("username", ""))
+		var lesson = entry.get("lesson", null)
+		if username == "" or typeof(lesson) != TYPE_DICTIONARY:
+			continue
+
+		var dedupe_key = _lesson_dedupe_key(lesson)
+		var global_key = username + "|" + dedupe_key
+		if seen_global.has(global_key):
+			continue
+
+		if user_saved_map.has(username) and not user_saved_map[username].has(dedupe_key):
+			continue
+
+		seen_global[global_key] = true
+		unique_global.append(entry)
+
+	db["global_saved_lessons"] = unique_global
 
 func save_db():
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -67,53 +144,72 @@ func add_user(username, password):
 	return true
 
 func check_user_credentials(username, password):
-	if not user_exists(username):
+	if not _ensure_user_schema(username):
 		return false
 	
 	var hashed_password = password.sha256_text()
-	return db["users"][username].password == hashed_password
+	return db["users"][username]["password"] == hashed_password
 
 func save_user_performance(username, performance_data):
-	if user_exists(username):
-		db["users"][username].performance = performance_data
-		save_db()
-		return true
-	return false
+	if not _ensure_user_schema(username):
+		return false
+
+	if typeof(performance_data) != TYPE_DICTIONARY:
+		performance_data = {}
+
+	db["users"][username]["performance"] = performance_data
+	save_db()
+	return true
 
 func load_user_performance(username):
-	if user_exists(username):
-		return db["users"][username].performance
-	return null
+	if not _ensure_user_schema(username):
+		return null
+	return db["users"][username]["performance"]
 
 func save_user_lesson(username, lesson_data):
-	if user_exists(username):
-		if not db["users"][username].has("saved_lessons"):
-			db["users"][username].saved_lessons = []
+	if not _ensure_user_schema(username):
+		return false
 
-		db["users"][username].saved_lessons.append(lesson_data)
+	if typeof(lesson_data) != TYPE_DICTIONARY:
+		return false
 
-		db["global_saved_lessons"].append({
-			"username": username,
-			"lesson": lesson_data,
-			"saved_at": Time.get_unix_time_from_system()
-		})
+	db["users"][username]["saved_lessons"].append(lesson_data)
 
-		save_db()
-		return true
-	return false
+	db["global_saved_lessons"].append({
+		"username": username,
+		"lesson": lesson_data,
+		"saved_at": Time.get_unix_time_from_system()
+	})
+
+	save_db()
+	return true
 
 func load_user_lessons(username, include_all := false):
-	if not user_exists(username):
+	if not _ensure_user_schema(username):
 		return []
 
 	var user_lessons = []
-	if db["users"][username].has("saved_lessons") and typeof(db["users"][username].saved_lessons) == TYPE_ARRAY:
-		user_lessons = db["users"][username].saved_lessons.duplicate(true)
+	if typeof(db["users"][username]["saved_lessons"]) == TYPE_ARRAY:
+		user_lessons = db["users"][username]["saved_lessons"].duplicate(true)
 
 	if include_all:
+		var known_paths := {}
+		for lesson in user_lessons:
+			if typeof(lesson) == TYPE_DICTIONARY and lesson.has("lesson_path"):
+				known_paths[str(lesson["lesson_path"])] = true
+
 		for entry in load_all_lessons():
 			if typeof(entry) == TYPE_DICTIONARY and entry.has("lesson"):
-				user_lessons.append(entry["lesson"])
+				var lesson = entry["lesson"]
+				if typeof(lesson) != TYPE_DICTIONARY or not lesson.has("lesson_path"):
+					user_lessons.append(lesson)
+					continue
+
+				var lesson_path = str(lesson["lesson_path"])
+				if known_paths.has(lesson_path):
+					continue
+				known_paths[lesson_path] = true
+				user_lessons.append(lesson)
 
 	return user_lessons
 
@@ -139,9 +235,28 @@ func load_all_lessons_grouped_by_user() -> Dictionary:
 
 
 func replace_user_lessons(username, lessons: Array) -> bool:
-	if not user_exists(username):
+	if not _ensure_user_schema(username):
 		return false
 
-	db["users"][username].saved_lessons = lessons.duplicate(true)
+	db["users"][username]["saved_lessons"] = lessons.duplicate(true)
+
+	var refreshed_global := []
+	for entry in db["global_saved_lessons"]:
+		if typeof(entry) != TYPE_DICTIONARY:
+			continue
+		if str(entry.get("username", "")) == str(username):
+			continue
+		refreshed_global.append(entry)
+
+	for lesson in lessons:
+		if typeof(lesson) != TYPE_DICTIONARY:
+			continue
+		refreshed_global.append({
+			"username": username,
+			"lesson": lesson,
+			"saved_at": lesson.get("saved_at", Time.get_unix_time_from_system())
+		})
+
+	db["global_saved_lessons"] = refreshed_global
 	save_db()
 	return true

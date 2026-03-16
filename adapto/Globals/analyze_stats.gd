@@ -12,7 +12,9 @@ func analyze_stats():
 	for i in range(4):
 		var game_type = UserStats.overall_stats["game1"]["type"][i]
 		var accuracy = UserStats.overall_stats["game1"]["accuracy"][i]
-		var time = UserStats.overall_stats["game1"]["time"][i]
+		var total_questions = UserStats.overall_stats["game1"]["total_questions"][i]
+		var total_time = UserStats.overall_stats["game1"]["total_sum_time"][i]
+		var time = 9999.0 if total_questions <= 0 else (float(total_time) / float(total_questions))
 		if game_type == "definition":
 			definition_proficiency["acc"] = "good" if accuracy > 80 else "poor"
 			definition_proficiency["time"] = "fast" if time < 30 else "slow"

@@ -1,591 +1,326 @@
-extends Node2D
+extends Control
 
 const ROUND_TIME := 150
-const MAX_NODE_COUNT := 12
+const TARGET_WORDS := 6
+const PENALTY_MISS := 20
+const PENALTY_HINT := 50
+const PENALTY_SKIP := 100
+const REWARD_LETTER := 15
+const REWARD_WORD := 150
 
 @onready var game_timer: Timer = $GameTimer
-@onready var score_label: Label = $TopBar/TopBarHBox/ScoreLabel
-@onready var moves_label: Label = $TopBar/TopBarHBox/MovesLabel
-@onready var timer_label: Label = $TopBar/TopBarHBox/TimerLabel
-@onready var feedback_label: Label = $FeedbackLabel
-@onready var start_label: Label = $PuzzlePanel/StartLabel
-@onready var end_label: Label = $PuzzlePanel/EndLabel
-@onready var graph_board: Control = $PuzzlePanel/GraphBoard
-@onready var current_path_label: Label = $PuzzlePanel/CurrentPathLabel
-@onready var goal_label: Label = $SidePanel/SideVBox/GoalLabel
-@onready var optimal_label: Label = $SidePanel/SideVBox/OptimalLabel
-@onready var attempts_label: Label = $SidePanel/SideVBox/AttemptsLabel
-@onready var undo_btn: Button = $BottomBar/BottomHBox/UndoBtn
-@onready var reset_path_btn: Button = $BottomBar/BottomHBox/ResetPathBtn
-@onready var hint_btn: Button = $BottomBar/BottomHBox/HintBtn
-@onready var submit_path_btn: Button = $BottomBar/BottomHBox/SubmitPathBtn
+@onready var score_label: Label = $MainVBox/TopBar/TopBarHBox/ScoreLabel
+@onready var streak_label: Label = $MainVBox/TopBar/TopBarHBox/StreakLabel
+@onready var timer_label: Label = $MainVBox/TopBar/TopBarHBox/TimerLabel
+
+@onready var definition_label: Label = $MainVBox/ContentHBox/GamePanel/GameVBox/DefinitionLabel
+@onready var word_label: Label = $MainVBox/ContentHBox/GamePanel/GameVBox/WordLabel
+@onready var feedback_label: Label = $MainVBox/ContentHBox/GamePanel/GameVBox/FeedbackLabel
+
+@onready var keyboard_row_1: HBoxContainer = $MainVBox/ContentHBox/GamePanel/GameVBox/KeyboardCenter/KeyboardVBox/KeyboardRow1
+@onready var keyboard_row_2: HBoxContainer = $MainVBox/ContentHBox/GamePanel/GameVBox/KeyboardCenter/KeyboardVBox/KeyboardRow2
+@onready var keyboard_row_3: HBoxContainer = $MainVBox/ContentHBox/GamePanel/GameVBox/KeyboardCenter/KeyboardVBox/KeyboardRow3
+
+@onready var progress_label: Label = $MainVBox/BottomBar/BottomHBox/ProgressLabel
+@onready var mistakes_label: Label = $MainVBox/BottomBar/BottomHBox/MistakesLabel
+
+@onready var hint_btn: Button = $MainVBox/BottomBar/BottomHBox/HintBtn
+@onready var skip_btn: Button = $MainVBox/BottomBar/BottomHBox/SkipBtn
 @onready var end_dialog: AcceptDialog = $EndDialog
 
 var lesson: Lesson
-var adj: Dictionary = {}
-var node_positions: Dictionary = {}
-var node_buttons: Dictionary = {}
-var shown_terms: Array[String] = []
+var game_data: Array = []
+var current_word_index := 0
 
-var start_term: String = ""
-var end_term: String = ""
-var optimal_path: Array[String] = []
-var current_path: Array[String] = []
+var current_term := ""
+var current_definition := ""
+var guessed_letters: Array[String] = []
 
-var score: int = 0
-var moves: int = 0
-var attempts: int = 0
-var hints_used: int = 0
-var invalid_submits: int = 0
-var time_remaining: int = ROUND_TIME
-var game_finished: bool = false
+var score := 0
+var time_remaining := ROUND_TIME
+var current_streak := 0
+var max_streak := 0
+var mistakes_total := 0
+var hints_used := 0
+var skips_used := 0
+var input_locked := false
+var game_finished := false
 
+var keyboard_buttons: Dictionary = {}
+
+const QWERTY_LAYOUT = [
+    "QWERTYUIOP",
+    "ASDFGHJKL",
+    "ZXCVBNM"
+]
 
 func _ready() -> void:
-	_fix_stacked_puzzle_panel()
-	_apply_main_layout()
-
-	lesson = Global.selected_lesson if Global.selected_lesson != null else load("res://Lessons/lesson_files/Object Oriented/oop.tres")
-
-	if lesson == null or lesson.lesson_items.is_empty():
-		feedback_label.text = "No lesson available. Please select a lesson first."
-		_disable_all_inputs()
-		return
-
-	_build_graph_from_lesson()
-	if not _setup_puzzle():
-		feedback_label.text = "Could not build a valid path puzzle from this lesson."
-		_disable_all_inputs()
-		return
-
-	_spawn_graph_nodes()
-	graph_board.draw.connect(_draw_graph)
-	graph_board.queue_redraw()
-
-	game_timer.wait_time = 1.0
-	game_timer.timeout.connect(_on_timer_tick)
-	game_timer.start()
-
-	undo_btn.pressed.connect(_on_undo_pressed)
-	reset_path_btn.pressed.connect(_on_reset_pressed)
-	hint_btn.pressed.connect(_on_hint_pressed)
-	submit_path_btn.pressed.connect(_on_submit_pressed)
-	end_dialog.confirmed.connect(_on_end_dialog_confirmed)
-
-	feedback_label.text = "Build a valid path from Start to End using connected terms."
-	_update_hud()
-
-
-func _fix_stacked_puzzle_panel() -> void:
-	# PanelContainers force all direct children to stack.
-	# We move them into a VBoxContainer programmatically so they arrange vertically.
-	var puzzle_panel = $PuzzlePanel
-	puzzle_panel.remove_child(start_label)
-	puzzle_panel.remove_child(end_label)
-	puzzle_panel.remove_child(graph_board)
-	puzzle_panel.remove_child(current_path_label)
-
-	var vbox = VBoxContainer.new()
-	puzzle_panel.add_child(vbox)
-	
-	vbox.add_child(start_label)
-	vbox.add_child(end_label)
-	vbox.add_child(graph_board)
-	vbox.add_child(current_path_label)
-	
-	# Ensure the graph board takes up all the available vertical space
-	graph_board.size_flags_vertical = Control.SIZE_EXPAND_FILL
-
-
-func _apply_main_layout() -> void:
-	var vp_size = get_viewport_rect().size
-	if vp_size.x < 100: vp_size = Vector2(1152, 648)
-	
-	var bg = get_node_or_null("Background")
-	if bg:
-		bg.size = vp_size
-
-	var margin := 20.0
-	var top_bar = $TopBar
-	var side_panel = $SidePanel
-	var bottom_bar = $BottomBar
-	var puzzle_panel = $PuzzlePanel
-
-	top_bar.position = Vector2(margin, margin)
-	top_bar.size = Vector2(vp_size.x - margin * 2, 60)
-	
-	feedback_label.position = Vector2(margin, top_bar.position.y + top_bar.size.y + 10)
-	feedback_label.size = Vector2(vp_size.x - margin * 2, 30)
-	feedback_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	
-	bottom_bar.size = Vector2(vp_size.x - margin * 2, 60)
-	bottom_bar.position = Vector2(margin, vp_size.y - bottom_bar.size.y - margin)
-	
-	var mid_y = feedback_label.position.y + feedback_label.size.y + 10
-	var mid_h = bottom_bar.position.y - mid_y - margin
-	var side_width := 300.0
-	
-	side_panel.size = Vector2(side_width, mid_h)
-	side_panel.position = Vector2(vp_size.x - side_width - margin, mid_y)
-	
-	puzzle_panel.size = Vector2(vp_size.x - side_width - margin * 3, mid_h)
-	puzzle_panel.position = Vector2(margin, mid_y)
-
-
-func _build_graph_from_lesson() -> void:
-	adj.clear()
-
-	var terms: Array[String] = []
-	var term_to_related: Dictionary = {}
-	var term_lookup: Dictionary = {}
-
-	for item in lesson.lesson_items:
-		var term: String = str(item.term).strip_edges()
-		if term == "":
-			continue
-		if not adj.has(term):
-			adj[term] = []
-			terms.append(term)
-		term_lookup[term.to_lower()] = term
-
-	for item in lesson.lesson_items:
-		var term: String = str(item.term).strip_edges()
-		if term == "" or not adj.has(term):
-			continue
-		var related_norm: Array[String] = []
-		if item.related_to != null:
-			for rel in item.related_to:
-				related_norm.append(str(rel).strip_edges().to_lower())
-		term_to_related[term] = related_norm
-
-	for i in range(terms.size()):
-		for j in range(i + 1, terms.size()):
-			var term_a: String = terms[i]
-			var term_b: String = terms[j]
-
-			var rel_a: Array = term_to_related.get(term_a, [])
-			var rel_b: Array = term_to_related.get(term_b, [])
-
-			var overlap := false
-			for rel in rel_a:
-				if rel_b.has(rel):
-					overlap = true
-					break
-
-			var mentions_term := rel_a.has(term_b.to_lower()) or rel_b.has(term_a.to_lower())
-			if overlap or mentions_term:
-				_add_edge(term_a, term_b)
-
-
-func _add_edge(a: String, b: String) -> void:
-	if not adj.has(a):
-		adj[a] = []
-	if not adj.has(b):
-		adj[b] = []
-	if not adj[a].has(b):
-		adj[a].append(b)
-	if not adj[b].has(a):
-		adj[b].append(a)
-
-
-func _setup_puzzle() -> bool:
-	var terms: Array[String] = []
-	for key in adj.keys():
-		if (adj[key] as Array).size() >= 1:
-			terms.append(str(key))
-
-	if terms.size() < 2:
-		return false
-
-	terms.shuffle()
-
-	for i in range(terms.size()):
-		for j in range(i + 1, terms.size()):
-			var a: String = terms[i]
-			var b: String = terms[j]
-			var path: Array[String] = _bfs_shortest_path(a, b)
-			if path.is_empty():
-				continue
-			var edges: int = path.size() - 1
-			if edges >= 3 and edges <= 6:
-				start_term = a
-				end_term = b
-				optimal_path = path
-				current_path = [start_term]
-				return true
-
-	# Fallback: any connected pair with at least 2 edges
-	for i in range(terms.size()):
-		for j in range(i + 1, terms.size()):
-			var a: String = terms[i]
-			var b: String = terms[j]
-			var path: Array[String] = _bfs_shortest_path(a, b)
-			if path.size() >= 3:
-				start_term = a
-				end_term = b
-				optimal_path = path
-				current_path = [start_term]
-				return true
-
-	return false
-
-
-func _bfs_shortest_path(start_node: String, end_node: String) -> Array[String]:
-	if start_node == end_node:
-		return [start_node]
-	if not adj.has(start_node) or not adj.has(end_node):
-		return []
-
-	var queue: Array[String] = [start_node]
-	var visited := {}
-	var parent := {}
-	visited[start_node] = true
-	parent[start_node] = ""
-
-	var found := false
-	while not queue.is_empty():
-		var current: String = queue.pop_front()
-		if current == end_node:
-			found = true
-			break
-
-		for next_node in adj[current]:
-			var neighbor: String = str(next_node)
-			if visited.has(neighbor):
-				continue
-			visited[neighbor] = true
-			parent[neighbor] = current
-			queue.append(neighbor)
-
-	if not found:
-		return []
-
-	var path: Array[String] = []
-	var node: String = end_node
-	while node != "":
-		path.append(node)
-		node = str(parent.get(node, ""))
-	path.reverse()
-	return path
-
-
-func _spawn_graph_nodes() -> void:
-	for child in graph_board.get_children():
-		child.queue_free()
-
-	node_positions.clear()
-	node_buttons.clear()
-	shown_terms.clear()
-
-	var all_terms: Array[String] = []
-	for key in adj.keys():
-		all_terms.append(str(key))
-
-	var include := {}
-	for term in optimal_path:
-		include[term] = true
-
-	all_terms.shuffle()
-	for term in all_terms:
-		if include.size() >= MAX_NODE_COUNT:
-			break
-		include[term] = true
-
-	for term in include.keys():
-		shown_terms.append(str(term))
-
-	var width: float = graph_board.size.x
-	var height: float = graph_board.size.y
-	if width < 200:
-		width = 660
-	if height < 200:
-		height = 370
-
-	var center: Vector2 = Vector2(width * 0.5, height * 0.52)
-	var radius: float = minf(width, height) * 0.36
-	if radius < 120:
-		radius = 120
-
-	var count: int = shown_terms.size()
-	for i in range(count):
-		var term: String = shown_terms[i]
-		var angle: float = (TAU * float(i) / float(maxi(1, count))) - PI * 0.5
-		var pos: Vector2 = center + Vector2(cos(angle), sin(angle)) * radius
-		node_positions[term] = pos
-
-		var btn := Button.new()
-		btn.text = term
-		btn.custom_minimum_size = Vector2(140, 44)
-		btn.size = Vector2(140, 44)
-		btn.position = pos - btn.size * 0.5
-		btn.clip_text = true
-		btn.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		btn.add_theme_font_size_override("font_size", 14)
-		btn.pressed.connect(_on_node_pressed.bind(term))
-		graph_board.add_child(btn)
-		node_buttons[term] = btn
-
-	_update_node_visuals()
-
-
-func _draw_graph() -> void:
-	for term in shown_terms:
-		if not adj.has(term):
-			continue
-		for n in adj[term]:
-			var other: String = str(n)
-			if not node_positions.has(other):
-				continue
-			if term > other:
-				continue
-			graph_board.draw_line(
-				node_positions[term],
-				node_positions[other],
-				Color(0.45, 0.45, 0.55, 0.65),
-				2.0,
-				true
-			)
-
-	if current_path.size() >= 2:
-		for i in range(current_path.size() - 1):
-			var a: String = current_path[i]
-			var b: String = current_path[i + 1]
-			if node_positions.has(a) and node_positions.has(b):
-				graph_board.draw_line(
-					node_positions[a],
-					node_positions[b],
-					Color(0.2, 0.85, 1.0, 0.95),
-					4.0,
-					true
-				)
-
-
-func _on_node_pressed(term: String) -> void:
-	if game_finished:
-		return
-
-	if current_path.is_empty():
-		current_path.append(start_term)
-
-	var last_term: String = current_path[current_path.size() - 1]
-	if term == last_term:
-		return
-
-	if current_path.has(term):
-		feedback_label.text = "Loops are disabled in MVP."
-		return
-
-	if not _are_connected(last_term, term):
-		feedback_label.text = "That term is not directly connected to your current node."
-		return
-
-	current_path.append(term)
-	moves += 1
-	feedback_label.text = "Path extended to: " + term
-	_update_hud()
-	_update_node_visuals()
-	graph_board.queue_redraw()
-
-
-func _are_connected(a: String, b: String) -> bool:
-	if not adj.has(a):
-		return false
-	return (adj[a] as Array).has(b)
-
-
-func _on_undo_pressed() -> void:
-	if game_finished:
-		return
-	if current_path.size() <= 1:
-		return
-	current_path.remove_at(current_path.size() - 1)
-	moves = maxi(0, moves - 1)
-	feedback_label.text = "Last node removed."
-	_update_hud()
-	_update_node_visuals()
-	graph_board.queue_redraw()
-
-
-func _on_reset_pressed() -> void:
-	if game_finished:
-		return
-	current_path = [start_term]
-	moves = 0
-	feedback_label.text = "Path reset to start."
-	_update_hud()
-	_update_node_visuals()
-	graph_board.queue_redraw()
-
+    lesson = Global.selected_lesson if Global.selected_lesson != null else load("res://Lessons/lesson_files/Object Oriented/oop.tres")
+    if lesson == null or lesson.lesson_items.is_empty():
+        definition_label.text = "No lesson available. Please select or create a lesson first."
+        _disable_gameplay()
+        return
+
+    _prepare_data()
+    if game_data.is_empty():
+        definition_label.text = "Not enough valid lesson entries for Hangman."
+        _disable_gameplay()
+        return
+
+    _build_keyboard()
+    _start_word(0)
+    _update_hud()
+
+    game_timer.wait_time = 1.0
+    game_timer.start()
+
+func _prepare_data() -> void:
+    game_data.clear()
+    var items = lesson.lesson_items.duplicate()
+    items.shuffle()
+    
+    var valid_words = []
+    # Filter terms: only alphabetical + spaces, no extreme length
+    for item in items:
+        var term: String = str(item.term).strip_edges().to_upper()
+        var definition: String = str(item.definition).strip_edges()
+        if definition == "":
+            definition = str(item.simple_terms).strip_edges()
+            
+        if term == "" or definition == "":
+            continue
+            
+        # simple check if valid for hangman
+        var is_valid = true
+        var valid_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ -_"
+        for char_str in term:
+            if not valid_chars.contains(char_str):
+                is_valid = false
+                break
+        
+        if is_valid and term.length() <= 20: 
+            valid_words.append({"term": term, "def": definition})
+        
+        if valid_words.size() >= TARGET_WORDS:
+            break
+            
+    game_data = valid_words
+
+func _build_keyboard() -> void:
+    # Clear existing
+    for row in [keyboard_row_1, keyboard_row_2, keyboard_row_3]:
+        for child in row.get_children():
+            child.queue_free()
+            
+    keyboard_buttons.clear()
+    
+    for i in range(QWERTY_LAYOUT.size()):
+        var row_str = QWERTY_LAYOUT[i]
+        var target_row: HBoxContainer
+        if i == 0: target_row = keyboard_row_1
+        elif i == 1: target_row = keyboard_row_2
+        else: target_row = keyboard_row_3
+            
+        for letter in row_str:
+            var btn := Button.new()
+            btn.custom_minimum_size = Vector2(50, 60)
+            btn.text = letter
+            btn.add_theme_font_size_override("font_size", 24)
+            btn.focus_mode = Control.FOCUS_NONE
+            btn.pressed.connect(_on_key_pressed.bind(letter))
+            target_row.add_child(btn)
+            keyboard_buttons[letter] = btn
+
+func _start_word(idx: int) -> void:
+    if idx >= game_data.size():
+        _end_game(true)
+        return
+        
+    current_word_index = idx
+    current_term = game_data[idx]["term"]
+    current_definition = game_data[idx]["def"]
+    guessed_letters.clear()
+    
+    input_locked = false
+    feedback_label.text = ""
+    
+    # Enable all keys
+    for key in keyboard_buttons:
+        var btn: Button = keyboard_buttons[key]
+        btn.disabled = false
+        btn.modulate = Color(1, 1, 1, 1)
+        
+    definition_label.text = current_definition
+    _update_word_display()
+    _update_hud()
+
+func _update_word_display() -> void:
+    var display_str := ""
+    var is_complete := true
+    
+    for char_str in current_term:
+        if char_str == " " or char_str == "-":
+            display_str += char_str + " "
+        elif guessed_letters.has(char_str):
+            display_str += char_str + " "
+        else:
+            display_str += "_ "
+            is_complete = false
+            
+    word_label.text = display_str.strip_edges()
+    
+    if is_complete and not input_locked:
+        input_locked = true
+        _word_completed(true)
+
+func _on_key_pressed(letter: String) -> void:
+    if input_locked or game_finished:
+        return
+        
+    if guessed_letters.has(letter):
+        return
+        
+    guessed_letters.append(letter)
+    var btn: Button = keyboard_buttons[letter]
+    btn.disabled = true
+    
+    if current_term.contains(letter):
+        btn.modulate = Color(0.4, 1.0, 0.4) # Greenish for correct
+        score += REWARD_LETTER
+        current_streak += 1
+        max_streak = maxi(max_streak, current_streak)
+        feedback_label.text = "Correct!"
+        if current_streak > 0 and current_streak % 5 == 0:
+            score += 50 # Streak bonus
+    else:
+        btn.modulate = Color(1.0, 0.4, 0.4) # Reddish for incorrect
+        score = maxi(0, score - PENALTY_MISS)
+        current_streak = 0
+        mistakes_total += 1
+        feedback_label.text = "Miss!"
+        
+    _update_word_display()
+    _update_hud()
 
 func _on_hint_pressed() -> void:
-	if game_finished:
-		return
-	if optimal_path.size() < 2:
-		feedback_label.text = "No hint available for this puzzle."
-		return
+    if input_locked or game_finished:
+        return
+        
+    score = maxi(0, score - PENALTY_HINT)
+    hints_used += 1
+    current_streak = 0
+    feedback_label.text = "Hint used!"
+    
+    # Find an unrevealed letter
+    var unrevealed = []
+    for char_str in current_term:
+        if char_str != " " and char_str != "-" and not guessed_letters.has(char_str):
+            unrevealed.append(char_str)
+            
+    if unrevealed.size() > 0:
+        var target_char = unrevealed[randi() % unrevealed.size()]
+        _on_key_pressed(target_char)
+    
+    _update_hud()
 
-	hints_used += 1
-	score -= 100
+func _on_skip_pressed() -> void:
+    if input_locked or game_finished:
+        return
+        
+    score = maxi(0, score - PENALTY_SKIP)
+    skips_used += 1
+    current_streak = 0
+    feedback_label.text = "Word skipped!"
+    
+    input_locked = true
+    _word_completed(false)
 
-	var next_hint: String = ""
-	var prefix_ok := true
-	if current_path.size() > optimal_path.size():
-		prefix_ok = false
-	else:
-		for i in range(current_path.size()):
-			if current_path[i] != optimal_path[i]:
-				prefix_ok = false
-				break
-
-	if prefix_ok and current_path.size() < optimal_path.size():
-		next_hint = optimal_path[current_path.size()]
-	else:
-		next_hint = optimal_path[1]
-
-	feedback_label.text = "Hint: Try stepping to \"%s\" next." % next_hint
-	optimal_label.visible = true
-	optimal_label.text = "Optimal length: %d edges" % (optimal_path.size() - 1)
-	_update_hud()
-
-
-func _on_submit_pressed() -> void:
-	if game_finished:
-		return
-
-	attempts += 1
-
-	var valid := _validate_current_path()
-	if not valid:
-		invalid_submits += 1
-		score -= 40
-		feedback_label.text = "Invalid path. Start/end or adjacency rules failed."
-		_update_hud()
-		return
-
-	var player_len := current_path.size() - 1
-	var optimal_len := optimal_path.size() - 1
-	var extra_steps := maxi(0, player_len - optimal_len)
-	var elapsed := ROUND_TIME - maxi(0, time_remaining)
-	var efficiency_bonus := maxi(0, (optimal_len * 80) - (extra_steps * 60))
-	var time_bonus := maxi(0, 120 - elapsed)
-
-	score += 300 + efficiency_bonus + time_bonus
-	_end_game(true)
-
-
-func _validate_current_path() -> bool:
-	if current_path.is_empty():
-		return false
-	if current_path[0] != start_term:
-		return false
-	if current_path[current_path.size() - 1] != end_term:
-		return false
-	for i in range(current_path.size() - 1):
-		if not _are_connected(current_path[i], current_path[i + 1]):
-			return false
-	return true
-
+func _word_completed(success: bool) -> void:
+    if success:
+        score += REWARD_WORD
+        feedback_label.text = "Excellent! +%d" % REWARD_WORD
+        
+    _update_hud()
+    await get_tree().create_timer(1.5).timeout
+    _start_word(current_word_index + 1)
 
 func _on_timer_tick() -> void:
-	if game_finished:
-		return
-	time_remaining -= 1
-	_update_hud()
-	if time_remaining <= 0:
-		_end_game(false)
-
-
-func _end_game(won: bool) -> void:
-	if game_finished:
-		return
-	game_finished = true
-	game_timer.stop()
-	_disable_all_inputs()
-
-	var elapsed := ROUND_TIME - maxi(0, time_remaining)
-	var player_len := maxi(0, current_path.size() - 1)
-	var optimal_len := maxi(0, optimal_path.size() - 1)
-	var extra_steps := maxi(0, player_len - optimal_len)
-	var payload := {
-		"score": score,
-		"correct": 1 if won else 0,
-		"incorrect": invalid_submits,
-		"accuracy": 100.0 if won else 0.0,
-		"time_spent": elapsed,
-		"completed": won,
-		"timestamp": Time.get_unix_time_from_system(),
-		"lesson_title": lesson.lesson_title if lesson != null else "",
-		"optimal_len": optimal_len,
-		"player_len": player_len,
-		"extra_steps": extra_steps,
-		"invalid_submits": invalid_submits,
-		"hints_used": hints_used,
-		"attempts": attempts,
-		"moves": moves
-	}
-	_save_performance(payload)
-
-	optimal_label.visible = true
-	optimal_label.text = "Optimal path (%d): %s" % [optimal_len, " → ".join(optimal_path)]
-
-	if won:
-		end_dialog.title = "Path Complete"
-		end_dialog.dialog_text = "Nice solve!\nScore: %d\nYour path length: %d\nOptimal: %d" % [score, player_len, optimal_len]
-	else:
-		end_dialog.title = "Time Up"
-		end_dialog.dialog_text = "Time expired.\nScore: %d\nOptimal path: %s" % [score, " → ".join(optimal_path)]
-	end_dialog.popup_centered()
-
-
-func _save_performance(payload: Dictionary) -> void:
-	if Global.current_user == null:
-		return
-	var existing = Database.load_user_performance(Global.current_user)
-	if typeof(existing) != TYPE_DICTIONARY:
-		existing = {}
-	existing["game5"] = payload
-	Database.save_user_performance(Global.current_user, existing)
-
+    if game_finished:
+        return
+    time_remaining -= 1
+    _update_hud()
+    if time_remaining <= 0:
+        _end_game(false)
 
 func _update_hud() -> void:
-	score_label.text = "Score: %d" % score
-	moves_label.text = "Moves: %d" % moves
-	timer_label.text = "Time: %ds" % maxi(0, time_remaining)
-	start_label.text = "Start: " + start_term
-	end_label.text = "End: " + end_term
-	current_path_label.text = "Current Path: " + " → ".join(current_path)
-	goal_label.text = "Goal:\nBuild a valid connected path from Start to End."
-	attempts_label.text = "Attempts: %d | Invalid: %d | Hints: %d" % [attempts, invalid_submits, hints_used]
+    score_label.text = "Score: %d" % score
+    streak_label.text = "Streak: x%d" % current_streak
+    timer_label.text = "Time: %ds" % maxi(0, time_remaining)
+    var d_size = game_data.size() if game_data != null else 0
+    progress_label.text = "Words: %d/%d" % [current_word_index, d_size]
+    mistakes_label.text = "Misses: %d" % mistakes_total
 
+func _disable_gameplay() -> void:
+    input_locked = true
+    hint_btn.disabled = true
+    skip_btn.disabled = true
+    for key in keyboard_buttons:
+        keyboard_buttons[key].disabled = true
 
-func _update_node_visuals() -> void:
-	for term in node_buttons.keys():
-		var btn: Button = node_buttons[term]
-		btn.modulate = Color(1, 1, 1, 1)
+func _input(event: InputEvent) -> void:
+    if game_finished or input_locked:
+        return
+    if event is InputEventKey and event.pressed and not event.echo:
+        var c = OS.get_keycode_string(event.keycode).to_upper()
+        if c.length() == 1 and QWERTY_LAYOUT[0].contains(c) or QWERTY_LAYOUT[1].contains(c) or QWERTY_LAYOUT[2].contains(c):
+            if not guessed_letters.has(c):
+                _on_key_pressed(c)
 
-	if node_buttons.has(start_term):
-		(node_buttons[start_term] as Button).modulate = Color(0.65, 1.0, 0.72, 1)
-	if node_buttons.has(end_term):
-		(node_buttons[end_term] as Button).modulate = Color(1.0, 0.76, 0.65, 1)
+func _end_game(won: bool) -> void:
+    if game_finished:
+        return
+    game_finished = true
+    game_timer.stop()
+    _disable_gameplay()
 
-	for term in current_path:
-		if node_buttons.has(term):
-			(node_buttons[term] as Button).modulate = Color(0.68, 0.88, 1.0, 1)
+    var elapsed := ROUND_TIME - maxi(0, time_remaining)
+    var accuracy := 0.0
+    var total_attempts := mistakes_total + guessed_letters.size()
+    if total_attempts > 0:
+        accuracy = float(guessed_letters.size() - mistakes_total) / float(total_attempts) * 100.0
+        accuracy = max(0.0, accuracy)
+        
+    _save_performance({
+        "score": score,
+        "mistakes": mistakes_total,
+        "accuracy": accuracy,
+        "time_spent": elapsed,
+        "completed": won,
+        "timestamp": Time.get_unix_time_from_system(),
+        "lesson_title": lesson.lesson_title if lesson != null else "",
+        "max_streak": max_streak,
+        "hints_used": hints_used,
+        "skips_used": skips_used,
+        "words_total": game_data.size()
+    })
 
-	if current_path.size() > 0:
-		var current_term: String = current_path[current_path.size() - 1]
-		if node_buttons.has(current_term):
-			(node_buttons[current_term] as Button).modulate = Color(0.35, 0.8, 1.0, 1)
+    if won:
+        end_dialog.title = "Round Complete"
+        end_dialog.dialog_text = "Amazing!\nScore: %d\nCompleted all words." % score
+    else:
+        end_dialog.title = "Time Up"
+        end_dialog.dialog_text = "Time's up!\nScore: %d\nWords: %d/%d" % [score, current_word_index, game_data.size()]
+    end_dialog.popup_centered()
 
-
-func _disable_all_inputs() -> void:
-	undo_btn.disabled = true
-	reset_path_btn.disabled = true
-	hint_btn.disabled = true
-	submit_path_btn.disabled = true
-	for term in node_buttons.keys():
-		(node_buttons[term] as Button).disabled = true
-
+func _save_performance(payload: Dictionary) -> void:
+    if Global.current_user == null:
+        return
+    var existing = Database.load_user_performance(Global.current_user)
+    if typeof(existing) != TYPE_DICTIONARY:
+        existing = {}
+    existing["game5"] = payload
+    Database.save_user_performance(Global.current_user, existing)
 
 func _on_end_dialog_confirmed() -> void:
-	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+    # After game 5, usually redirect to stats, main menu, or back to game selection
+    get_tree().change_scene_to_file("res://Menus/game1_stats.tscn")

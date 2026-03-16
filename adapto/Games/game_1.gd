@@ -225,4 +225,4 @@ func game_over() -> void:
 	option1_button.disabled = true
 	option2_button.disabled = true
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://Games/game_2.gd")
+	get_tree().change_scene_to_file("res://Games/game2.tscn")

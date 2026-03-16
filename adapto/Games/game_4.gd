@@ -1,19 +1,19 @@
-extends Node2D
+extends Control
 
 const ROUND_TIME := 120
 const TARGET_PAIRS := 8
 
 @onready var game_timer: Timer = $GameTimer
-@onready var score_label: Label = $TopBar/TopBarHBox/ScoreLabel
-@onready var streak_label: Label = $TopBar/TopBarHBox/StreakLabel
-@onready var timer_label: Label = $TopBar/TopBarHBox/TimerLabel
-@onready var feedback_label: Label = $FeedbackLabel
-@onready var board_grid: GridContainer = $BoardPanel/BoardGrid
-@onready var progress_label: Label = $SidePanel/SideVBox/ProgressLabel
-@onready var mistake_label: Label = $SidePanel/SideVBox/MistakeLabel
-@onready var shuffle_btn: Button = $BottomBar/BottomHBox/ShuffleBtn
-@onready var hint_btn: Button = $BottomBar/BottomHBox/HintBtn
-@onready var submit_pair_btn: Button = $BottomBar/BottomHBox/SubmitPairBtn
+@onready var score_label: Label = $MainVBox/TopBar/TopBarHBox/ScoreLabel
+@onready var streak_label: Label = $MainVBox/TopBar/TopBarHBox/StreakLabel
+@onready var timer_label: Label = $MainVBox/TopBar/TopBarHBox/TimerLabel
+@onready var feedback_label: Label = $MainVBox/FeedbackLabel
+@onready var board_grid: GridContainer = $MainVBox/ContentHBox/BoardPanel/ScrollContainer/BoardGrid
+@onready var progress_label: Label = $MainVBox/ContentHBox/SidePanel/SideVBox/ProgressLabel
+@onready var mistake_label: Label = $MainVBox/ContentHBox/SidePanel/SideVBox/MistakeLabel
+@onready var shuffle_btn: Button = $MainVBox/BottomBar/BottomHBox/ShuffleBtn
+@onready var hint_btn: Button = $MainVBox/BottomBar/BottomHBox/HintBtn
+@onready var submit_pair_btn: Button = $MainVBox/BottomBar/BottomHBox/SubmitPairBtn
 @onready var end_dialog: AcceptDialog = $EndDialog
 
 var lesson: Lesson
@@ -64,38 +64,7 @@ func _ready() -> void:
 
 
 func _apply_main_layout() -> void:
-	var vp_size = get_viewport_rect().size
-	if vp_size.x < 100: vp_size = Vector2(1152, 648)
-	
-	var bg = get_node_or_null("Background")
-	if bg:
-		bg.size = vp_size
-
-	var margin := 20.0
-	var top_bar = $TopBar
-	var side_panel = $SidePanel
-	var bottom_bar = $BottomBar
-	var board_panel = $BoardPanel
-
-	top_bar.position = Vector2(margin, margin)
-	top_bar.size = Vector2(vp_size.x - margin * 2, 60)
-	
-	feedback_label.position = Vector2(margin, top_bar.position.y + top_bar.size.y + 10)
-	feedback_label.size = Vector2(vp_size.x - margin * 2, 30)
-	feedback_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	
-	bottom_bar.size = Vector2(vp_size.x - margin * 2, 60)
-	bottom_bar.position = Vector2(margin, vp_size.y - bottom_bar.size.y - margin)
-	
-	var mid_y = feedback_label.position.y + feedback_label.size.y + 10
-	var mid_h = bottom_bar.position.y - mid_y - margin
-	var side_width := 300.0
-	
-	side_panel.size = Vector2(side_width, mid_h)
-	side_panel.position = Vector2(vp_size.x - side_width - margin, mid_y)
-	
-	board_panel.size = Vector2(vp_size.x - side_width - margin * 3, mid_h)
-	board_panel.position = Vector2(margin, mid_y)
+	pass
 
 
 func _prepare_cards() -> void:

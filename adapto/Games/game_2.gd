@@ -5,6 +5,7 @@ var questions = {}
 var answered = {}
 var current_key = ""
 var button_by_key = {}
+var total_questions = 0
 
 func _ready() -> void:
 	randomize()
@@ -62,6 +63,9 @@ func _ready() -> void:
 			questions[key] = {"question": qtext, "answer": item.term, "value": value}
 			btn.connect("pressed", Callable(self, "_on_button_pressed").bind(key))
 
+	total_questions = questions.size()
+	$Submit.disabled = true
+
 func _on_button_pressed(key: String) -> void:
 	if answered.has(key):
 		return
@@ -99,6 +103,10 @@ func check_answer() -> void:
 	_check_game_end()
 
 
+func _on_answer_input_text_changed() -> void:
+	$Submit.disabled = $AnswerInput.text.strip_edges().is_empty() or current_key == ""
+
+
 func _check_game_end() -> void:
-	if answered.size() == 9:
-		get_tree().change_scene_to_file("res://Games/game_3.gd")
+	if total_questions > 0 and answered.size() >= total_questions:
+		get_tree().change_scene_to_file("res://Games/game3.tscn")

@@ -12,10 +12,10 @@ content_margin_bottom = 6.0
 bg_color = Color(0.06, 0.06, 0.11, 0.97)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
 bg_color = Color(0.1, 0.1, 0.16, 0.9)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -40,81 +40,110 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="Game4" type="Node2D"]
+[node name="Game4" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_g4sc")
 
 [node name="Background" type="TextureRect" parent="."]
-offset_right = 1280.0
-offset_bottom = 720.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_g4bg")
-stretch_mode = 1
+expand_mode = 1
+stretch_mode = 6
 
 [node name="GameTimer" type="Timer" parent="."]
 
-[node name="TopBar" type="PanelContainer" parent="."]
-offset_right = 1280.0
-offset_bottom = 65.0
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="TopBar" type="PanelContainer" parent="MainVBox"]
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_header")
 
-[node name="TopBarHBox" type="HBoxContainer" parent="TopBar"]
+[node name="TopBarHBox" type="HBoxContainer" parent="MainVBox/TopBar"]
 layout_mode = 2
 theme_override_constants/separation = 18
 
-[node name="TitleLabel" type="Label" parent="TopBar/TopBarHBox"]
+[node name="TitleLabel" type="Label" parent="MainVBox/TopBar/TopBarHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.92, 0.25, 1)
 theme_override_fonts/font = ExtResource("2_g4fn")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 28
 text = "CONCEPT MATCH RUSH"
 horizontal_alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="TopBar/TopBarHBox"]
+[node name="ScoreLabel" type="Label" parent="MainVBox/TopBar/TopBarHBox"]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65, 0.95, 0.65, 1)
 theme_override_fonts/font = ExtResource("2_g4fn")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = "Score: 0"
 horizontal_alignment = 2
 
-[node name="StreakLabel" type="Label" parent="TopBar/TopBarHBox"]
+[node name="StreakLabel" type="Label" parent="MainVBox/TopBar/TopBarHBox"]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.75, 0.9, 1, 1)
 theme_override_fonts/font = ExtResource("2_g4fn")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = "Streak: x0"
 horizontal_alignment = 2
 
-[node name="TimerLabel" type="Label" parent="TopBar/TopBarHBox"]
+[node name="TimerLabel" type="Label" parent="MainVBox/TopBar/TopBarHBox"]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.82, 0.35, 1)
 theme_override_fonts/font = ExtResource("2_g4fn")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = "Time: 120s"
 horizontal_alignment = 2
 
-[node name="FeedbackLabel" type="Label" parent="."]
-offset_top = 68.0
-offset_right = 1280.0
-offset_bottom = 108.0
+[node name="FeedbackLabel" type="Label" parent="MainVBox"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 theme_override_fonts/font = ExtResource("2_g4fn")
 theme_override_font_sizes/font_size = 18
-text = "Pick two cards that match (term ↔ meaning)."
+text = "Pick two cards that match (term <-> meaning)."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="BoardPanel" type="PanelContainer" parent="."]
-offset_left = 10.0
-offset_top = 112.0
-offset_right = 925.0
-offset_bottom = 582.0
+[node name="ContentHBox" type="HBoxContainer" parent="MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="LeftMargin" type="Control" parent="MainVBox/ContentHBox"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="BoardPanel" type="PanelContainer" parent="MainVBox/ContentHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.5
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="BoardGrid" type="GridContainer" parent="BoardPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainVBox/ContentHBox/BoardPanel"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="BoardGrid" type="GridContainer" parent="MainVBox/ContentHBox/BoardPanel/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -122,20 +151,19 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 4
 
-[node name="SidePanel" type="PanelContainer" parent="."]
-offset_left = 935.0
-offset_top = 112.0
-offset_right = 1270.0
-offset_bottom = 582.0
+[node name="SidePanel" type="PanelContainer" parent="MainVBox/ContentHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="SideVBox" type="VBoxContainer" parent="SidePanel"]
+[node name="SideVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/SidePanel"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 14
+theme_override_constants/separation = 20
+alignment = 1
 
-[node name="ObjectiveLabel" type="Label" parent="SidePanel/SideVBox"]
+[node name="ObjectiveLabel" type="Label" parent="MainVBox/ContentHBox/SidePanel/SideVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.9, 0.7, 1)
 theme_override_fonts/font = ExtResource("2_g4fn")
@@ -144,7 +172,7 @@ text = "Objective:
 Match each term with its meaning before time runs out."
 autowrap_mode = 2
 
-[node name="ProgressLabel" type="Label" parent="SidePanel/SideVBox"]
+[node name="ProgressLabel" type="Label" parent="MainVBox/ContentHBox/SidePanel/SideVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.75, 0.9, 1, 1)
 theme_override_fonts/font = ExtResource("2_g4fn")
@@ -152,7 +180,7 @@ theme_override_font_sizes/font_size = 20
 text = "Matched: 0/8"
 autowrap_mode = 2
 
-[node name="MistakeLabel" type="Label" parent="SidePanel/SideVBox"]
+[node name="MistakeLabel" type="Label" parent="MainVBox/ContentHBox/SidePanel/SideVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.85, 0.75, 1)
 theme_override_fonts/font = ExtResource("2_g4fn")
@@ -160,21 +188,22 @@ theme_override_font_sizes/font_size = 20
 text = "Mistakes: 0 | Hints: 0"
 autowrap_mode = 2
 
-[node name="BottomBar" type="PanelContainer" parent="."]
-offset_left = 10.0
-offset_top = 587.0
-offset_right = 1270.0
-offset_bottom = 714.0
+[node name="RightMargin" type="Control" parent="MainVBox/ContentHBox"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="BottomBar" type="PanelContainer" parent="MainVBox"]
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_actionbar")
 
-[node name="BottomHBox" type="HBoxContainer" parent="BottomBar"]
+[node name="BottomHBox" type="HBoxContainer" parent="MainVBox/BottomBar"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 12
+theme_override_constants/separation = 20
 alignment = 1
 
-[node name="ShuffleBtn" type="Button" parent="BottomBar/BottomHBox"]
+[node name="ShuffleBtn" type="Button" parent="MainVBox/BottomBar/BottomHBox"]
 custom_minimum_size = Vector2(210, 64)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_g4fn")
@@ -182,7 +211,7 @@ theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxFlat_actionbtn")
 text = "SHUFFLE"
 
-[node name="HintBtn" type="Button" parent="BottomBar/BottomHBox"]
+[node name="HintBtn" type="Button" parent="MainVBox/BottomBar/BottomHBox"]
 custom_minimum_size = Vector2(210, 64)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_g4fn")
@@ -190,7 +219,7 @@ theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxFlat_actionbtn")
 text = "HINT"
 
-[node name="SubmitPairBtn" type="Button" parent="BottomBar/BottomHBox"]
+[node name="SubmitPairBtn" type="Button" parent="MainVBox/BottomBar/BottomHBox"]
 custom_minimum_size = Vector2(210, 64)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_g4fn")
@@ -198,12 +227,17 @@ theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxFlat_actionbtn")
 text = "SUBMIT"
 
+[node name="BottomMargin" type="Control" parent="MainVBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
 [node name="EndDialog" type="AcceptDialog" parent="."]
 title = "Round Complete"
-size = Vector2i(138, 100)
+initial_position = 2
+size = Vector2i(200, 100)
 ok_button_text = "Proceed"
 
 [connection signal="timeout" from="GameTimer" to="." method="_on_timer_tick"]
-[connection signal="pressed" from="BottomBar/BottomHBox/ShuffleBtn" to="." method="_on_shuffle_pressed"]
-[connection signal="pressed" from="BottomBar/BottomHBox/HintBtn" to="." method="_on_hint_pressed"]
-[connection signal="pressed" from="BottomBar/BottomHBox/SubmitPairBtn" to="." method="_on_submit_pair_pressed"]
+[connection signal="pressed" from="MainVBox/BottomBar/BottomHBox/ShuffleBtn" to="." method="_on_shuffle_pressed"]
+[connection signal="pressed" from="MainVBox/BottomBar/BottomHBox/HintBtn" to="." method="_on_hint_pressed"]
+[connection signal="pressed" from="MainVBox/BottomBar/BottomHBox/SubmitPairBtn" to="." method="_on_submit_pair_pressed"]
