@@ -239,7 +239,8 @@ z_index = 1
 position = Vector2(1182, 494)
 scale = Vector2(4.84375, 4.75)
 sprite_frames = SubResource("SpriteFrames_0dedr")
-frame_progress = 0.974094
+autoplay = "default"
+frame_progress = 0.749708
 flip_h = true
 
 [connection signal="text_changed" from="AnswerInput" to="." method="_on_answer_input_text_changed"]
