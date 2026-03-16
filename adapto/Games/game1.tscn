@@ -373,9 +373,7 @@ offset_bottom = 217.0
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("2_4h6do")
 theme_override_font_sizes/font_size = 32
-text = "Lucky
-20
--sexy"
+text = "LUCKY"
 metadata/_edit_use_anchors_ = true
 
 [node name="Question" type="Label" parent="."]

@@ -1,0 +1,550 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=32 format=3]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://adapto/Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://adapto/Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_ai_lin1"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN1"
+term = "Matrix"
+keyword = "array"
+definition = "A rectangular array of numbers, symbols, or expressions, arranged in rows and columns."
+simple_terms = "A grid of numbers."
+examples = ["[ [1, 2], [3, 4] ]", "[ [a, b, c], [d, e, f] ]"]
+accepted_terms = ["Rectangular Array", "Array of Numbers"]
+difficulty = 1
+related_to = ["Row", "Column", "Element"]
+tof_statement = {
+"false": "A matrix is a one-dimensional list of numbers.", 
+"true": "A matrix is a two-dimensional array of numbers."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin2"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN2"
+term = "Element (Matrix)"
+keyword = "entry"
+definition = "An individual number or symbol within a matrix."
+simple_terms = "A single number in the grid."
+examples = ["In matrix [ [1, 2], [3, 4] ], the element at row 1, column 2 is 2.", "The element 'e' in matrix [ [a, b, c], [d, e, f] ]"]
+accepted_terms = ["Entry", "Component"]
+difficulty = 1
+related_to = ["Matrix", "Row", "Column"]
+tof_statement = {
+"false": "The entire grid of numbers in a matrix is called an element.", 
+"true": "Each number inside a matrix is called an element."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin3"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN3"
+term = "Row (Matrix)"
+keyword = "horizontal"
+definition = "A horizontal line of elements in a matrix."
+simple_terms = "A horizontal line of numbers in the grid."
+examples = ["In matrix [ [1, 2, 3], [4, 5, 6] ], the first row is [1, 2, 3].", "The second row of the matrix [ [a], [b], [c] ] is not applicable as there is only one column."]
+accepted_terms = ["Matrix Row"]
+difficulty = 1
+related_to = ["Matrix", "Column", "Element"]
+tof_statement = {
+"false": "Rows in a matrix run from top to bottom.", 
+"true": "Rows in a matrix run from left to right."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin4"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN4"
+term = "Column (Matrix)"
+keyword = "vertical"
+definition = "A vertical line of elements in a matrix."
+simple_terms = "A vertical line of numbers in the grid."
+examples = ["In matrix [ [1, 2], [3, 4] ], the first column is [1, 3].", "The second column of the matrix [ [a, b, c] ] is not applicable as there is only one row."]
+accepted_terms = ["Matrix Column"]
+difficulty = 1
+related_to = ["Matrix", "Row", "Element"]
+tof_statement = {
+"false": "Columns in a matrix run from left to right.", 
+"true": "Columns in a matrix run from top to bottom."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin5"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN5"
+term = "Dimensions (Matrix)"
+keyword = "size"
+definition = "The number of rows and columns in a matrix, expressed as 'rows x columns'."
+simple_terms = "How big the grid is (rows by columns)."
+examples = ["A 2x3 matrix has 2 rows and 3 columns.", "The matrix [ [1], [2], [3] ] has dimensions 3x1."]
+accepted_terms = ["Matrix Size", "Order of Matrix"]
+difficulty = 1
+related_to = ["Matrix", "Row", "Column"]
+tof_statement = {
+"false": "A 3x2 matrix has two rows and three columns.", 
+"true": "A 3x2 matrix has three rows and two columns."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin6"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN6"
+term = "Square Matrix"
+keyword = "equal"
+definition = "A matrix where the number of rows equals the number of columns."
+simple_terms = "A matrix with the same number of rows and columns (like a square)."
+examples = ["A 2x2 matrix is a square matrix.", "The matrix [ [1, 2, 3], [4, 5, 6], [7, 8, 9] ] is a square matrix."]
+accepted_terms = ["NxN Matrix"]
+difficulty = 1
+related_to = ["Matrix", "Dimensions"]
+tof_statement = {
+"false": "A matrix with dimensions 4x4 is a rectangular matrix.", 
+"true": "A matrix with dimensions 4x4 is a square matrix."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin7"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN7"
+term = "Rectangular Matrix"
+keyword = "unequal"
+definition = "A matrix where the number of rows is not equal to the number of columns."
+simple_terms = "A matrix where the number of rows and columns are different (like a rectangle)."
+examples = ["A 2x3 matrix is a rectangular matrix.", "The matrix [ [1, 2], [3, 4], [5, 6] ] is a rectangular matrix."]
+accepted_terms = ["Non-Square Matrix"]
+difficulty = 1
+related_to = ["Matrix", "Dimensions"]
+tof_statement = {
+"false": "A matrix with dimensions 3x5 is a square matrix.", 
+"true": "A matrix with dimensions 3x5 is a rectangular matrix."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin8"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN8"
+term = "Row Matrix (Row Vector)"
+keyword = "one row"
+definition = "A matrix with only one row."
+simple_terms = "A matrix that is just one horizontal line of numbers."
+examples = ["[ [1, 2, 3, 4] ]", "[ [a, b] ]"]
+accepted_terms = ["Row Vector"]
+difficulty = 1
+related_to = ["Matrix", "Vector"]
+tof_statement = {
+"false": "A matrix with dimensions 5x1 is a row matrix.", 
+"true": "A matrix with dimensions 1x5 is a row matrix."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin9"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN9"
+term = "Column Matrix (Column Vector)"
+keyword = "one column"
+definition = "A matrix with only one column."
+simple_terms = "A matrix that is just one vertical line of numbers."
+examples = ["[ [1], [2], [3] ]", "[ [a], [b], [c], [d] ]"]
+accepted_terms = ["Column Vector"]
+difficulty = 1
+related_to = ["Matrix", "Vector"]
+tof_statement = {
+"false": "A matrix with dimensions 1x4 is a column matrix.", 
+"true": "A matrix with dimensions 4x1 is a column matrix."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin10"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN10"
+term = "Zero Matrix"
+keyword = "all zeros"
+definition = "A matrix where all elements are zero."
+simple_terms = "A matrix where every number is 0."
+examples = ["[ [0, 0], [0, 0] ]", "[ [0, 0, 0] ]"]
+accepted_terms = ["Null Matrix"]
+difficulty = 1
+related_to = ["Matrix", "Element"]
+tof_statement = {
+"false": "A matrix with only one zero entry is called a zero matrix.", 
+"true": "A matrix with all its entries as zero is called a zero matrix."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin11"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN11"
+term = "Identity Matrix"
+keyword = "ones diagonal"
+definition = "A square matrix with ones on the main diagonal and zeros elsewhere."
+simple_terms = "A square matrix with 1s on the diagonal and 0s everywhere else."
+examples = ["[ [1, 0], [0, 1] ] (2x2 Identity Matrix)", "[ [1, 0, 0], [0, 1, 0], [0, 0, 1] ] (3x3 Identity Matrix)"]
+accepted_terms = ["I Matrix"]
+difficulty = 2
+related_to = ["Matrix", "Square Matrix", "Diagonal Matrix"]
+tof_statement = {
+"false": "An identity matrix is a rectangular matrix with 1s on the anti-diagonal.", 
+"true": "An identity matrix is a square matrix with 1s on the main diagonal and 0s elsewhere."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin12"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN12"
+term = "Main Diagonal"
+keyword = "top-left to bottom-right"
+definition = "The diagonal of a square matrix running from the top-left element to the bottom-right element."
+simple_terms = "The line of numbers from the top-left corner to the bottom-right corner in a square grid."
+examples = ["In the matrix [ [1, 2, 3], [4, 5, 6], [7, 8, 9] ], the main diagonal elements are 1, 5, and 9.", "The elements on the main diagonal of a 2x2 identity matrix are both 1."]
+accepted_terms = ["Principal Diagonal", "Primary Diagonal"]
+difficulty = 1
+related_to = ["Matrix", "Square Matrix", "Identity Matrix"]
+tof_statement = {
+"false": "The main diagonal of a matrix goes from the top-right to the bottom-left.", 
+"true": "The main diagonal of a matrix goes from the top-left to the bottom-right."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin13"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN13"
+term = "Diagonal Matrix"
+keyword = "zeros off-diagonal"
+definition = "A square matrix where all elements outside the main diagonal are zero."
+simple_terms = "A square matrix with zeros everywhere except possibly on the main diagonal."
+examples = ["[ [2, 0, 0], [0, 5, 0], [0, 0, 9] ]", "[ [1, 0], [0, -3] ]"]
+accepted_terms = ["Diagonalizable Matrix"]
+difficulty = 2
+related_to = ["Matrix", "Square Matrix", "Main Diagonal", "Identity Matrix"]
+tof_statement = {
+"false": "In a diagonal matrix, only the elements off the main diagonal can be non-zero.", 
+"true": "In a diagonal matrix, only the elements on the main diagonal can be non-zero."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin14"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN14"
+term = "Scalar Matrix"
+keyword = "scalar multiple of identity"
+definition = "A diagonal matrix where all the diagonal elements are equal."
+simple_terms = "A diagonal matrix where all the numbers on the main diagonal are the same."
+examples = ["[ [5, 0, 0], [0, 5, 0], [0, 0, 5] ]", "[ [7, 0], [0, 7] ]"]
+accepted_terms = ["Scalar Diagonal Matrix"]
+difficulty = 2
+related_to = ["Matrix", "Diagonal Matrix", "Identity Matrix"]
+tof_statement = {
+"false": "A scalar matrix is a diagonal matrix where all diagonal entries are distinct.", 
+"true": "A scalar matrix is a diagonal matrix where all diagonal entries are identical."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin15"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN15"
+term = "Upper Triangular Matrix"
+keyword = "zeros below diagonal"
+definition = "A square matrix where all elements below the main diagonal are zero."
+simple_terms = "A square matrix with zeros below the main diagonal."
+examples = ["[ [1, 2, 3], [0, 4, 5], [0, 0, 6] ]", "[ [7, 8], [0, 9] ]"]
+accepted_terms = ["Upper Triangular"]
+difficulty = 2
+related_to = ["Matrix", "Square Matrix", "Main Diagonal"]
+tof_statement = {
+"false": "In an upper triangular matrix, all entries above the main diagonal must be zero.", 
+"true": "In an upper triangular matrix, all entries below the main diagonal must be zero."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin16"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN16"
+term = "Lower Triangular Matrix"
+keyword = "zeros above diagonal"
+definition = "A square matrix where all elements above the main diagonal are zero."
+simple_terms = "A square matrix with zeros above the main diagonal."
+examples = ["[ [1, 0, 0], [2, 3, 0], [4, 5, 6] ]", "[ [7, 0], [8, 9] ]"]
+accepted_terms = ["Lower Triangular"]
+difficulty = 2
+related_to = ["Matrix", "Square Matrix", "Main Diagonal"]
+tof_statement = {
+"false": "In a lower triangular matrix, all entries below the main diagonal must be zero.", 
+"true": "In a lower triangular matrix, all entries above the main diagonal must be zero."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin17"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN17"
+term = "Symmetric Matrix"
+keyword = "transpose equal"
+definition = "A square matrix that is equal to its transpose (A = Aᵀ)."
+simple_terms = "A square matrix that looks the same when you flip it across its main diagonal."
+examples = ["[ [1, 2], [2, 3] ]", "[ [a, b, c], [b, d, e], [c, e, f] ]"]
+accepted_terms = ["Symmetric"]
+difficulty = 2
+related_to = ["Matrix", "Square Matrix", "Transpose"]
+tof_statement = {
+"false": "A matrix A is symmetric if A[i, j] = -A[j, i] for all i and j.", 
+"true": "A matrix A is symmetric if A[i, j] = A[j, i] for all i and j."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin18"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN18"
+term = "Skew-Symmetric Matrix"
+keyword = "negative transpose"
+definition = "A square matrix that is equal to the negative of its transpose (A = -Aᵀ)."
+simple_terms = "A square matrix that becomes its negative when you flip it across its main diagonal."
+examples = ["[ [0, 2], [-2, 0] ]", "[ [0, 1, -2], [-1, 0, 3], [2, -3, 0] ]"]
+accepted_terms = ["Antisymmetric Matrix"]
+difficulty = 3
+related_to = ["Matrix", "Square Matrix", "Transpose", "Symmetric Matrix"]
+tof_statement = {
+"false": "A skew-symmetric matrix must have ones on its main diagonal.", 
+"true": "A skew-symmetric matrix must have zeros on its main diagonal."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin19"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN19"
+term = "Transpose of a Matrix"
+keyword = "swap rows columns"
+definition = "A new matrix formed by swapping the rows and columns of the original matrix."
+simple_terms = "Flipping a matrix over its diagonal, swapping rows and columns."
+examples = ["If A = [ [1, 2], [3, 4] ], then A\u1d40 = [ [1, 3], [2, 4] ].", "The transpose of [ [a, b, c] ] is [ [a], [b], [c] ]."]
+accepted_terms = ["Matrix Transpose", "A\u1d40"]
+difficulty = 1
+related_to = ["Matrix", "Symmetric Matrix", "Skew-Symmetric Matrix"]
+tof_statement = {
+"false": "The element at position (i, j) in matrix A stays at position (i, j) in its transpose Aᵀ.", 
+"true": "The element at position (i, j) in matrix A becomes the element at position (j, i) in its transpose Aᵀ."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin20"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN20"
+term = "Matrix Addition"
+keyword = "element-wise"
+definition = "Adding corresponding elements of two matrices of the same dimensions."
+simple_terms = "Adding the numbers in the same positions in two matrices."
+examples = ["[ [1, 2], [3, 4] ] + [ [5, 6], [7, 8] ] = [ [6, 8], [10, 12] ]", "Cannot add [ [1, 2] ] and [ [3], [4] ] because dimensions differ."]
+accepted_terms = ["Add Matrices"]
+difficulty = 1
+related_to = ["Matrix", "Dimensions", "Element"]
+tof_statement = {
+"false": "Matrices of any dimensions can be added together.", 
+"true": "To add matrices, they must have the same number of rows and columns."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin21"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN21"
+term = "Matrix Subtraction"
+keyword = "element-wise difference"
+definition = "Subtracting corresponding elements of two matrices of the same dimensions."
+simple_terms = "Subtracting the numbers in the same positions in two matrices."
+examples = ["[ [5, 6], [7, 8] ] - [ [1, 2], [3, 4] ] = [ [4, 4], [4, 4] ]", "Cannot subtract [ [1, 2] ] and [ [3], [4] ] because dimensions differ."]
+accepted_terms = ["Subtract Matrices"]
+difficulty = 1
+related_to = ["Matrix", "Dimensions", "Element", "Matrix Addition"]
+tof_statement = {
+"false": "Matrix subtraction can be performed on matrices of any size.", 
+"true": "Matrix subtraction requires matrices to have identical dimensions."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin22"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN22"
+term = "Scalar Multiplication"
+keyword = "multiply each element"
+definition = "Multiplying every element of a matrix by a scalar (a single number)."
+simple_terms = "Multiplying every number in a matrix by one number."
+examples = ["3 * [ [1, 2], [3, 4] ] = [ [3, 6], [9, 12] ]", "2 * [ [a, b] ] = [ [2a, 2b] ]"]
+accepted_terms = ["Scalar Multiply Matrix"]
+difficulty = 1
+related_to = ["Matrix", "Element", "Scalar"]
+tof_statement = {
+"false": "Scalar multiplication involves multiplying two matrices together.", 
+"true": "Scalar multiplication involves multiplying a single number with each entry of a matrix."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin23"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN23"
+term = "Matrix Multiplication"
+keyword = "dot product rows columns"
+definition = "A binary operation that produces a matrix from two matrices, where the element at row i, column j of the product is the dot product of row i of the first matrix and column j of the second matrix."
+simple_terms = "Multiplying matrices, where you take the dot product of rows from the first with columns from the second."
+examples = ["[ [1, 2], [3, 4] ] * [ [5, 6], [7, 8] ] = [ [1*5 + 2*7, 1*6 + 2*8], [3*5 + 4*7, 3*6 + 4*8] ] = [ [19, 22], [43, 50] ]", "Cannot multiply a 2x3 matrix by a 2x3 matrix."]
+accepted_terms = ["Multiply Matrices"]
+difficulty = 3
+related_to = ["Matrix", "Dimensions", "Dot Product", "Compatibility"]
+tof_statement = {
+"false": "For matrix multiplication AB, the number of rows in A must equal the number of columns in B.", 
+"true": "For matrix multiplication AB, the number of columns in A must equal the number of rows in B."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin24"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN24"
+term = "Compatibility for Multiplication"
+keyword = "inner dimensions match"
+definition = "Two matrices A (m x n) and B (p x q) are compatible for multiplication AB if and only if n = p (the number of columns in A equals the number of rows in B)."
+simple_terms = "Matrices can only be multiplied if the 'inner' dimensions match (columns of first = rows of second)."
+examples = ["A 2x3 matrix can be multiplied by a 3x4 matrix.", "A 2x3 matrix cannot be multiplied by a 2x3 matrix."]
+accepted_terms = ["Matrix Multiplication Compatibility"]
+difficulty = 2
+related_to = ["Matrix Multiplication", "Dimensions"]
+tof_statement = {
+"false": "A 3x2 matrix and a 2x5 matrix are not compatible for multiplication in that order.", 
+"true": "A 3x2 matrix and a 2x5 matrix are compatible for multiplication in that order."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin25"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN25"
+term = "Determinant of a Matrix"
+keyword = "scalar value"
+definition = "A scalar value that can be computed from the elements of a square matrix, providing information about the matrix's properties (e.g., invertibility)."
+simple_terms = "A single number calculated from a square matrix that tells us important things about it."
+examples = ["Determinant of [ [a, b], [c, d] ] is ad - bc.", "Determinant of [ [1, 2], [3, 4] ] is (1*4) - (2*3) = 4 - 6 = -2."]
+accepted_terms = ["det(A)", "|A|"]
+difficulty = 3
+related_to = ["Matrix", "Square Matrix", "Invertible Matrix", "Cofactor Expansion"]
+tof_statement = {
+"false": "The determinant can be calculated for any rectangular matrix.", 
+"true": "The determinant is only defined for square matrices."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin26"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN26"
+term = "Invertible Matrix (Non-singular)"
+keyword = "inverse exists"
+definition = "A square matrix that has a multiplicative inverse, meaning there exists another matrix (its inverse) such that their product is the identity matrix."
+simple_terms = "A square matrix that has a 'reciprocal' (its inverse) that multiplies with it to give the identity matrix."
+examples = ["The matrix [ [2, 1], [1, 1] ] is invertible.", "The zero matrix is not invertible."]
+accepted_terms = ["Non-singular Matrix", "Regular Matrix"]
+difficulty = 3
+related_to = ["Matrix", "Square Matrix", "Inverse Matrix", "Determinant"]
+tof_statement = {
+"false": "A matrix is invertible if and only if its determinant is zero.", 
+"true": "A matrix is invertible if and only if its determinant is non-zero."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin27"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN27"
+term = "Inverse Matrix"
+keyword = "A⁻¹"
+definition = "For a square matrix A, its inverse A⁻¹ is a matrix such that A * A⁻¹ = A⁻¹ * A = I (the identity matrix)."
+simple_terms = "The matrix that, when multiplied by the original matrix, gives the identity matrix."
+examples = ["If A = [ [2, 1], [1, 1] ], then A\u207b\u00b9 = [ [1, -1], [-1, 2] ] because A * A\u207b\u00b9 = [ [1, 0], [0, 1] ].", "The inverse of a 2x3 matrix is not defined."]
+accepted_terms = ["Matrix Inverse"]
+difficulty = 3
+related_to = ["Matrix", "Square Matrix", "Invertible Matrix", "Identity Matrix"]
+tof_statement = {
+"false": "If a matrix A has an inverse A⁻¹, then A * A⁻¹ equals the zero matrix.", 
+"true": "If a matrix A has an inverse A⁻¹, then A * A⁻¹ equals the identity matrix."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin28"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN28"
+term = "Augmented Matrix"
+keyword = "coefficients and constants"
+definition = "A matrix formed by combining the coefficient matrix of a system of linear equations with the constant terms, often separated by a vertical line."
+simple_terms = "A matrix that combines the coefficients and constants from a system of equations."
+examples = ["For the system 2x + 3y = 5 and 4x + 6y = 10, the augmented matrix is [ [2, 3 | 5], [4, 6 | 10] ].", "The augmented matrix for x - y = 1 is [ [1, -1 | 1] ]."]
+accepted_terms = ["Augmented System"]
+difficulty = 2
+related_to = ["Matrix", "System of Linear Equations", "Row Operations"]
+tof_statement = {
+"false": "An augmented matrix is used to calculate the determinant of a single matrix.", 
+"true": "An augmented matrix helps in solving systems of linear equations using row operations."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin29"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN29"
+term = "Row Operations"
+keyword = "elementary row operations"
+definition = "Basic operations that can be performed on the rows of a matrix without changing the solution set of the corresponding system of linear equations: swapping rows, multiplying a row by a non-zero scalar, or adding a multiple of one row to another."
+simple_terms = "Allowed ways to change rows of a matrix to simplify it without changing the answer."
+examples = ["Swap Row 1 and Row 2.", "Multiply Row 3 by 5.", "Add 2 times Row 1 to Row 2."]
+accepted_terms = ["Elementary Row Operations"]
+difficulty = 2
+related_to = ["Augmented Matrix", "Gaussian Elimination", "Gauss-Jordan Elimination"]
+tof_statement = {
+"false": "Multiplying an entire row by zero is a valid row operation.", 
+"true": "Adding a multiple of one row to another row is a valid row operation."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin30"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN30"
+term = "Matrix Rank"
+keyword = "linearly independent rows/columns"
+definition = "The maximum number of linearly independent row vectors or column vectors in a matrix."
+simple_terms = "The number of 'essential' rows or columns that can't be made from others."
+examples = ["The rank of [ [1, 0], [0, 1] ] is 2.", "The rank of [ [1, 2], [2, 4] ] is 1 because the second row is twice the first."]
+accepted_terms = ["Rank of a Matrix"]
+difficulty = 3
+related_to = ["Matrix", "Linear Independence", "System of Linear Equations"]
+tof_statement = {
+"false": "The rank of a matrix can be greater than the number of its rows or columns.", 
+"true": "The rank of a matrix is less than or equal to the minimum of its number of rows and columns."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Linear Algebra - Matrices"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_ai_lin1"), SubResource("Resource_ai_lin2"), SubResource("Resource_ai_lin3"), SubResource("Resource_ai_lin4"), SubResource("Resource_ai_lin5"), SubResource("Resource_ai_lin6"), SubResource("Resource_ai_lin7"), SubResource("Resource_ai_lin8"), SubResource("Resource_ai_lin9"), SubResource("Resource_ai_lin10"), SubResource("Resource_ai_lin11"), SubResource("Resource_ai_lin12"), SubResource("Resource_ai_lin13"), SubResource("Resource_ai_lin14"), SubResource("Resource_ai_lin15"), SubResource("Resource_ai_lin16"), SubResource("Resource_ai_lin17"), SubResource("Resource_ai_lin18"), SubResource("Resource_ai_lin19"), SubResource("Resource_ai_lin20"), SubResource("Resource_ai_lin21"), SubResource("Resource_ai_lin22"), SubResource("Resource_ai_lin23"), SubResource("Resource_ai_lin24"), SubResource("Resource_ai_lin25"), SubResource("Resource_ai_lin26"), SubResource("Resource_ai_lin27"), SubResource("Resource_ai_lin28"), SubResource("Resource_ai_lin29"), SubResource("Resource_ai_lin30")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"
