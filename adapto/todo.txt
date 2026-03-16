@@ -3,3 +3,11 @@ manual importing of lessons, export as tres and can be passed by instructor to o
 2 games (suggest games to implement)
 login-usecase
 fix text validation for ai prompt(min 15 items)
+
+-create adaptive design that maximizes game theyre most efficient in. 
+- if average performance of that game drops below the leading, lower it and switch to the next game.
+- this is a more scaled version of the diagnostic games
+- fair score system between games
+- game 3 needs hints
+- fix UIS
+- please add documentation on top of each script for easier reading
