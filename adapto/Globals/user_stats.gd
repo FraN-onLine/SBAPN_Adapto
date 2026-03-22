@@ -1,5 +1,46 @@
-# game_manager.gd
+## User stats and adaptive game flow manager.
+##
+## Responsibilities:
+## - Stores per-game and overall diagnostic statistics.
+## - Computes fair, normalized efficiency scores across different games.
+## - Runs an adaptive flow that starts with a scaled diagnostic pass and then
+##   prioritizes the game where the learner is currently most efficient.
 extends Node
+
+const GAME_SEQUENCE: Array[String] = ["game1", "game2", "game3", "game4", "game5"]
+const GAME_SCENES := {
+	"game1": "res://Games/game1.tscn",
+	"game2": "res://Games/game2.tscn",
+	"game3": "res://Games/game3.tscn",
+	"game4": "res://Games/game4.tscn",
+	"game5": "res://Games/game5.tscn"
+}
+const SCORE_REFERENCE := {
+	"game1": 500.0,
+	"game2": 2700.0,
+	"game3": 800.0,
+	"game4": 1200.0,
+	"game5": 1400.0
+}
+const TIME_REFERENCE := {
+	"game1": 150.0,
+	"game2": 180.0,
+	"game3": 180.0,
+	"game4": 120.0,
+	"game5": 150.0
+}
+const ADAPTIVE_HISTORY_LIMIT := 6
+
+var adaptive_mode_active := false
+var adaptive_phase: String = "none" # none | diagnostic | adaptive
+var adaptive_history := {
+	"game1": [],
+	"game2": [],
+	"game3": [],
+	"game4": [],
+	"game5": []
+}
+var adaptive_last_ranked: Array[String] = []
 
 var player_stats = {
 	"typing": {"accuracy": 0, "time": 0},
@@ -43,6 +84,107 @@ var overall_stats = {
 		"accuracy": 0.0,
 	}
 }
+
+
+# Starts a fresh adaptive run and clears rolling efficiency history.
+func start_adaptive_session() -> void:
+	adaptive_mode_active = true
+	adaptive_phase = "diagnostic"
+	adaptive_last_ranked = []
+	for game_id in GAME_SEQUENCE:
+		adaptive_history[game_id] = []
+	reset_game_stats()
+
+
+# Ends adaptive mode and returns routing to default game order.
+func stop_adaptive_session() -> void:
+	adaptive_mode_active = false
+	adaptive_phase = "none"
+
+
+# Resolves a game id to its scene path.
+func get_scene_for_game(game_id: String) -> String:
+	if GAME_SCENES.has(game_id):
+		return str(GAME_SCENES[game_id])
+	return str(GAME_SCENES["game1"])
+
+
+# Chooses the next scene using default order or adaptive ranking.
+func get_scene_after_game(current_game_id: String) -> String:
+	if not adaptive_mode_active:
+		return _get_default_scene_after_game(current_game_id)
+
+	if adaptive_phase == "diagnostic":
+		var idx := GAME_SEQUENCE.find(current_game_id)
+		if idx >= 0 and idx < GAME_SEQUENCE.size() - 1:
+			return get_scene_for_game(GAME_SEQUENCE[idx + 1])
+		adaptive_phase = "adaptive"
+
+	var leader := get_leading_game()
+	if leader == "":
+		return get_scene_for_game("game1")
+	return get_scene_for_game(leader)
+
+
+# Stores normalized performance in rolling history per game.
+func record_adaptive_result(
+	game_id: String,
+	raw_score: float,
+	accuracy_percent: float,
+	time_spent_sec: float,
+	completion_ratio: float
+) -> float:
+	if not adaptive_history.has(game_id):
+		return 0.0
+
+	var fair_score := compute_fair_score(game_id, raw_score, accuracy_percent, time_spent_sec, completion_ratio)
+	var game_history: Array = adaptive_history[game_id]
+	game_history.append(fair_score)
+	while game_history.size() > ADAPTIVE_HISTORY_LIMIT:
+		game_history.remove_at(0)
+	adaptive_history[game_id] = game_history
+
+	_update_adaptive_ranking()
+	return fair_score
+
+
+# Computes a fair cross-game efficiency score (0..100).
+func compute_fair_score(
+	game_id: String,
+	raw_score: float,
+	accuracy_percent: float,
+	time_spent_sec: float,
+	completion_ratio: float
+) -> float:
+	var ref_score := float(SCORE_REFERENCE.get(game_id, 1000.0))
+	var ref_time := float(TIME_REFERENCE.get(game_id, 150.0))
+
+	var score_component := clampf(_safe_ratio(raw_score, ref_score), 0.0, 1.0)
+	var accuracy_component := clampf(_safe_ratio(accuracy_percent, 100.0), 0.0, 1.0)
+	var speed_component := clampf(1.0 - _safe_ratio(time_spent_sec, ref_time), 0.0, 1.0)
+	var completion_component := clampf(completion_ratio, 0.0, 1.0)
+
+	# Weighted fairness model: emphasizes accuracy and completion over raw points.
+	return (
+		(accuracy_component * 0.45)
+		+ (completion_component * 0.30)
+		+ (speed_component * 0.15)
+		+ (score_component * 0.10)
+	) * 100.0
+
+
+# Returns the current top-ranked game by average efficiency.
+func get_leading_game() -> String:
+	_update_adaptive_ranking()
+	if adaptive_last_ranked.is_empty():
+		return ""
+	return adaptive_last_ranked[0]
+
+
+# Returns all games sorted by adaptive efficiency.
+func get_adaptive_ranked_games() -> Array[String]:
+	_update_adaptive_ranking()
+	return adaptive_last_ranked.duplicate()
 
 func reset_game_stats():
 	game_stats["game1"]["correct"] = [0, 0, 0, 0]
@@ -95,3 +237,57 @@ func get_game_stats_display():
 			avg_time = stats["sum_time"][i] / questions
 		display.append("%s: Correct: %d, INC: %d, TO: %d, ACC: %.1f%%, AT: %.1fs" % [type_name, correct, incorrect, timeout, accuracy, avg_time])
 	return display
+
+
+# Fallback next-scene routing for non-adaptive flow.
+func _get_default_scene_after_game(current_game_id: String) -> String:
+	var idx := GAME_SEQUENCE.find(current_game_id)
+	if idx == -1:
+		return get_scene_for_game("game1")
+	if idx >= GAME_SEQUENCE.size() - 1:
+		return "res://Menus/game1_stats.tscn"
+	return get_scene_for_game(GAME_SEQUENCE[idx + 1])
+
+
+# Prevents division-by-zero during normalization.
+func _safe_ratio(value: float, denominator: float) -> float:
+	if denominator <= 0.0:
+		return 0.0
+	return value / denominator
+
+
+# Calculates rolling average efficiency for a game.
+func _average_efficiency(game_id: String) -> float:
+	if not adaptive_history.has(game_id):
+		return 0.0
+	var history: Array = adaptive_history[game_id]
+	if history.is_empty():
+		return -1.0
+	var total := 0.0
+	for entry in history:
+		total += float(entry)
+	return total / float(history.size())
+
+
+# Rebuilds ranking from highest to lowest average efficiency.
+func _update_adaptive_ranking() -> void:
+	var ranked_with_score := []
+	for game_id in GAME_SEQUENCE:
+		ranked_with_score.append({
+			"game_id": game_id,
+			"avg": _average_efficiency(game_id)
+		})
+
+	ranked_with_score.sort_custom(func(a, b):
+		if a["avg"] == b["avg"]:
+			return GAME_SEQUENCE.find(a["game_id"]) < GAME_SEQUENCE.find(b["game_id"])
+		return float(a["avg"]) > float(b["avg"])
+	)
+
+	adaptive_last_ranked.clear()
+	for entry in ranked_with_score:
+		if float(entry["avg"]) >= 0.0:
+			adaptive_last_ranked.append(str(entry["game_id"]))
+
+	if adaptive_last_ranked.is_empty():
+		adaptive_last_ranked = GAME_SEQUENCE.duplicate()

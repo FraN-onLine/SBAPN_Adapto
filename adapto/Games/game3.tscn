@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d3cnxswr7rqur" path="res://Assets/Background/4.png" id="3_slpbq"]
 [ext_resource type="Texture2D" uid="uid://bvhx265qqihe6" path="res://Assets/Background/2.png" id="4_i8hbh"]
 [ext_resource type="Texture2D" uid="uid://cdoecq6a7hk05" path="res://Assets/Background/3.png" id="5_7jm4a"]
+[ext_resource type="Script" path="res://Games/clue_label.gd" id="6_clue_script"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
 content_margin_left = 14.0
@@ -185,6 +186,7 @@ theme_override_fonts/font = ExtResource("2_g3fn")
 theme_override_font_sizes/font_size = 16
 text = "Select a word to see its clue here."
 autowrap_mode = 2
+script = ExtResource("6_clue_script")
 
 [node name="AnswerHBox" type="HBoxContainer" parent="AnswerBar/AnswerVBox"]
 layout_mode = 2
@@ -204,3 +206,11 @@ theme_override_fonts/font = ExtResource("2_g3fn")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_submitbtn")
 text = "SUBMIT"
+
+[node name="HintBtn" type="Button" parent="AnswerBar/AnswerVBox/AnswerHBox"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g3fn")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_submitbtn")
+text = "HINT"

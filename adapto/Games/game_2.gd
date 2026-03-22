@@ -1,3 +1,7 @@
+## Game 2 category challenge.
+##
+## Tracks question correctness and money score, then reports a normalized result
+## to the adaptive engine before routing to the next game.
 extends Node2D
 
 var money = 0
@@ -6,9 +10,15 @@ var answered = {}
 var current_key = ""
 var button_by_key = {}
 var total_questions = 0
+var correct_count := 0
+var incorrect_count := 0
+var round_started_unix := 0
+var adaptive_recorded := false
 
 func _ready() -> void:
 	randomize()
+	# Capture start time for normalized speed scoring.
+	round_started_unix = Time.get_unix_time_from_system()
 	#gather and group lesson items
 	var lesson: Lesson
 	if Global.selected_lesson != null:
@@ -87,10 +97,12 @@ func check_answer() -> void:
 	var correct_answer = questions[current_key].answer.strip_edges().to_lower()
 	if user_answer == correct_answer:
 		money += questions[current_key].value
+		correct_count += 1
 	else:
 		money -= questions[current_key].value
+		incorrect_count += 1
 	answered[current_key] = true
-	$MoneyLabel.text = "Money: $" + str(money)
+	$TopBar/TopBarHBox/MoneyLabel.text = "Money: $" + str(money)
 	$QuestionBackground.visible = false
 	$QuestionDialog.text = ""
 	button_by_key[current_key].disabled = true
@@ -109,4 +121,26 @@ func _on_answer_input_text_changed() -> void:
 
 func _check_game_end() -> void:
 	if total_questions > 0 and answered.size() >= total_questions:
-		get_tree().change_scene_to_file("res://Games/game3.tscn")
+		# Persist normalized result before leaving the scene.
+		_record_adaptive_performance()
+		# Route next scene using adaptive ranking.
+		get_tree().change_scene_to_file(UserStats.get_scene_after_game("game2"))
+
+
+# Converts Game 2 outcomes into fair adaptive metrics.
+func _record_adaptive_performance() -> void:
+	if adaptive_recorded:
+		return
+	adaptive_recorded = true
+
+	var answered_total := answered.size()
+	var accuracy := 0.0
+	if answered_total > 0:
+		accuracy = (float(correct_count) / float(answered_total)) * 100.0
+
+	var elapsed := maxi(0, Time.get_unix_time_from_system() - round_started_unix)
+	var completion_ratio := 0.0
+	if total_questions > 0:
+		completion_ratio = clampf(float(answered_total) / float(total_questions), 0.0, 1.0)
+
+	UserStats.record_adaptive_result("game2", float(money), accuracy, float(elapsed), completion_ratio)

@@ -1,11 +1,15 @@
+## Game 1 diagnostic battle quiz.
+##
+## Collects foundational accuracy/time stats and reports normalized performance
+## for adaptive routing when adaptive mode is active.
 extends Node2D
 
 @onready var question = $Question
 @onready var option1_button = $Option1Button
 @onready var option2_button = $Option2Button
 @onready var feedback_label = $FeedbackLabel
-@onready var hp_label = $HPLabel
-@onready var timer_label = $TimerLabel
+@onready var hp_label = $TopBar/TopBarHBox/HPLabel
+@onready var timer_label = $TopBar/TopBarHBox/TimerLabel
 @onready var question_timer = $QuestionTimer
 
 @onready var hp_bar = $Healthbar
@@ -25,6 +29,7 @@ var max_time: int = 30
 @onready var enemy_sprite = $Enemy
 var correct_items = 0
 var correct_ans
+var adaptive_recorded := false
 
 func _ready() -> void:
 	# Load the selected lesson, fall back to OOP if none chosen
@@ -172,8 +177,14 @@ func answer_check() -> void:
 		option1_button.disabled = false
 		option2_button.disabled = false
 		if correct_items >= 5:
+			# Save this run to adaptive history before scene transition.
+			_record_adaptive_performance()
 			UserStats.update_overall_stats()
-			get_tree().change_scene_to_file("res://Menus/game1_stats.tscn")
+			# In adaptive mode, route directly to the next ranked game.
+			if UserStats.adaptive_mode_active:
+				get_tree().change_scene_to_file(UserStats.get_scene_after_game("game1"))
+			else:
+				get_tree().change_scene_to_file("res://Menus/game1_stats.tscn")
 			return
 		load_next_question()
 	else:
@@ -187,6 +198,8 @@ func answer_check() -> void:
 		if hp <= 0:
 			player_sprite.play("death")
 			await get_tree().create_timer(1).timeout
+			# Save adaptive metrics on loss as well.
+			_record_adaptive_performance()
 			UserStats.update_overall_stats()
 			game_over()
 		else:
@@ -211,6 +224,8 @@ func _on_timer_tick() -> void:
 		update_hp_display()
 		if hp <= 0:
 			await get_tree().create_timer(2.0).timeout
+			# Save adaptive metrics on timeout defeat.
+			_record_adaptive_performance()
 			UserStats.update_overall_stats()
 			game_over()
 		else:
@@ -225,4 +240,33 @@ func game_over() -> void:
 	option1_button.disabled = true
 	option2_button.disabled = true
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://Games/game2.tscn")
+	# Route via adaptive selector instead of hard-coded next scene.
+	get_tree().change_scene_to_file(UserStats.get_scene_after_game("game1"))
+
+
+# Builds game1 fairness inputs and stores normalized adaptive score.
+func _record_adaptive_performance() -> void:
+	if adaptive_recorded:
+		return
+	adaptive_recorded = true
+
+	var total_questions := 0
+	var total_correct := 0
+	var total_incorrect := 0
+	var total_timeout := 0
+	var total_time := 0.0
+
+	for i in range(4):
+		total_questions += int(UserStats.game_stats["game1"]["questions"][i])
+		total_correct += int(UserStats.game_stats["game1"]["correct"][i])
+		total_incorrect += int(UserStats.game_stats["game1"]["incorrect"][i])
+		total_timeout += int(UserStats.game_stats["game1"]["timeout"][i])
+		total_time += float(UserStats.game_stats["game1"]["sum_time"][i])
+
+	var accuracy := 0.0
+	if total_questions > 0:
+		accuracy = (float(total_correct) / float(total_questions)) * 100.0
+
+	var completion_ratio := clampf(float(correct_items) / 5.0, 0.0, 1.0)
+	var raw_score := (float(total_correct) * 100.0) - (float(total_incorrect) * 25.0) - (float(total_timeout) * 20.0)
+	UserStats.record_adaptive_result("game1", raw_score, accuracy, total_time, completion_ratio)

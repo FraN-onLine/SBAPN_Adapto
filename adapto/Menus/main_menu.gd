@@ -1,3 +1,7 @@
+## Main menu controller.
+##
+## Handles login/menu navigation, topic management, and entry points for
+## diagnostic and adaptive game sessions.
 extends TextureRect
 
 const DEFAULT_ACCESS_ALL_SAVED_LESSONS := true
@@ -17,7 +21,15 @@ func _on_start_button_pressed() -> void:
 
 
 func on_diagnostic_button_pressed():
+	# Ensure diagnostic starts in standard sequence mode.
+	UserStats.stop_adaptive_session()
 	get_tree().change_scene_to_file("res://Games/game1.tscn")
+
+
+func _on_adaptive_button_pressed() -> void:
+	# Start adaptive mode from game 1 diagnostic baseline.
+	UserStats.start_adaptive_session()
+	get_tree().change_scene_to_file(UserStats.get_scene_for_game("game1"))
 
 
 func _on_button_2_pressed() -> void:
