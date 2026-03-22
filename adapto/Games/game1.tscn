@@ -436,6 +436,7 @@ icon = ExtResource("3_ant2b")
 flat = true
 icon_alignment = 1
 expand_icon = true
+autowrap_mode = 2
 script = ExtResource("8_fit_script")
 
 [node name="Option2Button" type="Button" parent="."]
@@ -452,6 +453,7 @@ icon = ExtResource("3_ant2b")
 flat = true
 icon_alignment = 1
 expand_icon = true
+autowrap_mode = 2
 script = ExtResource("8_fit_script")
 
 [node name="FeedbackLabel" type="Label" parent="."]

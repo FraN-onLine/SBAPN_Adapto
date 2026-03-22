@@ -107,8 +107,15 @@ func load_next_question() -> void:
 	
 	# Set UI text
 	question.text =  display_text
-	option1_button.text = option1_value
-	option2_button.text = option2_value
+	if option1_button.has_method("update_text"):
+		option1_button.update_text(option1_value)
+	else:
+		option1_button.text = option1_value
+
+	if option2_button.has_method("update_text"):
+		option2_button.update_text(option2_value)
+	else:
+		option2_button.text = option2_value
 	
 	# Start timer
 	time_remaining = max_time

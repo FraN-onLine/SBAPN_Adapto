@@ -2,10 +2,12 @@ extends TextureProgressBar
 
 @onready var timer = $Timer
 
-var health = 0 : set = _set_health
+# Keep health as a normal field; updates go through _set_health() to avoid
+# recursive setter calls.
+var health = 0
 
 func _set_health(new_health):
-	var previous_health = health
+	var _previous_health = health
 	health = min(max_value, new_health)
 	value = health
 	

@@ -5,10 +5,10 @@ extends Node2D
 
 # ── Constants ────────────────────────────────────────────────────────────────
 # MIN and MAX limits for grid and cell size
-const MIN_CELL_SIZE  := 24
+const MIN_CELL_SIZE  := 16
 const MAX_CELL_SIZE  := 50
 const MIN_GRID_SIZE  := 13
-const MAX_GRID_SIZE  := 22
+const MAX_GRID_SIZE  := 34
 const TIME_LIMIT     := 180
 # Score cost applied each time a hint is used.
 const HINT_PENALTY := 30
@@ -60,8 +60,8 @@ func _ready() -> void:
 
 	for it in lesson.lesson_items:
 		var t: String = it.term.strip_edges()
-		# Allow longer words and words with spaces for dynamic grid
-		if t.length() >= 3 and t.length() <= 100:
+		# Keep longer terms; final fit is validated against computed grid size.
+		if t.length() >= 3 and t.length() <= MAX_GRID_SIZE:
 			items.append(it)
 	items.shuffle()
 	items = items.slice(0, min(8, items.size()))
@@ -203,17 +203,37 @@ func _generate_crossword() -> void:
 	if items.is_empty():
 		return
 
-	var sorted_items := items.duplicate()
+	# Keep only entries that can fit in the computed grid dimensions.
+	var placeable_items: Array = []
+	for item in items:
+		var word := str(item.term).strip_edges().to_upper()
+		if word.length() <= MAX_GRID:
+			placeable_items.append(item)
+
+	if placeable_items.is_empty():
+		return
+
+	var sorted_items := placeable_items.duplicate()
 	sorted_items.sort_custom(func(a, b): return a.term.length() > b.term.length())
 
-	var w0: String = sorted_items[0].term.to_upper()
-	if w0.length() > MAX_GRID:
-		return
-	var r0: int = int(MAX_GRID / 2.0)
-	var c0: int = clampi(int((MAX_GRID - w0.length()) / 2.0), 0, MAX_GRID - int(w0.length()))
-	_place_word(sorted_items[0], r0, c0, 0)
+	# Select the first valid anchor word instead of aborting generation.
+	var anchor_index := -1
+	for i in range(sorted_items.size()):
+		var w0: String = str(sorted_items[i].term).strip_edges().to_upper()
+		if w0.is_empty() or w0.length() > MAX_GRID:
+			continue
+		var r0: int = int(MAX_GRID / 2.0)
+		var c0: int = clampi(int((MAX_GRID - w0.length()) / 2.0), 0, MAX_GRID - int(w0.length()))
+		_place_word(sorted_items[i], r0, c0, 0)
+		anchor_index = i
+		break
 
-	for i in range(1, sorted_items.size()):
+	if anchor_index == -1:
+		return
+
+	for i in range(sorted_items.size()):
+		if i == anchor_index:
+			continue
 		_try_place_item(sorted_items[i])
 
 

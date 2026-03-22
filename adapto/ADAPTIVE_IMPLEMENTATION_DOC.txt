@@ -1,0 +1,124 @@
+ADAPTIVE IMPLEMENTATION DOCUMENTATION
+===================================
+
+Purpose
+-------
+This document explains how the following requirements were implemented:
+1) Adaptive design that maximizes the game the learner is most efficient in.
+2) If performance in that game drops below the new leader, switch to the next best game.
+3) Scaled diagnostic flow before fully adaptive looping.
+4) Fair score system across different games.
+
+
+1) Adaptive design that prioritizes strongest game
+-----------------------------------------------
+Core logic is centralized in Globals/user_stats.gd.
+
+- UserStats.start_adaptive_session()
+  - Enables adaptive mode.
+  - Resets rolling adaptive history per game.
+  - Sets phase to "diagnostic".
+
+- UserStats.record_adaptive_result(game_id, raw_score, accuracy_percent, time_spent_sec, completion_ratio)
+  - Called by each game after a run.
+  - Converts each run into one normalized fair score (0..100).
+  - Appends score into rolling history for that game (limited window).
+  - Rebuilds ranking from highest average to lowest average.
+
+- UserStats.get_scene_after_game(current_game_id)
+  - During adaptive phase, chooses the current top-ranked game:
+    - leader = UserStats.get_leading_game()
+    - next scene = UserStats.get_scene_for_game(leader)
+
+Result:
+- The next game is always the current best-performing game by rolling average efficiency.
+
+
+2) Automatic switching when leader changes
+-----------------------------------------
+Switching happens naturally through rolling-average re-ranking.
+
+- Every completed run in any game updates that game's recent history.
+- UserStats._update_adaptive_ranking() re-sorts games by average efficiency.
+- On the next transition, UserStats.get_scene_after_game(...) reads the new leader.
+
+Because ranking is recomputed after every result:
+- If the current leader's average drops and another game's average is now higher,
+  adaptive routing automatically switches to the new leading game.
+
+No hard-coded switch table is used; routing is data-driven by recent performance.
+
+
+3) Scaled diagnostic flow
+-------------------------
+Adaptive mode is implemented in two phases:
+
+A) Diagnostic baseline phase
+- adaptive_phase = "diagnostic"
+- UserStats.get_scene_after_game(...) follows the fixed sequence:
+  game1 -> game2 -> game3 -> game4 -> game5
+- This gathers at least one normalized sample per game.
+
+B) Adaptive phase
+- After finishing diagnostic sequence, phase changes to "adaptive".
+- Routing then always picks the ranked leader game.
+
+Entry points:
+- Menus/main_menu.gd
+  - _on_adaptive_button_pressed(): starts adaptive session and opens game1 baseline.
+  - on_diagnostic_button_pressed(): disables adaptive mode and starts standard flow.
+
+Result:
+- The system is a scaled diagnostic model: first survey all games, then specialize.
+
+
+4) Fair score system between games
+----------------------------------
+Cross-game fairness is implemented in UserStats.compute_fair_score(...).
+
+Normalization references:
+- SCORE_REFERENCE per game
+- TIME_REFERENCE per game
+
+Normalized components (0..1):
+- score_component      = raw_score / score_reference
+- accuracy_component   = accuracy_percent / 100
+- speed_component      = 1 - (time_spent / time_reference)
+- completion_component = completion_ratio
+
+Weighted formula (converted to 0..100):
+fair_score = (
+  accuracy_component * 0.45
++ completion_component * 0.30
++ speed_component * 0.15
++ score_component * 0.10
+) * 100
+
+Why this is fair:
+- Different games can have different raw point scales and round lengths.
+- Each game first maps its local outcome into shared metrics:
+  (raw_score, accuracy, elapsed_time, completion_ratio).
+- UserStats then compares games on the same normalized scale.
+
+
+Per-game reporting hooks (where normalization inputs are produced)
+-----------------------------------------------------------------
+- Games/game_1.gd  -> _record_adaptive_performance() -> UserStats.record_adaptive_result("game1", ...)
+- Games/game_2.gd  -> _record_adaptive_performance() -> UserStats.record_adaptive_result("game2", ...)
+- Games/game_3.gd  -> _record_adaptive_performance() -> UserStats.record_adaptive_result("game3", ...)
+- Games/game_4.gd  -> _record_adaptive_performance() -> UserStats.record_adaptive_result("game4", ...)
+- Games/game_5.gd  -> _record_adaptive_performance() -> UserStats.record_adaptive_result("game5", ...)
+
+Each game also routes forward through:
+- UserStats.get_scene_after_game("gameX")
+
+So transitions are consistently adaptive across all games.
+
+
+Summary
+-------
+Your four requirements are implemented through:
+- A centralized adaptive engine (UserStats) with rolling performance history.
+- Two-phase flow (diagnostic baseline -> adaptive specialization).
+- Continuous re-ranking that automatically switches leader when averages change.
+- A shared normalized fairness formula so different games can be compared reliably.
