@@ -42,27 +42,42 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.06, 0.06, 0.11, 0.97)
+
 [node name="Game2" type="Node2D"]
 script = ExtResource("1_yhycf")
 
-[node name="MoneyLabel" type="Label" parent="."]
-offset_left = 81.0
-offset_top = 437.0
-offset_right = 317.0
-offset_bottom = 507.0
-theme_override_fonts/font = ExtResource("1_d3qvd")
-theme_override_font_sizes/font_size = 54
-text = "Money: $0"
+[node name="TopBar" type="PanelContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 65.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_header")
 
-[node name="Jeopardy" type="Label" parent="."]
-offset_left = 279.0
-offset_top = 3.0
-offset_right = 1008.0
-offset_bottom = 73.0
+[node name="TopBarHBox" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="TopBar/TopBarHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.92, 0.25, 1)
 theme_override_fonts/font = ExtResource("1_d3qvd")
-theme_override_font_sizes/font_size = 54
-text = "WELCOME TO JEOPARDY"
-metadata/_edit_lock_ = true
+theme_override_font_sizes/font_size = 32
+text = "JEOPARDY"
+horizontal_alignment = 1
+
+[node name="MoneyLabel" type="Label" parent="TopBar/TopBarHBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.95, 0.65, 1)
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 24
+text = "Money: $0"
+horizontal_alignment = 2
 
 [node name="QuestionBackground" type="TextureRect" parent="."]
 z_index = 1

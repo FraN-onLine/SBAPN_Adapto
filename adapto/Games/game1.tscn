@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c3acq3neuakt4" path="res://Assets/Lucky/Lucky-Sheet.png" id="5_ant2b"]
 [ext_resource type="Texture2D" uid="uid://do6qelurv8g4w" path="res://Assets/Tilemaps/Room11-15Tilemap.png" id="6_gfijl"]
 [ext_resource type="PackedScene" uid="uid://br1qr3dy734ud" path="res://Games/Healtbars/healthbar-enemy.tscn" id="7_w14is"]
+[ext_resource type="Script" path="res://Games/fit_text_button.gd" id="8_fit_script"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w14is"]
 atlas = ExtResource("4_ant2b")
@@ -341,29 +342,52 @@ texture = ExtResource("6_gfijl")
 [sub_resource type="TileSet" id="TileSet_ant2b"]
 sources/0 = SubResource("TileSetAtlasSource_w14is")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.06, 0.06, 0.11, 0.97)
+
 [node name="Game1" type="Node2D"]
 script = ExtResource("1_q5wpw")
 
-[node name="HPLabel" type="Label" parent="."]
-offset_left = 50.0
-offset_top = 10.0
-offset_right = 200.0
-offset_bottom = 40.0
+[node name="TopBar" type="PanelContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 65.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_header")
+
+[node name="TopBarHBox" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="TopBar/TopBarHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.92, 0.25, 1)
+theme_override_fonts/font = ExtResource("2_4h6do")
+theme_override_font_sizes/font_size = 32
+text = "BATTLE WITH SABINE"
+horizontal_alignment = 1
+
+[node name="HPLabel" type="Label" parent="TopBar/TopBarHBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.95, 0.65, 1)
 theme_override_fonts/font = ExtResource("2_4h6do")
 theme_override_font_sizes/font_size = 24
 text = "HP: 5/5"
-metadata/_edit_use_anchors_ = true
+horizontal_alignment = 2
 
-[node name="TimerLabel" type="Label" parent="."]
-offset_left = 582.0
-offset_top = 12.0
-offset_right = 732.0
-offset_bottom = 46.0
-size_flags_vertical = 8
+[node name="TimerLabel" type="Label" parent="TopBar/TopBarHBox"]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.35, 1)
 theme_override_fonts/font = ExtResource("2_4h6do")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Time: 30s"
-metadata/_edit_use_anchors_ = true
+horizontal_alignment = 2
+
 
 [node name="NAme" type="Label" parent="."]
 offset_left = 1133.0
@@ -412,6 +436,8 @@ icon = ExtResource("3_ant2b")
 flat = true
 icon_alignment = 1
 expand_icon = true
+autowrap_mode = 2
+script = ExtResource("8_fit_script")
 
 [node name="Option2Button" type="Button" parent="."]
 custom_minimum_size = Vector2(300, 70)
@@ -427,6 +453,8 @@ icon = ExtResource("3_ant2b")
 flat = true
 icon_alignment = 1
 expand_icon = true
+autowrap_mode = 2
+script = ExtResource("8_fit_script")
 
 [node name="FeedbackLabel" type="Label" parent="."]
 custom_minimum_size = Vector2(700, 100)

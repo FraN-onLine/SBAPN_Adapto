@@ -592,6 +592,7 @@ layout_mode = 1
 [connection signal="pressed" from="Control/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Button4" to="." method="on_diagnostic_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button5" to="." method="_on_adaptive_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/TopicSelect" to="." method="_on_topic_select_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/TopicImport" to="." method="_on_topic_import_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/TopicExport" to="." method="_on_topic_export_pressed"]

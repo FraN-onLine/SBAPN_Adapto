@@ -1,3 +1,7 @@
+## Game 4 concept matching rush.
+##
+## Saves local performance and reports fair normalized performance for adaptive
+## progression across games.
 extends Control
 
 const ROUND_TIME := 120
@@ -31,6 +35,7 @@ var wrong_attempts := 0
 var hints_used := 0
 var input_locked := false
 var game_finished := false
+var adaptive_recorded := false
 
 
 func _ready() -> void:
@@ -349,6 +354,8 @@ func _end_game(won: bool) -> void:
 		"hints_used": hints_used,
 		"pairs_total": total_pairs
 	})
+	# Report fair adaptive metrics after persisting local payload.
+	_record_adaptive_performance(accuracy, elapsed)
 
 	if won:
 		end_dialog.title = "Round Complete"
@@ -376,4 +383,18 @@ func _disable_gameplay_buttons() -> void:
 
 
 func _on_end_dialog_confirmed() -> void:
-	get_tree().change_scene_to_file("res://Games/game5.tscn")
+	# Use adaptive router for next game selection.
+	get_tree().change_scene_to_file(UserStats.get_scene_after_game("game4"))
+
+
+# Converts Game 4 result into normalized adaptive score inputs.
+func _record_adaptive_performance(accuracy: float, elapsed: int) -> void:
+	if adaptive_recorded:
+		return
+	adaptive_recorded = true
+
+	var completion_ratio := 0.0
+	if total_pairs > 0:
+		completion_ratio = clampf(float(matched_pairs) / float(total_pairs), 0.0, 1.0)
+
+	UserStats.record_adaptive_result("game4", float(score), accuracy, float(elapsed), completion_ratio)
