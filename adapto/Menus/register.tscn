@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d1yqgq8h7g7w7"]
 
-[ext_resource type="Script" path="res://Menus/register.gd" id="1_abcde"]
+[ext_resource type="Script" uid="uid://cugxp7du4shwx" path="res://Menus/register.gd" id="1_abcde"]
 
 [node name="RegisterScreen" type="Control"]
 layout_mode = 3
@@ -38,7 +38,6 @@ offset_right = 100.0
 offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
-spacing = 10
 
 [node name="TitleLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2

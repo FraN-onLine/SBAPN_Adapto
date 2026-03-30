@@ -374,4 +374,8 @@ func _end_game(won: bool) -> void:
 	else:
 		feedback_label.text = "⏰  Time's up!  Score: %d  (answers revealed)" % score
 	await get_tree().create_timer(3.5).timeout
+	# Show stats scene for game 3 after completion
 	get_tree().change_scene_to_file("res://Games/game4.tscn")
+
+# Documentation:
+# After the crossword ends, the stats scene is shown. The stats scene displays one question type at a time with navigation and animations.

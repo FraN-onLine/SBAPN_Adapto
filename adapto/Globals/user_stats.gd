@@ -95,3 +95,13 @@ func get_game_stats_display():
 			avg_time = stats["sum_time"][i] / questions
 		display.append("%s: Correct: %d, INC: %d, TO: %d, ACC: %.1f%%, AT: %.1fs" % [type_name, correct, incorrect, timeout, accuracy, avg_time])
 	return display
+
+# Returns stats for game 3 in display-friendly format for game3_stats scene
+func get_game3_stats_display():
+	var stats = game_stats["game3"]
+	return [
+		"Questions Answered: %d" % stats["questions_answered"],
+		"Questions Correct: %d" % stats["questions_correct"],
+		"Total Score: %d" % stats["total_score"],
+		"Time Taken: %ds" % stats["time_taken"]
+	]

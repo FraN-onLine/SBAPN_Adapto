@@ -1,7 +1,6 @@
-[gd_scene load_steps=0 format=3 uid="uid://b5w5h5g5w5h5g"]
+[gd_scene load_steps=2 format=3 uid="uid://b5w5h5g5w5h5g"]
 
 [ext_resource type="Script" path="res://Menus/lesson_creator.gd" id="1_abcde"]
-[ext_resource type="PackedScene" uid="uid://c5w5h5g5w5h5g" path="res://Menus/question_entry.tscn" id="2_fghij"]
 
 [node name="LessonCreator" type="Control"]
 layout_mode = 3
@@ -29,11 +28,11 @@ offset_left = 20.0
 offset_top = 20.0
 offset_right = -20.0
 offset_bottom = -20.0
-spacing = 10
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
-spacing = 10
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -52,7 +51,6 @@ horizontal_scroll_mode = 0
 [node name="QuestionsVBox" type="VBoxContainer" parent="Panel/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-spacing = 10
 
 [node name="AddQuestionButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -71,10 +69,9 @@ layout_mode = 2
 text = "Back"
 
 [node name="FileDialog" type="FileDialog" parent="."]
-title = "Save Lesson"
-ok_button_text = "Save"
+title = "Open a File"
+ok_button_text = "Open"
 file_mode = 0
-access = 0
 filters = PackedStringArray("*.tres ; Godot Resource")
 
 [connection signal="pressed" from="Panel/VBoxContainer/AddQuestionButton" to="." method="_on_add_question_button_pressed"]

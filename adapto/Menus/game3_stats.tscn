@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3]
+
+[node name="Game3Stats" type="Node2D"]
+
+[node name="TypeLabel" type="Label" parent="."]
+position = Vector2(320, 120)
+text = "Keyword"
+
+[node name="StatLabel" type="Label" parent="."]
+position = Vector2(320, 180)
+text = "Stat Value"
+
+[node name="BackBtn" type="Button" parent="."]
+position = Vector2(220, 260)
+text = "< Back"
+
+[node name="NextBtn" type="Button" parent="."]
+position = Vector2(420, 260)
+text = "Next >"
