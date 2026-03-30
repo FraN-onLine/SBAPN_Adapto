@@ -1,11 +1,25 @@
+## Game 3 crossword challenge.
+##
+## Adds in-round hints and reports normalized performance for adaptive routing.
 extends Node2D
 
 # ── Constants ────────────────────────────────────────────────────────────────
-const MAX_GRID   := 13
-const CELL_SIZE  := 42
-const GRID_OX    := 18
-const GRID_OY    := 18
-const TIME_LIMIT := 180
+# MIN and MAX limits for grid and cell size
+const MIN_CELL_SIZE  := 16
+const MAX_CELL_SIZE  := 50
+const MIN_GRID_SIZE  := 13
+const MAX_GRID_SIZE  := 34
+const TIME_LIMIT     := 180
+# Score cost applied each time a hint is used.
+const HINT_PENALTY := 30
+
+# ── Dynamic grid properties (calculated in _ready) ────────────────────────────
+var MAX_GRID: int = 13
+var CELL_SIZE: int = 42
+var GRID_OX: int = 18
+var GRID_OY: int = 18
+var available_width: int = 0
+var available_height: int = 0
 
 # ── @onready ─────────────────────────────────────────────────────────────────
 @onready var game_timer     = $GameTimer
@@ -17,6 +31,8 @@ const TIME_LIMIT := 180
 @onready var answer_input   = $AnswerBar/AnswerVBox/AnswerHBox/AnswerInput
 @onready var clue_display   = $AnswerBar/AnswerVBox/ClueLabel
 @onready var submit_btn     = $AnswerBar/AnswerVBox/AnswerHBox/SubmitBtn
+# UI button that reveals a partial answer pattern.
+@onready var hint_btn       = $AnswerBar/AnswerVBox/AnswerHBox/HintBtn
 @onready var grid_node      = $GridNode
 
 # ── State ─────────────────────────────────────────────────────────────────────
@@ -33,6 +49,9 @@ var placements: Array = []  # dicts: word/clue/row/col/dir(0=across 1=down)/numb
 # Selection / Solved state
 var selected_idx: int = -1
 var solved: Array = []      # bool per placement index
+var wrong_attempts := 0
+var hints_used := 0
+var adaptive_recorded := false
 
 
 func _ready() -> void:
@@ -41,11 +60,13 @@ func _ready() -> void:
 
 	for it in lesson.lesson_items:
 		var t: String = it.term.strip_edges()
-		# Only single-word terms that fit in the grid are valid for crossword
-		if t.length() >= 3 and t.length() <= MAX_GRID and not " " in t:
+		# Keep longer terms; final fit is validated against computed grid size.
+		if t.length() >= 3 and t.length() <= MAX_GRID_SIZE:
 			items.append(it)
 	items.shuffle()
 	items = items.slice(0, min(8, items.size()))
+
+	_calculate_grid_dimensions()
 
 	_generate_crossword()
 
@@ -65,6 +86,8 @@ func _ready() -> void:
 	game_timer.timeout.connect(_on_tick)
 	game_timer.start()
 	submit_btn.pressed.connect(_on_submit)
+	# Enable hint feature for crossword words.
+	hint_btn.pressed.connect(_on_hint_pressed)
 	answer_input.text_submitted.connect(func(_t): _on_submit())
 	_update_hud()
 
@@ -72,6 +95,38 @@ func _ready() -> void:
 # ─────────────────────────────────────────────────────────────────────────────
 # Crossword Generation
 # ─────────────────────────────────────────────────────────────────────────────
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Dynamic Grid Sizing
+# ─────────────────────────────────────────────────────────────────────────────
+
+func _calculate_grid_dimensions() -> void:
+	# Get GridNode's available space
+	var grid_rect: Rect2 = grid_node.get_rect()
+	available_width = int(grid_rect.size.x)
+	available_height = int(grid_rect.size.y)
+	
+	# Find longest word in items (accounting for spaces)
+	var longest_len: int = 0
+	for item in items:
+		var word_len = item.term.strip_edges().length()
+		if word_len > longest_len:
+			longest_len = word_len
+	
+	# MAX_GRID should be at least the longest word, but clamped to reasonable limits
+	MAX_GRID = clampi(maxi(longest_len + 4, MIN_GRID_SIZE), MIN_GRID_SIZE, MAX_GRID_SIZE)
+	
+	# Calculate CELL_SIZE to fit the grid in available space, leaving some padding
+	var width_cell_size = (available_width - 36) / MAX_GRID  # 36 = padding on both sides
+	var height_cell_size = (available_height - 36) / MAX_GRID
+	CELL_SIZE = clampi(mini(width_cell_size, height_cell_size), MIN_CELL_SIZE, MAX_CELL_SIZE)
+	
+	# Center the grid in available space
+	var grid_total_width = MAX_GRID * CELL_SIZE
+	var grid_total_height = MAX_GRID * CELL_SIZE
+	GRID_OX = int((available_width - grid_total_width) / 2.0)
+	GRID_OY = int((available_height - grid_total_height) / 2.0)
+
 
 func _init_grid() -> void:
 	grid.clear()
@@ -110,6 +165,11 @@ func _can_place(word: String, row: int, col: int, dir: int) -> bool:
 		var c := col + dc * i
 		var letter := word[i]
 		var existing := _cell(r, c)
+		
+		# Spaces can overlap with anything
+		if letter == " ":
+			continue
+
 		if existing == "":
 			if dir == 0:
 				if _cell(r - 1, c) != "" and _cell(r - 1, c) != "#": return false
@@ -119,7 +179,7 @@ func _can_place(word: String, row: int, col: int, dir: int) -> bool:
 				if _cell(r, c + 1) != "" and _cell(r, c + 1) != "#": return false
 		elif existing == letter:
 			intersections += 1
-		else:
+		elif existing != " " and letter != " ":
 			return false
 
 	return intersections > 0 or placements.is_empty()
@@ -130,7 +190,8 @@ func _place_word(item, row: int, col: int, dir: int) -> void:
 	var dr := 1 if dir == 1 else 0
 	var dc := 1 if dir == 0 else 0
 	for i in range(word.length()):
-		grid[row + dr * i][col + dc * i] = word[i]
+		if word[i] != " ":
+			grid[row + dr * i][col + dc * i] = word[i]
 	placements.append({
 		"word": word, "clue": item.definition,
 		"row": row, "col": col, "dir": dir, "number": 0
@@ -142,17 +203,37 @@ func _generate_crossword() -> void:
 	if items.is_empty():
 		return
 
-	var sorted_items := items.duplicate()
+	# Keep only entries that can fit in the computed grid dimensions.
+	var placeable_items: Array = []
+	for item in items:
+		var word := str(item.term).strip_edges().to_upper()
+		if word.length() <= MAX_GRID:
+			placeable_items.append(item)
+
+	if placeable_items.is_empty():
+		return
+
+	var sorted_items := placeable_items.duplicate()
 	sorted_items.sort_custom(func(a, b): return a.term.length() > b.term.length())
 
-	var w0: String = sorted_items[0].term.to_upper()
-	if w0.length() > MAX_GRID:
-		return
-	var r0: int = int(MAX_GRID / 2.0)
-	var c0: int = clampi(int((MAX_GRID - w0.length()) / 2.0), 0, MAX_GRID - int(w0.length()))
-	_place_word(sorted_items[0], r0, c0, 0)
+	# Select the first valid anchor word instead of aborting generation.
+	var anchor_index := -1
+	for i in range(sorted_items.size()):
+		var w0: String = str(sorted_items[i].term).strip_edges().to_upper()
+		if w0.is_empty() or w0.length() > MAX_GRID:
+			continue
+		var r0: int = int(MAX_GRID / 2.0)
+		var c0: int = clampi(int((MAX_GRID - w0.length()) / 2.0), 0, MAX_GRID - int(w0.length()))
+		_place_word(sorted_items[i], r0, c0, 0)
+		anchor_index = i
+		break
 
-	for i in range(1, sorted_items.size()):
+	if anchor_index == -1:
+		return
+
+	for i in range(sorted_items.size()):
+		if i == anchor_index:
+			continue
 		_try_place_item(sorted_items[i])
 
 
@@ -264,17 +345,21 @@ func _draw_grid() -> void:
 				grid_node.draw_rect(rect, bg)
 				grid_node.draw_rect(rect, Color(0.35, 0.35, 0.42, 1.0), false, 1.5)
 				if solved_cells.has(key):
+					# Scale letter spacing and size based on CELL_SIZE
+					var font_size = int(CELL_SIZE * 0.7)
 					grid_node.draw_string(font,
-						Vector2(x + 14, y + CELL_SIZE - 10),
+						Vector2(x + (CELL_SIZE * 0.25), y + CELL_SIZE - (CELL_SIZE * 0.2)),
 						solved_cells[key],
-						HORIZONTAL_ALIGNMENT_LEFT, -1, 22, Color.BLACK)
+						HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.BLACK)
 
 	for p in placements:
 		var x: int = GRID_OX + (p["col"] as int) * CELL_SIZE
 		var y: int = GRID_OY + (p["row"] as int) * CELL_SIZE
-		grid_node.draw_string(font, Vector2(x + 2, y + 11),
+		# Calculate number font size relative to cell size
+		var num_size = maxi(10, int(CELL_SIZE * 0.3))
+		grid_node.draw_string(font, Vector2(x + 2, y + num_size + 1),
 			str(p["number"]),
-			HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.15, 0.15, 0.2, 1.0))
+			HORIZONTAL_ALIGNMENT_LEFT, -1, num_size, Color(0.15, 0.15, 0.2, 1.0))
 
 
 func _on_grid_input(event: InputEvent) -> void:
@@ -327,8 +412,29 @@ func _on_submit() -> void:
 		if solved.all(func(s): return s):
 			_end_game(true)
 	else:
+			# Count failed attempts for adaptive accuracy metrics.
+		wrong_attempts += 1
 		feedback_label.text = "❌  Wrong — try again!"
 		answer_input.text = ""
+
+
+	# Reveals partial letters for the selected word and applies penalty.
+func _on_hint_pressed() -> void:
+	if game_over:
+		return
+	if selected_idx < 0 or selected_idx >= placements.size():
+		feedback_label.text = "Select a clue first to get a hint."
+		return
+	if solved[selected_idx]:
+		feedback_label.text = "That word is already solved."
+		return
+
+	var p: Dictionary = placements[selected_idx]
+	var hint_text := _build_hint(str(p["word"]))
+	hints_used += 1
+	score = maxi(0, score - HINT_PENALTY)
+	feedback_label.text = "💡  Hint: %s" % hint_text
+	_update_hud()
 
 
 func _mark_clue_solved(idx: int) -> void:
@@ -373,5 +479,47 @@ func _end_game(won: bool) -> void:
 		feedback_label.text = "🎉  Excellent!  Crossword complete!  Final score: %d" % score
 	else:
 		feedback_label.text = "⏰  Time's up!  Score: %d  (answers revealed)" % score
+	# Save normalized performance before adaptive routing.
+	_record_adaptive_performance()
 	await get_tree().create_timer(3.5).timeout
-	get_tree().change_scene_to_file("res://Games/game4.tscn")
+	# Route to next game using adaptive rank order.
+	get_tree().change_scene_to_file(UserStats.get_scene_after_game("game3"))
+
+
+# Returns a masked hint with first/last + one random internal letter.
+func _build_hint(word: String) -> String:
+	if word.length() <= 2:
+		return "%s (%d letters)" % [word, word.length()]
+
+	var reveal_index := 1 + randi() % maxi(1, word.length() - 2)
+	var tokens := []
+	for i in range(word.length()):
+		if i == 0 or i == reveal_index or i == word.length() - 1:
+			tokens.append(word[i])
+		else:
+			tokens.append("_")
+	return "%s (%d letters)" % [" ".join(tokens), word.length()]
+
+
+# Converts crossword outcomes into fair adaptive metrics.
+func _record_adaptive_performance() -> void:
+	if adaptive_recorded:
+		return
+	adaptive_recorded = true
+
+	var solved_count := 0
+	for state in solved:
+		if bool(state):
+			solved_count += 1
+
+	var attempts := solved_count + wrong_attempts
+	var accuracy := 0.0
+	if attempts > 0:
+		accuracy = (float(solved_count) / float(attempts)) * 100.0
+
+	var completion_ratio := 0.0
+	if placements.size() > 0:
+		completion_ratio = clampf(float(solved_count) / float(placements.size()), 0.0, 1.0)
+
+	var elapsed := float(TIME_LIMIT - maxi(0, time_remaining))
+	UserStats.record_adaptive_result("game3", float(score), accuracy, elapsed, completion_ratio)

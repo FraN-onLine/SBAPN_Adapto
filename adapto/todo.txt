@@ -11,3 +11,6 @@ fix text validation for ai prompt(min 15 items)
 - game 3 needs hints
 - fix UIS
 - please add documentation on top of each script for easier reading
+
+todo
+-ui fix

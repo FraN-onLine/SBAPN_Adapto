@@ -1,3 +1,7 @@
+## Game 5 hangman-style concept recall.
+##
+## Persists game metrics and reports normalized performance for adaptive
+## sequencing after each run.
 extends Control
 
 const ROUND_TIME := 150
@@ -45,6 +49,7 @@ var hints_used := 0
 var skips_used := 0
 var input_locked := false
 var game_finished := false
+var adaptive_recorded := false
 
 var keyboard_buttons: Dictionary = {}
 
@@ -303,6 +308,8 @@ func _end_game(won: bool) -> void:
 		"skips_used": skips_used,
 		"words_total": game_data.size()
 	})
+	# Report fair adaptive metrics after persisting local payload.
+	_record_adaptive_performance(accuracy, elapsed)
 
 	if won:
 		end_dialog.title = "Round Complete"
@@ -322,5 +329,18 @@ func _save_performance(payload: Dictionary) -> void:
 	Database.save_user_performance(Global.current_user, existing)
 
 func _on_end_dialog_confirmed() -> void:
-	# After game 5, usually redirect to stats, main menu, or back to game selection
-	get_tree().change_scene_to_file("res://Menus/game1_stats.tscn")
+	# Use adaptive router for next game selection.
+	get_tree().change_scene_to_file(UserStats.get_scene_after_game("game5"))
+
+
+# Converts Game 5 result into normalized adaptive score inputs.
+func _record_adaptive_performance(accuracy: float, elapsed: int) -> void:
+	if adaptive_recorded:
+		return
+	adaptive_recorded = true
+
+	var completion_ratio := 0.0
+	if game_data.size() > 0:
+		completion_ratio = clampf(float(current_word_index) / float(game_data.size()), 0.0, 1.0)
+
+	UserStats.record_adaptive_result("game5", float(score), accuracy, float(elapsed), completion_ratio)
