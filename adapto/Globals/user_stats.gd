@@ -1,3 +1,15 @@
+# Returns the game_id with the highest diagnostic score for the current user.
+func get_best_diagnostic_game() -> String:
+	# For each game, check overall_stats[game]["highest_score"]
+	var best_game = ""
+	var best_score = -INF
+	for game_id in GAME_SEQUENCE:
+		if overall_stats.has(game_id) and overall_stats[game_id].has("highest_score"):
+			var score = overall_stats[game_id]["highest_score"]
+			if score > best_score:
+				best_score = score
+				best_game = game_id
+	return best_game
 ## User stats and adaptive game flow manager.
 ##
 ## Responsibilities:

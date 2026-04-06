@@ -21,15 +21,17 @@ func _on_start_button_pressed() -> void:
 
 
 func on_diagnostic_button_pressed():
-	# Ensure diagnostic starts in standard sequence mode.
+	# Diagnostic test will replay the game the player did best on.
 	UserStats.stop_adaptive_session()
-	get_tree().change_scene_to_file("res://Games/game1.tscn")
+	var best_game = UserStats.get_best_diagnostic_game()
+	if best_game != "":
+		get_tree().change_scene_to_file(UserStats.get_scene_for_game(best_game))
+	else:
+		show_error_dialog("No diagnostic history found. Please play a game first.")
 
 
 func _on_adaptive_button_pressed() -> void:
-	# Start adaptive mode from game 1 diagnostic baseline.
-	UserStats.start_adaptive_session()
-	get_tree().change_scene_to_file(UserStats.get_scene_for_game("game1"))
+	show_error_dialog("Adaptive test is not available for your account.")
 
 
 func _on_button_2_pressed() -> void:
@@ -342,6 +344,9 @@ func _ready():
 		register_screen.visible = false
 		main_menu_control.visible = true
 		_setup_admin_all_lessons_toggle()
+		# Hide adaptive button for all users
+		if main_menu_control.has_node("VBoxContainer/Button4"):
+			main_menu_control.get_node("VBoxContainer/Button4").visible = false
 	else:
 		login_screen.visible = true
 		register_screen.visible = false
