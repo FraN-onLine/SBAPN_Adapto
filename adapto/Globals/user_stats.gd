@@ -56,6 +56,8 @@ var adaptive_history := {
 	"game5": []
 }
 var adaptive_last_ranked: Array[String] = []
+# Tracks the current leader game during adaptive phase
+var adaptive_current_leader: String = ""
 
 var player_stats = {
 	"typing": {"accuracy": 0, "time": 0},
@@ -106,6 +108,7 @@ func start_adaptive_session() -> void:
 	adaptive_mode_active = true
 	adaptive_phase = "diagnostic"
 	adaptive_last_ranked = []
+	adaptive_current_leader = ""
 	for game_id in GAME_SEQUENCE:
 		adaptive_history[game_id] = []
 	reset_game_stats()
@@ -115,6 +118,7 @@ func start_adaptive_session() -> void:
 func stop_adaptive_session() -> void:
 	adaptive_mode_active = false
 	adaptive_phase = "none"
+	adaptive_current_leader = ""
 
 
 # Resolves a game id to its scene path.
@@ -122,6 +126,7 @@ func get_scene_for_game(game_id: String) -> String:
 	if GAME_SCENES.has(game_id):
 		return str(GAME_SCENES[game_id])
 	return str(GAME_SCENES["game1"])
+
 
 
 # Chooses the next scene using default order or adaptive ranking.
@@ -133,12 +138,22 @@ func get_scene_after_game(current_game_id: String) -> String:
 		var idx := GAME_SEQUENCE.find(current_game_id)
 		if idx >= 0 and idx < GAME_SEQUENCE.size() - 1:
 			return get_scene_for_game(GAME_SEQUENCE[idx + 1])
+		   # After diagnostic, set initial leader and enter adaptive phase
 		adaptive_phase = "adaptive"
+		adaptive_current_leader = get_leading_game()
 
-	var leader := get_leading_game()
-	if leader == "":
-		return get_scene_for_game("game1")
-	return get_scene_for_game(leader)
+	   # In adaptive phase, always return the current leader's scene
+	if adaptive_phase == "adaptive":
+		   # Check if a new leader has emerged
+		var new_leader = get_leading_game()
+		if new_leader != "" and new_leader != adaptive_current_leader:
+			adaptive_current_leader = new_leader
+		if adaptive_current_leader == "":
+			adaptive_current_leader = "game1"
+		return get_scene_for_game(adaptive_current_leader)
+
+	   # Fallback
+	return get_scene_for_game("game1")
 
 
 # Stores normalized performance in rolling history per game.
