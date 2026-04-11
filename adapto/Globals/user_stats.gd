@@ -1,15 +1,5 @@
 # Returns the game_id with the highest diagnostic score for the current user.
-func get_best_diagnostic_game() -> String:
-	# For each game, check overall_stats[game]["highest_score"]
-	var best_game = ""
-	var best_score = -INF
-	for game_id in GAME_SEQUENCE:
-		if overall_stats.has(game_id) and overall_stats[game_id].has("highest_score"):
-			var score = overall_stats[game_id]["highest_score"]
-			if score > best_score:
-				best_score = score
-				best_game = game_id
-	return best_game
+
 ## User stats and adaptive game flow manager.
 ##
 ## Responsibilities:
@@ -27,6 +17,7 @@ const GAME_SCENES := {
 	"game4": "res://Games/game4.tscn",
 	"game5": "res://Games/game5.tscn"
 }
+
 const SCORE_REFERENCE := {
 	"game1": 500.0,
 	"game2": 2700.0,
@@ -43,6 +34,18 @@ const TIME_REFERENCE := {
 }
 const ADAPTIVE_HISTORY_LIMIT := 6
 
+func get_best_diagnostic_game() -> String:
+	# For each game, check overall_stats[game]["highest_score"]
+	var best_game = ""
+	var best_score = -INF
+	for game_id in GAME_SEQUENCE:
+		if overall_stats.has(game_id) and overall_stats[game_id].has("highest_score"):
+			var score = overall_stats[game_id]["highest_score"]
+			if score > best_score:
+				best_score = score
+				best_game = game_id
+	return best_game
+	
 var adaptive_mode_active := false
 var adaptive_phase: String = "none" # none | diagnostic | adaptive
 var adaptive_history := {
