@@ -38,11 +38,19 @@ func _on_adaptive_button_pressed() -> void:
            return
        get_tree().change_scene_to_file(UserStats.get_scene_for_game(leader))
 func _on_stats_button_pressed() -> void:
-       var scores = UserStats.get_average_scores_per_game()
-       var msg = "Average Scores per Game:\n"
-       for game_id in UserStats.GAME_SEQUENCE:
-           msg += game_id.capitalize() + ": " + str(round(scores[game_id])) + "%\n"
-       show_success_dialog(msg)
+    var scores = UserStats.get_average_scores_per_game()
+    var analysis = UserStats.get_diagnostic_analysis()
+    var msg = "Average Scores per Game:\n"
+    for game_id in UserStats.GAME_SEQUENCE:
+        msg += game_id.capitalize() + ": " + str(round(scores[game_id])) + "%\n"
+    msg += "\nBest Game: " + analysis["best_game"].capitalize()
+    msg += "\nWorst Game: " + analysis["worst_game"].capitalize()
+    msg += "\nFastest Game: " + analysis["fastest_game"].capitalize()
+    msg += "\nSlowest Game: " + analysis["slowest_game"].capitalize()
+    msg += "\n\nAverage Time per Question (s):\n"
+    for game_id in UserStats.GAME_SEQUENCE:
+        msg += game_id.capitalize() + ": " + str(round(analysis["average_times"][game_id])) + "\n"
+    show_success_dialog(msg)
 
 
 

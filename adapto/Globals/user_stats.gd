@@ -194,12 +194,11 @@ func get_scene_after_game(current_game_id: String) -> String:
         var idx := GAME_SEQUENCE.find(current_game_id)
         if idx >= 0 and idx < GAME_SEQUENCE.size() - 1:
             return get_scene_for_game(GAME_SEQUENCE[idx + 1])
-        # After last game, switch to adaptive phase
+        # After last game, switch to adaptive phase and return to main menu
         adaptive_phase = "adaptive"
         adaptive_current_leader = get_leading_game()
-        return "res://Menus/game1_stats.tscn" # or summary screen
-
-    # Adaptive phase: always do best game
+        return "res://Menus/main_menu.tscn" # Return to main menu after diagnostic
+        # Adaptive phase: always do best game
     if adaptive_phase == "adaptive":
         var new_leader = get_leading_game()
         if new_leader != "" and new_leader != adaptive_current_leader:
@@ -210,6 +209,66 @@ func get_scene_after_game(current_game_id: String) -> String:
 
     # Fallback
     return get_scene_for_game("game1")
+# Returns a dictionary with analysis: best, worst, fastest, slowest game, and average times
+func get_diagnostic_analysis() -> Dictionary:
+    var result = {
+        "best_game": "",
+        "worst_game": "",
+        "fastest_game": "",
+        "slowest_game": "",
+        "average_times": {},
+        "scores": {},
+        "accuracies": {}
+    }
+    var best_score = -INF
+    var worst_score = INF
+    var fastest_time = INF
+    var slowest_time = -INF
+    for game_id in GAME_SEQUENCE:
+        var stat =  overall_stats[game_id] if overall_stats.has(game_id) else null
+        var score = 0.0
+        var accuracy = 0.0
+        var avg_time = 0.0
+        if stat and stat.has("total_questions") and stat.has("correct") and stat.has("total_sum_time"):
+            var total = 0
+            var correct = 0
+            var sum_time = 0.0
+            for i in range(stat["total_questions"].size()):
+                total += stat["total_questions"][i]
+                correct += stat["correct"][i]
+                sum_time += stat["total_sum_time"][i]
+            accuracy =  float(correct) / float(total) * 100.0 if total > 0 else 0.0
+            avg_time = float(sum_time) / float(total) if total > 0 else 0.0
+            score = correct
+        elif stat and stat.has("total_questions_answered") and stat.has("total_questions_correct") and stat.has("total_time"):
+            var total = stat["total_questions_answered"]
+            var correct = stat["total_questions_correct"]
+            var sum_time = stat["total_time"]
+            accuracy = float(correct) / float(total) * 100.0 if total > 0 else 0.0
+            avg_time = float(sum_time) / float(total) if total > 0 else 0.0
+            score = correct
+        elif stat and stat.has("highest_score"):
+            score = float(stat["highest_score"])
+            accuracy =  float(stat["accuracy"]) if stat.has("accuracy") else 0.0
+            avg_time =  float(stat["total_time"]) / float(stat["total_questions_answered"]) if stat.has("total_time") and stat["total_questions_answered"] > 0 else 0.0
+        result["scores"][game_id] = score
+        result["accuracies"][game_id] = accuracy
+        result["average_times"][game_id] = avg_time
+        if score > best_score:
+            best_score = score
+            result["best_game"] = game_id
+        if score < worst_score:
+            worst_score = score
+            result["worst_game"] = game_id
+        if avg_time < fastest_time:
+            fastest_time = avg_time
+            result["fastest_game"] = game_id
+        if avg_time > slowest_time:
+            slowest_time = avg_time
+            result["slowest_game"] = game_id
+    return result
+
+
 
 
 # Stores normalized performance in rolling history per game.
