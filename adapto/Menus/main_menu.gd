@@ -21,13 +21,9 @@ func _on_start_button_pressed() -> void:
 
 
 func on_diagnostic_button_pressed():
-    # Diagnostic test will replay the game the player did best on.
+    # Start diagnostic session in order: game1 -> game2 -> ...
     UserStats.stop_adaptive_session()
-    var best_game = UserStats.get_best_diagnostic_game()
-    if best_game != "":
-        get_tree().change_scene_to_file(UserStats.get_scene_for_game(best_game))
-    else:
-        show_error_dialog("No diagnostic history found. Please play a game first.")
+    get_tree().change_scene_to_file(UserStats.get_scene_for_game("game1"))
 
 
 func _on_adaptive_button_pressed() -> void:

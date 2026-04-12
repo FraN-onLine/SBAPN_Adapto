@@ -189,17 +189,18 @@ func get_scene_after_game(current_game_id: String) -> String:
     if not adaptive_mode_active:
         return _get_default_scene_after_game(current_game_id)
 
+    # Diagnostic phase: always go in order
     if adaptive_phase == "diagnostic":
         var idx := GAME_SEQUENCE.find(current_game_id)
         if idx >= 0 and idx < GAME_SEQUENCE.size() - 1:
             return get_scene_for_game(GAME_SEQUENCE[idx + 1])
-           # After diagnostic, set initial leader and enter adaptive phase
+        # After last game, switch to adaptive phase
         adaptive_phase = "adaptive"
         adaptive_current_leader = get_leading_game()
+        return "res://Menus/game1_stats.tscn" # or summary screen
 
-       # In adaptive phase, always return the current leader's scene
+    # Adaptive phase: always do best game
     if adaptive_phase == "adaptive":
-           # Check if a new leader has emerged
         var new_leader = get_leading_game()
         if new_leader != "" and new_leader != adaptive_current_leader:
             adaptive_current_leader = new_leader
@@ -207,7 +208,7 @@ func get_scene_after_game(current_game_id: String) -> String:
             adaptive_current_leader = "game1"
         return get_scene_for_game(adaptive_current_leader)
 
-       # Fallback
+    # Fallback
     return get_scene_for_game("game1")
 
 
