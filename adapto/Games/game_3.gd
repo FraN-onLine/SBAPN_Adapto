@@ -12,6 +12,8 @@ const MAX_GRID_SIZE  := 34
 const TIME_LIMIT     := 180
 # Score cost applied each time a hint is used.
 const HINT_PENALTY := 30
+const TIMEOUT_REVEAL_DELAY := 10.0
+const WIN_TRANSITION_DELAY := 3.5
 
 # ── Dynamic grid properties (calculated in _ready) ────────────────────────────
 var MAX_GRID: int = 13
@@ -63,6 +65,7 @@ func _ready() -> void:
 		# Keep longer terms; final fit is validated against computed grid size.
 		if t.length() >= 3 and t.length() <= MAX_GRID_SIZE:
 			items.append(it)
+	items = _dedupe_crossword_items(items)
 	items.shuffle()
 	items = items.slice(0, min(8, items.size()))
 
@@ -237,6 +240,41 @@ func _generate_crossword() -> void:
 		_try_place_item(sorted_items[i])
 
 
+func _dedupe_crossword_items(source: Array) -> Array:
+	var filtered: Array = []
+	var seen_terms := {}
+	var seen_definitions := {}
+
+	for item in source:
+		var canonical_term := _canonical_crossword_term(str(item.term))
+		if canonical_term == "":
+			continue
+		if seen_terms.has(canonical_term):
+			continue
+
+		var definition_key := str(item.definition).strip_edges().to_lower()
+		if definition_key != "" and seen_definitions.has(definition_key):
+			continue
+
+		seen_terms[canonical_term] = true
+		if definition_key != "":
+			seen_definitions[definition_key] = true
+		filtered.append(item)
+
+	return filtered
+
+
+func _canonical_crossword_term(raw_term: String) -> String:
+	var t := raw_term.strip_edges().to_upper().replace("-", " ")
+	while t.find("  ") != -1:
+		t = t.replace("  ", " ")
+	if t.length() >= 5 and t.ends_with("ES"):
+		t = t.substr(0, t.length() - 2)
+	elif t.length() >= 4 and t.ends_with("S"):
+		t = t.substr(0, t.length() - 1)
+	return t
+
+
 func _try_place_item(item) -> void:
 	var word: String = item.term.to_upper()
 	for existing in placements:
@@ -285,7 +323,9 @@ func _build_clue_ui() -> void:
 		btn.text = "%d. %s" % [p["number"], p["clue"]]
 		btn.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		btn.custom_minimum_size = Vector2(0, 38)
+		btn.custom_minimum_size = Vector2(0, 56)
+		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		btn.clip_text = false
 		btn.pressed.connect(_on_clue_selected.bind(idx))
 		if p["dir"] == 0:
 			across_items.add_child(btn)
@@ -337,7 +377,7 @@ func _draw_grid() -> void:
 			var key := Vector2i(r, c)
 			var rect := Rect2(x, y, CELL_SIZE - 1, CELL_SIZE - 1)
 			if not word_cells.has(key):
-				grid_node.draw_rect(rect, Color(0.06, 0.06, 0.09, 1.0))
+				grid_node.draw_rect(rect, Color(0.14, 0.2, 0.28, 0.55))
 			else:
 				var bg := Color.WHITE
 				if sel_cells.has(key):
@@ -481,7 +521,8 @@ func _end_game(won: bool) -> void:
 		feedback_label.text = "⏰  Time's up!  Score: %d  (answers revealed)" % score
 	# Save normalized performance before adaptive routing.
 	_record_adaptive_performance()
-	await get_tree().create_timer(3.5).timeout
+	var transition_delay := WIN_TRANSITION_DELAY if won else TIMEOUT_REVEAL_DELAY
+	await get_tree().create_timer(transition_delay).timeout
 	# Route to next game using adaptive rank order.
 	get_tree().change_scene_to_file(UserStats.get_scene_after_game("game3"))
 

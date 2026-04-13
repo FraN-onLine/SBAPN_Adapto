@@ -35,28 +35,25 @@ const TIME_REFERENCE := {
 }
 const ADAPTIVE_HISTORY_LIMIT := 6
 
+
+func _default_adaptive_history() -> Dictionary:
+    return {
+        "game1": [],
+        "game2": [],
+        "game3": [],
+        "game4": [],
+        "game5": []
+    }
+
 # Returns true if the current user has completed at least one full diagnostic round (all games played at least once)
 func has_completed_diagnostic() -> bool:
        if Global.current_user == null:
            return false
-       for game_id in GAME_SEQUENCE:
-           if not overall_stats.has(game_id):
-               return false
-           # For a game to be considered completed, must have at least one question answered or score > 0
-           var stat = overall_stats[game_id]
-           if stat.has("total_questions"):
-               var total = 0
-               for q in stat["total_questions"]:
-                   total += q
-               if total == 0:
-                   return false
-           elif stat.has("total_questions_answered"):
-               if stat["total_questions_answered"] == 0:
-                   return false
-           elif stat.has("highest_score"):
-               if stat["highest_score"] == 0:
-                   return false
-       return true
+       return diagnostic_runs_completed >= 1
+
+
+func should_prompt_adaptive_first() -> bool:
+    return has_completed_diagnostic() and not adaptive_started_once
 
 
 func get_best_diagnostic_game() -> String:
@@ -72,17 +69,13 @@ func get_best_diagnostic_game() -> String:
     return best_game
     
 var adaptive_mode_active := false
-var adaptive_phase: String = "none" # none | diagnostic | adaptive
-var adaptive_history := {
-    "game1": [],
-    "game2": [],
-    "game3": [],
-    "game4": [],
-    "game5": []
-}
+var adaptive_phase: String = "none" # none | adaptive
+var adaptive_history := _default_adaptive_history()
 var adaptive_last_ranked: Array[String] = []
 # Tracks the current leader game during adaptive phase
 var adaptive_current_leader: String = ""
+var diagnostic_runs_completed := 0
+var adaptive_started_once := false
 
 var player_stats = {
     "typing": {"accuracy": 0, "time": 0},
@@ -130,10 +123,13 @@ var overall_stats = {
 # Save user stats to database
 func save_user_stats():
     if Global.current_user != null:
-        var perf = {
-            "overall_stats": overall_stats.duplicate(true),
-            "adaptive_history": adaptive_history.duplicate(true)
-        }
+        var perf = Database.load_user_performance(Global.current_user)
+        if typeof(perf) != TYPE_DICTIONARY:
+            perf = {}
+        perf["overall_stats"] = overall_stats.duplicate(true)
+        perf["adaptive_history"] = adaptive_history.duplicate(true)
+        perf["diagnostic_runs_completed"] = diagnostic_runs_completed
+        perf["adaptive_started_once"] = adaptive_started_once
         Database.save_user_performance(Global.current_user, perf)
 
 # Load user stats from database
@@ -145,6 +141,18 @@ func load_user_stats():
                 overall_stats = perf["overall_stats"]
             if perf.has("adaptive_history"):
                 adaptive_history = perf["adaptive_history"]
+            if perf.has("diagnostic_runs_completed"):
+                diagnostic_runs_completed = int(perf["diagnostic_runs_completed"])
+            if perf.has("adaptive_started_once"):
+                adaptive_started_once = bool(perf["adaptive_started_once"])
+
+    for game_id in GAME_SEQUENCE:
+        if not adaptive_history.has(game_id) or typeof(adaptive_history[game_id]) != TYPE_ARRAY:
+            adaptive_history[game_id] = []
+
+    # Backward-compat migration: infer unlock for older saves that already completed diagnostics.
+    if diagnostic_runs_completed <= 0 and _legacy_has_completed_diagnostic_stats():
+        diagnostic_runs_completed = 1
 
 
 # Starts a fresh adaptive run and clears rolling efficiency history.
@@ -156,12 +164,10 @@ func start_adaptive_session() -> void:
         adaptive_current_leader = ""
         return
     adaptive_mode_active = true
-    adaptive_phase = "diagnostic"
+    adaptive_phase = "adaptive"
     adaptive_last_ranked = []
-    adaptive_current_leader = ""
-    for game_id in GAME_SEQUENCE:
-        adaptive_history[game_id] = []
-    reset_game_stats()
+    adaptive_current_leader = get_leading_game()
+    adaptive_started_once = true
     save_user_stats()
 # Returns average score for each game for the current user
 func get_average_scores_per_game() -> Dictionary:
@@ -208,23 +214,10 @@ func get_scene_for_game(game_id: String) -> String:
 # Chooses the next scene using default order or adaptive ranking.
 func get_scene_after_game(current_game_id: String) -> String:
     if not adaptive_mode_active:
+        if current_game_id == "game5":
+            mark_diagnostic_completed()
         return _get_default_scene_after_game(current_game_id)
 
-    # Diagnostic phase: always go in order
-    if adaptive_phase == "diagnostic":
-        var idx := GAME_SEQUENCE.find(current_game_id)
-        # Unlock adaptive after first diagnostic game and save to DB
-        if idx == 0:
-            # Unlock adaptive mode for this user
-            adaptive_mode_active = false
-            adaptive_phase = "none"
-            save_user_stats()
-        if idx >= 0 and idx < GAME_SEQUENCE.size() - 1:
-            return get_scene_for_game(GAME_SEQUENCE[idx + 1])
-        # After last game, show stats screen, then return to main menu
-        adaptive_phase = "adaptive"
-        adaptive_current_leader = get_leading_game()
-        return "res://Menus/game_stats.tscn" # Show stats screen after diagnostic
     # Adaptive phase: always do best game
     if adaptive_phase == "adaptive":
         var new_leader = get_leading_game()
@@ -317,6 +310,7 @@ func record_adaptive_result(
     adaptive_history[game_id] = game_history
 
     _update_adaptive_ranking()
+    save_user_stats()
     return fair_score
 
 
@@ -418,7 +412,7 @@ func _get_default_scene_after_game(current_game_id: String) -> String:
     if idx == -1:
         return get_scene_for_game("game1")
     if idx + 1 == 5:
-        return "res://Menus/game_stats.gd"
+        return "res://Menus/game_stats.tscn"
     return get_scene_for_game(GAME_SEQUENCE[idx + 1])
 
 
@@ -464,3 +458,30 @@ func _update_adaptive_ranking() -> void:
 
     if adaptive_last_ranked.is_empty():
         adaptive_last_ranked = GAME_SEQUENCE.duplicate()
+
+
+func mark_diagnostic_completed() -> void:
+    diagnostic_runs_completed = maxi(1, diagnostic_runs_completed)
+    save_user_stats()
+
+
+func _legacy_has_completed_diagnostic_stats() -> bool:
+    for game_id in GAME_SEQUENCE:
+        if not overall_stats.has(game_id):
+            return false
+        var stat = overall_stats[game_id]
+        if typeof(stat) != TYPE_DICTIONARY:
+            return false
+        if stat.has("total_questions"):
+            var total := 0
+            for q in stat["total_questions"]:
+                total += int(q)
+            if total <= 0:
+                return false
+        elif stat.has("total_questions_answered"):
+            if int(stat["total_questions_answered"]) <= 0:
+                return false
+        elif stat.has("highest_score"):
+            if float(stat["highest_score"]) <= 0.0:
+                return false
+    return true

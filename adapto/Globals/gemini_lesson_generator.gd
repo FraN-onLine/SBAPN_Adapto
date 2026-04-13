@@ -46,6 +46,7 @@ Schema:
 	  "definition": "string",
 	  "simple_terms": "string",
 	  "examples": ["string", "string"],
+		"accepted_terms": ["string", "string"],
 	  "difficulty": 1,
 	  "related_to": ["string"],
 	  "type_of_information": ["definition", "apply"]
@@ -108,6 +109,7 @@ func _on_request_completed(_result: int, response_code: int, _headers: PackedStr
 		li.definition = str(entry.get("definition", ""))
 		li.simple_terms = str(entry.get("simple_terms", ""))
 		li.examples = entry.get("examples", [])
+		li.accepted_terms = entry.get("accepted_terms", [])
 		li.difficulty = int(entry.get("difficulty", 1))
 		li.related_to = entry.get("related_to", [])
 		li.type_of_information = entry.get("type_of_information", ["definition"])

@@ -9,6 +9,12 @@ const ADMIN_USERNAMES := ["admin"]
 
 var access_all_saved_lessons := DEFAULT_ACCESS_ALL_SAVED_LESSONS
 var admin_all_lessons_toggle: CheckBox
+var loading_dialog: AcceptDialog
+var _generation_thread: Thread
+var _generation_running := false
+var _loading_base_text := ""
+var _loading_tick := 0.0
+var _generation_context := {}
 
 
 func _on_start_button_pressed() -> void:
@@ -21,6 +27,9 @@ func _on_start_button_pressed() -> void:
 
 
 func on_diagnostic_button_pressed():
+	if UserStats.should_prompt_adaptive_first():
+		show_error_dialog("Adaptive mode is unlocked. Please try adaptive mode first before starting another diagnostic run.")
+		return
 	# Start diagnostic session in order: game1 -> game2 -> ...
 	UserStats.stop_adaptive_session()
 	get_tree().change_scene_to_file(UserStats.get_scene_for_game("game1"))
@@ -30,9 +39,12 @@ func _on_adaptive_button_pressed() -> void:
 	if not UserStats.has_completed_diagnostic():
 		show_error_dialog("You must complete the diagnostic test (all games at least once) before accessing adaptive mode.")
 		return
-	   # If allowed, start adaptive session and go to the first adaptive game
+	# If allowed, start adaptive session and go to the best adaptive game.
 	UserStats.start_adaptive_session()
 	var leader = UserStats.get_leading_game()
+	if leader == "":
+		leader = "game1"
+	get_tree().change_scene_to_file(UserStats.get_scene_for_game(leader))
 	
 
 func _show_main_menu_for_user():
@@ -46,6 +58,7 @@ func _show_main_menu_for_user():
 			for btn_name in ["Button", "Button2", "Button3", "Button4", "Button5", "Back"]:
 				if vbox.has_node(btn_name):
 					vbox.get_node(btn_name).visible = true
+			_apply_instructor_visibility()
 		else:
 			login_screen.visible = true
 			register_screen.visible = false
@@ -61,8 +74,8 @@ func _on_button_3_pressed() -> void:
 	$Control/VBoxContainer/Button2.visible = false
 	$Control/VBoxContainer/Button3.visible = false
 	$Control/VBoxContainer/TopicSelect.visible = true
-	$Control/VBoxContainer/TopicImport.visible = true
-	$Control/VBoxContainer/TopicExport.visible = true
+		$Control/VBoxContainer/TopicImport.visible = _is_current_user_instructor()
+		$Control/VBoxContainer/TopicExport.visible = _is_current_user_instructor()
 	$Control/VBoxContainer/Back.visible = true
 	
 func _on_back_button_pressed():
@@ -218,6 +231,9 @@ func _on_topic_entry_selected(path: String, _display_name: String) -> void:
 # ── Import Topic entry point ──────────────────────────────────────────────────
 
 func _on_topic_import_pressed() -> void:
+	if not _is_current_user_instructor():
+		show_error_dialog("Only instructors can import topics.")
+		return
 	$ImportChoicePanel.visible = true
 
 
@@ -240,15 +256,7 @@ func generate_lesson_from_pdf(pdf_path: String) -> void:
 	var project_path = ProjectSettings.globalize_path("res://")
 	var script_path = project_path + "Lessons/generate_lesson.py"
 	var args = [script_path, "--pdf", pdf_path]
-	var output = []
-	var result = OS.execute("python", args, output, true, true)
-	if result == 0:
-		show_success_dialog("Lesson generated from PDF!\nFile: " + pdf_path.get_file())
-	else:
-		var error_msg = "Failed to generate lesson from PDF.\nError code: " + str(result)
-		if output.size() > 0:
-			error_msg += "\n" + str(output[0])
-		show_error_dialog(error_msg)
+	_start_python_generation_job(args, "Generating lesson from PDF...", "Lesson generated from PDF!\nFile: " + pdf_path.get_file(), "Failed to generate lesson from PDF.")
 
 
 # ── Import by Prompt ──────────────────────────────────────────────────────────
@@ -288,20 +296,15 @@ func generate_lesson_with_python(topic: String, count: int, folder: String) -> v
 	var project_path = ProjectSettings.globalize_path("res://")
 	var script_path = project_path + "Lessons/generate_lesson.py"
 	var args = [script_path, topic, str(count), folder]
-	var output = []
-	var result = OS.execute("python", args, output, true, true)
-	if result == 0:
-		show_success_dialog("Lesson generated!\nTopic: " + topic + "\nQuestions: " + str(count))
-	else:
-		var error_msg = "Failed to generate lesson.\nError code: " + str(result)
-		if output.size() > 0:
-			error_msg += "\n" + str(output[0])
-		show_error_dialog(error_msg)
+	_start_python_generation_job(args, "Generating lesson by prompt...", "Lesson generated!\nTopic: " + topic + "\nQuestions: " + str(count), "Failed to generate lesson.")
 
 
 # ── Manual Import/Export ──────────────────────────────────────────────────────
 
 func _on_topic_export_pressed() -> void:
+	if not _is_current_user_instructor():
+		show_error_dialog("Only instructors can export topics.")
+		return
 	if Global.selected_lesson == null:
 		show_error_dialog("Please select a topic to export first.")
 		return
@@ -372,24 +375,25 @@ func _ready():
 		register_screen.show_login.connect(_on_show_login)
 
 	if Global.current_user != null and str(Global.current_user).strip_edges() != "":
+		UserStats.load_user_stats()
 		login_screen.visible = false
 		register_screen.visible = false
 		main_menu_control.visible = true
 		_setup_admin_all_lessons_toggle()
-		# Hide adaptive button for all users
-		if main_menu_control.has_node("VBoxContainer/Button4"):
-			main_menu_control.get_node("VBoxContainer/Button4").visible = false
+		_apply_instructor_visibility()
 	else:
 		login_screen.visible = true
 		register_screen.visible = false
-	main_menu_control.visible = false
+		main_menu_control.visible = false
 
 	_show_main_menu_for_user()
 
 func _on_login_successful():
 	login_screen.visible = false
+	UserStats.load_user_stats()
 	main_menu_control.visible = true
 	_setup_admin_all_lessons_toggle()
+	_apply_instructor_visibility()
 
 func _on_show_registration():
 	login_screen.visible = false
@@ -413,8 +417,110 @@ func _is_current_user_admin() -> bool:
 	return ADMIN_USERNAMES.has(str(Global.current_user).to_lower())
 
 
+func _is_current_user_instructor() -> bool:
+	if _is_current_user_admin():
+		return true
+	if Global.current_user == null:
+		return false
+	return str(Global.current_user_role).to_lower() == "instructor"
+
+
+func _apply_instructor_visibility() -> void:
+	if not main_menu_control or not main_menu_control.has_node("VBoxContainer"):
+		return
+	var vbox = main_menu_control.get_node("VBoxContainer")
+	if vbox.has_node("Button3"):
+		vbox.get_node("Button3").visible = _is_current_user_instructor()
+
+
 func _can_access_all_saved_lessons() -> bool:
 	return _is_current_user_admin() and access_all_saved_lessons
+
+
+func _start_python_generation_job(args: Array, loading_text: String, success_text: String, error_prefix: String) -> void:
+	if _generation_running:
+		show_error_dialog("A lesson generation task is already running.")
+		return
+
+	_show_loading_dialog(loading_text)
+	_generation_context = {
+		"success_text": success_text,
+		"error_prefix": error_prefix
+	}
+	_generation_thread = Thread.new()
+	_generation_running = true
+	set_process(true)
+
+	var err := _generation_thread.start(_run_python_generation.bind(args))
+	if err != OK:
+		_generation_running = false
+		set_process(false)
+		_hide_loading_dialog()
+		show_error_dialog("Unable to start background generation task. Error code: " + str(err))
+
+
+func _run_python_generation(args: Array) -> Dictionary:
+	var output: Array = []
+	var code := OS.execute("python", args, output, true, true)
+	return {
+		"code": code,
+		"output": output
+	}
+
+
+func _process(delta: float) -> void:
+	if not _generation_running:
+		return
+
+	_loading_tick += delta
+	if loading_dialog != null:
+		var dots = ".".repeat((int(_loading_tick * 2.0) % 3) + 1)
+		loading_dialog.dialog_text = _loading_base_text + "\nPlease wait" + dots
+
+	if _generation_thread != null and not _generation_thread.is_alive():
+		var result = _generation_thread.wait_to_finish()
+		_generation_running = false
+		set_process(false)
+		_hide_loading_dialog()
+		_handle_generation_result(result)
+
+
+func _show_loading_dialog(message: String) -> void:
+	if loading_dialog == null:
+		loading_dialog = AcceptDialog.new()
+		loading_dialog.title = "Working"
+		loading_dialog.exclusive = true
+		loading_dialog.initial_position = Window.WINDOW_INITIAL_POSITION_CENTER_PRIMARY_SCREEN
+		add_child(loading_dialog)
+
+	_loading_base_text = message
+	_loading_tick = 0.0
+	loading_dialog.dialog_text = message + "\nPlease wait..."
+	loading_dialog.get_ok_button().visible = false
+	loading_dialog.popup_centered(Vector2i(500, 150))
+
+
+func _hide_loading_dialog() -> void:
+	if loading_dialog != null:
+		loading_dialog.hide()
+
+
+func _handle_generation_result(result) -> void:
+	var data: Dictionary = {}
+	if typeof(result) == TYPE_DICTIONARY:
+		data = result
+
+	var code := int(data.get("code", -1))
+	var output := data.get("output", [])
+	if code == 0:
+		show_success_dialog(str(_generation_context.get("success_text", "Lesson generated successfully.")))
+		return
+
+	var error_msg := str(_generation_context.get("error_prefix", "Lesson generation failed."))
+	error_msg += "\nError code: " + str(code)
+	if typeof(output) == TYPE_ARRAY and output.size() > 0:
+		error_msg += "\n" + str(output[0])
+	show_error_dialog(error_msg)
 
 
 # ========================= TEMP ADMIN TOGGLE START =========================

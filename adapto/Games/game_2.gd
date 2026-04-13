@@ -70,7 +70,12 @@ func _ready() -> void:
 			var value = int(btn.text.lstrip("$ "))
 			var item = categories[row][col]
 			var qtext = item.definition
-			questions[key] = {"question": qtext, "answer": item.term, "value": value}
+			questions[key] = {
+				"question": qtext,
+				"answer": item.term,
+				"accepted_answers": _build_accepted_answers(item),
+				"value": value
+			}
 			btn.connect("pressed", Callable(self, "_on_button_pressed").bind(key))
 
 	total_questions = questions.size()
@@ -93,9 +98,9 @@ func _on_button_pressed(key: String) -> void:
 func check_answer() -> void:
 	if current_key == "":
 		return
-	var user_answer = $AnswerInput.text.strip_edges().to_lower()
-	var correct_answer = questions[current_key].answer.strip_edges().to_lower()
-	if user_answer == correct_answer:
+	var user_answer = _normalize_answer($AnswerInput.text)
+	var accepted_answers: Array = questions[current_key].get("accepted_answers", [])
+	if accepted_answers.has(user_answer):
 		money += questions[current_key].value
 		correct_count += 1
 	else:
@@ -113,6 +118,33 @@ func check_answer() -> void:
 			button_by_key[btn_key].disabled = false
 	$AnswerInput.text = ""
 	_check_game_end()
+
+
+func _build_accepted_answers(item) -> Array:
+	var options: Array = []
+	options.append(_normalize_answer(str(item.term)))
+
+	if item.has_method("get"):
+		var extra = item.get("accepted_terms")
+		if typeof(extra) == TYPE_ARRAY:
+			for term in extra:
+				options.append(_normalize_answer(str(term)))
+
+	var dedup := {}
+	for option in options:
+		if option == "":
+			continue
+		dedup[option] = true
+		if option.ends_with("s") and option.length() > 3:
+			dedup[option.substr(0, option.length() - 1)] = true
+		else:
+			dedup[option + "s"] = true
+
+	return dedup.keys()
+
+
+func _normalize_answer(value: String) -> String:
+	return value.strip_edges().to_lower().replace("_", " ").replace("-", " ")
 
 
 func _on_answer_input_text_changed() -> void:
