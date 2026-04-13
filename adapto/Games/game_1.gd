@@ -191,7 +191,7 @@ func answer_check() -> void:
 			if UserStats.adaptive_mode_active:
 				get_tree().change_scene_to_file(UserStats.get_scene_after_game("game1"))
 			else:
-				get_tree().change_scene_to_file("res://Menus/game1_stats.tscn")
+				get_tree().change_scene_to_file(UserStats.get_scene_after_game("game1"))
 			return
 		load_next_question()
 	else:

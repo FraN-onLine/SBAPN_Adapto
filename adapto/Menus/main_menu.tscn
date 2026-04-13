@@ -589,14 +589,14 @@ visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="Control/VBoxContainer/Button" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button2" to="." method="_on_stats_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Button4" to="." method="on_diagnostic_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Button5" to="." method="_on_adaptive_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/TopicSelect" to="." method="_on_topic_select_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/TopicImport" to="." method="_on_topic_import_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/TopicExport" to="." method="_on_topic_export_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Back" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="ImportChoicePanel/ChoiceBox/VBox/PDFBtn" to="." method="_on_import_by_pdf_pressed"]
 [connection signal="pressed" from="ImportChoicePanel/ChoiceBox/VBox/PromptBtn" to="." method="_on_import_by_prompt_pressed"]
 [connection signal="pressed" from="ImportChoicePanel/ChoiceBox/VBox/FileBtn" to="." method="_on_import_from_file_pressed"]

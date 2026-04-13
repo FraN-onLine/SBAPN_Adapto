@@ -109,14 +109,14 @@ var game_stats = {
 
 var overall_stats = {
     "game1" : {
-        "type": ["keyword", "simple_terms", "definition", "tof"], #arr of 4
-        "correct": [0, 0, 0, 0], #arr of 4
-        "incorrect": [0, 0, 0, 0], #arr of 4
-        "timeout": [0, 0, 0, 0], #arr of 4
-        "accuracy": [0, 0, 0, 0], #arr of 4
-        "total_sum_time": [0, 0, 0, 0], #total sum of times
-        "total_questions": [0, 0, 0, 0], #total number of questions
-    },##
+        "type": ["keyword", "simple_terms", "definition", "tof"],
+        "correct": [0, 0, 0, 0],
+        "incorrect": [0, 0, 0, 0],
+        "timeout": [0, 0, 0, 0],
+        "accuracy": [0, 0, 0, 0],
+        "total_sum_time": [0, 0, 0, 0],
+        "total_questions": [0, 0, 0, 0],
+    },
     "game3" : {
         "total_questions_answered": 0,
         "total_questions_correct": 0,
@@ -127,22 +127,42 @@ var overall_stats = {
     }
 }
 
+# Save user stats to database
+func save_user_stats():
+    if Global.current_user != null:
+        var perf = {
+            "overall_stats": overall_stats.duplicate(true),
+            "adaptive_history": adaptive_history.duplicate(true)
+        }
+        Database.save_user_performance(Global.current_user, perf)
+
+# Load user stats from database
+func load_user_stats():
+    if Global.current_user != null:
+        var perf = Database.load_user_performance(Global.current_user)
+        if perf != null and typeof(perf) == TYPE_DICTIONARY:
+            if perf.has("overall_stats"):
+                overall_stats = perf["overall_stats"]
+            if perf.has("adaptive_history"):
+                adaptive_history = perf["adaptive_history"]
+
 
 # Starts a fresh adaptive run and clears rolling efficiency history.
 func start_adaptive_session() -> void:
-       # Only allow adaptive if diagnostic is completed
-       if not has_completed_diagnostic():
-           adaptive_mode_active = false
-           adaptive_phase = "none"
-           adaptive_current_leader = ""
-           return
-       adaptive_mode_active = true
-       adaptive_phase = "diagnostic"
-       adaptive_last_ranked = []
-       adaptive_current_leader = ""
-       for game_id in GAME_SEQUENCE:
-           adaptive_history[game_id] = []
-       reset_game_stats()
+    # Only allow adaptive if diagnostic is completed
+    if not has_completed_diagnostic():
+        adaptive_mode_active = false
+        adaptive_phase = "none"
+        adaptive_current_leader = ""
+        return
+    adaptive_mode_active = true
+    adaptive_phase = "diagnostic"
+    adaptive_last_ranked = []
+    adaptive_current_leader = ""
+    for game_id in GAME_SEQUENCE:
+        adaptive_history[game_id] = []
+    reset_game_stats()
+    save_user_stats()
 # Returns average score for each game for the current user
 func get_average_scores_per_game() -> Dictionary:
        var result = {}
@@ -174,6 +194,7 @@ func stop_adaptive_session() -> void:
     adaptive_mode_active = false
     adaptive_phase = "none"
     adaptive_current_leader = ""
+    save_user_stats()
 
 
 # Resolves a game id to its scene path.
@@ -364,6 +385,7 @@ func update_overall_stats():
     overall_stats["game3"]["total_puzzles_completed"] += game_stats["game3"]["puzzles_completed"]
     if overall_stats["game3"]["total_questions_answered"] > 0:
         overall_stats["game3"]["accuracy"] = (overall_stats["game3"]["total_questions_correct"] * 100.0) / overall_stats["game3"]["total_questions_answered"]
+    save_user_stats()
 
 func get_game_stats_display():
     var stats = game_stats["game1"]
@@ -389,8 +411,6 @@ func _get_default_scene_after_game(current_game_id: String) -> String:
     var idx := GAME_SEQUENCE.find(current_game_id)
     if idx == -1:
         return get_scene_for_game("game1")
-    if idx >= GAME_SEQUENCE.size() - 1:
-        return "res://Menus/game1_stats.tscn"
     return get_scene_for_game(GAME_SEQUENCE[idx + 1])
 
 
