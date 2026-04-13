@@ -213,13 +213,19 @@ func get_scene_after_game(current_game_id: String) -> String:
     # Diagnostic phase: always go in order
     if adaptive_phase == "diagnostic":
         var idx := GAME_SEQUENCE.find(current_game_id)
+        # Unlock adaptive after first diagnostic game and save to DB
+        if idx == 0:
+            # Unlock adaptive mode for this user
+            adaptive_mode_active = false
+            adaptive_phase = "none"
+            save_user_stats()
         if idx >= 0 and idx < GAME_SEQUENCE.size() - 1:
             return get_scene_for_game(GAME_SEQUENCE[idx + 1])
-        # After last game, switch to adaptive phase and return to main menu
+        # After last game, show stats screen, then return to main menu
         adaptive_phase = "adaptive"
         adaptive_current_leader = get_leading_game()
-        return "res://Menus/main_menu.tscn" # Return to main menu after diagnostic
-        # Adaptive phase: always do best game
+        return "res://Menus/game_stats.tscn" # Show stats screen after diagnostic
+    # Adaptive phase: always do best game
     if adaptive_phase == "adaptive":
         var new_leader = get_leading_game()
         if new_leader != "" and new_leader != adaptive_current_leader:
@@ -411,6 +417,8 @@ func _get_default_scene_after_game(current_game_id: String) -> String:
     var idx := GAME_SEQUENCE.find(current_game_id)
     if idx == -1:
         return get_scene_for_game("game1")
+    if idx + 1 == 5:
+        return "res://Menus/game_stats.gd"
     return get_scene_for_game(GAME_SEQUENCE[idx + 1])
 
 

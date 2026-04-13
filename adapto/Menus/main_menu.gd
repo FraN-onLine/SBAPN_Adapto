@@ -73,6 +73,8 @@ func _on_back_button_pressed():
 	$Control/VBoxContainer/TopicImport.visible = false
 	$Control/VBoxContainer/TopicExport.visible = false
 	$Control/VBoxContainer/Back.visible = false
+	$Control/VBoxContainer/Button4.visible = false
+	$Control/VBoxContainer/Button5.visible = false
 	
 func _on_stats_button_pressed():
 		var scores = UserStats.get_average_scores_per_game()
