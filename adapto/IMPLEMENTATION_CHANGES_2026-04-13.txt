@@ -1,0 +1,140 @@
+ADAPTO Implementation Changes - 2026-04-13
+
+Scope covered:
+1) Game 3 overlap/duplicate-answer fixes and UI polish
+2) Loading visuals for prompt/PDF generation
+3) Instructor privileges
+4) Game 5 hint scoring and transition crash fix
+5) Database/user stats persistence hardening
+6) Adaptive-mode unlock behavior after one diagnostic run
+7) AI alternate-word generation and acceptance in gameplay
+
+==================================================
+1) GAME 3: OVERLAPPING ANSWERS + UI IMPROVEMENTS
+==================================================
+Files:
+- Games/game_3.gd
+- Games/game3.tscn
+
+Changes:
+- Added crossword item deduplication to avoid near-duplicate terms entering the same puzzle:
+  - Canonicalization reduces plural forms (e.g., method/methods) to one root key.
+  - Duplicate definitions are also filtered out.
+- Increased clue button minimum height and set expand-fill + no clipping to prevent clue text overlap.
+- Updated empty-cell draw color to softer transparent blue to avoid harsh black-bar look.
+- Updated scene anchors/offsets for TopBar, FeedbackLabel, GridNode, CluesPanel, and AnswerBar so layout scales better and avoids black bars/clipping on resize.
+- Adjusted panel and button palette for a cleaner visual presentation.
+
+==================================================
+2) LOADING VISUALS FOR PROMPT/PDF GENERATION
+==================================================
+File:
+- Menus/main_menu.gd
+
+Changes:
+- Replaced blocking generation flow with background thread execution for Python script calls.
+- Added loading modal (AcceptDialog) that displays progress text while generation runs.
+- Added periodic loading text animation (ellipsis updates) via _process.
+- Added completion handler that reports success/failure and includes script output on error.
+
+Result:
+- Users now get immediate UI feedback instead of apparent freeze during generation.
+
+==================================================
+3) INSTRUCTOR PRIVILEGES
+==================================================
+Files:
+- Database/database.gd
+- Globals/global.gd
+- Menus/login.gd
+- Menus/register.gd
+- Menus/main_menu.gd
+
+Changes:
+- Added persistent user role in database schema (student/instructor/admin).
+- Added role migration for existing users via schema ensure.
+- Added helper APIs: get_user_role, set_user_role, is_instructor.
+- Added Global.current_user_role.
+- On login, current user role is loaded into Global.
+- Instructor/admin gating:
+  - Create Topic button visible only to instructor/admin.
+  - Topic import/export actions blocked for non-instructors.
+- Registration convention:
+  - Username starting with inst_ or ending with _inst is auto-assigned role instructor.
+  - Otherwise default role is student.
+
+==================================================
+4) GAME 5 SCORING + MENU TRANSITION CRASH FIX
+==================================================
+Files:
+- Games/game_5.gd
+- Globals/user_stats.gd
+
+Scoring fix:
+- Added hint_used_on_current_word flag.
+- Hinted letters no longer award per-letter score.
+- Completing a word after using hint no longer grants REWARD_WORD completion bonus.
+
+Transition fix:
+- Fixed bad scene path in default routing (was game_stats.gd, now game_stats.tscn).
+- This resolves crash when transitioning from final game to stats/menu flow.
+
+==================================================
+5) DATABASE MUST STORE USER STATS (HARDENED)
+==================================================
+File:
+- Globals/user_stats.gd
+
+Changes:
+- save_user_stats now merges with existing performance dictionary instead of replacing it,
+  preventing loss of other game payload sections (e.g., game4/game5 data).
+- record_adaptive_result now calls save_user_stats so adaptive history persists immediately.
+- load_user_stats now restores additional flags and normalizes missing adaptive history keys.
+
+==================================================
+6) ADAPTIVE UNLOCK AFTER ONE DIAGNOSTIC PER USER
+==================================================
+Files:
+- Globals/user_stats.gd
+- Menus/main_menu.gd
+
+Changes:
+- Added persistent flags:
+  - diagnostic_runs_completed
+  - adaptive_started_once
+- Adaptive unlock now depends on diagnostic_runs_completed >= 1.
+- On default route finishing game5, diagnostic run is marked complete.
+- Added should_prompt_adaptive_first() and integrated menu guard:
+  - If diagnostic is done but adaptive not yet tried, diagnostic button shows instruction to use adaptive first.
+- start_adaptive_session now enters adaptive phase directly.
+
+Backward compatibility:
+- Added legacy migration check to infer first diagnostic completion from existing overall_stats when possible.
+
+==================================================
+7) AI GENERATOR ALTERNATE WORDS (accepted_terms)
+==================================================
+Files:
+- Globals/gemini_lesson_generator.gd
+- Lessons/generate_lesson.py
+- Games/game_2.gd
+
+Generator changes:
+- Prompt schemas now include accepted_terms field.
+- Parsed lesson items now populate LessonItem.accepted_terms.
+- .tres writer now writes accepted_terms to generated resources.
+
+Gameplay acceptance changes:
+- Game 2 now stores accepted_answers per question from:
+  - primary term
+  - accepted_terms list
+  - basic singular/plural variant handling
+- Answer checking uses normalized matching against accepted_answers.
+
+==================================================
+VALIDATION
+==================================================
+Checked with editor diagnostics:
+- No errors found in all modified .gd files, game3.tscn, and generate_lesson.py.
+
+End of document.

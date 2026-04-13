@@ -37,9 +37,20 @@ func _ensure_user_schema(username: String) -> bool:
 		user_record["performance"] = {}
 	if not user_record.has("saved_lessons") or typeof(user_record["saved_lessons"]) != TYPE_ARRAY:
 		user_record["saved_lessons"] = []
+	if not user_record.has("role") or typeof(user_record["role"]) != TYPE_STRING:
+		user_record["role"] = "student"
+	else:
+		user_record["role"] = _normalize_role(str(user_record["role"]))
 
 	db["users"][username] = user_record
 	return true
+
+
+func _normalize_role(role: String) -> String:
+	var normalized := role.strip_edges().to_lower()
+	if normalized in ["admin", "instructor", "student"]:
+		return normalized
+	return "student"
 
 func _ready():
 	load_db()
@@ -128,7 +139,7 @@ func user_exists(username):
 	_ensure_schema()
 	return db["users"].has(username)
 
-func add_user(username, password):
+func add_user(username, password, role := "student"):
 	if user_exists(username):
 		return false
 	
@@ -138,7 +149,8 @@ func add_user(username, password):
 	db["users"][username] = {
 		"password": hashed_password,
 		"performance": {},
-		"saved_lessons": []
+		"saved_lessons": [],
+		"role": _normalize_role(str(role))
 	}
 	save_db()
 	return true
@@ -165,6 +177,25 @@ func load_user_performance(username):
 	if not _ensure_user_schema(username):
 		return null
 	return db["users"][username]["performance"]
+
+
+func get_user_role(username: String) -> String:
+	if not _ensure_user_schema(username):
+		return "student"
+	return _normalize_role(str(db["users"][username].get("role", "student")))
+
+
+func set_user_role(username: String, role: String) -> bool:
+	if not _ensure_user_schema(username):
+		return false
+	db["users"][username]["role"] = _normalize_role(role)
+	save_db()
+	return true
+
+
+func is_instructor(username: String) -> bool:
+	var role := get_user_role(username)
+	return role == "instructor" or role == "admin"
 
 func save_user_lesson(username, lesson_data):
 	if not _ensure_user_schema(username):

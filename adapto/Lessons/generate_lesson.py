@@ -98,6 +98,8 @@ def write_tres(topic: str, items: list, out_path: str):
         lines.append(f'simple_terms = "{item.get("simple_terms", "")}"')
         examples = item.get("examples", [])
         lines.append(f'examples = {json.dumps(examples)}')
+        accepted_terms = item.get("accepted_terms", [])
+        lines.append(f'accepted_terms = {json.dumps(accepted_terms)}')
         lines.append(f'difficulty = {item.get("difficulty", 1)}')
         related = item.get("related_to", [])
         lines.append(f'related_to = {json.dumps(related)}')
@@ -159,6 +161,7 @@ Schema:
       "definition": "string",
       "simple_terms": "string",
       "examples": ["string", "string"],
+    "accepted_terms": ["string", "string"],
       "difficulty": 1,
       "related_to": ["string"],
       "type_of_information": ["definition", "apply"],

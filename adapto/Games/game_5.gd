@@ -50,6 +50,7 @@ var skips_used := 0
 var input_locked := false
 var game_finished := false
 var adaptive_recorded := false
+var hint_used_on_current_word := false
 
 var keyboard_buttons: Dictionary = {}
 
@@ -145,6 +146,7 @@ func _start_word(idx: int) -> void:
 	current_term = game_data[idx]["term"]
 	current_definition = game_data[idx]["def"]
 	guessed_letters.clear()
+	hint_used_on_current_word = false
 	
 	input_locked = false
 	feedback_label.text = ""
@@ -178,7 +180,7 @@ func _update_word_display() -> void:
 		input_locked = true
 		_word_completed(true)
 
-func _on_key_pressed(letter: String) -> void:
+func _on_key_pressed(letter: String, from_hint := false) -> void:
 	if input_locked or game_finished:
 		return
 		
@@ -191,10 +193,11 @@ func _on_key_pressed(letter: String) -> void:
 	
 	if current_term.contains(letter):
 		btn.modulate = Color(0.4, 1.0, 0.4) # Greenish for correct
-		score += REWARD_LETTER
+		if not from_hint:
+			score += REWARD_LETTER
 		current_streak += 1
 		max_streak = maxi(max_streak, current_streak)
-		feedback_label.text = "Correct!"
+		feedback_label.text = "Hint revealed a letter." if from_hint else "Correct!"
 		if current_streak > 0 and current_streak % 5 == 0:
 			score += 50 # Streak bonus
 	else:
@@ -224,7 +227,8 @@ func _on_hint_pressed() -> void:
 			
 	if unrevealed.size() > 0:
 		var target_char = unrevealed[randi() % unrevealed.size()]
-		_on_key_pressed(target_char)
+		hint_used_on_current_word = true
+		_on_key_pressed(target_char, true)
 	
 	_update_hud()
 
@@ -241,9 +245,11 @@ func _on_skip_pressed() -> void:
 	_word_completed(false)
 
 func _word_completed(success: bool) -> void:
-	if success:
+	if success and not hint_used_on_current_word:
 		score += REWARD_WORD
 		feedback_label.text = "Excellent! +%d" % REWARD_WORD
+	elif success:
+		feedback_label.text = "Word completed with a hint. No completion bonus."
 		
 	_update_hud()
 	await get_tree().create_timer(1.5).timeout

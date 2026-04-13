@@ -19,6 +19,7 @@ func _on_login_button_pressed():
 	# For now, we'll just simulate a successful login
 	if Database.check_user_credentials(username, password):
 		Global.current_user = username
+		Global.current_user_role = Database.get_user_role(username)
 		login_successful.emit()
 	else:
 		feedback_label.text = "Invalid username or password."
