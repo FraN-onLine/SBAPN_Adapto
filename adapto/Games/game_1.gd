@@ -123,13 +123,13 @@ func load_next_question() -> void:
 
 func _on_option1_pressed() -> void:
 	selected_option = 0
-	option1_button.modulate = Color.YELLOW
+	option1_button.modulate = Color.SLATE_GRAY
 	option2_button.modulate = Color.WHITE
 	answer_check()
 
 func _on_option2_pressed() -> void:
 	selected_option = 1
-	option2_button.modulate = Color.YELLOW
+	option2_button.modulate = Color.SLATE_GRAY
 	option1_button.modulate = Color.WHITE
 	answer_check()
 

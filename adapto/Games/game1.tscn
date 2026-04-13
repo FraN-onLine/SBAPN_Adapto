@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://c8m67p3f82wx0"]
+[gd_scene load_steps=47 format=4 uid="uid://c8m67p3f82wx0"]
 
 [ext_resource type="Script" uid="uid://n6ikjxkq238o" path="res://Games/game_1.gd" id="1_q5wpw"]
 [ext_resource type="FontFile" uid="uid://bgrgca3qc6dxo" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="2_4h6do"]
@@ -17,6 +17,12 @@ content_margin_right = 14.0
 content_margin_bottom = 6.0
 bg_color = Color(0.06, 0.06, 0.11, 0.97)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cnp8q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j11ww"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lnsk3"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_37jos"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d2u18"]
@@ -28,6 +34,20 @@ bg_color = Color(0.06, 0.06, 0.11, 0.97)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8apws"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eodgo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7mjov"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yv7jk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4y2jg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kd8sk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4nbcc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cqnt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d1jsl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w14is"]
 atlas = ExtResource("4_ant2b")
@@ -335,7 +355,7 @@ autowrap_mode = 2
 custom_minimum_size = Vector2(900, 70)
 offset_left = 10.0
 offset_top = 420.0
-offset_right = 910.0
+offset_right = 1271.0
 offset_bottom = 587.0
 theme_override_fonts/font = ExtResource("2_4h6do")
 theme_override_font_sizes/font_size = 28
@@ -351,8 +371,13 @@ offset_bottom = 747.0
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_4h6do")
 theme_override_font_sizes/font_size = 18
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cnp8q")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_j11ww")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_lnsk3")
 theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_37jos")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d2u18")
 theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_vlkqd")
@@ -376,8 +401,17 @@ offset_bottom = 771.0
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_4h6do")
 theme_override_font_sizes/font_size = 18
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7mjov")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_yv7jk")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_4y2jg")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_kd8sk")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_4nbcc")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_5cqnt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d1jsl")
 text = "Option 2"
 icon = ExtResource("3_ant2b")
 flat = true
