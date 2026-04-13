@@ -12,6 +12,8 @@ const MAX_GRID_SIZE  := 34
 const TIME_LIMIT     := 180
 # Score cost applied each time a hint is used.
 const HINT_PENALTY := 30
+const TIMEOUT_REVEAL_DELAY := 10.0
+const WIN_TRANSITION_DELAY := 3.5
 
 # ── Dynamic grid properties (calculated in _ready) ────────────────────────────
 var MAX_GRID: int = 13
@@ -519,7 +521,8 @@ func _end_game(won: bool) -> void:
 		feedback_label.text = "⏰  Time's up!  Score: %d  (answers revealed)" % score
 	# Save normalized performance before adaptive routing.
 	_record_adaptive_performance()
-	await get_tree().create_timer(3.5).timeout
+	var transition_delay := WIN_TRANSITION_DELAY if won else TIMEOUT_REVEAL_DELAY
+	await get_tree().create_timer(transition_delay).timeout
 	# Route to next game using adaptive rank order.
 	get_tree().change_scene_to_file(UserStats.get_scene_after_game("game3"))
 
