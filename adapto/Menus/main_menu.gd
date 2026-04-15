@@ -74,8 +74,8 @@ func _on_button_3_pressed() -> void:
 	$Control/VBoxContainer/Button2.visible = false
 	$Control/VBoxContainer/Button3.visible = false
 	$Control/VBoxContainer/TopicSelect.visible = true
-		$Control/VBoxContainer/TopicImport.visible = _is_current_user_instructor()
-		$Control/VBoxContainer/TopicExport.visible = _is_current_user_instructor()
+	$Control/VBoxContainer/TopicImport.visible = true
+	$Control/VBoxContainer/TopicExport.visible = true
 	$Control/VBoxContainer/Back.visible = true
 	
 func _on_back_button_pressed():
@@ -231,9 +231,9 @@ func _on_topic_entry_selected(path: String, _display_name: String) -> void:
 # ── Import Topic entry point ──────────────────────────────────────────────────
 
 func _on_topic_import_pressed() -> void:
-	if not _is_current_user_instructor():
-		show_error_dialog("Only instructors can import topics.")
-		return
+	#if not _is_current_user_instructor():
+	#	show_error_dialog("Only instructors can import topics.")
+	#	return
 	$ImportChoicePanel.visible = true
 
 
@@ -302,9 +302,9 @@ func generate_lesson_with_python(topic: String, count: int, folder: String) -> v
 # ── Manual Import/Export ──────────────────────────────────────────────────────
 
 func _on_topic_export_pressed() -> void:
-	if not _is_current_user_instructor():
-		show_error_dialog("Only instructors can export topics.")
-		return
+	#if not _is_current_user_instructor():
+	#	show_error_dialog("Only instructors can export topics.")
+	#	return
 	if Global.selected_lesson == null:
 		show_error_dialog("Please select a topic to export first.")
 		return
@@ -430,7 +430,7 @@ func _apply_instructor_visibility() -> void:
 		return
 	var vbox = main_menu_control.get_node("VBoxContainer")
 	if vbox.has_node("Button3"):
-		vbox.get_node("Button3").visible = _is_current_user_instructor()
+		vbox.get_node("Button3").visible = true
 
 
 func _can_access_all_saved_lessons() -> bool:
@@ -511,7 +511,7 @@ func _handle_generation_result(result) -> void:
 		data = result
 
 	var code := int(data.get("code", -1))
-	var output := data.get("output", [])
+	var output = data.get("output", [])
 	if code == 0:
 		show_success_dialog(str(_generation_context.get("success_text", "Lesson generated successfully.")))
 		return

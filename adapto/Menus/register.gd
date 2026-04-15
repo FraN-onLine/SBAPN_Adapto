@@ -25,7 +25,7 @@ func _on_register_button_pressed():
 		feedback_label.text = "Username already exists."
 		return
 
-	var normalized_username := username.strip_edges().to_lower()
+	var normalized_username = username.strip_edges().to_lower()
 	var role := "student"
 	if normalized_username.begins_with("inst_") or normalized_username.ends_with("_inst"):
 		role = "instructor"
