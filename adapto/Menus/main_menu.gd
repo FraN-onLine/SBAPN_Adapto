@@ -27,10 +27,7 @@ func _on_start_button_pressed() -> void:
 
 
 func on_diagnostic_button_pressed():
-	if UserStats.should_prompt_adaptive_first():
-		show_error_dialog("Adaptive mode is unlocked. Please try adaptive mode first before starting another diagnostic run.")
-		return
-	# Start diagnostic session in order: game1 -> game2 -> ...
+	# Allow diagnostic to be repeated any time
 	UserStats.stop_adaptive_session()
 	get_tree().change_scene_to_file(UserStats.get_scene_for_game("game1"))
 
@@ -92,18 +89,40 @@ func _on_back_button_pressed():
 func _on_stats_button_pressed():
 		var scores = UserStats.get_average_scores_per_game()
 		var analysis = UserStats.get_diagnostic_analysis()
+		var game_names = {
+			"game1": "Multiple Choice",
+			"game2": "Jeopardy",
+			"game3": "Crossword",
+			"game4": "Matching Game",
+			"game5": "Hangman"
+		}
 		var msg = "Average Scores per Game:\n"
 		for game_id in UserStats.GAME_SEQUENCE:
-			msg += game_id.capitalize() + ": " + str(round(scores[game_id])) + "%\n"
-		msg += "\nBest Game: " + analysis["best_game"].capitalize()
-		msg += "\nWorst Game: " + analysis["worst_game"].capitalize()
-		msg += "\nFastest Game: " + analysis["fastest_game"].capitalize()
-		msg += "\nSlowest Game: " + analysis["slowest_game"].capitalize()
+			var gname = game_names[game_id] if game_names.has(game_id) else game_id
+			msg += gname + ": " + str(round(scores[game_id])) + "%\n"
+		var best = analysis["best_game"]
+		var worst = analysis["worst_game"]
+		var fastest = analysis["fastest_game"]
+		var slowest = analysis["slowest_game"]
+		var best_name = game_names[best] if game_names.has(best) else best
+		var worst_name = game_names[worst] if game_names.has(worst) else worst
+		var fastest_name = game_names[fastest] if game_names.has(fastest) else fastest
+		var slowest_name = game_names[slowest] if game_names.has(slowest) else slowest
+		msg += "\nBest Game: " + best_name.capitalize()
+		msg += "\nWorst Game: " + worst_name.capitalize()
+		msg += "\nFastest Game: " + fastest_name.capitalize()
+		msg += "\nSlowest Game: " + slowest_name.capitalize()
 		msg += "\n\nAverage Time per Question (s):\n"
 		for game_id in UserStats.GAME_SEQUENCE:
-			msg += game_id.capitalize() + ": " + str(round(analysis["average_times"][game_id])) + "\n"
+			var gname = game_names[game_id] if game_names.has(game_id) else game_id
+			msg += gname + ": " + str(round(analysis["average_times"][game_id])) + "\n"
+		# Debug: show raw stats display for all games
+		msg += "\n\n[DEBUG] Raw Game Stats Display:\n"
+		var stats_display = UserStats.get_game_stats_display()
+		for line in stats_display:
+			msg += line + "\n"
 		show_success_dialog(msg)
-	
+
 
 func _on_topic_select_pressed() -> void:
 	_populate_topic_list()

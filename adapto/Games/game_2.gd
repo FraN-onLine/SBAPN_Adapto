@@ -1,8 +1,13 @@
+extends Node2D
+
+func _unhandled_input(event):
+	if event is InputEventKey and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER) and not event.echo:
+		if $AnswerInput.has_focus() and not $Submit.disabled:
+			check_answer()
 ## Game 2 category challenge.
 ##
 ## Tracks question correctness and money score, then reports a normalized result
 ## to the adaptive engine before routing to the next game.
-extends Node2D
 
 var money = 0
 var questions = {}

@@ -218,16 +218,20 @@ func get_scene_after_game(current_game_id: String) -> String:
             mark_diagnostic_completed()
         return _get_default_scene_after_game(current_game_id)
 
-    # Adaptive phase: always do best game
+    # Adaptive phase: alternate between top 1 and top 2
     if adaptive_phase == "adaptive":
-        var new_leader = get_leading_game()
-        if new_leader != "" and new_leader != adaptive_current_leader:
-            adaptive_current_leader = new_leader
+        var ranked = get_adaptive_ranked_games()
+        if ranked.size() < 2:
+            adaptive_current_leader = ranked[0] if ranked.size() > 0 else "game1"
+        else:
+            var idx = 0
+            if adaptive_current_leader == ranked[0]:
+                idx = 1
+            adaptive_current_leader = ranked[idx]
         if adaptive_current_leader == "":
             adaptive_current_leader = "game1"
         return get_scene_for_game(adaptive_current_leader)
 
-    # Fallback
     return get_scene_for_game("game1")
 # Returns a dictionary with analysis: best, worst, fastest, slowest game, and average times
 func get_diagnostic_analysis() -> Dictionary:
@@ -388,21 +392,32 @@ func update_overall_stats():
     save_user_stats()
 
 func get_game_stats_display():
-    var stats = game_stats["game1"]
     var display = []
-    for i in range(4):
-        var type_name = stats["type"][i]
-        var correct = stats["correct"][i]
-        var incorrect = stats["incorrect"][i]
-        var timeout = stats["timeout"][i]
-        var questions = stats["questions"][i]
-        var accuracy = 0.0
-        if questions > 0:
-            accuracy = (correct * 100.0) / questions
-        var avg_time = 0.0
-        if questions > 0:
-            avg_time = stats["sum_time"][i] / questions
-        display.append("%s: Correct: %d, INC: %d, TO: %d, ACC: %.1f%%, AT: %.1fs" % [type_name, correct, incorrect, timeout, accuracy, avg_time])
+    for game_id in GAME_SEQUENCE:
+        if game_stats.has(game_id):
+            var stats = game_stats[game_id]
+            if game_id == "game1":
+                for i in range(4):
+                    var type_name = stats["type"][i]
+                    var correct = stats["correct"][i]
+                    var incorrect = stats["incorrect"][i]
+                    var timeout = stats["timeout"][i]
+                    var questions = stats["questions"][i]
+                    var avg_time = 0.0
+                    if questions > 0:
+                        avg_time = stats["sum_time"][i] / questions
+                    var norm_score = 0.0
+                    if questions > 0:
+                        norm_score = compute_fair_score(game_id, correct, (correct * 100.0) / questions, avg_time, float(questions) / float(questions))
+                    display.append("%s (%s): Score: %.1f, Correct: %d, INC: %d, TO: %d, AT: %.1fs" % [game_id, type_name, norm_score, correct, incorrect, timeout, avg_time])
+            elif game_id == "game3":
+                var correct = stats.get("questions_correct", 0)
+                var total = stats.get("questions_answered", 0)
+                var avg_time = 0.0
+                if total > 0:
+                    avg_time = stats.get("time_taken", 0) / total
+                var norm_score = compute_fair_score(game_id, correct, (correct * 100.0) / total if total > 0 else 0.0, avg_time, float(total) / float(total) if total > 0 else 0.0)
+                display.append("%s: Score: %.1f, Correct: %d, Total: %d, AT: %.1fs" % [game_id, norm_score, correct, total, avg_time])
     return display
 
 

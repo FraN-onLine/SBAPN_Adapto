@@ -205,8 +205,7 @@ theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 
 theme_override_fonts/font = ExtResource("3_cxdly")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
-text = "Options
-"
+text = "user data"
 
 [node name="Button3" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2

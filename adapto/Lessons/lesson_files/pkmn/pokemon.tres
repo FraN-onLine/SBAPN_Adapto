@@ -1,0 +1,730 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=42 format=3]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://adapto/Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://adapto/Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_ai_pok1"]
+script = ExtResource("1_7hrog")
+id = "AI_POK1"
+term = "Pikachu"
+keyword = "electric mouse"
+definition = "A popular Electric-type Pokémon known for its yellow fur, red cheeks, and lightning-bolt tail."
+simple_terms = "Electric mouse Pokémon"
+examples = ["Ash's Pikachu is a famous example in the anime.", "Pikachu evolves from Pichu and into Raichu."]
+accepted_terms = ["Pika", "Electric Mouse"]
+difficulty = 1
+related_to = ["electric type", "evolution", "anime"]
+tof_statement = {
+"false": "Pikachu is a Fire-type Pokémon.", 
+"true": "Pikachu is an Electric-type Pokémon."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok2"]
+script = ExtResource("1_7hrog")
+id = "AI_POK2"
+term = "Charizard"
+keyword = "fire dragon"
+definition = "A Fire/Flying-type Pokémon that evolves from Charmeleon. It is known for its dragon-like appearance and fiery breath."
+simple_terms = "Fire dragon Pokémon"
+examples = ["Charizard is a powerful Pok\u00e9mon often used by trainers.", "It evolves from Charmander."]
+accepted_terms = ["Fire Dragon", "Char"]
+difficulty = 2
+related_to = ["fire type", "flying type", "evolution", "starter Pok\u00e9mon"]
+tof_statement = {
+"false": "Charizard is a Water type Pokémon.", 
+"true": "Charizard is a Fire and Flying type Pokémon."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok3"]
+script = ExtResource("1_7hrog")
+id = "AI_POK3"
+term = "Bulbasaur"
+keyword = "grass seed"
+definition = "A Grass/Poison-type Pokémon, one of the original starter Pokémon. It has a bulb on its back that grows with it."
+simple_terms = "Grass starter Pokémon"
+examples = ["Bulbasaur is known for its Vine Whip attack.", "It evolves into Ivysaur."]
+accepted_terms = ["Grass starter", "Bulb Pok\u00e9mon"]
+difficulty = 1
+related_to = ["grass type", "poison type", "evolution", "starter Pok\u00e9mon"]
+tof_statement = {
+"false": "Bulbasaur has a flame on its tail.", 
+"true": "Bulbasaur has a bulb on its back."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok4"]
+script = ExtResource("1_7hrog")
+id = "AI_POK4"
+term = "Squirtle"
+keyword = "water turtle"
+definition = "A Water-type Pokémon, another of the original starter Pokémon. It has a shell and can shoot water from its mouth."
+simple_terms = "Water starter Pokémon"
+examples = ["Squirtle Squad is a famous group of Squirtle in the anime.", "It evolves into Wartortle."]
+accepted_terms = ["Water starter", "Turtle Pok\u00e9mon"]
+difficulty = 1
+related_to = ["water type", "evolution", "starter Pok\u00e9mon"]
+tof_statement = {
+"false": "Squirtle is a Grass type Pokémon.", 
+"true": "Squirtle is a Water type Pokémon."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok5"]
+script = ExtResource("1_7hrog")
+id = "AI_POK5"
+term = "Eevee"
+keyword = "evolutionary"
+definition = "A Normal-type Pokémon known for its unstable genetic code, allowing it to evolve into multiple different forms (Eeveelutions) based on various factors."
+simple_terms = "Pokémon that can evolve many ways"
+examples = ["Eevee can evolve into Vaporeon, Jolteon, Flareon, Espeon, Umbreon, Leafeon, Glaceon, and Sylveon.", "The stones like Water Stone or Fire Stone can trigger some evolutions."]
+accepted_terms = ["Eeveelution base", "Adaptable Pok\u00e9mon"]
+difficulty = 3
+related_to = ["evolution", "normal type", "eeveelutions"]
+tof_statement = {
+"false": "Eevee can only evolve into one other Pokémon.", 
+"true": "Eevee can evolve into more than three different Pokémon."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok6"]
+script = ExtResource("1_7hrog")
+id = "AI_POK6"
+term = "Type Matchups"
+keyword = "strengths weaknesses"
+definition = "The system in which certain Pokémon types are strong against others, dealing more damage, and weak against others, taking more damage."
+simple_terms = "Rock-paper-scissors for Pokémon"
+examples = ["Water-type attacks are super effective against Fire-type Pok\u00e9mon.", "Grass-type attacks are weak against Fire-type Pok\u00e9mon."]
+accepted_terms = ["Type effectiveness", "Type chart"]
+difficulty = 2
+related_to = ["battle", "strategy", "types"]
+tof_statement = {
+"false": "Electric-type attacks are super effective against Ground-type Pokémon.", 
+"true": "Fire-type attacks are super effective against Grass-type Pokémon."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok7"]
+script = ExtResource("1_7hrog")
+id = "AI_POK7"
+term = "Poké Ball"
+keyword = "capture"
+definition = "A spherical device used to capture wild Pokémon. When thrown at a wild Pokémon, it sucks it in and closes."
+simple_terms = "Ball to catch Pokémon"
+examples = ["The trainer threw a Pok\u00e9 Ball and caught a Pidgey.", "Great Balls and Ultra Balls are stronger versions of Pok\u00e9 Balls."]
+accepted_terms = ["Monster Ball", "Capture device"]
+difficulty = 1
+related_to = ["capture", "items", "trainer"]
+tof_statement = {
+"false": "A Poké Ball is used to heal Pokémon.", 
+"true": "A Poké Ball is used to catch Pokémon."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok8"]
+script = ExtResource("1_7hrog")
+id = "AI_POK8"
+term = "Evolution"
+keyword = "transform"
+definition = "The process by which a Pokémon changes into a different, usually stronger, form. This can be triggered by leveling up, using stones, or other conditions."
+simple_terms = "Pokémon changing form"
+examples = ["Charmander evolves into Charmeleon.", "Some Pok\u00e9mon evolve through trading."]
+accepted_terms = ["Evolve", "Metamorphosis"]
+difficulty = 2
+related_to = ["level up", "items", "Pok\u00e9mon forms"]
+tof_statement = {
+"false": "Evolution always makes a Pokémon weaker.", 
+"true": "Evolution typically makes a Pokémon stronger."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok9"]
+script = ExtResource("1_7hrog")
+id = "AI_POK9"
+term = "Trainer"
+keyword = "battle"
+definition = "An individual who trains Pokémon and engages in battles with other trainers or wild Pokémon."
+simple_terms = "Person who battles with Pokémon"
+examples = ["Ash Ketchum is a famous Pok\u00e9mon Trainer.", "Gym Leaders are powerful Trainers."]
+accepted_terms = ["Pok\u00e9mon Master", "Coach"]
+difficulty = 1
+related_to = ["battle", "capture", "gym leader"]
+tof_statement = {
+"false": "A Trainer only collects Pokémon cards.", 
+"true": "A Trainer battles with Pokémon."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok10"]
+script = ExtResource("1_7hrog")
+id = "AI_POK10"
+term = "Gym Leader"
+keyword = "badge"
+definition = "A powerful Trainer who specializes in a specific Pokémon type and presides over a Pokémon Gym. Defeating them earns trainers a badge."
+simple_terms = "Gym boss"
+examples = ["Brock is the Pewter City Gym Leader.", "Gym Leaders award Gym Badges."]
+accepted_terms = ["Gym Captain", "Gym Master"]
+difficulty = 2
+related_to = ["trainer", "badge", "battle", "types"]
+tof_statement = {
+"false": "Defeating a Gym Leader earns a trainer a Poké Ball.", 
+"true": "Defeating a Gym Leader earns a trainer a badge."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok11"]
+script = ExtResource("1_7hrog")
+id = "AI_POK11"
+term = "Legendary Pokémon"
+keyword = "rare"
+definition = "Extremely rare and powerful Pokémon, often with unique abilities or significant roles in the Pokémon world's lore."
+simple_terms = "Super rare and strong Pokémon"
+examples = ["Mewtwo and Lugia are examples of Legendary Pok\u00e9mon.", "Legendary Pok\u00e9mon usually cannot breed."]
+accepted_terms = ["Mythical Pok\u00e9mon", "Legend"]
+difficulty = 3
+related_to = ["rare", "powerful", "lore"]
+tof_statement = {
+"false": "Legendary Pokémon are found in every Pokémon Center.", 
+"true": "Legendary Pokémon are typically very difficult to find."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok12"]
+script = ExtResource("1_7hrog")
+id = "AI_POK12"
+term = "Mega Evolution"
+keyword = "temporary power-up"
+definition = "A temporary transformation that certain Pokémon can undergo during battle, granting them increased stats and sometimes a change in type or ability."
+simple_terms = "Temporary battle boost form"
+examples = ["Mega Charizard X is a Mega Evolution of Charizard.", "Mega Evolution requires a Mega Stone and a Key Stone."]
+accepted_terms = ["Mega Evolve", "Temporary evolution"]
+difficulty = 3
+related_to = ["evolution", "battle", "items", "powerful"]
+tof_statement = {
+"false": "Mega Evolution is a permanent change for a Pokémon.", 
+"true": "Mega Evolution is a temporary state that occurs during battle."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok13"]
+script = ExtResource("1_7hrog")
+id = "AI_POK13"
+term = "Ability"
+keyword = "passive effect"
+definition = "A special passive characteristic that each Pokémon possesses, influencing battles or interactions outside of battle."
+simple_terms = "Pokémon's special trait"
+examples = ["Levitate allows a Pok\u00e9mon to be immune to Ground-type attacks.", "Intimidate lowers the opponent's Attack stat upon entering battle."]
+accepted_terms = ["Skill", "Trait"]
+difficulty = 2
+related_to = ["battle", "strategy", "passive"]
+tof_statement = {
+"false": "Abilities are active moves that a Pokémon chooses to use.", 
+"true": "Abilities provide passive effects for Pokémon."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok14"]
+script = ExtResource("1_7hrog")
+id = "AI_POK14"
+term = "Stats"
+keyword = "attributes"
+definition = "Numerical values that represent a Pokémon's inherent capabilities, including HP, Attack, Defense, Special Attack, Special Defense, and Speed."
+simple_terms = "Pokémon's numbers for fighting"
+examples = ["A Pok\u00e9mon with high Attack stats will deal more physical damage.", "HP stands for Hit Points."]
+accepted_terms = ["Base stats", "Attributes"]
+difficulty = 2
+related_to = ["battle", "power", "HP", "Attack", "Defense", "Speed"]
+tof_statement = {
+"false": "Stats are randomly assigned to each Pokémon upon creation.", 
+"true": "Stats determine how strong a Pokémon is in various aspects."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok15"]
+script = ExtResource("1_7hrog")
+id = "AI_POK15"
+term = "Moves"
+keyword = "attacks"
+definition = "The actions a Pokémon can perform during battle, such as attacking, defending, or status-inflicting actions. Each move has a type, power, accuracy, and PP."
+simple_terms = "What Pokémon can do in battle"
+examples = ["Tackle is a basic Normal-type move.", "Flamethrower is a powerful Fire-type special move."]
+accepted_terms = ["Attacks", "Techniques"]
+difficulty = 1
+related_to = ["battle", "strategy", "types"]
+tof_statement = {
+"false": "Moves are only used outside of battle for training.", 
+"true": "Moves are how Pokémon interact in battle."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok16"]
+script = ExtResource("1_7hrog")
+id = "AI_POK16"
+term = "Status Conditions"
+keyword = "ailments"
+definition = "Negative effects that can be inflicted on a Pokémon during battle, such as Poison, Burn, Paralysis, Sleep, or Freeze."
+simple_terms = "Bad effects in battle"
+examples = ["Poisoned Pok\u00e9mon lose HP each turn.", "Paralysis can prevent a Pok\u00e9mon from moving."]
+accepted_terms = ["Status effects", "Ailments"]
+difficulty = 2
+related_to = ["battle", "strategy", "HP"]
+tof_statement = {
+"false": "Burned Pokémon move faster.", 
+"true": "Burned Pokémon take damage each turn."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok17"]
+script = ExtResource("1_7hrog")
+id = "AI_POK17"
+term = "Wild Pokémon"
+keyword = "unclaimed"
+definition = "Pokémon that are not owned by any trainer and inhabit natural environments like tall grass, caves, or water."
+simple_terms = "Pokémon in the wild"
+examples = ["You can find wild Pidgey in forests.", "Wild Pok\u00e9mon can be caught with Pok\u00e9 Balls."]
+accepted_terms = ["Feral Pok\u00e9mon", "Untamed Pok\u00e9mon"]
+difficulty = 1
+related_to = ["capture", "environment", "trainer"]
+tof_statement = {
+"false": "Wild Pokémon are always friendly and never attack.", 
+"true": "Wild Pokémon are not currently owned by a trainer."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok18"]
+script = ExtResource("1_7hrog")
+id = "AI_POK18"
+term = "Breeding"
+keyword = "eggs"
+definition = "The process where two compatible Pokémon can produce an Egg, which will eventually hatch into a baby Pokémon."
+simple_terms = "Making baby Pokémon"
+examples = ["Breeding two compatible Pok\u00e9mon at a Day Care can result in an Egg.", "Baby Pok\u00e9mon are often the first stage of an evolutionary line."]
+accepted_terms = ["Pok\u00e9mon breeding", "Reproduction"]
+difficulty = 3
+related_to = ["eggs", "baby Pok\u00e9mon", "Day Care"]
+tof_statement = {
+"false": "Breeding Pokémon results in a fully evolved Pokémon.", 
+"true": "Breeding Pokémon can result in an Egg."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok19"]
+script = ExtResource("1_7hrog")
+id = "AI_POK19"
+term = "Items"
+keyword = "tools"
+definition = "Objects that trainers can use to help their Pokémon, such as healing items, battle items, or evolution-triggering items."
+simple_terms = "Things trainers use"
+examples = ["Potions heal HP.", "Rare Candies increase a Pok\u00e9mon's level."]
+accepted_terms = ["Objects", "Consumables"]
+difficulty = 1
+related_to = ["healing", "battle", "evolution", "Pok\u00e9 Ball"]
+tof_statement = {
+"false": "Items can only be used to attack Pokémon.", 
+"true": "Items can be used to heal Pokémon."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok20"]
+script = ExtResource("1_7hrog")
+id = "AI_POK20"
+term = "Catch Rate"
+keyword = "capture chance"
+definition = "A hidden value that determines how likely it is for a trainer to successfully capture a wild Pokémon with a Poké Ball."
+simple_terms = "How easy it is to catch"
+examples = ["Legendary Pok\u00e9mon generally have very low catch rates.", "Using a weaker Pok\u00e9 Ball on a strong Pok\u00e9mon decreases the catch rate."]
+accepted_terms = ["Capture probability", "Catch chance"]
+difficulty = 3
+related_to = ["capture", "Pok\u00e9 Ball", "wild Pok\u00e9mon", "difficulty"]
+tof_statement = {
+"false": "The catch rate determines how many battles a Pokémon can win.", 
+"true": "The catch rate influences how difficult it is to capture a Pokémon."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok21"]
+script = ExtResource("1_7hrog")
+id = "AI_POK21"
+term = "Shiny Pokémon"
+keyword = "rare color"
+definition = "An extremely rare variant of a Pokémon that has a different color palette than the standard coloration."
+simple_terms = "Rare colored Pokémon"
+examples = ["A Shiny Gyarados is red instead of blue.", "Encountering a Shiny Pok\u00e9mon is a rare event."]
+accepted_terms = ["Alternate color", "Chromium Pok\u00e9mon"]
+difficulty = 3
+related_to = ["rare", "color", "odds"]
+tof_statement = {
+"false": "Shiny Pokémon have higher base stats than normal Pokémon.", 
+"true": "Shiny Pokémon have a different color scheme than normal Pokémon."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok22"]
+script = ExtResource("1_7hrog")
+id = "AI_POK22"
+term = "HM (Hidden Machine)"
+keyword = "field move"
+definition = "Special moves that can be taught to Pokémon to overcome obstacles in the game world, such as cutting down trees or surfing on water. They can also be used in battle."
+simple_terms = "Moves for exploring"
+examples = ["Cut is an HM used to clear small trees.", "Surf is an HM used to travel across water."]
+accepted_terms = ["Field Move", "Utility move"]
+difficulty = 2
+related_to = ["moves", "exploration", "battle", "items"]
+tof_statement = {
+"false": "HMs can only be used in Pokémon battles.", 
+"true": "HMs are used to progress through the game world."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok23"]
+script = ExtResource("1_7hrog")
+id = "AI_POK23"
+term = "TM (Technical Machine)"
+keyword = "battle move"
+definition = "Items that allow a Pokémon to learn a specific move. Unlike HMs, TMs are often single-use and focus on battle-oriented moves."
+simple_terms = "Items to teach moves"
+examples = ["TMs can teach powerful attacking moves like Thunderbolt or Fire Blast.", "A Pok\u00e9mon can learn a limited number of TMs."]
+accepted_terms = ["Technical Machine", "Move disk"]
+difficulty = 2
+related_to = ["moves", "items", "battle", "strategy"]
+tof_statement = {
+"false": "TMs are used to evolve Pokémon.", 
+"true": "TMs are used to teach Pokémon specific moves."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok24"]
+script = ExtResource("1_7hrog")
+id = "AI_POK24"
+term = "Nature"
+keyword = "stat modifier"
+definition = "A characteristic assigned to each Pokémon that affects the growth rate of two of its stats (one increases, one decreases), while two stats remain unaffected."
+simple_terms = "Affects stat growth"
+examples = ["A 'Jolly' Nature increases Speed and decreases Special Attack.", "A 'Brave' Nature increases Attack and decreases Speed."]
+accepted_terms = ["Pok\u00e9mon personality", "Stat tendency"]
+difficulty = 3
+related_to = ["stats", "strategy", "breeding", "IVs", "EVs"]
+tof_statement = {
+"false": "Natures determine a Pokémon's type.", 
+"true": "Natures modify how a Pokémon's stats grow."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok25"]
+script = ExtResource("1_7hrog")
+id = "AI_POK25"
+term = "IV (Individual Value)"
+keyword = "hidden potential"
+definition = "A hidden value for each stat (0-31) that contributes to a Pokémon's base stats, representing its inherent potential."
+simple_terms = "Hidden stat potential"
+examples = ["A Pok\u00e9mon with perfect IVs (31) in all stats is considered ideal for competitive play.", "IVs are determined when the Pok\u00e9mon is generated."]
+accepted_terms = ["Individual Value", "Stat potential"]
+difficulty = 4
+related_to = ["stats", "breeding", "competitive", "Nature", "EVs"]
+tof_statement = {
+"false": "Individual Values can be changed by battling.", 
+"true": "Individual Values contribute to a Pokémon's final stats."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok26"]
+script = ExtResource("1_7hrog")
+id = "AI_POK26"
+term = "EV (Effort Value)"
+keyword = "training points"
+definition = "Points earned by a Pokémon through battling or using certain items, which increase its stats. Each stat can have a maximum of 252 EVs."
+simple_terms = "Points from training"
+examples = ["Defeating Pok\u00e9mon that yield Attack EVs will increase a Pok\u00e9mon's Attack stat.", "Vitamins like Protein give EVs."]
+accepted_terms = ["Effort Value", "Training points"]
+difficulty = 3
+related_to = ["stats", "training", "battle", "competitive", "IVs", "Nature"]
+tof_statement = {
+"false": "Effort Values are gained by collecting badges.", 
+"true": "Effort Values are gained through training and affect stats."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok27"]
+script = ExtResource("1_7hrog")
+id = "AI_POK27"
+term = "STAB (Same Type Attack Bonus)"
+keyword = "type bonus"
+definition = "A bonus that increases the power of a move if the move's type matches one of the Pokémon's types."
+simple_terms = "Bonus for using same type move"
+examples = ["A Water-type Pok\u00e9mon using a Water-type move gets a STAB bonus.", "STAB typically adds a 50% power increase."]
+accepted_terms = ["Same Type Attack Bonus", "Type advantage bonus"]
+difficulty = 3
+related_to = ["battle", "strategy", "types", "moves", "power"]
+tof_statement = {
+"false": "STAB reduces the damage of moves that match the Pokémon's type.", 
+"true": "STAB increases the damage of moves that match the Pokémon's type."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok28"]
+script = ExtResource("1_7hrog")
+id = "AI_POK28"
+term = "Critical Hit"
+keyword = "high damage"
+definition = "An attack that deals significantly more damage than a normal hit. The chance of a critical hit can be influenced by moves, abilities, or items."
+simple_terms = "Extra strong hit"
+examples = ["Critical hits ignore some stat changes like Defense boosts.", "Moves like Focus Energy increase the chance of a critical hit."]
+accepted_terms = ["Crit", "Critical strike"]
+difficulty = 2
+related_to = ["battle", "strategy", "damage", "moves"]
+tof_statement = {
+"false": "A critical hit deals less damage than a normal hit.", 
+"true": "A critical hit deals more damage than a normal hit."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok29"]
+script = ExtResource("1_7hrog")
+id = "AI_POK29"
+term = "Held Item"
+keyword = "item held"
+definition = "An item that a Pokémon can hold during battle to provide various effects, such as boosting stats, healing, or triggering abilities."
+simple_terms = "Item a Pokémon carries"
+examples = ["A Choice Scarf boosts Speed but locks the Pok\u00e9mon into one move.", "Leftovers passively heal HP each turn."]
+accepted_terms = ["Holding item", "Accessory"]
+difficulty = 2
+related_to = ["items", "battle", "strategy", "boost"]
+tof_statement = {
+"false": "Held items can only be used outside of battle.", 
+"true": "Held items can provide benefits to a Pokémon in battle."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok30"]
+script = ExtResource("1_7hrog")
+id = "AI_POK30"
+term = "Z-Move"
+keyword = "special attack"
+definition = "A powerful, single-use move that a Pokémon can unleash when holding a Z-Crystal that matches its type or its own type. Introduced in Generation VII."
+simple_terms = "Super powerful move"
+examples = ["Pikachu can use 10,000,000 Volt Thunderbolt with Pikashunium Z.", "Z-Moves often have very high base power."]
+accepted_terms = ["Z Crystal move", "Ultimate move"]
+difficulty = 3
+related_to = ["battle", "moves", "items", "powerful", "Generation VII"]
+tof_statement = {
+"false": "Z-Moves can be used multiple times in a battle.", 
+"true": "Z-Moves are powerful moves that can be used once per battle."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok31"]
+script = ExtResource("1_7hrog")
+id = "AI_POK31"
+term = "Dynamax"
+keyword = "giant form"
+definition = "A battle mechanic where Pokémon can grow to giant size for three turns, significantly boosting their HP and turning their moves into Max Moves. Introduced in Generation VIII."
+simple_terms = "Growing giant in battle"
+examples = ["Dynamaxed Pok\u00e9mon have increased HP.", "Max Moves can have secondary effects."]
+accepted_terms = ["Gigantamax", "Max form"]
+difficulty = 3
+related_to = ["battle", "moves", "powerful", "HP", "Generation VIII"]
+tof_statement = {
+"false": "Dynamax permanently changes a Pokémon's type.", 
+"true": "Dynamax temporarily increases a Pokémon's HP."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok32"]
+script = ExtResource("1_7hrog")
+id = "AI_POK32"
+term = "Tera Type"
+keyword = "crystal type"
+definition = "A mechanic introduced in Generation IX where Pokémon can change their type to a 'Tera Type' by Terastallizing, making them resistant to attacks that are super effective against their original type."
+simple_terms = "Crystal type change"
+examples = ["A Fire-type Pok\u00e9mon Terastallizing into a Water Tera Type becomes weak to Electric and Grass moves, but resistant to Fire, Ice, Bug, and Steel moves.", "Terastallizing requires a Tera Orb."]
+accepted_terms = ["Terastal", "Tera form"]
+difficulty = 3
+related_to = ["battle", "types", "strategy", "Generation IX"]
+tof_statement = {
+"false": "Tera Type is a permanent change that happens after evolution.", 
+"true": "Tera Type can change a Pokémon's type temporarily during battle."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok33"]
+script = ExtResource("1_7hrog")
+id = "AI_POK33"
+term = "Pokédex"
+keyword = "information"
+definition = "An electronic encyclopedia that records information about Pokémon species encountered or caught by a trainer."
+simple_terms = "Pokémon encyclopedia"
+examples = ["The Pok\u00e9dex lists a Pok\u00e9mon's height, weight, type, and abilities.", "Completing the Pok\u00e9dex is a major goal for many trainers."]
+accepted_terms = ["Dex", "Electronic encyclopedia"]
+difficulty = 1
+related_to = ["information", "trainer", "species", "capture"]
+tof_statement = {
+"false": "The Pokédex is used to battle Pokémon.", 
+"true": "The Pokédex contains information about Pokémon."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok34"]
+script = ExtResource("1_7hrog")
+id = "AI_POK34"
+term = "Poké Center"
+keyword = "healing"
+definition = "A facility found in towns and cities where trainers can heal their Pokémon and access other services like the PC system."
+simple_terms = "Place to heal Pokémon"
+examples = ["Visiting a Pok\u00e9 Center fully restores a Pok\u00e9mon's HP and PP.", "The PC system allows trainers to store their Pok\u00e9mon."]
+accepted_terms = ["Pokemon Center", "Heal station"]
+difficulty = 1
+related_to = ["healing", "items", "PC system", "towns"]
+tof_statement = {
+"false": "Poké Centers are used to catch wild Pokémon.", 
+"true": "Poké Centers are used to heal Pokémon."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok35"]
+script = ExtResource("1_7hrog")
+id = "AI_POK35"
+term = "PC System"
+keyword = "storage"
+definition = "A system, often accessed at Poké Centers, that allows trainers to store and retrieve Pokémon they are not currently using in their party."
+simple_terms = "Pokémon storage box"
+examples = ["Trainers can deposit Pok\u00e9mon they've caught into the PC.", "The PC system is essential for managing a large collection of Pok\u00e9mon."]
+accepted_terms = ["Pok\u00e9mon Storage System", "Storage Box"]
+difficulty = 1
+related_to = ["storage", "Pok\u00e9mon", "trainer", "Pok\u00e9 Center"]
+tof_statement = {
+"false": "The PC System is used to train Pokémon's stats directly.", 
+"true": "The PC System is used to store Pokémon."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok36"]
+script = ExtResource("1_7hrog")
+id = "AI_POK36"
+term = "Move Tutor"
+keyword = "teach move"
+definition = "An NPC (Non-Player Character) who can teach certain Pokémon specific moves, often powerful or rare ones, sometimes in exchange for specific items or at a cost."
+simple_terms = "Person who teaches moves"
+examples = ["A Move Tutor might teach a Pok\u00e9mon a powerful combo move.", "Some Move Tutors teach moves that are not available via TM or level-up."]
+accepted_terms = ["NPC move teacher", "Skill instructor"]
+difficulty = 2
+related_to = ["moves", "NPC", "items", "strategy"]
+tof_statement = {
+"false": "Move Tutors can evolve Pokémon.", 
+"true": "Move Tutors can teach Pokémon specific moves."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok37"]
+script = ExtResource("1_7hrog")
+id = "AI_POK37"
+term = "Battle Frontier"
+keyword = "challenge"
+definition = "A post-game area in some Pokémon games that offers various facilities with unique battle challenges and rewards, testing a trainer's skill."
+simple_terms = "Hard battle challenges"
+examples = ["The Battle Frontier often features facilities like the Battle Tower or Battle Factory.", "Defeating Frontier Brains yields valuable rewards."]
+accepted_terms = ["Battle Challenges", "Post-game area"]
+difficulty = 3
+related_to = ["battle", "post-game", "challenge", "rewards", "strategy"]
+tof_statement = {
+"false": "The Battle Frontier is a place to catch basic Pokémon.", 
+"true": "The Battle Frontier offers challenging battles."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok38"]
+script = ExtResource("1_7hrog")
+id = "AI_POK38"
+term = "Contest"
+keyword = "performance"
+definition = "An alternative to battles where Pokémon are judged on their condition, appeal, and performance in various categories, rather than combat strength."
+simple_terms = "Pokémon beauty pageant"
+examples = ["Contests have categories like Cool, Beauty, Cute, Smart, and Tough.", "Pok\u00e9mon can learn specific moves for contests."]
+accepted_terms = ["Pok\u00e9mon Show", "Performance battle"]
+difficulty = 2
+related_to = ["performance", "condition", "appeal", "strategy"]
+tof_statement = {
+"false": "Pokémon Contests are purely about battling strength.", 
+"true": "Pokémon Contests judge a Pokémon's appeal and performance."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok39"]
+script = ExtResource("1_7hrog")
+id = "AI_POK39"
+term = "Friendship"
+keyword = "bond"
+definition = "A hidden value that represents how much a Pokémon likes its trainer. High friendship can lead to increased critical hit ratios, certain evolutions, and other benefits."
+simple_terms = "How much Pokémon likes trainer"
+examples = ["Walking with a Pok\u00e9mon increases its friendship.", "Some Pok\u00e9mon, like Eevee evolving into Espeon or Umbreon, require high friendship."]
+accepted_terms = ["Affection", "Bond level"]
+difficulty = 2
+related_to = ["bond", "evolution", "happiness", "strategy"]
+tof_statement = {
+"false": "Friendship affects a Pokémon's base stats directly.", 
+"true": "Friendship affects certain Pokémon evolutions."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_pok40"]
+script = ExtResource("1_7hrog")
+id = "AI_POK40"
+term = "Type Effectiveness"
+keyword = "super effective"
+definition = "The measure of how much damage an attack of a certain type will deal to a Pokémon of another type, categorized as 'Super Effective', 'Not Very Effective', or 'Immune'."
+simple_terms = "How well types hit each other"
+examples = ["A Water-type move is Super Effective against a Fire-type Pok\u00e9mon.", "An Electric-type move is Immune to a Ground-type Pok\u00e9mon."]
+accepted_terms = ["Type Matchups", "Elemental advantage"]
+difficulty = 2
+related_to = ["types", "battle", "strategy", "damage", "Type Matchups"]
+tof_statement = {
+"false": "Fire-type attacks are Super Effective against Rock-type Pokémon.", 
+"true": "Fire-type attacks are Not Very Effective against Rock-type Pokémon."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "pokemon"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_ai_pok1"), SubResource("Resource_ai_pok2"), SubResource("Resource_ai_pok3"), SubResource("Resource_ai_pok4"), SubResource("Resource_ai_pok5"), SubResource("Resource_ai_pok6"), SubResource("Resource_ai_pok7"), SubResource("Resource_ai_pok8"), SubResource("Resource_ai_pok9"), SubResource("Resource_ai_pok10"), SubResource("Resource_ai_pok11"), SubResource("Resource_ai_pok12"), SubResource("Resource_ai_pok13"), SubResource("Resource_ai_pok14"), SubResource("Resource_ai_pok15"), SubResource("Resource_ai_pok16"), SubResource("Resource_ai_pok17"), SubResource("Resource_ai_pok18"), SubResource("Resource_ai_pok19"), SubResource("Resource_ai_pok20"), SubResource("Resource_ai_pok21"), SubResource("Resource_ai_pok22"), SubResource("Resource_ai_pok23"), SubResource("Resource_ai_pok24"), SubResource("Resource_ai_pok25"), SubResource("Resource_ai_pok26"), SubResource("Resource_ai_pok27"), SubResource("Resource_ai_pok28"), SubResource("Resource_ai_pok29"), SubResource("Resource_ai_pok30"), SubResource("Resource_ai_pok31"), SubResource("Resource_ai_pok32"), SubResource("Resource_ai_pok33"), SubResource("Resource_ai_pok34"), SubResource("Resource_ai_pok35"), SubResource("Resource_ai_pok36"), SubResource("Resource_ai_pok37"), SubResource("Resource_ai_pok38"), SubResource("Resource_ai_pok39"), SubResource("Resource_ai_pok40")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"
