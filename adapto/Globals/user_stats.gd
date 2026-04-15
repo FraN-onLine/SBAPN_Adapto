@@ -83,20 +83,43 @@ var player_stats = {
 
 var game_stats = {
     "game1" : {
-        "type": ["keyword", "simple_terms", "definition", "tof"], #arr of 4
-        "correct": [0, 0, 0, 0], #arr of 4
-        "incorrect": [0, 0, 0, 0], #arr of 4
-        "timeout": [0, 0, 0, 0], #arr of 4
-        "accuracy": [0, 0, 0, 0], #arr of 4
-        "sum_time": [0, 0, 0, 0], #sum of times per question type
-        "questions": [0, 0, 0, 0], #number of questions per type
-    },##
+        "type": ["keyword", "simple_terms", "definition", "tof"],
+        "correct": [0, 0, 0, 0],
+        "incorrect": [0, 0, 0, 0],
+        "timeout": [0, 0, 0, 0],
+        "accuracy": [0, 0, 0, 0],
+        "sum_time": [0, 0, 0, 0],
+        "questions": [0, 0, 0, 0],
+        "item_times": [[], [], [], []], # track time per item per type
+    },
+    "game2": {
+        "questions_answered": 0,
+        "questions_correct": 0,
+        "total_score": 0,
+        "time_taken": 0,
+        "item_times": [], # track time per item
+    },
     "game3" : {
         "questions_answered": 0,
         "questions_correct": 0,
         "total_score": 0,
         "time_taken": 0,
+        "item_times": [],
         "puzzles_completed": 0,
+    },
+    "game4": {
+        "questions_answered": 0,
+        "questions_correct": 0,
+        "total_score": 0,
+        "time_taken": 0,
+        "item_times": [],
+    },
+    "game5": {
+        "questions_answered": 0,
+        "questions_correct": 0,
+        "total_score": 0,
+        "time_taken": 0,
+        "item_times": [],
     }
 }
 
@@ -110,12 +133,33 @@ var overall_stats = {
         "total_sum_time": [0, 0, 0, 0],
         "total_questions": [0, 0, 0, 0],
     },
+    "game2": {
+        "total_questions_answered": 0,
+        "total_questions_correct": 0,
+        "highest_score": 0,
+        "total_time": 0,
+        "accuracy": 0.0,
+    },
     "game3" : {
         "total_questions_answered": 0,
         "total_questions_correct": 0,
         "highest_score": 0,
         "total_time": 0,
         "total_puzzles_completed": 0,
+        "accuracy": 0.0,
+    },
+    "game4": {
+        "total_questions_answered": 0,
+        "total_questions_correct": 0,
+        "highest_score": 0,
+        "total_time": 0,
+        "accuracy": 0.0,
+    },
+    "game5": {
+        "total_questions_answered": 0,
+        "total_questions_correct": 0,
+        "highest_score": 0,
+        "total_time": 0,
         "accuracy": 0.0,
     }
 }
@@ -371,25 +415,35 @@ func reset_game_stats():
     game_stats["game3"]["puzzles_completed"] = 0
 
 func update_overall_stats():
-    for i in range(4):
-        overall_stats["game1"]["correct"][i] += game_stats["game1"]["correct"][i]
-        overall_stats["game1"]["incorrect"][i] += game_stats["game1"]["incorrect"][i]
-        overall_stats["game1"]["timeout"][i] += game_stats["game1"]["timeout"][i]
-        overall_stats["game1"]["total_sum_time"][i] += game_stats["game1"]["sum_time"][i]
-        overall_stats["game1"]["total_questions"][i] += game_stats["game1"]["questions"][i]
-        if overall_stats["game1"]["total_questions"][i] > 0:
-            overall_stats["game1"]["accuracy"][i] = (overall_stats["game1"]["correct"][i] * 100.0) / overall_stats["game1"]["total_questions"][i]
-    ##
-    # Update game3 overall stats
-    overall_stats["game3"]["total_questions_answered"] += game_stats["game3"]["questions_answered"]
-    overall_stats["game3"]["total_questions_correct"] += game_stats["game3"]["questions_correct"]
-    if game_stats["game3"]["total_score"] > overall_stats["game3"]["highest_score"]:
-        overall_stats["game3"]["highest_score"] = game_stats["game3"]["total_score"]
-    overall_stats["game3"]["total_time"] += game_stats["game3"]["time_taken"]
-    overall_stats["game3"]["total_puzzles_completed"] += game_stats["game3"]["puzzles_completed"]
-    if overall_stats["game3"]["total_questions_answered"] > 0:
-        overall_stats["game3"]["accuracy"] = (overall_stats["game3"]["total_questions_correct"] * 100.0) / overall_stats["game3"]["total_questions_answered"]
-    save_user_stats()
+        # Track average time per question for all games
+        for gid in ["game2", "game3", "game4", "game5"]:
+            var item_times = game_stats[gid].get("item_times", [])
+            var total_time = 0.0
+            var total_items = 0
+            for t in item_times:
+                total_time += t
+                total_items += 1
+            overall_stats[gid]["average_time_per_item"] = total_time / total_items if total_items > 0 else 0.0
+        # Game 1 (per-type)
+        for i in range(4):
+            overall_stats["game1"]["correct"][i] += game_stats["game1"]["correct"][i]
+            overall_stats["game1"]["incorrect"][i] += game_stats["game1"]["incorrect"][i]
+            overall_stats["game1"]["timeout"][i] += game_stats["game1"]["timeout"][i]
+            overall_stats["game1"]["total_sum_time"][i] += game_stats["game1"]["sum_time"][i]
+            overall_stats["game1"]["total_questions"][i] += game_stats["game1"]["questions"][i]
+            if overall_stats["game1"]["total_questions"][i] > 0:
+                overall_stats["game1"]["accuracy"][i] = (overall_stats["game1"]["correct"][i] * 100.0) / overall_stats["game1"]["total_questions"][i]
+
+        # Games 2, 3, 4, 5 (aggregate)
+        for gid in ["game2", "game3", "game4", "game5"]:
+            overall_stats[gid]["total_questions_answered"] += game_stats[gid].get("questions_answered", 0)
+            overall_stats[gid]["total_questions_correct"] += game_stats[gid].get("questions_correct", 0)
+            if game_stats[gid].has("total_score") and game_stats[gid]["total_score"] > overall_stats[gid]["highest_score"]:
+                overall_stats[gid]["highest_score"] = game_stats[gid]["total_score"]
+            overall_stats[gid]["total_time"] += game_stats[gid].get("time_taken", 0)
+            if overall_stats[gid]["total_questions_answered"] > 0:
+                overall_stats[gid]["accuracy"] = (overall_stats[gid]["total_questions_correct"] * 100.0) / overall_stats[gid]["total_questions_answered"]
+        save_user_stats()
 
 func get_game_stats_display():
     var display = []
@@ -409,15 +463,19 @@ func get_game_stats_display():
                     var norm_score = 0.0
                     if questions > 0:
                         norm_score = compute_fair_score(game_id, correct, (correct * 100.0) / questions, avg_time, float(questions) / float(questions))
-                    display.append("%s (%s): Score: %.1f, Correct: %d, INC: %d, TO: %d, AT: %.1fs" % [game_id, type_name, norm_score, correct, incorrect, timeout, avg_time])
-            elif game_id == "game3":
+                    display.append("%s (%s): Score: %.1f, Correct: %d, INC: %d, TO: %d, AT: %.1fs | [score=%.2f, acc=%.2f, avg_time=%.2f, comp=%.2f]" % [game_id, type_name, norm_score, correct, incorrect, timeout, avg_time, norm_score, (correct * 100.0) / questions if questions > 0 else 0.0, avg_time, float(questions) / float(questions) if questions > 0 else 0.0])
+            else:
                 var correct = stats.get("questions_correct", 0)
                 var total = stats.get("questions_answered", 0)
                 var avg_time = 0.0
+                var item_times = stats.get("item_times", [])
                 if total > 0:
-                    avg_time = stats.get("time_taken", 0) / total
+                    avg_time = 0.0
+                    for t in item_times:
+                        avg_time += t
+                    avg_time = avg_time / total if total > 0 else 0.0
                 var norm_score = compute_fair_score(game_id, correct, (correct * 100.0) / total if total > 0 else 0.0, avg_time, float(total) / float(total) if total > 0 else 0.0)
-                display.append("%s: Score: %.1f, Correct: %d, Total: %d, AT: %.1fs" % [game_id, norm_score, correct, total, avg_time])
+                display.append("%s: Score: %.1f, Correct: %d, Total: %d, AT: %.1fs | [score=%.2f, acc=%.2f, avg_time=%.2f, comp=%.2f]" % [game_id, norm_score, correct, total, avg_time, norm_score, (correct * 100.0) / total if total > 0 else 0.0, avg_time, float(total) / float(total) if total > 0 else 0.0])
     return display
 
 
