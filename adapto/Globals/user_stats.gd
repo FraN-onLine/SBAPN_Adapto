@@ -47,9 +47,9 @@ func _default_adaptive_history() -> Dictionary:
 
 # Returns true if the current user has completed at least one full diagnostic round (all games played at least once)
 func has_completed_diagnostic() -> bool:
-       if Global.current_user == null:
-           return false
-       return diagnostic_runs_completed >= 1
+    if Global.current_user == null:
+        return false
+    return diagnostic_runs_completed >= 1
 
 
 func should_prompt_adaptive_first() -> bool:
