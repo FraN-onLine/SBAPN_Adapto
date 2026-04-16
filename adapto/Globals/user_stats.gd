@@ -539,7 +539,7 @@ func _get_default_scene_after_game(current_game_id: String) -> String:
     if idx == -1:
         return get_scene_for_game("game1")
     if idx + 1 == 5:
-        return "res://Menus/game_stats.tscn"
+        return "res://Menus/main_menu.tscn"
     return get_scene_for_game(GAME_SEQUENCE[idx + 1])
 
 
