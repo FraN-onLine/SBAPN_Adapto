@@ -52,7 +52,7 @@ func _show_main_menu_for_user():
 			_setup_admin_all_lessons_toggle()
 			# Ensure all main menu buttons are visible
 			var vbox = main_menu_control.get_node("VBoxContainer")
-			for btn_name in ["Button", "Button2", "Button3", "Button4", "Button5", "Back"]:
+			for btn_name in ["Button", "Button2", "Button3"]:
 				if vbox.has_node(btn_name):
 					vbox.get_node(btn_name).visible = true
 			_apply_instructor_visibility()

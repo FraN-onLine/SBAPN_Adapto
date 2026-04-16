@@ -132,18 +132,19 @@ var overall_stats = {
         "accuracy": [0, 0, 0, 0],
         "total_sum_time": [0, 0, 0, 0],
         "total_questions": [0, 0, 0, 0],
+        "average_score": 0.0,
     },
     "game2": {
         "total_questions_answered": 0,
         "total_questions_correct": 0,
-        "highest_score": 0,
+        "average_score": 0.0,
         "total_time": 0,
         "accuracy": 0.0,
     },
     "game3" : {
         "total_questions_answered": 0,
         "total_questions_correct": 0,
-        "highest_score": 0,
+        "average_score": 0.0,
         "total_time": 0,
         "total_puzzles_completed": 0,
         "accuracy": 0.0,
@@ -151,14 +152,14 @@ var overall_stats = {
     "game4": {
         "total_questions_answered": 0,
         "total_questions_correct": 0,
-        "highest_score": 0,
+        "average_score": 0.0,
         "total_time": 0,
         "accuracy": 0.0,
     },
     "game5": {
         "total_questions_answered": 0,
         "total_questions_correct": 0,
-        "highest_score": 0,
+        "average_score": 0.0,
         "total_time": 0,
         "accuracy": 0.0,
     }
@@ -215,28 +216,13 @@ func start_adaptive_session() -> void:
     save_user_stats()
 # Returns average score for each game for the current user
 func get_average_scores_per_game() -> Dictionary:
-       var result = {}
-       for game_id in GAME_SEQUENCE:
-           if overall_stats.has(game_id):
-               var stat = overall_stats[game_id]
-               if stat.has("total_questions") and stat.has("correct") and stat["total_questions"] is Array:
-                   var total = 0
-                   var correct = 0
-                   for i in range(stat["total_questions"].size()):
-                       total += stat["total_questions"][i]
-                       correct += stat["correct"][i]
-                   result[game_id] = float(correct) / float(total) * 100.0 if total > 0 else 0.0
-               elif stat.has("total_questions_answered") and stat.has("total_questions_correct"):
-                   var total = stat["total_questions_answered"]
-                   var correct = stat["total_questions_correct"]
-                   result[game_id] =  float(correct) / float(total) * 100.0 if total > 0 else 0.0
-               elif stat.has("highest_score"):
-                   result[game_id] = float(stat["highest_score"])
-               else:
-                   result[game_id] = 0.0
-           else:
-               result[game_id] = 0.0
-       return result
+    var result = {}
+    for game_id in GAME_SEQUENCE:
+        if overall_stats.has(game_id) and overall_stats[game_id].has("average_score"):
+            result[game_id] = overall_stats[game_id]["average_score"]
+        else:
+            result[game_id] = 0.0
+    return result
 
 
 # Ends adaptive mode and returns routing to default game order.
@@ -279,54 +265,32 @@ func get_scene_after_game(current_game_id: String) -> String:
     return get_scene_for_game("game1")
 # Returns a dictionary with analysis: best, worst, fastest, slowest game, and average times
 func get_diagnostic_analysis() -> Dictionary:
+    # Use normalized average score for best/worst game, not highest_score
     var result = {
         "best_game": "",
         "worst_game": "",
         "fastest_game": "",
         "slowest_game": "",
         "average_times": {},
-        "scores": {},
-        "accuracies": {}
+        "average_scores": {},
     }
-    var best_score = -INF
-    var worst_score = INF
-    var fastest_time = INF
-    var slowest_time = -INF
+    var best_score = -1.0
+    var worst_score = 9999.0
+    var fastest_time = 999999.0
+    var slowest_time = -1.0
     for game_id in GAME_SEQUENCE:
-        var stat =  overall_stats[game_id] if overall_stats.has(game_id) else null
-        var score = 0.0
-        var accuracy = 0.0
+        var avg_score = 0.0
         var avg_time = 0.0
-        if stat and stat.has("total_questions") and stat.has("correct") and stat.has("total_sum_time"):
-            var total = 0
-            var correct = 0
-            var sum_time = 0.0
-            for i in range(stat["total_questions"].size()):
-                total += stat["total_questions"][i]
-                correct += stat["correct"][i]
-                sum_time += stat["total_sum_time"][i]
-            accuracy =  float(correct) / float(total) * 100.0 if total > 0 else 0.0
-            avg_time = float(sum_time) / float(total) if total > 0 else 0.0
-            score = correct
-        elif stat and stat.has("total_questions_answered") and stat.has("total_questions_correct") and stat.has("total_time"):
-            var total = stat["total_questions_answered"]
-            var correct = stat["total_questions_correct"]
-            var sum_time = stat["total_time"]
-            accuracy = float(correct) / float(total) * 100.0 if total > 0 else 0.0
-            avg_time = float(sum_time) / float(total) if total > 0 else 0.0
-            score = correct
-        elif stat and stat.has("highest_score"):
-            score = float(stat["highest_score"])
-            accuracy =  float(stat["accuracy"]) if stat.has("accuracy") else 0.0
-            avg_time =  float(stat["total_time"]) / float(stat["total_questions_answered"]) if stat.has("total_time") and stat["total_questions_answered"] > 0 else 0.0
-        result["scores"][game_id] = score
-        result["accuracies"][game_id] = accuracy
+        if overall_stats.has(game_id):
+            avg_score = overall_stats[game_id].get("average_score", 0.0)
+            avg_time = overall_stats[game_id].get("average_time_per_item", 0.0)
+        result["average_scores"][game_id] = avg_score
         result["average_times"][game_id] = avg_time
-        if score > best_score:
-            best_score = score
+        if avg_score > best_score:
+            best_score = avg_score
             result["best_game"] = game_id
-        if score < worst_score:
-            worst_score = score
+        if avg_score < worst_score:
+            worst_score = avg_score
             result["worst_game"] = game_id
         if avg_time < fastest_time:
             fastest_time = avg_time
@@ -464,7 +428,7 @@ func update_overall_stats():
                     "accuracy": 0.0,
                 }
 
-    # Track average time per question for all games
+    # Track average time per question for all games and update normalized average_score
     for gid in ["game2", "game3", "game4", "game5"]:
         var item_times = game_stats[gid]["item_times"] if game_stats.has(gid) and game_stats[gid].has("item_times") else []
         var total_time = 0.0
@@ -473,8 +437,16 @@ func update_overall_stats():
             total_time += t
             total_items += 1
         overall_stats[gid]["average_time_per_item"] = total_time / total_items if total_items > 0 else 0.0
+        # Calculate normalized average score for each game
+        var norm_score = 0.0
+        if game_stats[gid].has("total_score") and game_stats[gid].has("questions_answered") and game_stats[gid]["questions_answered"] > 0:
+            var ref_score = float(SCORE_REFERENCE.get(gid, 1000.0))
+            norm_score = clampf(_safe_ratio(game_stats[gid]["total_score"], ref_score), 0.0, 1.0) * 100.0
+        overall_stats[gid]["average_score"] = norm_score
 
     # Game 1 (per-type)
+    var game1_total_score = 0.0
+    var game1_total_questions = 0
     for i in range(4):
         overall_stats["game1"]["correct"][i] += game_stats["game1"]["correct"][i] if game_stats["game1"].has("correct") and game_stats["game1"]["correct"].size() > i else 0
         overall_stats["game1"]["incorrect"][i] += game_stats["game1"]["incorrect"][i] if game_stats["game1"].has("incorrect") and game_stats["game1"]["incorrect"].size() > i else 0
@@ -483,6 +455,13 @@ func update_overall_stats():
         overall_stats["game1"]["total_questions"][i] += game_stats["game1"]["questions"][i] if game_stats["game1"].has("questions") and game_stats["game1"]["questions"].size() > i else 0
         if overall_stats["game1"]["total_questions"][i] > 0:
             overall_stats["game1"]["accuracy"][i] = (overall_stats["game1"]["correct"][i] * 100.0) / overall_stats["game1"]["total_questions"][i]
+        # For normalized average score (game1):
+        var ref_score = float(SCORE_REFERENCE.get("game1", 1000.0))
+        var type_score = float(game_stats["game1"]["correct"][i]) * 100.0 - float(game_stats["game1"]["incorrect"][i]) * 25.0 - float(game_stats["game1"]["timeout"][i]) * 20.0
+        game1_total_score += type_score
+        game1_total_questions += game_stats["game1"]["questions"][i]
+    var norm_score1 = clampf(_safe_ratio(game1_total_score, float(SCORE_REFERENCE.get("game1", 1000.0))), 0.0, 1.0) * 100.0 if game1_total_questions > 0 else 0.0
+    overall_stats["game1"]["average_score"] = norm_score1
 
     # Games 2, 3, 4, 5 (aggregate)
     for gid in ["game2", "game3", "game4", "game5"]:
@@ -490,8 +469,7 @@ func update_overall_stats():
             continue
         overall_stats[gid]["total_questions_answered"] += game_stats[gid].get("questions_answered", 0)
         overall_stats[gid]["total_questions_correct"] += game_stats[gid].get("questions_correct", 0)
-        if game_stats[gid].has("total_score") and game_stats[gid]["total_score"] > overall_stats[gid]["highest_score"]:
-            overall_stats[gid]["highest_score"] = game_stats[gid]["total_score"]
+        # Remove highest_score logic, will use average_score instead
         overall_stats[gid]["total_time"] += game_stats[gid].get("time_taken", 0)
         if overall_stats[gid]["total_questions_answered"] > 0:
             overall_stats[gid]["accuracy"] = (overall_stats[gid]["total_questions_correct"] * 100.0) / overall_stats[gid]["total_questions_answered"]
