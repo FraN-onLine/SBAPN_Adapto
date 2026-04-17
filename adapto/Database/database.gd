@@ -1,7 +1,15 @@
 extends Node
 
-const SAVE_PATH = "user://user_data.json"
+const USE_PROJECT_SAVE_PATH := true
+const PROJECT_SAVE_PATH := "res://Database/user_data.json"
+const USER_SAVE_PATH := "user://user_data.json"
 var db = {}
+
+
+func _get_save_path() -> String:
+	if USE_PROJECT_SAVE_PATH:
+		return PROJECT_SAVE_PATH
+	return USER_SAVE_PATH
 
 func _default_db() -> Dictionary:
 	return {
@@ -56,7 +64,8 @@ func _ready():
 	load_db()
 
 func load_db():
-	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	var save_path := _get_save_path()
+	var file = FileAccess.open(save_path, FileAccess.READ)
 	if file:
 		var content = file.get_as_text()
 		var json = JSON.parse_string(content)
@@ -129,7 +138,8 @@ func _migrate_and_deduplicate_lessons() -> void:
 	db["global_saved_lessons"] = unique_global
 
 func save_db():
-	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	var save_path := _get_save_path()
+	var file = FileAccess.open(save_path, FileAccess.WRITE)
 	if file:
 		var json_string = JSON.stringify(db, "\t")
 		file.store_string(json_string)
