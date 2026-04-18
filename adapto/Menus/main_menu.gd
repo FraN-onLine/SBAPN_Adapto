@@ -87,8 +87,6 @@ func _on_back_button_pressed():
 	$Control/VBoxContainer/Button5.visible = false
 	
 func _on_stats_button_pressed():
-		var scores = UserStats.get_average_scores_per_game()
-		var analysis = UserStats.get_diagnostic_analysis()
 		var game_names = {
 			"game1": "Multiple Choice",
 			"game2": "Jeopardy",
@@ -96,10 +94,18 @@ func _on_stats_button_pressed():
 			"game4": "Matching Game",
 			"game5": "Hangman"
 		}
-		var msg = "Average Scores per Game:\n"
+		var scores = UserStats.get_average_scores_per_game()
+		var analysis = UserStats.get_diagnostic_analysis()
+		var msg = "Average Score and Time per Game (per play session):\n"
 		for game_id in UserStats.GAME_SEQUENCE:
 			var gname = game_names[game_id] if game_names.has(game_id) else game_id
-			msg += gname + ": " + str(round(scores[game_id])) + "%\n"
+			var avg_score = 0.0
+			var avg_time = 0.0
+			if UserStats.overall_stats.has(game_id):
+				avg_score = UserStats.overall_stats[game_id].get("average_score", 0.0)
+				avg_time = UserStats.overall_stats[game_id].get("average_time_per_play", 0.0)
+			msg += gname + ": Score " + str(round(avg_score)) + ", Time " + str(round(avg_time)) + "s\n"
+
 		var best = analysis["best_game"]
 		var worst = analysis["worst_game"]
 		var fastest = analysis["fastest_game"]
@@ -112,7 +118,6 @@ func _on_stats_button_pressed():
 		msg += "\nWorst Game: " + worst_name.capitalize()
 		msg += "\nFastest Game: " + fastest_name.capitalize()
 		msg += "\nSlowest Game: " + slowest_name.capitalize()
-		msg += "\n\nAverage Time per Question (s):\n"
 		show_success_dialog(msg)
 
 

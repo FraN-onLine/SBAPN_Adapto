@@ -428,21 +428,29 @@ func update_overall_stats():
 					"accuracy": 0.0,
 				}
 
-	# Track average time per question for all games and update normalized average_score
+	# Track average time and average score per play session for all games
 	for gid in ["game2", "game3", "game4", "game5"]:
-		var item_times = game_stats[gid]["item_times"] if game_stats.has(gid) and game_stats[gid].has("item_times") else []
-		var total_time = 0.0
-		var total_items = 0
-		for t in item_times:
-			total_time += t
-			total_items += 1
-		overall_stats[gid]["average_time_per_item"] = total_time / total_items if total_items > 0 else 0.0
-		# Calculate normalized average score for each game
-		var norm_score = 0.0
-		if game_stats[gid].has("total_score") and game_stats[gid].has("questions_answered") and game_stats[gid]["questions_answered"] > 0:
+		# Store all session times and scores
+		if not overall_stats[gid].has("all_session_times"):
+			overall_stats[gid]["all_session_times"] = []
+		if not overall_stats[gid].has("all_session_scores"):
+			overall_stats[gid]["all_session_scores"] = []
+		# Add this session's time and normalized score if a new session was played
+		if game_stats[gid].has("time_taken") and game_stats[gid]["time_taken"] > 0:
+			overall_stats[gid]["all_session_times"].append(game_stats[gid]["time_taken"])
 			var ref_score = float(SCORE_REFERENCE.get(gid, 1000.0))
-			norm_score = clampf(_safe_ratio(game_stats[gid]["total_score"], ref_score), 0.0, 1.0) * 100.0
-		overall_stats[gid]["average_score"] = norm_score
+			var norm_score = clampf(_safe_ratio(game_stats[gid]["total_score"], ref_score), 0.0, 1.0) * 1000.0
+			overall_stats[gid]["all_session_scores"].append(norm_score)
+		# Compute average time and average score per play session
+		var total_time = 0.0
+		var total_score = 0.0
+		var session_count = overall_stats[gid]["all_session_times"].size()
+		for t in overall_stats[gid]["all_session_times"]:
+			total_time += t
+		for s in overall_stats[gid]["all_session_scores"]:
+			total_score += s
+		overall_stats[gid]["average_time_per_play"] = total_time / session_count if session_count > 0 else 0.0
+		overall_stats[gid]["average_score"] = total_score / session_count if session_count > 0 else 0.0
 
 	# Game 1 (per-type)
 	var game1_total_score = 0.0
@@ -530,15 +538,14 @@ func _safe_ratio(value: float, denominator: float) -> float:
 
 # Calculates rolling average efficiency for a game.
 func _average_efficiency(game_id: String) -> float:
-	if not adaptive_history.has(game_id):
-		return 0.0
-	var history: Array = adaptive_history[game_id]
-	if history.is_empty():
+	if not overall_stats.has(game_id):
 		return -1.0
-	var total := 0.0
-	for entry in history:
-		total += float(entry)
-	return total / float(history.size())
+	var avg_score = overall_stats[game_id].get("average_score", 0.0)
+	var avg_time = overall_stats[game_id].get("average_time_per_play", 999999.0)
+	# Combine: prioritize higher score, then lower time. Use a weighted formula.
+	var score_component = clampf(avg_score / 1000.0, 0.0, 1.0)
+	var time_component = 1.0 - clampf(avg_time / float(TIME_REFERENCE.get(game_id, 150.0)), 0.0, 1.0)
+	return (score_component * 0.7) + (time_component * 0.3)
 
 
 # Rebuilds ranking from highest to lowest average efficiency.
