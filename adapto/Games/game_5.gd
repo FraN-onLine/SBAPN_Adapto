@@ -50,6 +50,7 @@ var skips_used := 0
 var input_locked := false
 var game_finished := false
 var adaptive_recorded := false
+var stats_recorded := false
 var hint_used_on_current_word := false
 
 var keyboard_buttons: Dictionary = {}
@@ -314,6 +315,7 @@ func _end_game(won: bool) -> void:
 		"skips_used": skips_used,
 		"words_total": game_data.size()
 	})
+	_record_user_stats(elapsed)
 	# Report fair adaptive metrics after persisting local payload.
 	_record_adaptive_performance(accuracy, elapsed)
 
@@ -324,6 +326,22 @@ func _end_game(won: bool) -> void:
 		end_dialog.title = "Time Up"
 		end_dialog.dialog_text = "Time's up!\nScore: %d\nWords: %d/%d" % [score, current_word_index, game_data.size()]
 	end_dialog.popup_centered()
+
+
+func _record_user_stats(elapsed: int) -> void:
+	if stats_recorded:
+		return
+	stats_recorded = true
+
+	var total_answers := mistakes_total + guessed_letters.size()
+	var correct_answers := maxi(0, guessed_letters.size() - mistakes_total)
+
+	UserStats.game_stats["game5"]["questions_answered"] = total_answers
+	UserStats.game_stats["game5"]["questions_correct"] = correct_answers
+	UserStats.game_stats["game5"]["total_score"] = score
+	UserStats.game_stats["game5"]["time_taken"] = elapsed
+	UserStats.game_stats["game5"]["item_times"] = [float(elapsed)]
+	UserStats.update_overall_stats()
 
 func _save_performance(payload: Dictionary) -> void:
 	if Global.current_user == null:

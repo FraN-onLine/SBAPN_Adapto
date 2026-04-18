@@ -36,6 +36,7 @@ var hints_used := 0
 var input_locked := false
 var game_finished := false
 var adaptive_recorded := false
+var stats_recorded := false
 
 
 func _ready() -> void:
@@ -265,14 +266,14 @@ func _on_hint_pressed() -> void:
 			for card_id in ids:
 				var idx := _find_card_index(int(card_id))
 				if idx != -1 and cards[idx]["state"] != "solved":
-					cards[idx]["state"] = "selected"
+					cards[idx]["state"] = "hint"
 					_apply_card_visual(int(card_id))
 
 			await get_tree().create_timer(1.2).timeout
 
 			for card_id in ids:
 				var idx := _find_card_index(int(card_id))
-				if idx != -1 and cards[idx]["state"] == "selected":
+				if idx != -1 and cards[idx]["state"] == "hint":
 					cards[idx]["state"] = "idle"
 					_apply_card_visual(int(card_id))
 
@@ -304,6 +305,9 @@ func _apply_card_visual(card_id: int) -> void:
 		"solved":
 			btn.disabled = true
 			btn.modulate = Color(0.55, 1.0, 0.62, 1.0)
+		"hint":
+			btn.disabled = false
+			btn.modulate = Color(1.0, 0.92, 0.35, 1.0)
 		"selected":
 			btn.disabled = false
 			btn.modulate = Color(0.7, 0.88, 1.0, 1.0)
@@ -354,6 +358,7 @@ func _end_game(won: bool) -> void:
 		"hints_used": hints_used,
 		"pairs_total": total_pairs
 	})
+	_record_user_stats(elapsed)
 	# Report fair adaptive metrics after persisting local payload.
 	_record_adaptive_performance(accuracy, elapsed)
 
@@ -364,6 +369,20 @@ func _end_game(won: bool) -> void:
 		end_dialog.title = "Time Up"
 		end_dialog.dialog_text = "Time's up!\nScore: %d\nMatched %d/%d pairs." % [score, matched_pairs, total_pairs]
 	end_dialog.popup_centered()
+
+
+func _record_user_stats(elapsed: int) -> void:
+	if stats_recorded:
+		return
+	stats_recorded = true
+
+	var attempts := matched_pairs + wrong_attempts
+	UserStats.game_stats["game4"]["questions_answered"] = attempts
+	UserStats.game_stats["game4"]["questions_correct"] = matched_pairs
+	UserStats.game_stats["game4"]["total_score"] = score
+	UserStats.game_stats["game4"]["time_taken"] = elapsed
+	UserStats.game_stats["game4"]["item_times"] = [float(elapsed)]
+	UserStats.update_overall_stats()
 
 
 func _save_performance(payload: Dictionary) -> void:

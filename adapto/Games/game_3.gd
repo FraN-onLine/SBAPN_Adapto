@@ -54,6 +54,7 @@ var solved: Array = []      # bool per placement index
 var wrong_attempts := 0
 var hints_used := 0
 var adaptive_recorded := false
+var stats_recorded := false
 
 
 func _ready() -> void:
@@ -464,9 +465,11 @@ func _on_hint_pressed() -> void:
 		return
 	if selected_idx < 0 or selected_idx >= placements.size():
 		feedback_label.text = "Select a clue first to get a hint."
+		answer_input.grab_focus()
 		return
 	if solved[selected_idx]:
 		feedback_label.text = "That word is already solved."
+		answer_input.grab_focus()
 		return
 
 	var p: Dictionary = placements[selected_idx]
@@ -475,6 +478,7 @@ func _on_hint_pressed() -> void:
 	score = maxi(0, score - HINT_PENALTY)
 	feedback_label.text = "💡  Hint: %s" % hint_text
 	_update_hud()
+	answer_input.grab_focus()
 
 
 func _mark_clue_solved(idx: int) -> void:
@@ -519,12 +523,35 @@ func _end_game(won: bool) -> void:
 		feedback_label.text = "🎉  Excellent!  Crossword complete!  Final score: %d" % score
 	else:
 		feedback_label.text = "⏰  Time's up!  Score: %d  (answers revealed)" % score
+	_record_user_stats(won)
 	# Save normalized performance before adaptive routing.
 	_record_adaptive_performance()
 	var transition_delay := WIN_TRANSITION_DELAY if won else TIMEOUT_REVEAL_DELAY
 	await get_tree().create_timer(transition_delay).timeout
 	# Route to next game using adaptive rank order.
 	get_tree().change_scene_to_file(UserStats.get_scene_after_game("game3"))
+
+
+func _record_user_stats(won: bool) -> void:
+	if stats_recorded:
+		return
+	stats_recorded = true
+
+	var solved_count := 0
+	for state in solved:
+		if bool(state):
+			solved_count += 1
+
+	var attempts := solved_count + wrong_attempts
+	var elapsed := TIME_LIMIT if not won else (TIME_LIMIT - maxi(0, time_remaining))
+
+	UserStats.game_stats["game3"]["questions_answered"] = attempts
+	UserStats.game_stats["game3"]["questions_correct"] = solved_count
+	UserStats.game_stats["game3"]["total_score"] = score
+	UserStats.game_stats["game3"]["time_taken"] = elapsed
+	UserStats.game_stats["game3"]["item_times"] = [float(elapsed)]
+	UserStats.game_stats["game3"]["puzzles_completed"] = solved_count
+	UserStats.update_overall_stats()
 
 
 # Returns a masked hint with first/last + one random internal letter.

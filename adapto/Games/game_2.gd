@@ -19,6 +19,7 @@ var correct_count := 0
 var incorrect_count := 0
 var round_started_unix := 0
 var adaptive_recorded := false
+var stats_recorded := false
 
 func _ready() -> void:
 	randomize()
@@ -158,10 +159,27 @@ func _on_answer_input_text_changed() -> void:
 
 func _check_game_end() -> void:
 	if total_questions > 0 and answered.size() >= total_questions:
+		_record_user_stats()
 		# Persist normalized result before leaving the scene.
 		_record_adaptive_performance()
 		# Route next scene using adaptive ranking.
 		get_tree().change_scene_to_file(UserStats.get_scene_after_game("game2"))
+
+
+func _record_user_stats() -> void:
+	if stats_recorded:
+		return
+	stats_recorded = true
+
+	var answered_total := answered.size()
+	var elapsed := maxi(0, Time.get_unix_time_from_system() - round_started_unix)
+
+	UserStats.game_stats["game2"]["questions_answered"] = answered_total
+	UserStats.game_stats["game2"]["questions_correct"] = correct_count
+	UserStats.game_stats["game2"]["total_score"] = money
+	UserStats.game_stats["game2"]["time_taken"] = elapsed
+	UserStats.game_stats["game2"]["item_times"] = [float(elapsed)]
+	UserStats.update_overall_stats()
 
 
 # Converts Game 2 outcomes into fair adaptive metrics.

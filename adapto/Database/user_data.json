@@ -1,0 +1,137 @@
+{
+	"global_saved_lessons": [],
+	"users": {
+		"a": {
+			"password": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+			"performance": {
+				"adaptive_history": {
+					"game1": [
+						77.8
+					],
+					"game2": [
+						43.9166666666667
+					],
+					"game3": [
+						62.25
+					],
+					"game4": [
+						85.6583333333333
+					],
+					"game5": [
+						42.5
+					]
+				},
+				"adaptive_started_once": false,
+				"diagnostic_runs_completed": 1.0,
+				"game4": {
+					"accuracy": 88.8888888888889,
+					"completed": true,
+					"correct": 8.0,
+					"hints_used": 10.0,
+					"incorrect": 1.0,
+					"lesson_title": "Object Oriented Programming",
+					"max_streak": 8.0,
+					"pairs_total": 8.0,
+					"score": 454.0,
+					"time_spent": 25.0,
+					"timestamp": 1776449152.265
+				},
+				"game5": {
+					"accuracy": 0.0,
+					"completed": true,
+					"hints_used": 0.0,
+					"lesson_title": "Object Oriented Programming",
+					"max_streak": 17.0,
+					"mistakes": 22.0,
+					"score": 1590.0,
+					"skips_used": 0.0,
+					"time_spent": 75.0,
+					"timestamp": 1776449229.41,
+					"words_total": 6.0
+				},
+				"overall_stats": {
+					"game1": {
+						"accuracy": [
+							0.0,
+							50.0,
+							50.0,
+							100.0
+						],
+						"average_score": 80.0,
+						"correct": [
+							0.0,
+							5.0,
+							15.0,
+							5.0
+						],
+						"incorrect": [
+							0.0,
+							5.0,
+							15.0,
+							0.0
+						],
+						"timeout": [
+							0.0,
+							0.0,
+							0.0,
+							0.0
+						],
+						"total_questions": [
+							0.0,
+							10.0,
+							30.0,
+							5.0
+						],
+						"total_sum_time": [
+							0.0,
+							0.0,
+							0.0,
+							10.0
+						],
+						"type": [
+							"keyword",
+							"simple_terms",
+							"definition",
+							"tof"
+						]
+					},
+					"game2": {
+						"accuracy": 0.0,
+						"average_score": 0.0,
+						"average_time_per_item": 13.0,
+						"total_questions_answered": 36.0,
+						"total_questions_correct": 0.0,
+						"total_time": 52.0
+					},
+					"game3": {
+						"accuracy": 60.0,
+						"average_score": 12.5,
+						"average_time_per_item": 132.0,
+						"total_puzzles_completed": 0.0,
+						"total_questions_answered": 30.0,
+						"total_questions_correct": 18.0,
+						"total_time": 396.0
+					},
+					"game4": {
+						"accuracy": 88.8888888888889,
+						"average_score": 37.8333333333333,
+						"average_time_per_item": 25.0,
+						"total_questions_answered": 18.0,
+						"total_questions_correct": 16.0,
+						"total_time": 50.0
+					},
+					"game5": {
+						"accuracy": 0.0,
+						"average_score": 100.0,
+						"average_time_per_item": 75.0,
+						"total_questions_answered": 33.0,
+						"total_questions_correct": 0.0,
+						"total_time": 75.0
+					}
+				}
+			},
+			"role": "student",
+			"saved_lessons": []
+		}
+	}
+}
