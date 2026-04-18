@@ -333,14 +333,15 @@ func _record_user_stats(elapsed: int) -> void:
 		return
 	stats_recorded = true
 
-	var total_answers := mistakes_total + guessed_letters.size()
+	var question_count := game_data.size()
 	var correct_answers := maxi(0, guessed_letters.size() - mistakes_total)
+	var avg_time_per_item = float(elapsed) / float(question_count) if question_count > 0 else 0.0
 
-	UserStats.game_stats["game5"]["questions_answered"] = total_answers
+	UserStats.game_stats["game5"]["questions_answered"] = question_count
 	UserStats.game_stats["game5"]["questions_correct"] = correct_answers
 	UserStats.game_stats["game5"]["total_score"] = score
 	UserStats.game_stats["game5"]["time_taken"] = elapsed
-	UserStats.game_stats["game5"]["item_times"] = [float(elapsed)]
+	UserStats.game_stats["game5"]["item_times"] = [avg_time_per_item]
 	UserStats.update_overall_stats()
 
 func _save_performance(payload: Dictionary) -> void:

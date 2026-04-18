@@ -542,14 +542,15 @@ func _record_user_stats(won: bool) -> void:
 		if bool(state):
 			solved_count += 1
 
-	var attempts := solved_count + wrong_attempts
-	var elapsed := TIME_LIMIT if not won else (TIME_LIMIT - maxi(0, time_remaining))
+	var question_count := placements.size()
+	var elapsed = (TIME_LIMIT - maxi(0, time_remaining)) if won else TIME_LIMIT
+	var avg_time_per_item := float(elapsed) / float(question_count)
 
-	UserStats.game_stats["game3"]["questions_answered"] = attempts
+	UserStats.game_stats["game3"]["questions_answered"] = question_count
 	UserStats.game_stats["game3"]["questions_correct"] = solved_count
 	UserStats.game_stats["game3"]["total_score"] = score
 	UserStats.game_stats["game3"]["time_taken"] = elapsed
-	UserStats.game_stats["game3"]["item_times"] = [float(elapsed)]
+	UserStats.game_stats["game3"]["item_times"] = [avg_time_per_item]
 	UserStats.game_stats["game3"]["puzzles_completed"] = solved_count
 	UserStats.update_overall_stats()
 

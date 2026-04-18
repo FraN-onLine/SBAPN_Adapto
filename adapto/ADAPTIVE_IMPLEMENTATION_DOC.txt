@@ -27,8 +27,8 @@ Core logic is centralized in Globals/user_stats.gd.
 
 - UserStats.get_scene_after_game(current_game_id)
   - During adaptive phase, chooses the current top-ranked game:
-    - leader = UserStats.get_leading_game()
-    - next scene = UserStats.get_scene_for_game(leader)
+	- leader = UserStats.get_leading_game()
+	- next scene = UserStats.get_scene_for_game(leader)
 
 Result:
 - The next game is always the current best-performing game by rolling average efficiency.

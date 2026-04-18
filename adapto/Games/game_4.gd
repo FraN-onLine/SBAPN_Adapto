@@ -376,12 +376,13 @@ func _record_user_stats(elapsed: int) -> void:
 		return
 	stats_recorded = true
 
-	var attempts := matched_pairs + wrong_attempts
-	UserStats.game_stats["game4"]["questions_answered"] = attempts
+	var question_count := total_pairs
+	var avg_time_per_item = float(elapsed) / float(question_count) if question_count > 0 else 0.0
+	UserStats.game_stats["game4"]["questions_answered"] = question_count
 	UserStats.game_stats["game4"]["questions_correct"] = matched_pairs
 	UserStats.game_stats["game4"]["total_score"] = score
 	UserStats.game_stats["game4"]["time_taken"] = elapsed
-	UserStats.game_stats["game4"]["item_times"] = [float(elapsed)]
+	UserStats.game_stats["game4"]["item_times"] = [avg_time_per_item]
 	UserStats.update_overall_stats()
 
 

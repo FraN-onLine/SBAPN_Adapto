@@ -228,6 +228,7 @@ func _on_timer_tick() -> void:
 		UserStats.game_stats["game1"]["timeout"][question_type] += 1
 		selected_option = 0  #wrong answer
 		hp -= 1
+		$HPItem.size.x = hp * 32
 		update_hp_display()
 		if hp <= 0:
 			await get_tree().create_timer(2.0).timeout

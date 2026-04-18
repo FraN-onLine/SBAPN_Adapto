@@ -113,14 +113,6 @@ func _on_stats_button_pressed():
 		msg += "\nFastest Game: " + fastest_name.capitalize()
 		msg += "\nSlowest Game: " + slowest_name.capitalize()
 		msg += "\n\nAverage Time per Question (s):\n"
-		for game_id in UserStats.GAME_SEQUENCE:
-			var gname = game_names[game_id] if game_names.has(game_id) else game_id
-			msg += gname + ": " + str(round(analysis["average_times"][game_id])) + "\n"
-		# Debug: show raw stats display for all games
-		msg += "\n\n[DEBUG] Raw Game Stats Display:\n"
-		var stats_display = UserStats.get_game_stats_display()
-		for line in stats_display:
-			msg += line + "\n"
 		show_success_dialog(msg)
 
 

@@ -171,14 +171,16 @@ func _record_user_stats() -> void:
 		return
 	stats_recorded = true
 
+	var question_count = total_questions
 	var answered_total := answered.size()
 	var elapsed := maxi(0, Time.get_unix_time_from_system() - round_started_unix)
+	var avg_time_per_item = float(elapsed) / float(question_count) if question_count > 0 else 0.0
 
-	UserStats.game_stats["game2"]["questions_answered"] = answered_total
+	UserStats.game_stats["game2"]["questions_answered"] = question_count
 	UserStats.game_stats["game2"]["questions_correct"] = correct_count
 	UserStats.game_stats["game2"]["total_score"] = money
 	UserStats.game_stats["game2"]["time_taken"] = elapsed
-	UserStats.game_stats["game2"]["item_times"] = [float(elapsed)]
+	UserStats.game_stats["game2"]["item_times"] = [avg_time_per_item]
 	UserStats.update_overall_stats()
 
 

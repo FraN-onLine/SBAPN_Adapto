@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b61w5vaor706u"]
+[gd_scene format=3 uid="uid://b61w5vaor706u"]
 
 [ext_resource type="Texture2D" uid="uid://bvt3jdobtlf5c" path="res://Assets/Background/Classroom.png" id="1_11gta"]
 [ext_resource type="Script" uid="uid://dul8ol2xok5ng" path="res://Menus/main_menu.gd" id="1_p3jrs"]
@@ -155,7 +155,7 @@ corner_radius_top_right = 14
 corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
 
-[node name="ColorRect" type="TextureRect"]
+[node name="ColorRect" type="TextureRect" unique_id=88508662]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -166,7 +166,7 @@ grow_vertical = 2
 texture = ExtResource("1_11gta")
 script = ExtResource("1_p3jrs")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1895627105]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -174,7 +174,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=2070866371]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -189,7 +189,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="Button" type="Button" parent="Control/VBoxContainer"]
+[node name="Button" type="Button" parent="Control/VBoxContainer" unique_id=171913757]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
@@ -198,7 +198,7 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "Start "
 
-[node name="Button2" type="Button" parent="Control/VBoxContainer"]
+[node name="Button2" type="Button" parent="Control/VBoxContainer" unique_id=1079897645]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
@@ -207,7 +207,7 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "user data"
 
-[node name="Button3" type="Button" parent="Control/VBoxContainer"]
+[node name="Button3" type="Button" parent="Control/VBoxContainer" unique_id=1596805079]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
@@ -217,7 +217,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "Create Topic
 "
 
-[node name="Button4" type="Button" parent="Control/VBoxContainer"]
+[node name="Button4" type="Button" parent="Control/VBoxContainer" unique_id=122959025]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -228,7 +228,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "Diagnostic test
 "
 
-[node name="Button5" type="Button" parent="Control/VBoxContainer"]
+[node name="Button5" type="Button" parent="Control/VBoxContainer" unique_id=1568673066]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -239,7 +239,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "adaptive test
 "
 
-[node name="TopicSelect" type="Button" parent="Control/VBoxContainer"]
+[node name="TopicSelect" type="Button" parent="Control/VBoxContainer" unique_id=1706541820]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -249,7 +249,7 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "select topic"
 
-[node name="TopicImport" type="Button" parent="Control/VBoxContainer"]
+[node name="TopicImport" type="Button" parent="Control/VBoxContainer" unique_id=2018024113]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -259,7 +259,7 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "Import topic"
 
-[node name="TopicExport" type="Button" parent="Control/VBoxContainer"]
+[node name="TopicExport" type="Button" parent="Control/VBoxContainer" unique_id=1075567635]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -269,7 +269,7 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "Export topic"
 
-[node name="Back" type="Button" parent="Control/VBoxContainer"]
+[node name="Back" type="Button" parent="Control/VBoxContainer" unique_id=1432256046]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -280,25 +280,23 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_nhx3u")
 text = "Back
 "
 
-[node name="Title" type="Sprite2D" parent="."]
+[node name="Title" type="Sprite2D" parent="." unique_id=1439419539]
 position = Vector2(579, 123)
 scale = Vector2(7.01786, 7.125)
 texture = ExtResource("2_at0u2")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_gn11b")
-}
-autoplay = "new_animation"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=95076965]
+libraries/ = SubResource("AnimationLibrary_gn11b")
+autoplay = &"new_animation"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1594301762]
 position = Vector2(967, 407)
 scale = Vector2(4.84961, 4.86719)
 sprite_frames = SubResource("SpriteFrames_b716q")
 autoplay = "default"
 frame_progress = 0.630091
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1249550535]
 visible = false
 layout_mode = 0
 offset_left = 89.0
@@ -306,7 +304,7 @@ offset_top = 65.0
 offset_right = 1161.0
 offset_bottom = 637.0
 
-[node name="ImportChoicePanel" type="Control" parent="."]
+[node name="ImportChoicePanel" type="Control" parent="." unique_id=1884022393]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -315,7 +313,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ChoiceBG" type="ColorRect" parent="ImportChoicePanel"]
+[node name="ChoiceBG" type="ColorRect" parent="ImportChoicePanel" unique_id=757895671]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -324,7 +322,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.65)
 
-[node name="ChoiceBox" type="PanelContainer" parent="ImportChoicePanel"]
+[node name="ChoiceBox" type="PanelContainer" parent="ImportChoicePanel" unique_id=233084305]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -339,11 +337,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="VBox" type="VBoxContainer" parent="ImportChoicePanel/ChoiceBox"]
+[node name="VBox" type="VBoxContainer" parent="ImportChoicePanel/ChoiceBox" unique_id=233699168]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="ChoiceTitle" type="Label" parent="ImportChoicePanel/ChoiceBox/VBox"]
+[node name="ChoiceTitle" type="Label" parent="ImportChoicePanel/ChoiceBox/VBox" unique_id=2112886637]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_fonts/font = ExtResource("3_cxdly")
@@ -351,7 +349,7 @@ theme_override_font_sizes/font_size = 32
 text = "Import Topic"
 horizontal_alignment = 1
 
-[node name="ChoiceSubtitle" type="Label" parent="ImportChoicePanel/ChoiceBox/VBox"]
+[node name="ChoiceSubtitle" type="Label" parent="ImportChoicePanel/ChoiceBox/VBox" unique_id=1609231083]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
 theme_override_font_sizes/font_size = 16
@@ -359,7 +357,7 @@ text = "Choose how you want to import a topic"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="PDFBtn" type="Button" parent="ImportChoicePanel/ChoiceBox/VBox"]
+[node name="PDFBtn" type="Button" parent="ImportChoicePanel/ChoiceBox/VBox" unique_id=1329045099]
 custom_minimum_size = Vector2(0, 68)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -368,7 +366,7 @@ theme_override_font_sizes/font_size = 26
 theme_override_styles/normal = SubResource("StyleBoxFlat_blue")
 text = "Import by PDF"
 
-[node name="PromptBtn" type="Button" parent="ImportChoicePanel/ChoiceBox/VBox"]
+[node name="PromptBtn" type="Button" parent="ImportChoicePanel/ChoiceBox/VBox" unique_id=1757729720]
 custom_minimum_size = Vector2(0, 68)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -377,7 +375,7 @@ theme_override_font_sizes/font_size = 26
 theme_override_styles/normal = SubResource("StyleBoxFlat_green")
 text = "Import by Prompt"
 
-[node name="FileBtn" type="Button" parent="ImportChoicePanel/ChoiceBox/VBox"]
+[node name="FileBtn" type="Button" parent="ImportChoicePanel/ChoiceBox/VBox" unique_id=1799848824]
 custom_minimum_size = Vector2(0, 68)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -386,7 +384,7 @@ theme_override_font_sizes/font_size = 26
 theme_override_styles/normal = SubResource("StyleBoxFlat_blue")
 text = "Import from File"
 
-[node name="ChoiceCancelBtn" type="Button" parent="ImportChoicePanel/ChoiceBox/VBox"]
+[node name="ChoiceCancelBtn" type="Button" parent="ImportChoicePanel/ChoiceBox/VBox" unique_id=370209854]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -395,7 +393,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_red")
 text = "Cancel"
 
-[node name="PromptImportPanel" type="Control" parent="."]
+[node name="PromptImportPanel" type="Control" parent="." unique_id=1917418781]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -404,7 +402,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PromptBG" type="ColorRect" parent="PromptImportPanel"]
+[node name="PromptBG" type="ColorRect" parent="PromptImportPanel" unique_id=1716896648]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -413,7 +411,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.65)
 
-[node name="PromptBox" type="PanelContainer" parent="PromptImportPanel"]
+[node name="PromptBox" type="PanelContainer" parent="PromptImportPanel" unique_id=1434889445]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -428,11 +426,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="VBox" type="VBoxContainer" parent="PromptImportPanel/PromptBox"]
+[node name="VBox" type="VBoxContainer" parent="PromptImportPanel/PromptBox" unique_id=129334138]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="PromptTitle" type="Label" parent="PromptImportPanel/PromptBox/VBox"]
+[node name="PromptTitle" type="Label" parent="PromptImportPanel/PromptBox/VBox" unique_id=1668113483]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_fonts/font = ExtResource("3_cxdly")
@@ -440,44 +438,44 @@ theme_override_font_sizes/font_size = 28
 text = "Import by Prompt"
 horizontal_alignment = 1
 
-[node name="TopicLabel" type="Label" parent="PromptImportPanel/PromptBox/VBox"]
+[node name="TopicLabel" type="Label" parent="PromptImportPanel/PromptBox/VBox" unique_id=1252674472]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 16
 text = "Topic Name:"
 
-[node name="TopicInput" type="LineEdit" parent="PromptImportPanel/PromptBox/VBox"]
+[node name="TopicInput" type="LineEdit" parent="PromptImportPanel/PromptBox/VBox" unique_id=1479114713]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 placeholder_text = "e.g., Machine Learning"
 
-[node name="CountLabel" type="Label" parent="PromptImportPanel/PromptBox/VBox"]
+[node name="CountLabel" type="Label" parent="PromptImportPanel/PromptBox/VBox" unique_id=579451680]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 16
 text = "Number of Questions:"
 
-[node name="CountInput" type="SpinBox" parent="PromptImportPanel/PromptBox/VBox"]
+[node name="CountInput" type="SpinBox" parent="PromptImportPanel/PromptBox/VBox" unique_id=404998769]
 custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
 min_value = 15.0
 max_value = 50.0
 value = 15.0
 
-[node name="FolderLabel" type="Label" parent="PromptImportPanel/PromptBox/VBox"]
+[node name="FolderLabel" type="Label" parent="PromptImportPanel/PromptBox/VBox" unique_id=852791145]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 16
 text = "Folder Name (optional):"
 
-[node name="FolderInput" type="LineEdit" parent="PromptImportPanel/PromptBox/VBox"]
+[node name="FolderInput" type="LineEdit" parent="PromptImportPanel/PromptBox/VBox" unique_id=1273141817]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 placeholder_text = "Leave empty to use topic name"
 
-[node name="GenerateBtn" type="Button" parent="PromptImportPanel/PromptBox/VBox"]
+[node name="GenerateBtn" type="Button" parent="PromptImportPanel/PromptBox/VBox" unique_id=268174694]
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -486,7 +484,7 @@ theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxFlat_green")
 text = "Generate Lesson"
 
-[node name="PromptBackBtn" type="Button" parent="PromptImportPanel/PromptBox/VBox"]
+[node name="PromptBackBtn" type="Button" parent="PromptImportPanel/PromptBox/VBox" unique_id=1100963420]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -495,21 +493,21 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_red")
 text = "Back"
 
-[node name="PDFFileDialog" type="FileDialog" parent="."]
+[node name="PDFFileDialog" type="FileDialog" parent="." unique_id=1394102126]
 title = "Select a PDF File"
 access = 2
 filters = PackedStringArray("*.pdf ; PDF Files")
 
-[node name="TresImportDialog" type="FileDialog" parent="."]
+[node name="TresImportDialog" type="FileDialog" parent="." unique_id=1664443499]
 title = "Select a .tres File"
 access = 2
 filters = PackedStringArray("*.tres ; TRES Files")
 
-[node name="TresExportDialog" type="FileDialog" parent="."]
+[node name="TresExportDialog" type="FileDialog" parent="." unique_id=371202092]
 title = "Save Lesson as .tres"
 filters = PackedStringArray("*.tres ; TRES Files")
 
-[node name="TopicSelectPanel" type="Control" parent="."]
+[node name="TopicSelectPanel" type="Control" parent="." unique_id=6184785]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -518,7 +516,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopicBG" type="ColorRect" parent="TopicSelectPanel"]
+[node name="TopicBG" type="ColorRect" parent="TopicSelectPanel" unique_id=1989450149]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -527,7 +525,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.65)
 
-[node name="TopicBox" type="PanelContainer" parent="TopicSelectPanel"]
+[node name="TopicBox" type="PanelContainer" parent="TopicSelectPanel" unique_id=1305180732]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -542,11 +540,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="VBox" type="VBoxContainer" parent="TopicSelectPanel/TopicBox"]
+[node name="VBox" type="VBoxContainer" parent="TopicSelectPanel/TopicBox" unique_id=1942036387]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="TopicTitle" type="Label" parent="TopicSelectPanel/TopicBox/VBox"]
+[node name="TopicTitle" type="Label" parent="TopicSelectPanel/TopicBox/VBox" unique_id=652339227]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_fonts/font = ExtResource("3_cxdly")
@@ -554,23 +552,23 @@ theme_override_font_sizes/font_size = 32
 text = "Select a Topic"
 horizontal_alignment = 1
 
-[node name="CurrentLabel" type="Label" parent="TopicSelectPanel/TopicBox/VBox"]
+[node name="CurrentLabel" type="Label" parent="TopicSelectPanel/TopicBox/VBox" unique_id=1793582248]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
 theme_override_font_sizes/font_size = 15
 text = "No topic selected"
 horizontal_alignment = 1
 
-[node name="Scroll" type="ScrollContainer" parent="TopicSelectPanel/TopicBox/VBox"]
+[node name="Scroll" type="ScrollContainer" parent="TopicSelectPanel/TopicBox/VBox" unique_id=361545153]
 custom_minimum_size = Vector2(0, 350)
 layout_mode = 2
 
-[node name="TopicListVBox" type="VBoxContainer" parent="TopicSelectPanel/TopicBox/VBox/Scroll"]
+[node name="TopicListVBox" type="VBoxContainer" parent="TopicSelectPanel/TopicBox/VBox/Scroll" unique_id=226430964]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="TopicCancelBtn" type="Button" parent="TopicSelectPanel/TopicBox/VBox"]
+[node name="TopicCancelBtn" type="Button" parent="TopicSelectPanel/TopicBox/VBox" unique_id=648679938]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -579,11 +577,11 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_red")
 text = "Cancel"
 
-[node name="LoginScreen" parent="." instance=ExtResource("5_abcde")]
+[node name="LoginScreen" parent="." unique_id=959997949 instance=ExtResource("5_abcde")]
 visible = false
 layout_mode = 1
 
-[node name="RegisterScreen" parent="." instance=ExtResource("6_fghij")]
+[node name="RegisterScreen" parent="." unique_id=1610512127 instance=ExtResource("6_fghij")]
 visible = false
 layout_mode = 1
 
