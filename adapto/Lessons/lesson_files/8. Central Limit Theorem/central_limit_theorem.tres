@@ -1,0 +1,154 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=10 format=3]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://adapto/Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://adapto/Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_clt_001"]
+script = ExtResource("1_7hrog")
+id = "clt_001"
+term = "Population"
+keyword = "Population"
+definition = "The entire set of individuals or items that are of interest in a study."
+simple_terms = "The whole group we're studying."
+examples = ["All the students in a university.", "All possible scores a player can get in a game."]
+accepted_terms = ["Population", "Universe"]
+difficulty = 1
+related_to = ["Sample", "Parameter"]
+tof_statement = {
+"false": "A population refers only to a small subset selected for analysis.", 
+"true": "A population includes all possible outcomes or individuals relevant to a statistical inquiry."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_clt_002"]
+script = ExtResource("1_7hrog")
+id = "clt_002"
+term = "Sample Mean"
+keyword = "Sample Mean"
+definition = "The average of the values in a specific sample taken from a population."
+simple_terms = "The average of a small group taken from the whole."
+examples = ["The average score of 5 students selected from a class of 30.", "The mean of a sample of 2 scores taken from possible scores of 2, 4, 6, 8."]
+accepted_terms = ["Sample Mean", "Mean of Sample", "Average of Sample"]
+difficulty = 1
+related_to = ["Population Mean", "Sampling Distribution"]
+tof_statement = {
+"false": "The sample mean is always equal to the population mean.", 
+"true": "The sample mean is calculated from a subset of data, not the entire population."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_clt_003"]
+script = ExtResource("1_7hrog")
+id = "clt_003"
+term = "Sampling Distribution of the Sample Mean"
+keyword = "Sampling Distribution"
+definition = "A probability distribution of all possible sample means, taken from a population, for a given sample size."
+simple_terms = "A list of all possible averages from samples and how often they occur."
+examples = ["The distribution of the means of all possible samples of size 2 taken from the scores {2, 4, 6, 8}.", "The distribution of averages of samples of size 30 from a large population."]
+accepted_terms = ["Sampling Distribution", "Distribution of Sample Means"]
+difficulty = 2
+related_to = ["Sample Mean", "Central Limit Theorem"]
+tof_statement = {
+"false": "The sampling distribution is the same as the original population distribution.", 
+"true": "The sampling distribution describes the behavior of sample means across many different samples."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_clt_004"]
+script = ExtResource("1_7hrog")
+id = "clt_004"
+term = "Central Limit Theorem (CLT)"
+keyword = "Central Limit Theorem"
+definition = "A theorem stating that, regardless of the population's distribution, the sampling distribution of the sample mean will be approximately normally distributed if the sample size is sufficiently large (often n ≥ 30)."
+simple_terms = "As you take more samples, their averages start to look like a bell curve, even if the original data isn't a bell curve."
+examples = ["If you take many samples of size 30 from any population, the means of those samples will form a normal distribution.", "The CLT explains why the distribution of sample means gets narrower and more bell-shaped as sample size increases."]
+accepted_terms = ["CLT", "Central Limit Theorem"]
+difficulty = 2
+related_to = ["Sampling Distribution", "Normal Distribution", "Sample Size"]
+tof_statement = {
+"false": "The Central Limit Theorem states that the population itself must be normally distributed for the theorem to hold.", 
+"true": "The Central Limit Theorem applies to the distribution of sample means, not the original population distribution."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_clt_005"]
+script = ExtResource("1_7hrog")
+id = "clt_005"
+term = "Standard Error"
+keyword = "Standard Error"
+definition = "The standard deviation of the sampling distribution of the sample mean. It measures the typical difference between a sample mean and the population mean."
+simple_terms = "How spread out the sample averages are from the true average."
+examples = ["For a sample size of 60, a population mean of 120, and a standard deviation of 45, the standard error is 45/\u221a60.", "The standard error decreases as the sample size increases."]
+accepted_terms = ["Standard Error", "SE", "Standard Deviation of Sample Mean"]
+difficulty = 2
+related_to = ["Standard Deviation", "Sample Size", "Sampling Distribution"]
+tof_statement = {
+"false": "The standard error is the same as the population standard deviation.", 
+"true": "The standard error quantifies the variability of sample means around the population mean."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_clt_006"]
+script = ExtResource("1_7hrog")
+id = "clt_006"
+term = "Z-score"
+keyword = "Z-score"
+definition = "A measure of how many standard deviations a particular data point is away from the mean. For sample means, it's calculated using the standard error."
+simple_terms = "How many 'steps' (standard errors) away a sample average is from the population average."
+examples = ["To find the probability that a sample mean is between 112 and 125, you calculate the z-scores for both values using the population mean, standard deviation, and sample size.", "A z-score of 0 means the sample mean is exactly equal to the population mean."]
+accepted_terms = ["Z-score", "Standard Score"]
+difficulty = 2
+related_to = ["Central Limit Theorem", "Standard Error", "Probability"]
+tof_statement = {
+"false": "The z-score is calculated solely based on the sample mean and population standard deviation.", 
+"true": "The z-score helps convert a sample mean into a standardized value to find probabilities using the standard normal distribution."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_clt_007"]
+script = ExtResource("1_7hrog")
+id = "clt_007"
+term = "Normal Distribution"
+keyword = "Normal Distribution"
+definition = "A symmetrical probability distribution characterized by a bell-shaped curve, where most of the data clusters around the mean."
+simple_terms = "A bell curve; a common pattern where data is centered and tapers off equally on both sides."
+examples = ["Height of adult males often follows a normal distribution.", "The Central Limit Theorem suggests that the distribution of sample means approaches a normal distribution."]
+accepted_terms = ["Normal Distribution", "Bell Curve", "Gaussian Distribution"]
+difficulty = 1
+related_to = ["Central Limit Theorem", "Standard Normal Table"]
+tof_statement = {
+"false": "A normal distribution is always skewed to the right.", 
+"true": "In a normal distribution, the mean, median, and mode are all equal and located at the center of the distribution."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_clt_008"]
+script = ExtResource("1_7hrog")
+id = "clt_008"
+term = "Application of CLT in Exercises"
+keyword = "Exercise Application"
+definition = "Using the Central Limit Theorem to calculate probabilities related to sample means, often involving finding z-scores and using a standard normal table."
+simple_terms = "Using the CLT to solve problems about sample averages."
+examples = ["Exercise: Find the probability that a sample mean falls within a certain range, given population parameters and sample size.", "Assignment: Calculate probabilities for sample means being greater or less than a specific value using the CLT."]
+accepted_terms = ["CLT Application", "Statistical Problem Solving"]
+difficulty = 3
+related_to = ["Central Limit Theorem", "Z-score", "Probability", "Standard Normal Table"]
+tof_statement = {
+"false": "The Central Limit Theorem is only useful when the population itself is normally distributed.", 
+"true": "The Central Limit Theorem allows us to make inferences about population parameters based on sample statistics, even without knowing the original population distribution."
+}
+type_of_information = ["apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Central Limit Theorem"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_clt_001"), SubResource("Resource_clt_002"), SubResource("Resource_clt_003"), SubResource("Resource_clt_004"), SubResource("Resource_clt_005"), SubResource("Resource_clt_006"), SubResource("Resource_clt_007"), SubResource("Resource_clt_008")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"

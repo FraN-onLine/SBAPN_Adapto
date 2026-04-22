@@ -1,0 +1,550 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=32 format=3]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://adapto/Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://adapto/Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_ai_sig1"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG1"
+term = "Psychoanalysis"
+keyword = "unconscious mind"
+definition = "A therapeutic approach and theory developed by Sigmund Freud, focusing on the exploration of the unconscious mind to understand and treat psychological disorders."
+simple_terms = "Talking therapy to uncover hidden thoughts."
+examples = ["A patient discussing dreams to reveal underlying anxieties.", "Therapist using free association to explore a patient's thoughts."]
+accepted_terms = ["Freudian analysis", "depth psychology"]
+difficulty = 1
+related_to = ["unconscious", "id", "ego", "superego", "defense mechanisms"]
+tof_statement = {
+"false": "Psychoanalysis primarily focuses on conscious decision-making.", 
+"true": "Psychoanalysis aims to bring unconscious material into conscious awareness."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig2"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG2"
+term = "Id"
+keyword = "pleasure principle"
+definition = "The most primitive part of the personality, present from birth, that operates entirely on the pleasure principle, seeking immediate gratification of desires and needs."
+simple_terms = "The 'want it now' part of you."
+examples = ["A baby crying for food when hungry.", "An impulse to grab a cookie without thinking."]
+accepted_terms = ["instinctual drives", "unconscious desires"]
+difficulty = 1
+related_to = ["ego", "superego", "unconscious", "libido"]
+tof_statement = {
+"false": "The id operates on the reality principle, delaying gratification.", 
+"true": "The id is driven by the desire for immediate pleasure and satisfaction."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig3"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG3"
+term = "Ego"
+keyword = "reality principle"
+definition = "The part of the personality that develops from the id and operates on the reality principle, mediating between the demands of the id, the superego, and the external world."
+simple_terms = "The 'planner' or 'decision-maker'."
+examples = ["Deciding to save money for a desired item instead of buying it immediately.", "Finding a socially acceptable way to express anger."]
+accepted_terms = ["conscious self", "mediator"]
+difficulty = 1
+related_to = ["id", "superego", "conscious", "defense mechanisms"]
+tof_statement = {
+"false": "The ego always acts on impulse to fulfill immediate desires.", 
+"true": "The ego tries to satisfy the id's desires in realistic and socially acceptable ways."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig4"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG4"
+term = "Superego"
+keyword = "morality"
+definition = "The part of the personality that develops last, representing internalized moral standards and ideals learned from parents and society, striving for perfection."
+simple_terms = "Your 'conscience' or 'moral compass'."
+examples = ["Feeling guilty after lying.", "Striving to be a good person and follow rules."]
+accepted_terms = ["conscience", "moral conscience"]
+difficulty = 1
+related_to = ["id", "ego", "morality", "internalization"]
+tof_statement = {
+"false": "The superego is solely focused on seeking immediate pleasure.", 
+"true": "The superego judges actions based on internalized moral standards."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig5"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG5"
+term = "Unconscious Mind"
+keyword = "hidden thoughts"
+definition = "The vast reservoir of feelings, thoughts, urges, and memories that are outside of our conscious awareness, significantly influencing behavior."
+simple_terms = "Things you don't know you're thinking or feeling."
+examples = ["Forgotten childhood memories that affect adult relationships.", "Hidden desires that drive certain behaviors."]
+accepted_terms = ["subconscious", "preconscious"]
+difficulty = 1
+related_to = ["id", "ego", "superego", "dreams", "psychoanalysis"]
+tof_statement = {
+"false": "The unconscious mind is the same as our conscious awareness.", 
+"true": "The unconscious mind contains repressed thoughts and desires that influence behavior."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig6"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG6"
+term = "Defense Mechanisms"
+keyword = "reduce anxiety"
+definition = "Unconscious psychological strategies used to protect a person from anxiety arising from unacceptable thoughts or feelings."
+simple_terms = "Mental tricks to avoid feeling bad."
+examples = ["Denial: Refusing to accept a painful reality.", "Projection: Attributing one's own unacceptable thoughts to others."]
+accepted_terms = ["ego defense mechanisms", "coping mechanisms"]
+difficulty = 2
+related_to = ["ego", "anxiety", "repression", "denial", "projection"]
+tof_statement = {
+"false": "Defense mechanisms are always conscious and deliberate actions.", 
+"true": "Defense mechanisms operate unconsciously to protect the ego."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig7"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG7"
+term = "Repression"
+keyword = "forgetting"
+definition = "The most fundamental defense mechanism, where unacceptable or painful thoughts, memories, or impulses are pushed into the unconscious."
+simple_terms = "Pushing bad memories away so you don't remember them."
+examples = ["A person who experienced childhood trauma cannot recall any details of that period.", "Forgetting an embarrassing event."]
+accepted_terms = ["motivated forgetting", "unconscious forgetting"]
+difficulty = 2
+related_to = ["defense mechanisms", "unconscious", "trauma", "memory"]
+tof_statement = {
+"false": "Repression is a conscious decision to ignore unpleasant feelings.", 
+"true": "Repression is an unconscious process of pushing distressing thoughts out of awareness."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig8"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG8"
+term = "Denial"
+keyword = "refusal"
+definition = "A defense mechanism where an individual refuses to accept reality or facts, acting as if a painful event, thought, or feeling did not exist."
+simple_terms = "Pretending something bad isn't happening."
+examples = ["A smoker refusing to admit that smoking is harmful.", "Someone diagnosed with a serious illness acting as if nothing is wrong."]
+accepted_terms = ["reality denial", "refusal of reality"]
+difficulty = 1
+related_to = ["defense mechanisms", "ego", "anxiety", "reality"]
+tof_statement = {
+"false": "Denial is about acknowledging and processing difficult emotions.", 
+"true": "Denial involves rejecting painful external realities or facts."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig9"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG9"
+term = "Projection"
+keyword = "blaming"
+definition = "A defense mechanism where an individual attributes their own unacceptable thoughts, feelings, or motives to another person."
+simple_terms = "Accusing others of what you're secretly doing or thinking."
+examples = ["Someone who is cheating on their partner suspects their partner is cheating on them.", "A person who is angry accuses others of being hostile."]
+accepted_terms = ["displacement of blame", "attributing motives"]
+difficulty = 2
+related_to = ["defense mechanisms", "ego", "unconscious", "attribution"]
+tof_statement = {
+"false": "Projection is the act of taking responsibility for one's own negative feelings.", 
+"true": "Projection involves seeing one's own unacceptable traits in others."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig10"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG10"
+term = "Psychosexual Stages"
+keyword = "child development"
+definition = "Freud's theory that personality develops through a series of stages in childhood, each focused on a different erogenous zone, and that fixation at any stage can lead to adult personality traits."
+simple_terms = "Stages of development based on pleasure zones."
+examples = ["The Oral Stage (0-1 year) focuses on the mouth.", "The Phallic Stage (3-6 years) involves the genitals and the Oedipus complex."]
+accepted_terms = ["stages of development", "erogenous zones"]
+difficulty = 2
+related_to = ["oral stage", "anal stage", "phallic stage", "latency stage", "genital stage", "fixation"]
+tof_statement = {
+"false": "Freud's psychosexual stages occur only in adulthood.", 
+"true": "Freud believed that experiences in childhood psychosexual stages significantly shape adult personality."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig11"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG11"
+term = "Oral Stage"
+keyword = "mouth"
+definition = "The first psychosexual stage (birth to 1 year), where the infant's primary source of pleasure is the mouth (sucking, biting, chewing)."
+simple_terms = "Pleasure from the mouth: feeding, sucking."
+examples = ["An infant finding comfort in breastfeeding.", "A child who chews on toys."]
+accepted_terms = ["oral fixation", "oral phase"]
+difficulty = 2
+related_to = ["psychosexual stages", "id", "fixation", "libido"]
+tof_statement = {
+"false": "The oral stage is characterized by the development of the superego.", 
+"true": "In the oral stage, the infant's pleasure is centered around oral activities like sucking and biting."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig12"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG12"
+term = "Anal Stage"
+keyword = "toilet training"
+definition = "The second psychosexual stage (1 to 3 years), characterized by the child's focus on bowel and bladder control (toilet training)."
+simple_terms = "Pleasure from controlling bowel movements."
+examples = ["A child learning to use the toilet.", "Resistance or enjoyment during toilet training."]
+accepted_terms = ["anal fixation", "anal phase"]
+difficulty = 2
+related_to = ["psychosexual stages", "ego", "fixation", "control"]
+tof_statement = {
+"false": "During the anal stage, the primary focus is on oral gratification.", 
+"true": "The anal stage focuses on the child's experience with toilet training and control over bodily functions."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig13"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG13"
+term = "Phallic Stage"
+keyword = "genitals"
+definition = "The third psychosexual stage (3 to 6 years), where the child becomes aware of and focuses on their genitals and the Oedipus/Electra complex."
+simple_terms = "Awareness of genitals and attraction to the opposite-sex parent."
+examples = ["A boy developing an unconscious desire for his mother and rivalry with his father (Oedipus complex).", "A girl developing an unconscious desire for her father and rivalry with her mother (Electra complex)."]
+accepted_terms = ["Oedipus complex", "Electra complex", "phallic phase"]
+difficulty = 3
+related_to = ["psychosexual stages", "ego", "superego", "identification", "gender identity"]
+tof_statement = {
+"false": "The phallic stage is primarily concerned with oral pleasures.", 
+"true": "The phallic stage is significant for the development of the superego through identification with the same-sex parent."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig14"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG14"
+term = "Oedipus Complex"
+keyword = "father rivalry"
+definition = "During the phallic stage, a boy's unconscious desire for his mother and feelings of rivalry and hostility toward his father."
+simple_terms = "Boy wants mom, sees dad as rival."
+examples = ["A young boy showing jealousy when his father interacts with his mother.", "A child wanting to 'marry' the parent of the opposite sex."]
+accepted_terms = ["Electra complex"]
+difficulty = 3
+related_to = ["phallic stage", "superego", "identification", "gender development"]
+tof_statement = {
+"false": "The Oedipus complex is a conscious feeling of affection for all family members.", 
+"true": "The Oedipus complex involves a child's unconscious attraction to the parent of the opposite sex and rivalry with the same-sex parent."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig15"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG15"
+term = "Latency Stage"
+keyword = "dormant"
+definition = "The fourth psychosexual stage (6 years to puberty), where sexual urges are dormant, and the child focuses on social and intellectual development."
+simple_terms = "Sexual feelings are quiet; focus on school and friends."
+examples = ["Children playing with same-sex friends.", "Interest in learning and developing skills."]
+accepted_terms = ["latency phase"]
+difficulty = 2
+related_to = ["psychosexual stages", "social development", "intellectual development"]
+tof_statement = {
+"false": "The latency stage is characterized by intense sexual exploration.", 
+"true": "During the latency stage, sexual energy is redirected towards non-sexual pursuits like learning and socialization."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig16"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG16"
+term = "Genital Stage"
+keyword = "mature sexuality"
+definition = "The fifth and final psychosexual stage (puberty onwards), where individuals develop mature sexual interests and seek fulfillment in relationships."
+simple_terms = "Mature sexual interests and relationships."
+examples = ["Forming intimate romantic relationships.", "Developing a healthy interest in sexual intimacy."]
+accepted_terms = ["genital phase"]
+difficulty = 2
+related_to = ["psychosexual stages", "libido", "relationships", "adulthood"]
+tof_statement = {
+"false": "The genital stage is marked by the resolution of the Oedipus complex and a return to oral fixation.", 
+"true": "The genital stage involves the development of mature sexuality and the ability to form healthy relationships."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig17"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG17"
+term = "Fixation"
+keyword = "stuck"
+definition = "A persistent focus on an earlier psychosexual stage due to unresolved conflicts or excessive gratification/frustration, leading to specific personality traits in adulthood."
+simple_terms = "Getting 'stuck' in a developmental stage."
+examples = ["Oral fixation leading to smoking, excessive eating, or nail-biting.", "Anal-retentive personality (stingy, orderly) due to harsh toilet training."]
+accepted_terms = ["stage fixation", "psychosexual fixation"]
+difficulty = 3
+related_to = ["psychosexual stages", "unresolved conflicts", "personality traits", "oral stage", "anal stage"]
+tof_statement = {
+"false": "Fixation is a conscious choice made in adulthood to focus on childhood experiences.", 
+"true": "Fixation occurs when unresolved issues from a psychosexual stage affect adult personality."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig18"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG18"
+term = "Libido"
+keyword = "life force"
+definition = "Freud's concept of psychic energy or sexual drive that fuels the id and motivates behavior, particularly during the psychosexual stages."
+simple_terms = "Sexual energy or life drive."
+examples = ["The drive to seek pleasure in the oral stage.", "Sexual energy that becomes focused on romantic relationships in the genital stage."]
+accepted_terms = ["psychic energy", "sexual drive"]
+difficulty = 2
+related_to = ["id", "psychosexual stages", "energy", "motivation"]
+tof_statement = {
+"false": "Libido refers only to conscious sexual desires.", 
+"true": "Libido is the psychic energy that drives the id and is central to Freud's theory of psychosexual development."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig19"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG19"
+term = "Dreams"
+keyword = "wish fulfillment"
+definition = "Freud viewed dreams as the 'royal road to the unconscious,' representing disguised fulfillment of repressed wishes and desires."
+simple_terms = "Dreams reveal hidden desires."
+examples = ["Dreaming of flying might represent a desire for freedom.", "Dreaming of being chased could symbolize avoiding a problem."]
+accepted_terms = ["dream analysis", "wish fulfillment theory"]
+difficulty = 2
+related_to = ["unconscious", "interpretation", "manifest content", "latent content"]
+tof_statement = {
+"false": "Freud thought dreams were random neural firings with no psychological meaning.", 
+"true": "Freud believed that dreams are a way for the unconscious to express repressed wishes, often in a symbolic form."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig20"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG20"
+term = "Manifest Content"
+keyword = "dream story"
+definition = "The remembered storyline of a dream, the actual images and events that occur in the dream."
+simple_terms = "What you actually see and remember in a dream."
+examples = ["Dreaming you are flying over a city.", "Dreaming you are talking to a deceased relative."]
+accepted_terms = ["surface content", "dream imagery"]
+difficulty = 2
+related_to = ["dreams", "latent content", "dream analysis", "symbols"]
+tof_statement = {
+"false": "The manifest content represents the hidden, symbolic meaning of a dream.", 
+"true": "The manifest content is the literal, remembered storyline of a dream."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig21"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG21"
+term = "Latent Content"
+keyword = "hidden meaning"
+definition = "The underlying, hidden meaning of a dream, representing the unconscious wishes and desires that are being disguised."
+simple_terms = "The secret message or meaning of a dream."
+examples = ["The latent content of dreaming about a snake might represent a phallic symbol or repressed fear.", "Dreaming of falling might symbolize a loss of control or insecurity."]
+accepted_terms = ["hidden meaning", "symbolic meaning", "unconscious meaning"]
+difficulty = 3
+related_to = ["dreams", "manifest content", "unconscious", "symbols", "interpretation"]
+tof_statement = {
+"false": "The latent content is the part of the dream that is easily remembered.", 
+"true": "The latent content refers to the symbolic, hidden meaning of a dream."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig22"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG22"
+term = "Free Association"
+keyword = "say anything"
+definition = "A psychoanalytic technique where the patient is encouraged to say whatever comes to mind without censorship, allowing unconscious thoughts to surface."
+simple_terms = "Saying whatever pops into your head without holding back."
+examples = ["A patient talking about a random memory that suddenly comes to mind during therapy.", "Describing a dream in detail, including seemingly irrelevant thoughts."]
+accepted_terms = ["uninhibited speech", "spontaneous utterance"]
+difficulty = 2
+related_to = ["psychoanalysis", "unconscious", "therapy", "catharsis"]
+tof_statement = {
+"false": "Free association requires patients to carefully filter their thoughts before speaking.", 
+"true": "Free association is a technique used in psychoanalysis to access unconscious material by speaking freely."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig23"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG23"
+term = "Catharsis"
+keyword = "emotional release"
+definition = "The process of releasing strong or repressed emotions, often achieved through psychoanalytic therapy, leading to a sense of relief."
+simple_terms = "Letting out pent-up emotions for relief."
+examples = ["Crying uncontrollably during a therapy session after discussing a traumatic event.", "Expressing anger that has been suppressed for a long time."]
+accepted_terms = ["emotional release", "abreaction"]
+difficulty = 2
+related_to = ["psychoanalysis", "emotions", "repression", "therapy"]
+tof_statement = {
+"false": "Catharsis involves suppressing emotions to maintain control.", 
+"true": "Catharsis is the emotional release experienced when repressed feelings are brought to the surface."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig24"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG24"
+term = "Transference"
+keyword = "redirected feelings"
+definition = "The unconscious redirection of feelings from one person (often a parent) to another (often the therapist) during therapy."
+simple_terms = "Treating your therapist like someone from your past."
+examples = ["A patient feeling angry at their therapist because the therapist reminds them of a critical parent.", "A patient developing romantic feelings for their therapist."]
+accepted_terms = ["therapeutic transference", "emotional redirection"]
+difficulty = 3
+related_to = ["psychoanalysis", "therapy", "unconscious", "relationships"]
+tof_statement = {
+"false": "Transference is a conscious and deliberate attempt to manipulate the therapist.", 
+"true": "Transference occurs when a patient unconsciously projects feelings about past relationships onto the therapist."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig25"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG25"
+term = "Countertransference"
+keyword = "therapist's feelings"
+definition = "The therapist's unconscious emotional reaction to the patient, often stemming from the therapist's own past experiences or unresolved conflicts."
+simple_terms = "Therapist's unconscious feelings about the patient."
+examples = ["A therapist feeling overly protective of a patient who reminds them of a sibling.", "A therapist feeling irritated by a patient due to their own unresolved issues."]
+accepted_terms = ["therapist reaction", "emotional response"]
+difficulty = 3
+related_to = ["psychoanalysis", "therapy", "unconscious", "therapist bias"]
+tof_statement = {
+"false": "Countertransference is solely the patient's responsibility to manage.", 
+"true": "Countertransference refers to the therapist's emotional reaction to the patient, influenced by the therapist's own unconscious."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig26"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG26"
+term = "Alfred Adler"
+keyword = "individual psychology"
+definition = "A psychotherapist who was initially a follower of Freud but later broke away to develop his own theory of 'individual psychology,' emphasizing social factors and the drive for superiority."
+simple_terms = "Freud's former student who focused on social needs and overcoming inferiority."
+examples = ["Adler's concept of the 'inferiority complex'.", "His focus on birth order and its influence on personality."]
+accepted_terms = ["individual psychology", "inferiority complex"]
+difficulty = 2
+related_to = ["Freud", "individual psychology", "inferiority complex", "birth order", "social factors"]
+tof_statement = {
+"false": "Alfred Adler fully agreed with Freud's theories on psychosexual stages and the id.", 
+"true": "Alfred Adler developed 'individual psychology,' which differed from Freud's by emphasizing social influences and the drive for superiority."
+}
+type_of_information = ["definition", "biography"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig27"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG27"
+term = "Carl Jung"
+keyword = "collective unconscious"
+definition = "A Swiss psychiatrist and psychoanalyst who founded analytical psychology, diverging from Freud by introducing concepts like the collective unconscious, archetypes, and individuation."
+simple_terms = "Freud's protégé who introduced universal unconscious concepts and archetypes."
+examples = ["Jung's concept of archetypes like the 'Hero' or the 'Shadow'.", "His idea of the 'collective unconscious' shared by all humans."]
+accepted_terms = ["analytical psychology", "collective unconscious", "archetypes", "individuation"]
+difficulty = 2
+related_to = ["Freud", "analytical psychology", "collective unconscious", "archetypes", "individuation"]
+tof_statement = {
+"false": "Carl Jung believed personality was solely determined by early childhood experiences.", 
+"true": "Carl Jung introduced the concept of the collective unconscious, a shared reservoir of human experience."
+}
+type_of_information = ["definition", "biography"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig28"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG28"
+term = "Archetypes"
+keyword = "universal patterns"
+definition = "Universal, archaic patterns and images that derive from the collective unconscious and are the psychic counterpart of the instincts."
+simple_terms = "Universal symbols or patterns found in stories and myths."
+examples = ["The Hero archetype: representing courage and overcoming challenges.", "The Mother archetype: representing nurturing and fertility."]
+accepted_terms = ["universal images", "primordial images"]
+difficulty = 3
+related_to = ["collective unconscious", "Carl Jung", "symbols", "mythology"]
+tof_statement = {
+"false": "Archetypes are unique to individual personal experiences.", 
+"true": "Archetypes are universal patterns of thought and behavior that emerge from the collective unconscious."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig29"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG29"
+term = "Ego Psychology"
+keyword = "ego strength"
+definition = "A school of psychoanalytic thought that emphasizes the ego's role in development and its ability to adapt to the environment, rather than focusing solely on the id's impulses."
+simple_terms = "Focuses on the ego's ability to cope and adapt."
+examples = ["Studying how the ego develops coping mechanisms to deal with stress.", "Analyzing the ego's role in maintaining a sense of self."]
+accepted_terms = ["ego functioning", "adaptation"]
+difficulty = 3
+related_to = ["ego", "defense mechanisms", "adaptation", "Anna Freud", "Heinz Hartmann"]
+tof_statement = {
+"false": "Ego psychology dismisses the importance of the id and unconscious drives.", 
+"true": "Ego psychology highlights the ego's adaptive functions and its role in mediating reality."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_sig30"]
+script = ExtResource("1_7hrog")
+id = "AI_SIG30"
+term = "Object Relations Theory"
+keyword = "early relationships"
+definition = "A Neo-Freudian theory that focuses on how early relationships, particularly with primary caregivers, shape an individual's internal 'objects' (mental representations) and influence future relationships."
+simple_terms = "How early relationships shape how you relate to others later."
+examples = ["A child internalizing their mother's responsiveness, forming a secure attachment style.", "Difficulty forming intimate relationships due to early experiences of neglect."]
+accepted_terms = ["internal objects", "attachment theory"]
+difficulty = 3
+related_to = ["psychoanalysis", "relationships", "attachment", "caregivers", "Melanie Klein", "Donald Winnicott"]
+tof_statement = {
+"false": "Object relations theory focuses exclusively on biological drives and instincts.", 
+"true": "Object relations theory emphasizes the lasting impact of early relationships on an individual's internal psychological world and interpersonal patterns."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Sigmund Freud Theories"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_ai_sig1"), SubResource("Resource_ai_sig2"), SubResource("Resource_ai_sig3"), SubResource("Resource_ai_sig4"), SubResource("Resource_ai_sig5"), SubResource("Resource_ai_sig6"), SubResource("Resource_ai_sig7"), SubResource("Resource_ai_sig8"), SubResource("Resource_ai_sig9"), SubResource("Resource_ai_sig10"), SubResource("Resource_ai_sig11"), SubResource("Resource_ai_sig12"), SubResource("Resource_ai_sig13"), SubResource("Resource_ai_sig14"), SubResource("Resource_ai_sig15"), SubResource("Resource_ai_sig16"), SubResource("Resource_ai_sig17"), SubResource("Resource_ai_sig18"), SubResource("Resource_ai_sig19"), SubResource("Resource_ai_sig20"), SubResource("Resource_ai_sig21"), SubResource("Resource_ai_sig22"), SubResource("Resource_ai_sig23"), SubResource("Resource_ai_sig24"), SubResource("Resource_ai_sig25"), SubResource("Resource_ai_sig26"), SubResource("Resource_ai_sig27"), SubResource("Resource_ai_sig28"), SubResource("Resource_ai_sig29"), SubResource("Resource_ai_sig30")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"

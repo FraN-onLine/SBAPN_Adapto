@@ -1,0 +1,280 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=17 format=3]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://adapto/Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://adapto/Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_ai_lin1"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN1"
+term = "Linear Programming"
+keyword = "optimization"
+definition = "A mathematical technique used to find the best possible outcome (such as maximum profit or minimum cost) in a given situation with certain constraints."
+simple_terms = "finding the best result with rules"
+examples = ["Maximizing profit for a factory producing different products with limited resources.", "Minimizing the cost of a diet while meeting nutritional requirements."]
+accepted_terms = ["LP", "Linear Optimization"]
+difficulty = 1
+related_to = ["optimization", "constraints", "objective function"]
+tof_statement = {
+"false": "Linear programming can only find maximum values, never minimums.", 
+"true": "Linear programming is used to find optimal solutions under constraints."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin2"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN2"
+term = "Objective Function"
+keyword = "optimize"
+definition = "The mathematical expression that represents the quantity to be maximized or minimized in a linear programming problem."
+simple_terms = "what you want to make best (max or min)"
+examples = ["Maximize Z = 3x + 5y (representing profit)", "Minimize C = 10a + 15b (representing cost)"]
+accepted_terms = ["objective", "goal function"]
+difficulty = 1
+related_to = ["linear programming", "decision variables"]
+tof_statement = {
+"false": "The objective function is always a constraint in a linear programming problem.", 
+"true": "The objective function defines what we are trying to optimize in an LP problem."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin3"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN3"
+term = "Decision Variables"
+keyword = "choices"
+definition = "The variables in a linear programming problem that represent the quantities or decisions to be made."
+simple_terms = "the things you can change or decide on"
+examples = ["x = number of chairs to produce, y = number of tables to produce", "a = amount of ingredient A to use, b = amount of ingredient B to use"]
+accepted_terms = ["variables", "decision factors"]
+difficulty = 1
+related_to = ["objective function", "constraints"]
+tof_statement = {
+"false": "Decision variables are fixed values that do not change in an LP problem.", 
+"true": "Decision variables are the unknown quantities that we need to determine the optimal values for."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin4"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN4"
+term = "Constraints"
+keyword = "limitations"
+definition = "The limitations or restrictions expressed as inequalities or equalities that the decision variables must satisfy."
+simple_terms = "the rules or limits you must follow"
+examples = ["2x + 3y <= 100 (resource limitation)", "x >= 0, y >= 0 (non-negativity)"]
+accepted_terms = ["restrictions", "limitations", "boundaries"]
+difficulty = 1
+related_to = ["linear programming", "feasible region", "decision variables"]
+tof_statement = {
+"false": "Constraints are optional and do not affect the final solution in linear programming.", 
+"true": "Constraints define the boundaries of the possible solutions in a linear programming problem."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin5"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN5"
+term = "Feasible Region"
+keyword = "possible"
+definition = "The set of all possible solutions that satisfy all the constraints of a linear programming problem."
+simple_terms = "the area where all rules are met"
+examples = ["A polygon on a graph representing all valid production quantities.", "The intersection of all constraint lines and their valid sides."]
+accepted_terms = ["feasible set", "solution space"]
+difficulty = 2
+related_to = ["constraints", "corner points", "optimal solution"]
+tof_statement = {
+"false": "The feasible region is always a single point.", 
+"true": "Any point within the feasible region is a valid solution to the linear programming problem."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin6"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN6"
+term = "Corner Point"
+keyword = "vertex"
+definition = "A point where two or more constraint lines intersect, forming a vertex of the feasible region."
+simple_terms = "a corner of the possible area"
+examples = ["The intersection of x=0 and 2x+3y=100.", "The intersection of 2x+3y=100 and x+y=50."]
+accepted_terms = ["vertex", "extreme point"]
+difficulty = 2
+related_to = ["feasible region", "optimal solution", "graphical method"]
+tof_statement = {
+"false": "Corner points are irrelevant to finding the optimal solution in linear programming.", 
+"true": "The optimal solution for a linear programming problem is always found at one of the corner points of the feasible region."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin7"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN7"
+term = "Graphical Method"
+keyword = "visualize"
+definition = "A method for solving linear programming problems with two decision variables by graphing the constraints and identifying the feasible region and corner points."
+simple_terms = "solving by drawing lines on a graph"
+examples = ["Plotting the lines 2x + y = 10 and x + y = 7, then shading the region that satisfies all inequalities.", "Finding the intersection points of the plotted lines."]
+accepted_terms = ["graphing", "two-variable method"]
+difficulty = 2
+related_to = ["linear programming", "feasible region", "corner points"]
+tof_statement = {
+"false": "The graphical method can be used to solve linear programming problems with any number of decision variables.", 
+"true": "The graphical method is suitable for visualizing and solving linear programming problems with up to two decision variables."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin8"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN8"
+term = "Simplex Method"
+keyword = "iterative"
+definition = "An algebraic algorithm used to find the optimal solution for linear programming problems with any number of variables and constraints."
+simple_terms = "a step-by-step mathematical process for solving"
+examples = ["Using a tableau to move from one corner point to another until the optimal solution is found.", "An algorithm that systematically explores vertices of the feasible region."]
+accepted_terms = ["simplex algorithm"]
+difficulty = 3
+related_to = ["linear programming", "optimization", "algebraic method"]
+tof_statement = {
+"false": "The simplex method is a visual technique that relies on graphing.", 
+"true": "The simplex method is a powerful algorithm for solving complex linear programming problems with many variables."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin9"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN9"
+term = "Non-negativity Constraints"
+keyword = "positive"
+definition = "Constraints that require the decision variables to be greater than or equal to zero, as quantities cannot be negative."
+simple_terms = "you can't have less than zero of something"
+examples = ["x >= 0, y >= 0", "Production quantities must be zero or positive."]
+accepted_terms = ["non-negative variables"]
+difficulty = 1
+related_to = ["constraints", "feasible region"]
+tof_statement = {
+"false": "Non-negativity constraints are only applied when maximizing profit.", 
+"true": "Non-negativity constraints ensure that the decision variables represent realistic quantities."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin10"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN10"
+term = "Slack Variable"
+keyword = "unused"
+definition = "A variable added to an inequality constraint to convert it into an equality, representing the unused amount of a resource."
+simple_terms = "how much of a resource is left over"
+examples = ["If 2x + 3y <= 100, adding a slack variable 's' gives 2x + 3y + s = 100, where s >= 0.", "In a production problem, slack variables indicate unused machine hours or raw materials."]
+accepted_terms = ["surplus variable"]
+difficulty = 2
+related_to = ["constraints", "simplex method", "equality constraints"]
+tof_statement = {
+"false": "Slack variables are always negative.", 
+"true": "A slack variable represents the amount by which the left side of a '<=' inequality is less than the right side."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin11"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN11"
+term = "Surplus Variable"
+keyword = "excess"
+definition = "A variable subtracted from a greater-than-or-equal-to inequality constraint to convert it into an equality, representing the excess amount beyond a requirement."
+simple_terms = "how much of something is more than needed"
+examples = ["If x >= 10, adding a surplus variable 'e' gives x - e = 10, where e >= 0.", "In a dietary problem, a surplus variable might represent the excess protein consumed beyond the minimum requirement."]
+accepted_terms = ["slack variable"]
+difficulty = 2
+related_to = ["constraints", "simplex method", "equality constraints"]
+tof_statement = {
+"false": "Surplus variables are added to convert '>=' inequalities into equalities.", 
+"true": "A surplus variable represents the amount by which the left side of a '>=' inequality exceeds the right side."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin12"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN12"
+term = "Integer Programming"
+keyword = "whole"
+definition = "A type of linear programming where the decision variables are restricted to be integers (whole numbers)."
+simple_terms = "solving when answers must be whole numbers"
+examples = ["Determining the number of buses to buy, as you can't buy a fraction of a bus.", "Assigning tasks to workers, where each task is assigned to exactly one worker."]
+accepted_terms = ["integer linear programming"]
+difficulty = 3
+related_to = ["linear programming", "discrete optimization", "decision variables"]
+tof_statement = {
+"false": "Integer programming is the same as standard linear programming, just with more constraints.", 
+"true": "In integer programming, solutions must consist of whole numbers for the decision variables."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin13"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN13"
+term = "Sensitivity Analysis"
+keyword = "changes"
+definition = "The study of how changes in the parameters of a linear programming problem (like objective function coefficients or constraint right-hand sides) affect the optimal solution."
+simple_terms = "how the answer changes if the numbers change"
+examples = ["Analyzing how a change in the selling price of a product affects the optimal production mix.", "Determining the impact of an increase in raw material cost on the minimum production cost."]
+accepted_terms = ["what-if analysis"]
+difficulty = 3
+related_to = ["linear programming", "objective function", "constraints"]
+tof_statement = {
+"false": "Sensitivity analysis is only performed on the decision variables.", 
+"true": "Sensitivity analysis helps understand the robustness of the optimal solution to variations in input data."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin14"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN14"
+term = "Duality"
+keyword = "dual problem"
+definition = "The concept that every linear programming problem (the primal) has a corresponding related problem (the dual), and their optimal solutions are linked."
+simple_terms = "a related problem that gives the same best answer"
+examples = ["The dual of a maximization problem is a minimization problem, and vice versa.", "The dual variables can often be interpreted as the shadow prices or marginal values of resources."]
+accepted_terms = ["dual problem", "primal-dual relationship"]
+difficulty = 4
+related_to = ["linear programming", "simplex method", "shadow price"]
+tof_statement = {
+"false": "The dual problem is always identical to the primal problem.", 
+"true": "The optimal value of the primal linear programming problem is equal to the optimal value of its dual problem."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_lin15"]
+script = ExtResource("1_7hrog")
+id = "AI_LIN15"
+term = "Shadow Price"
+keyword = "marginal value"
+definition = "The change in the optimal value of the objective function per unit increase in the right-hand side of a constraint, assuming the change is small enough."
+simple_terms = "how much the best answer improves if a rule is relaxed a little"
+examples = ["A shadow price of $5 for a labor constraint means that if one additional hour of labor is available, the maximum profit will increase by $5.", "Interpreting the dual variables in the context of resource scarcity."]
+accepted_terms = ["dual variable", "marginal value", "opportunity cost"]
+difficulty = 4
+related_to = ["duality", "constraints", "sensitivity analysis"]
+tof_statement = {
+"false": "Shadow prices are only relevant for equality constraints.", 
+"true": "The shadow price indicates the economic value of relaxing a constraint by one unit."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Linear Programming"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_ai_lin1"), SubResource("Resource_ai_lin2"), SubResource("Resource_ai_lin3"), SubResource("Resource_ai_lin4"), SubResource("Resource_ai_lin5"), SubResource("Resource_ai_lin6"), SubResource("Resource_ai_lin7"), SubResource("Resource_ai_lin8"), SubResource("Resource_ai_lin9"), SubResource("Resource_ai_lin10"), SubResource("Resource_ai_lin11"), SubResource("Resource_ai_lin12"), SubResource("Resource_ai_lin13"), SubResource("Resource_ai_lin14"), SubResource("Resource_ai_lin15")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"
