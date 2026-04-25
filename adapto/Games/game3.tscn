@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cxgame3scene7"]
+[gd_scene format=3 uid="uid://cxgame3scene7"]
 
 [ext_resource type="Script" uid="uid://cxgame3d5sc7t" path="res://Games/game_3.gd" id="1_g3sc"]
 [ext_resource type="FontFile" uid="uid://bgrgca3qc6dxo" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="2_g3fn"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bvhx265qqihe6" path="res://Assets/Background/2.png" id="4_i8hbh"]
 [ext_resource type="Texture2D" uid="uid://cdoecq6a7hk05" path="res://Assets/Background/3.png" id="5_7jm4a"]
 [ext_resource type="Script" uid="uid://ccoxqrwe4p2cx" path="res://Games/clue_label.gd" id="6_clue_script"]
+[ext_resource type="Texture2D" uid="uid://cm7m58hhdoske" path="res://Assets/Sabine/SabineFace-Sheet.png" id="8_i8hbh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
 content_margin_left = 14.0
@@ -44,48 +45,84 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="Game3" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gmps"]
+atlas = ExtResource("8_i8hbh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_al162"]
+atlas = ExtResource("8_i8hbh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phou3"]
+atlas = ExtResource("8_i8hbh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75f8o"]
+atlas = ExtResource("8_i8hbh")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7jm4a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gmps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_al162")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phou3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75f8o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Game3" type="Node2D" unique_id=877928966]
 script = ExtResource("1_g3sc")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=749755096]
 offset_right = 1280.0
 offset_bottom = 720.0
 texture = ExtResource("2_ma3p4")
 stretch_mode = 1
 
-[node name="Background2" type="TextureRect" parent="Background"]
+[node name="Background2" type="TextureRect" parent="Background" unique_id=429061745]
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 texture = ExtResource("3_slpbq")
 stretch_mode = 1
 
-[node name="Background3" type="TextureRect" parent="Background"]
+[node name="Background3" type="TextureRect" parent="Background" unique_id=1971372566]
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 texture = ExtResource("4_i8hbh")
 stretch_mode = 1
 
-[node name="Background4" type="TextureRect" parent="Background"]
+[node name="Background4" type="TextureRect" parent="Background" unique_id=975676601]
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 texture = ExtResource("5_7jm4a")
 stretch_mode = 1
 
-[node name="GameTimer" type="Timer" parent="."]
+[node name="GameTimer" type="Timer" parent="." unique_id=1900180612]
 
-[node name="TopBar" type="PanelContainer" parent="."]
+[node name="TopBar" type="PanelContainer" parent="." unique_id=333117467]
 offset_right = 1280.0
 offset_bottom = 65.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_header")
 
-[node name="TopBarHBox" type="HBoxContainer" parent="TopBar"]
+[node name="TopBarHBox" type="HBoxContainer" parent="TopBar" unique_id=1252294374]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="TitleLabel" type="Label" parent="TopBar/TopBarHBox"]
+[node name="TitleLabel" type="Label" parent="TopBar/TopBarHBox" unique_id=1776217777]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.92, 0.25, 1)
@@ -94,7 +131,7 @@ theme_override_font_sizes/font_size = 32
 text = "CROSSWORD PUZZLE"
 horizontal_alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="TopBar/TopBarHBox"]
+[node name="ScoreLabel" type="Label" parent="TopBar/TopBarHBox" unique_id=1332329118]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65, 0.95, 0.65, 1)
@@ -103,7 +140,7 @@ theme_override_font_sizes/font_size = 24
 text = "Score: 0"
 horizontal_alignment = 2
 
-[node name="TimerLabel" type="Label" parent="TopBar/TopBarHBox"]
+[node name="TimerLabel" type="Label" parent="TopBar/TopBarHBox" unique_id=1774236380]
 custom_minimum_size = Vector2(210, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.82, 0.35, 1)
@@ -112,18 +149,18 @@ theme_override_font_sizes/font_size = 24
 text = "Time: 180s"
 horizontal_alignment = 2
 
-[node name="FeedbackLabel" type="Label" parent="."]
+[node name="FeedbackLabel" type="Label" parent="." unique_id=513095558]
 offset_top = 68.0
 offset_right = 1280.0
 offset_bottom = 108.0
-theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_g3fn")
 theme_override_font_sizes/font_size = 18
 text = "Click a clue or a grid cell to select a word, then type and submit your answer!"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="GridNode" type="Control" parent="."]
+[node name="GridNode" type="Control" parent="." unique_id=1812963664]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 5.0
@@ -131,75 +168,75 @@ offset_top = 112.0
 offset_right = 580.0
 offset_bottom = 714.0
 
-[node name="CluesPanel" type="PanelContainer" parent="."]
+[node name="CluesPanel" type="PanelContainer" parent="." unique_id=352498389]
 offset_left = 585.0
 offset_top = 112.0
 offset_right = 1275.0
 offset_bottom = 582.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="CluesScroll" type="ScrollContainer" parent="CluesPanel"]
+[node name="CluesScroll" type="ScrollContainer" parent="CluesPanel" unique_id=770473567]
 layout_mode = 2
 
-[node name="CluesVBox" type="VBoxContainer" parent="CluesPanel/CluesScroll"]
+[node name="CluesVBox" type="VBoxContainer" parent="CluesPanel/CluesScroll" unique_id=1756093634]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 6
 
-[node name="AcrossHeader" type="Label" parent="CluesPanel/CluesScroll/CluesVBox"]
+[node name="AcrossHeader" type="Label" parent="CluesPanel/CluesScroll/CluesVBox" unique_id=1632872009]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.75, 0.9, 1, 1)
 theme_override_fonts/font = ExtResource("2_g3fn")
 theme_override_font_sizes/font_size = 18
 text = "ACROSS"
 
-[node name="AcrossItems" type="VBoxContainer" parent="CluesPanel/CluesScroll/CluesVBox"]
+[node name="AcrossItems" type="VBoxContainer" parent="CluesPanel/CluesScroll/CluesVBox" unique_id=571340824]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="DownHeader" type="Label" parent="CluesPanel/CluesScroll/CluesVBox"]
+[node name="DownHeader" type="Label" parent="CluesPanel/CluesScroll/CluesVBox" unique_id=1909904045]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.82, 0.75, 1)
 theme_override_fonts/font = ExtResource("2_g3fn")
 theme_override_font_sizes/font_size = 18
 text = "DOWN"
 
-[node name="DownItems" type="VBoxContainer" parent="CluesPanel/CluesScroll/CluesVBox"]
+[node name="DownItems" type="VBoxContainer" parent="CluesPanel/CluesScroll/CluesVBox" unique_id=1537025832]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="AnswerBar" type="PanelContainer" parent="."]
+[node name="AnswerBar" type="PanelContainer" parent="." unique_id=87383768]
 offset_left = 585.0
 offset_top = 587.0
 offset_right = 1275.0
 offset_bottom = 714.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_answerbar")
 
-[node name="AnswerVBox" type="VBoxContainer" parent="AnswerBar"]
+[node name="AnswerVBox" type="VBoxContainer" parent="AnswerBar" unique_id=1355477519]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="ClueLabel" type="Label" parent="AnswerBar/AnswerVBox"]
+[node name="ClueLabel" type="Label" parent="AnswerBar/AnswerVBox" unique_id=603322381]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.9, 0.7, 1)
 theme_override_fonts/font = ExtResource("2_g3fn")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Select a word to see its clue here."
 autowrap_mode = 2
 script = ExtResource("6_clue_script")
 
-[node name="AnswerHBox" type="HBoxContainer" parent="AnswerBar/AnswerVBox"]
+[node name="AnswerHBox" type="HBoxContainer" parent="AnswerBar/AnswerVBox" unique_id=2086580349]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="AnswerInput" type="LineEdit" parent="AnswerBar/AnswerVBox/AnswerHBox"]
+[node name="AnswerInput" type="LineEdit" parent="AnswerBar/AnswerVBox/AnswerHBox" unique_id=844792771]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2_g3fn")
 theme_override_font_sizes/font_size = 22
 placeholder_text = "Type your answer..."
 
-[node name="SubmitBtn" type="Button" parent="AnswerBar/AnswerVBox/AnswerHBox"]
+[node name="SubmitBtn" type="Button" parent="AnswerBar/AnswerVBox/AnswerHBox" unique_id=1873301596]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_g3fn")
@@ -207,10 +244,19 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_submitbtn")
 text = "SUBMIT"
 
-[node name="HintBtn" type="Button" parent="AnswerBar/AnswerVBox/AnswerHBox"]
+[node name="HintBtn" type="Button" parent="AnswerBar/AnswerVBox/AnswerHBox" unique_id=1089955186]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_g3fn")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_submitbtn")
 text = "HINT"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=871682643]
+z_index = 1
+position = Vector2(1204.0001, 116)
+scale = Vector2(4.84375, 4.75)
+sprite_frames = SubResource("SpriteFrames_7jm4a")
+autoplay = "default"
+frame_progress = 0.809123
+flip_h = true

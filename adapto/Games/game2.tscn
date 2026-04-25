@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://fw7a21mnd67y"]
+[gd_scene format=3 uid="uid://fw7a21mnd67y"]
 
 [ext_resource type="FontFile" uid="uid://bgrgca3qc6dxo" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="1_d3qvd"]
 [ext_resource type="Script" uid="uid://bv4ehp7fldo7d" path="res://Games/game_2.gd" id="1_yhycf"]
@@ -49,19 +49,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Game2" type="Node2D"]
+[node name="Game2" type="Node2D" unique_id=1120526919]
 script = ExtResource("1_yhycf")
 
-[node name="TopBar" type="PanelContainer" parent="."]
+[node name="TopBar" type="PanelContainer" parent="." unique_id=817777906]
 offset_right = 1280.0
 offset_bottom = 65.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_header")
 
-[node name="TopBarHBox" type="HBoxContainer" parent="TopBar"]
+[node name="TopBarHBox" type="HBoxContainer" parent="TopBar" unique_id=684276463]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="TitleLabel" type="Label" parent="TopBar/TopBarHBox"]
+[node name="TitleLabel" type="Label" parent="TopBar/TopBarHBox" unique_id=970433011]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.92, 0.25, 1)
@@ -70,7 +70,7 @@ theme_override_font_sizes/font_size = 32
 text = "JEOPARDY"
 horizontal_alignment = 1
 
-[node name="MoneyLabel" type="Label" parent="TopBar/TopBarHBox"]
+[node name="MoneyLabel" type="Label" parent="TopBar/TopBarHBox" unique_id=1865746421]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65, 0.95, 0.65, 1)
@@ -79,7 +79,7 @@ theme_override_font_sizes/font_size = 24
 text = "Money: $0"
 horizontal_alignment = 2
 
-[node name="QuestionBackground" type="TextureRect" parent="."]
+[node name="QuestionBackground" type="TextureRect" parent="." unique_id=1484560929]
 z_index = 1
 offset_left = 734.0
 offset_top = 75.0
@@ -87,7 +87,7 @@ offset_right = 1208.0
 offset_bottom = 538.0
 texture = ExtResource("3_3pyle")
 
-[node name="QuestionDialog" type="Label" parent="."]
+[node name="QuestionDialog" type="Label" parent="." unique_id=1571446086]
 z_index = 1
 offset_left = 768.0
 offset_top = 119.0
@@ -99,9 +99,9 @@ text = "Welcome to jeopardy, click on an item under a category to answer a quest
 autowrap_mode = 3
 justification_flags = 162
 
-[node name="Category" type="Node" parent="."]
+[node name="Category" type="Node" parent="." unique_id=1807919059]
 
-[node name="Category1" type="Label" parent="Category"]
+[node name="Category1" type="Label" parent="Category" unique_id=291761987]
 offset_left = 90.0
 offset_top = 69.0
 offset_right = 286.0
@@ -113,7 +113,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Category2" type="Label" parent="Category"]
+[node name="Category2" type="Label" parent="Category" unique_id=1420911059]
 offset_left = 295.0
 offset_top = 13.0
 offset_right = 546.0
@@ -126,7 +126,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 metadata/_edit_lock_ = true
 
-[node name="Category3" type="Label" parent="Category"]
+[node name="Category3" type="Label" parent="Category" unique_id=1179908287]
 offset_left = 496.0
 offset_top = 15.0
 offset_right = 747.0
@@ -137,9 +137,9 @@ text = "DOGS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Cat1" type="Node" parent="."]
+[node name="Cat1" type="Node" parent="." unique_id=1557111803]
 
-[node name="100" type="Button" parent="Cat1"]
+[node name="100" type="Button" parent="Cat1" unique_id=1002088904]
 offset_left = 112.0
 offset_top = 125.0
 offset_right = 258.0
@@ -148,7 +148,7 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$100"
 
-[node name="250" type="Button" parent="Cat1"]
+[node name="250" type="Button" parent="Cat1" unique_id=676106194]
 offset_left = 108.0
 offset_top = 225.0
 offset_right = 260.0
@@ -157,7 +157,7 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$250"
 
-[node name="500" type="Button" parent="Cat1"]
+[node name="500" type="Button" parent="Cat1" unique_id=1692852764]
 offset_left = 112.0
 offset_top = 315.0
 offset_right = 264.0
@@ -166,9 +166,9 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$500"
 
-[node name="Cat2" type="Node" parent="."]
+[node name="Cat2" type="Node" parent="." unique_id=591638971]
 
-[node name="100" type="Button" parent="Cat2"]
+[node name="100" type="Button" parent="Cat2" unique_id=98073348]
 offset_left = 341.0
 offset_top = 124.0
 offset_right = 487.0
@@ -177,7 +177,7 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$100"
 
-[node name="250" type="Button" parent="Cat2"]
+[node name="250" type="Button" parent="Cat2" unique_id=1447275273]
 offset_left = 339.0
 offset_top = 226.0
 offset_right = 491.0
@@ -186,7 +186,7 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$250"
 
-[node name="500" type="Button" parent="Cat2"]
+[node name="500" type="Button" parent="Cat2" unique_id=1846041417]
 offset_left = 340.0
 offset_top = 314.0
 offset_right = 492.0
@@ -195,9 +195,9 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$500"
 
-[node name="Cat3" type="Node" parent="."]
+[node name="Cat3" type="Node" parent="." unique_id=1341786079]
 
-[node name="100" type="Button" parent="Cat3"]
+[node name="100" type="Button" parent="Cat3" unique_id=1248738176]
 offset_left = 546.0
 offset_top = 123.0
 offset_right = 692.0
@@ -206,7 +206,7 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$100"
 
-[node name="250" type="Button" parent="Cat3"]
+[node name="250" type="Button" parent="Cat3" unique_id=2057772508]
 offset_left = 541.0
 offset_top = 226.0
 offset_right = 693.0
@@ -215,7 +215,7 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$250"
 
-[node name="500" type="Button" parent="Cat3"]
+[node name="500" type="Button" parent="Cat3" unique_id=483309579]
 offset_left = 541.0
 offset_top = 315.0
 offset_right = 693.0
@@ -224,7 +224,7 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "$500"
 
-[node name="AnswerInput" type="TextEdit" parent="."]
+[node name="AnswerInput" type="TextEdit" parent="." unique_id=718547431]
 offset_left = 62.0
 offset_top = 558.0
 offset_right = 1216.0
@@ -232,7 +232,7 @@ offset_bottom = 620.0
 theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 32
 
-[node name="Submit" type="Button" parent="."]
+[node name="Submit" type="Button" parent="." unique_id=219845388]
 offset_left = 538.0
 offset_top = 632.0
 offset_right = 744.0
@@ -241,7 +241,7 @@ theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 48
 text = "Submit"
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2101653736]
 z_index = -3
 offset_right = 1283.0
 offset_bottom = 720.0
@@ -249,7 +249,7 @@ mouse_filter = 2
 texture = ExtResource("4_lui7y")
 metadata/_edit_lock_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1366594019]
 z_index = 1
 position = Vector2(1182, 494)
 scale = Vector2(4.84375, 4.75)
@@ -257,6 +257,13 @@ sprite_frames = SubResource("SpriteFrames_0dedr")
 autoplay = "default"
 frame_progress = 0.0689719
 flip_h = true
+
+[node name="EndDialog" type="AcceptDialog" parent="." unique_id=775083039]
+oversampling_override = 1.0
+title = "Round Complete"
+initial_position = 2
+size = Vector2i(200, 100)
+ok_button_text = "Proceed"
 
 [connection signal="text_changed" from="AnswerInput" to="." method="_on_answer_input_text_changed"]
 [connection signal="pressed" from="Submit" to="." method="check_answer"]

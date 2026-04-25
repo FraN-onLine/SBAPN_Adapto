@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhxdu56q06mq"]
+[gd_scene format=3 uid="uid://bhxdu56q06mq"]
 
 [ext_resource type="Script" uid="uid://cdscumpeje8nc" path="res://Games/game_5.gd" id="1_g5sc"]
 [ext_resource type="FontFile" uid="uid://bgrgca3qc6dxo" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="2_g5fn"]
 [ext_resource type="Texture2D" uid="uid://cdoecq6a7hk05" path="res://Assets/Background/3.png" id="3_g5bg"]
+[ext_resource type="Texture2D" uid="uid://cm7m58hhdoske" path="res://Assets/Sabine/SabineFace-Sheet.png" id="4_uqoxm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
 content_margin_left = 14.0
@@ -40,7 +41,43 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="Game5" type="Control"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gmps"]
+atlas = ExtResource("4_uqoxm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_al162"]
+atlas = ExtResource("4_uqoxm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phou3"]
+atlas = ExtResource("4_uqoxm")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75f8o"]
+atlas = ExtResource("4_uqoxm")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cdmxg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gmps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_al162")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phou3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75f8o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Game5" type="Control" unique_id=493513420]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,7 +86,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g5sc")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=1282269826]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,9 +97,9 @@ texture = ExtResource("3_g5bg")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="GameTimer" type="Timer" parent="."]
+[node name="GameTimer" type="Timer" parent="." unique_id=521981766]
 
-[node name="MainVBox" type="VBoxContainer" parent="."]
+[node name="MainVBox" type="VBoxContainer" parent="." unique_id=1741271019]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,15 +108,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="TopBar" type="PanelContainer" parent="MainVBox"]
+[node name="TopBar" type="PanelContainer" parent="MainVBox" unique_id=1574164631]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_header")
 
-[node name="TopBarHBox" type="HBoxContainer" parent="MainVBox/TopBar"]
+[node name="TopBarHBox" type="HBoxContainer" parent="MainVBox/TopBar" unique_id=582427108]
 layout_mode = 2
 theme_override_constants/separation = 18
 
-[node name="TitleLabel" type="Label" parent="MainVBox/TopBar/TopBarHBox"]
+[node name="TitleLabel" type="Label" parent="MainVBox/TopBar/TopBarHBox" unique_id=1822688617]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.92, 0.25, 1)
@@ -88,7 +125,7 @@ theme_override_font_sizes/font_size = 28
 text = "HANGMAN: MISSING LETTERS"
 horizontal_alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="MainVBox/TopBar/TopBarHBox"]
+[node name="ScoreLabel" type="Label" parent="MainVBox/TopBar/TopBarHBox" unique_id=381300619]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65, 0.95, 0.65, 1)
@@ -97,7 +134,7 @@ theme_override_font_sizes/font_size = 20
 text = "Score: 0"
 horizontal_alignment = 2
 
-[node name="StreakLabel" type="Label" parent="MainVBox/TopBar/TopBarHBox"]
+[node name="StreakLabel" type="Label" parent="MainVBox/TopBar/TopBarHBox" unique_id=1773166540]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.75, 0.9, 1, 1)
@@ -106,7 +143,7 @@ theme_override_font_sizes/font_size = 20
 text = "Streak: x0"
 horizontal_alignment = 2
 
-[node name="TimerLabel" type="Label" parent="MainVBox/TopBar/TopBarHBox"]
+[node name="TimerLabel" type="Label" parent="MainVBox/TopBar/TopBarHBox" unique_id=311317774]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.82, 0.35, 1)
@@ -115,25 +152,25 @@ theme_override_font_sizes/font_size = 20
 text = "Time: 120s"
 horizontal_alignment = 2
 
-[node name="ContentHBox" type="HBoxContainer" parent="MainVBox"]
+[node name="ContentHBox" type="HBoxContainer" parent="MainVBox" unique_id=1338051415]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 
-[node name="LeftMargin" type="Control" parent="MainVBox/ContentHBox"]
+[node name="LeftMargin" type="Control" parent="MainVBox/ContentHBox" unique_id=1215495216]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="GamePanel" type="PanelContainer" parent="MainVBox/ContentHBox"]
+[node name="GamePanel" type="PanelContainer" parent="MainVBox/ContentHBox" unique_id=713007718]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="GameVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/GamePanel"]
+[node name="GameVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/GamePanel" unique_id=824731223]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="DefinitionLabel" type="Label" parent="MainVBox/ContentHBox/GamePanel/GameVBox"]
+[node name="DefinitionLabel" type="Label" parent="MainVBox/ContentHBox/GamePanel/GameVBox" unique_id=622784326]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
@@ -144,7 +181,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="WordLabel" type="Label" parent="MainVBox/ContentHBox/GamePanel/GameVBox"]
+[node name="WordLabel" type="Label" parent="MainVBox/ContentHBox/GamePanel/GameVBox" unique_id=1148069146]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 0.95, 0.4, 1)
@@ -154,53 +191,53 @@ text = "_ _ _ _ _"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FeedbackLabel" type="Label" parent="MainVBox/ContentHBox/GamePanel/GameVBox"]
+[node name="FeedbackLabel" type="Label" parent="MainVBox/ContentHBox/GamePanel/GameVBox" unique_id=1902185554]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
 theme_override_fonts/font = ExtResource("2_g5fn")
 theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 
-[node name="KeyboardCenter" type="CenterContainer" parent="MainVBox/ContentHBox/GamePanel/GameVBox"]
+[node name="KeyboardCenter" type="CenterContainer" parent="MainVBox/ContentHBox/GamePanel/GameVBox" unique_id=741643458]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="KeyboardVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/GamePanel/GameVBox/KeyboardCenter"]
+[node name="KeyboardVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/GamePanel/GameVBox/KeyboardCenter" unique_id=1988259136]
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="KeyboardRow1" type="HBoxContainer" parent="MainVBox/ContentHBox/GamePanel/GameVBox/KeyboardCenter/KeyboardVBox"]
+[node name="KeyboardRow1" type="HBoxContainer" parent="MainVBox/ContentHBox/GamePanel/GameVBox/KeyboardCenter/KeyboardVBox" unique_id=1815633883]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="KeyboardRow2" type="HBoxContainer" parent="MainVBox/ContentHBox/GamePanel/GameVBox/KeyboardCenter/KeyboardVBox"]
+[node name="KeyboardRow2" type="HBoxContainer" parent="MainVBox/ContentHBox/GamePanel/GameVBox/KeyboardCenter/KeyboardVBox" unique_id=1705055443]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="KeyboardRow3" type="HBoxContainer" parent="MainVBox/ContentHBox/GamePanel/GameVBox/KeyboardCenter/KeyboardVBox"]
+[node name="KeyboardRow3" type="HBoxContainer" parent="MainVBox/ContentHBox/GamePanel/GameVBox/KeyboardCenter/KeyboardVBox" unique_id=699509979]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="RightMargin" type="Control" parent="MainVBox/ContentHBox"]
+[node name="RightMargin" type="Control" parent="MainVBox/ContentHBox" unique_id=197126244]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="BottomBar" type="PanelContainer" parent="MainVBox"]
+[node name="BottomBar" type="PanelContainer" parent="MainVBox" unique_id=244677909]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_actionbar")
 
-[node name="BottomHBox" type="HBoxContainer" parent="MainVBox/BottomBar"]
+[node name="BottomHBox" type="HBoxContainer" parent="MainVBox/BottomBar" unique_id=956134087]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="ProgressLabel" type="Label" parent="MainVBox/BottomBar/BottomHBox"]
+[node name="ProgressLabel" type="Label" parent="MainVBox/BottomBar/BottomHBox" unique_id=1205766313]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_g5fn")
@@ -208,7 +245,7 @@ theme_override_font_sizes/font_size = 22
 text = "Progress: 0/5"
 vertical_alignment = 1
 
-[node name="MistakesLabel" type="Label" parent="MainVBox/BottomBar/BottomHBox"]
+[node name="MistakesLabel" type="Label" parent="MainVBox/BottomBar/BottomHBox" unique_id=1400755468]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_g5fn")
@@ -216,7 +253,7 @@ theme_override_font_sizes/font_size = 22
 text = "Misses: 0"
 vertical_alignment = 1
 
-[node name="HintBtn" type="Button" parent="MainVBox/BottomBar/BottomHBox"]
+[node name="HintBtn" type="Button" parent="MainVBox/BottomBar/BottomHBox" unique_id=1446183755]
 custom_minimum_size = Vector2(210, 64)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_g5fn")
@@ -224,7 +261,7 @@ theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxFlat_actionbtn")
 text = "HINT (-50)"
 
-[node name="SkipBtn" type="Button" parent="MainVBox/BottomBar/BottomHBox"]
+[node name="SkipBtn" type="Button" parent="MainVBox/BottomBar/BottomHBox" unique_id=629334743]
 custom_minimum_size = Vector2(210, 64)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_g5fn")
@@ -232,15 +269,23 @@ theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxFlat_actionbtn")
 text = "SKIP (-100)"
 
-[node name="BottomMargin" type="Control" parent="MainVBox"]
+[node name="BottomMargin" type="Control" parent="MainVBox" unique_id=155139826]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="EndDialog" type="AcceptDialog" parent="."]
+[node name="EndDialog" type="AcceptDialog" parent="." unique_id=151728385]
 title = "Round Complete"
 initial_position = 2
 size = Vector2i(200, 100)
 ok_button_text = "Proceed"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=218117800]
+z_index = 1
+position = Vector2(113, 597)
+scale = Vector2(4.84375, 4.75)
+sprite_frames = SubResource("SpriteFrames_cdmxg")
+autoplay = "default"
+frame_progress = 0.320725
 
 [connection signal="timeout" from="GameTimer" to="." method="_on_timer_tick"]
 [connection signal="pressed" from="MainVBox/BottomBar/BottomHBox/HintBtn" to="." method="_on_hint_pressed"]

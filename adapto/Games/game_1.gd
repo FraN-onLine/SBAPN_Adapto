@@ -13,7 +13,7 @@ extends Node2D
 @onready var question_timer = $QuestionTimer
 
 @onready var hp_bar = $Healthbar
-
+@onready var end_dialog: AcceptDialog = $EndDialog
 
 var lesson: Lesson
 var current_item: LessonItem
@@ -30,6 +30,7 @@ var max_time: int = 30
 var correct_items = 0
 var correct_ans
 var adaptive_recorded := false
+var stats_recorded := false
 
 func _ready() -> void:
 	# Load the selected lesson, fall back to OOP if none chosen
@@ -43,6 +44,7 @@ func _ready() -> void:
 	option1_button.pressed.connect(_on_option1_pressed)
 	option2_button.pressed.connect(_on_option2_pressed)
 	question_timer.timeout.connect(_on_timer_tick)
+	end_dialog.confirmed.connect(_on_end_dialog_confirmed)
 	
 	# Reset game stats
 	
@@ -184,14 +186,11 @@ func answer_check() -> void:
 		option1_button.disabled = false
 		option2_button.disabled = false
 		if correct_items >= 5:
-			# Save this run to adaptive history before scene transition.
+			# Save this run to adaptive history before showing end dialog.
 			_record_adaptive_performance()
+			_record_user_stats()
 			UserStats.update_overall_stats()
-			# In adaptive mode, route directly to the next ranked game.
-			if UserStats.adaptive_mode_active:
-				get_tree().change_scene_to_file(UserStats.get_scene_after_game("game1"))
-			else:
-				get_tree().change_scene_to_file(UserStats.get_scene_after_game("game1"))
+			_show_end_dialog(true)
 			return
 		load_next_question()
 	else:
@@ -207,8 +206,9 @@ func answer_check() -> void:
 			await get_tree().create_timer(1).timeout
 			# Save adaptive metrics on loss as well.
 			_record_adaptive_performance()
+			_record_user_stats()
 			UserStats.update_overall_stats()
-			game_over()
+			_show_end_dialog(false)
 		else:
 			await get_tree().create_timer(0.3).timeout
 			option1_button.disabled = false
@@ -234,8 +234,9 @@ func _on_timer_tick() -> void:
 			await get_tree().create_timer(2.0).timeout
 			# Save adaptive metrics on timeout defeat.
 			_record_adaptive_performance()
+			_record_user_stats()
 			UserStats.update_overall_stats()
-			game_over()
+			_show_end_dialog(false)
 		else:
 			await get_tree().create_timer(2.0).timeout
 			load_next_question()
@@ -243,13 +244,68 @@ func _on_timer_tick() -> void:
 func update_hp_display() -> void:
 	hp_label.text = "HP: " + str(hp) + "/" + str(max_hp)
 
-func game_over() -> void:
-	question.text = "GAME OVER!"
+func _show_end_dialog(won: bool) -> void:
+	question.text = ""
 	option1_button.disabled = true
 	option2_button.disabled = true
-	await get_tree().create_timer(2.0).timeout
-	# Route via adaptive selector instead of hard-coded next scene.
+	
+	var rating := _get_performance_rating()
+	
+	if won:
+		end_dialog.title = "Victory!"
+		end_dialog.dialog_text = "Great job!\nCorrect: %d/5\nRating: %s\nAccuracy: %.1f%%" % [correct_items, rating, _calculate_accuracy()]
+	else:
+		end_dialog.title = "Defeat"
+		end_dialog.dialog_text = "Game Over\nCorrect: %d/5\nRating: %s\nAccuracy: %.1f%%" % [correct_items, rating, _calculate_accuracy()]
+	
+	end_dialog.popup_centered()
+
+
+func _on_end_dialog_confirmed() -> void:
+	# Route via adaptive selector to the next game.
 	get_tree().change_scene_to_file(UserStats.get_scene_after_game("game1"))
+
+
+func _get_performance_rating() -> String:
+	var accuracy := _calculate_accuracy()
+	if accuracy >= 80:
+		return "Excellent"
+	elif accuracy >= 60:
+		return "Good"
+	elif accuracy >= 40:
+		return "Fair"
+	else:
+		return "Try Again"
+
+
+func _calculate_accuracy() -> float:
+	var total_questions := 0
+	var total_correct := 0
+	for i in range(4):
+		total_questions += int(UserStats.game_stats["game1"]["questions"][i])
+		total_correct += int(UserStats.game_stats["game1"]["correct"][i])
+	if total_questions > 0:
+		return (float(total_correct) / float(total_questions)) * 100.0
+	return 0.0
+
+
+func _record_user_stats() -> void:
+	if stats_recorded:
+		return
+	stats_recorded = true
+	
+	var total_questions := 0
+	var total_time := 0.0
+	for i in range(4):
+		total_questions += int(UserStats.game_stats["game1"]["questions"][i])
+		total_time += float(UserStats.game_stats["game1"]["sum_time"][i])
+	
+	var avg_time_per_item = float(total_time) / float(total_questions) if total_questions > 0 else 0.0
+	UserStats.game_stats["game1"]["questions_answered"] = total_questions
+	UserStats.game_stats["game1"]["questions_correct"] = correct_items
+	UserStats.game_stats["game1"]["total_score"] = correct_items * 100
+	UserStats.game_stats["game1"]["time_taken"] = int(total_time)
+	UserStats.game_stats["game1"]["item_times"] = [avg_time_per_item]
 
 
 # Builds game1 fairness inputs and stores normalized adaptive score.

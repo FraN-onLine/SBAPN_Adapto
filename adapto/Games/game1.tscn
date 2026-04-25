@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://c8m67p3f82wx0"]
+[gd_scene format=4 uid="uid://c8m67p3f82wx0"]
 
 [ext_resource type="Script" uid="uid://n6ikjxkq238o" path="res://Games/game_1.gd" id="1_q5wpw"]
 [ext_resource type="FontFile" uid="uid://bgrgca3qc6dxo" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="2_4h6do"]
@@ -17,37 +17,37 @@ content_margin_right = 14.0
 content_margin_bottom = 6.0
 bg_color = Color(0.06, 0.06, 0.11, 0.97)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cnp8q"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j11ww"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lnsk3"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_37jos"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d2u18"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vlkqd"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fpaoy"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eodgo"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8apws"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eodgo"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fpaoy"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7mjov"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vlkqd"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yv7jk"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d2u18"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4y2jg"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_37jos"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kd8sk"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lnsk3"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4nbcc"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j11ww"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cnp8q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d1jsl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cqnt"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d1jsl"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4nbcc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kd8sk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4y2jg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yv7jk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7mjov"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w14is"]
 atlas = ExtResource("4_ant2b")
@@ -290,19 +290,19 @@ texture = ExtResource("9_37jos")
 [sub_resource type="TileSet" id="TileSet_vlkqd"]
 sources/0 = SubResource("TileSetAtlasSource_d2u18")
 
-[node name="Game1" type="Node2D"]
+[node name="Game1" type="Node2D" unique_id=212670419]
 script = ExtResource("1_q5wpw")
 
-[node name="TopBar" type="PanelContainer" parent="."]
+[node name="TopBar" type="PanelContainer" parent="." unique_id=1507218881]
 offset_right = 1280.0
 offset_bottom = 65.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_header")
 
-[node name="TopBarHBox" type="HBoxContainer" parent="TopBar"]
+[node name="TopBarHBox" type="HBoxContainer" parent="TopBar" unique_id=808362022]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="TitleLabel" type="Label" parent="TopBar/TopBarHBox"]
+[node name="TitleLabel" type="Label" parent="TopBar/TopBarHBox" unique_id=1068074867]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.92, 0.25, 1)
@@ -311,7 +311,7 @@ theme_override_font_sizes/font_size = 32
 text = "BATTLE WITH SABINE"
 horizontal_alignment = 1
 
-[node name="HPLabel" type="Label" parent="TopBar/TopBarHBox"]
+[node name="HPLabel" type="Label" parent="TopBar/TopBarHBox" unique_id=323245276]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65, 0.95, 0.65, 1)
@@ -320,7 +320,7 @@ theme_override_font_sizes/font_size = 24
 text = "HP: 5/5"
 horizontal_alignment = 2
 
-[node name="TimerLabel" type="Label" parent="TopBar/TopBarHBox"]
+[node name="TimerLabel" type="Label" parent="TopBar/TopBarHBox" unique_id=1533421859]
 custom_minimum_size = Vector2(210, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.82, 0.35, 1)
@@ -329,7 +329,7 @@ theme_override_font_sizes/font_size = 24
 text = "Time: 30s"
 horizontal_alignment = 2
 
-[node name="NAme" type="Label" parent="."]
+[node name="NAme" type="Label" parent="." unique_id=1284530065]
 offset_left = 1133.0
 offset_top = 62.0
 offset_right = 1313.0
@@ -340,7 +340,7 @@ theme_override_font_sizes/font_size = 32
 text = "LUCKY"
 metadata/_edit_use_anchors_ = true
 
-[node name="Question" type="Label" parent="."]
+[node name="Question" type="Label" parent="." unique_id=406874567]
 custom_minimum_size = Vector2(900, 70)
 offset_left = 10.0
 offset_top = 474.0
@@ -351,7 +351,7 @@ theme_override_font_sizes/font_size = 28
 text = "Loading... ghjhfhfghfhfghfghf hfghfghfghfgrtyryyrtyryry"
 autowrap_mode = 2
 
-[node name="ChallengeText" type="Label" parent="."]
+[node name="ChallengeText" type="Label" parent="." unique_id=1564707708]
 custom_minimum_size = Vector2(900, 70)
 offset_left = 10.0
 offset_top = 420.0
@@ -362,28 +362,28 @@ theme_override_font_sizes/font_size = 28
 text = "professor is testing your knowledge:"
 autowrap_mode = 2
 
-[node name="Option1Button" type="Button" parent="."]
+[node name="Option1Button" type="Button" parent="." unique_id=1458564504]
 custom_minimum_size = Vector2(300, 70)
 offset_left = 188.0
 offset_top = 533.0
 offset_right = 584.0
 offset_bottom = 747.0
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_4h6do")
 theme_override_font_sizes/font_size = 18
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cnp8q")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_j11ww")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_lnsk3")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_37jos")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d2u18")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_vlkqd")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_fpaoy")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8apws")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_eodgo")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8apws")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_fpaoy")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_vlkqd")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d2u18")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_37jos")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_lnsk3")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_j11ww")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cnp8q")
 text = "Option 1"
 icon = ExtResource("3_ant2b")
 flat = true
@@ -392,26 +392,26 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("8_fit_script")
 
-[node name="Option2Button" type="Button" parent="."]
+[node name="Option2Button" type="Button" parent="." unique_id=2057382662]
 custom_minimum_size = Vector2(300, 70)
 offset_left = 719.0
 offset_top = 516.0
 offset_right = 1086.0
 offset_bottom = 771.0
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_4h6do")
 theme_override_font_sizes/font_size = 18
-theme_override_styles/focus = SubResource("StyleBoxEmpty_7mjov")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_yv7jk")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_4y2jg")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_kd8sk")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_4nbcc")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_5cqnt")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_d1jsl")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_5cqnt")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_4nbcc")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_kd8sk")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_4y2jg")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_yv7jk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7mjov")
 text = "Option 2"
 icon = ExtResource("3_ant2b")
 flat = true
@@ -420,7 +420,7 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("8_fit_script")
 
-[node name="FeedbackLabel" type="Label" parent="."]
+[node name="FeedbackLabel" type="Label" parent="." unique_id=1573611042]
 custom_minimum_size = Vector2(700, 100)
 offset_left = 236.0
 offset_top = 529.0
@@ -428,9 +428,9 @@ offset_right = 936.0
 offset_bottom = 629.0
 theme_override_font_sizes/font_size = 20
 
-[node name="QuestionTimer" type="Timer" parent="."]
+[node name="QuestionTimer" type="Timer" parent="." unique_id=146845041]
 
-[node name="Player" type="AnimatedSprite2D" parent="."]
+[node name="Player" type="AnimatedSprite2D" parent="." unique_id=142282248]
 position = Vector2(262, 256)
 scale = Vector2(4.21094, 4.01172)
 sprite_frames = SubResource("SpriteFrames_w14is")
@@ -439,7 +439,7 @@ autoplay = "default"
 frame = 6
 frame_progress = 1.0
 
-[node name="Enemy" type="AnimatedSprite2D" parent="."]
+[node name="Enemy" type="AnimatedSprite2D" parent="." unique_id=2067197214]
 position = Vector2(1027, 245)
 scale = Vector2(4.55859, 4.58203)
 sprite_frames = SubResource("SpriteFrames_d2u18")
@@ -447,7 +447,7 @@ autoplay = "default"
 frame_progress = 0.697455
 metadata/_edit_lock_ = true
 
-[node name="HPItem" type="TextureRect" parent="."]
+[node name="HPItem" type="TextureRect" parent="." unique_id=345145667]
 offset_left = 40.0
 offset_top = 44.0
 offset_right = 72.0
@@ -455,13 +455,11 @@ offset_bottom = 76.0
 texture = ExtResource("4_b80xg")
 stretch_mode = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_gfijl")
-}
-autoplay = "new_animation"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1443108942]
+libraries/ = SubResource("AnimationLibrary_gfijl")
+autoplay = &"new_animation"
 
-[node name="Healthbar" parent="." instance=ExtResource("7_w14is")]
+[node name="Healthbar" parent="." unique_id=223375675 instance=ExtResource("7_w14is")]
 offset_left = 966.0
 offset_top = 21.0
 offset_right = 1112.0
@@ -471,11 +469,18 @@ offset_bottom = 56.0
 position = Vector2(53.75, 16)
 scale = Vector2(2.74375, 2.09167)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=703877337]
 z_index = -2
 scale = Vector2(6, 6)
 tile_map_data = PackedByteArray("AAAAAAQAAAACAAYAAAABAAQAAAABAAYAAAACAAQAAAACAAYAAAADAAQAAAAAAAYAAAAEAAQAAAABAAYAAAAFAAQAAAACAAYAAAAGAAQAAAAAAAYAAAAHAAQAAAABAAYAAAAIAAQAAAACAAYAAAAJAAQAAAAAAAYAAAAKAAQAAAABAAYAAAALAAQAAAACAAYAAAAMAAQAAAAAAAYAAAANAAQAAAABAAYAAAAOAAQAAAACAAYAAAAAAAUAAAAAAAcAAAAAAAYAAAAAAAgAAAAAAAcAAAAAAAkAAAABAAUAAAABAAcAAAABAAYAAAABAAgAAAABAAcAAAABAAkAAAACAAUAAAACAAcAAAACAAYAAAACAAgAAAACAAcAAAACAAkAAAADAAUAAAAAAAcAAAADAAYAAAAAAAgAAAADAAcAAAAAAAkAAAAEAAUAAAABAAcAAAAEAAYAAAABAAgAAAAEAAcAAAABAAkAAAAFAAUAAAACAAcAAAAFAAYAAAACAAgAAAAFAAcAAAACAAkAAAAGAAUAAAAAAAcAAAAGAAYAAAAAAAgAAAAGAAcAAAAAAAkAAAAHAAUAAAABAAcAAAAHAAYAAAABAAgAAAAHAAcAAAABAAkAAAAIAAUAAAACAAcAAAAIAAYAAAACAAgAAAAIAAcAAAACAAkAAAAJAAUAAAAAAAcAAAAJAAYAAAAAAAgAAAAJAAcAAAAAAAkAAAAKAAUAAAABAAcAAAAKAAYAAAABAAgAAAAKAAcAAAABAAkAAAALAAUAAAACAAcAAAALAAYAAAACAAgAAAALAAcAAAACAAkAAAAMAAUAAAAAAAcAAAAMAAYAAAAAAAgAAAAMAAcAAAAAAAkAAAANAAUAAAABAAcAAAANAAYAAAABAAgAAAANAAcAAAABAAkAAAAOAAUAAAACAAcAAAAOAAYAAAACAAgAAAAOAAcAAAACAAkAAAAAAAEAAAAAAAMAAAAAAAIAAAAAAAQAAAAAAAMAAAAAAAUAAAABAP//AAAHAAEAAAABAAAAAAAHAAIAAAABAAEAAAAHAAMAAAABAAIAAAAHAAQAAAABAAMAAAAHAAUAAAACAP//AAAIAAEAAAACAAAAAAAIAAIAAAACAAEAAAAIAAMAAAACAAIAAAAIAAQAAAACAAMAAAAIAAUAAAADAP//AAABAAEAAAADAAAAAAABAAIAAAADAAEAAAABAAMAAAADAAIAAAABAAQAAAADAAMAAAABAAUAAAAEAP//AAACAAEAAAAEAAAAAAACAAIAAAAEAAEAAAACAAMAAAAEAAIAAAACAAQAAAAEAAMAAAACAAUAAAAFAP//AAADAAEAAAAFAAAAAAADAAIAAAAFAAEAAAADAAMAAAAFAAIAAAADAAQAAAAFAAMAAAADAAUAAAAGAP//AAAEAAEAAAAGAAAAAAAEAAIAAAAGAAEAAAAEAAMAAAAGAAIAAAAEAAQAAAAGAAMAAAAEAAUAAAAHAP//AAAFAAEAAAAHAAAAAAAFAAIAAAAHAAEAAAAFAAMAAAAHAAIAAAAFAAQAAAAHAAMAAAAFAAUAAAAIAP//AAAGAAEAAAAIAAAAAAAGAAIAAAAIAAEAAAAGAAMAAAAIAAIAAAAGAAQAAAAIAAMAAAAGAAUAAAAJAP//AAAHAAEAAAAJAAAAAAAHAAIAAAAJAAEAAAAHAAMAAAAJAAIAAAAHAAQAAAAJAAMAAAAHAAUAAAAKAP//AAAIAAEAAAAKAAAAAAAIAAIAAAAKAAEAAAAIAAMAAAAKAAIAAAAIAAQAAAAKAAMAAAAIAAUAAAALAP//AAAHAAEAAAALAAAAAAAHAAIAAAALAAEAAAAHAAAAAAALAAIAAAAHAAEAAAALAAMAAAAHAAUAAAAMAP//AAAIAAEAAAAMAAAAAAAIAAIAAAAMAAEAAAAIAAAAAAAMAAIAAAAIAAEAAAAMAAMAAAAIAAUAAAANAP//AAAHAAEAAAANAAAAAAAHAAIAAAANAAEAAAAHAAMAAAANAAIAAAAHAAQAAAANAAMAAAAHAAUAAAAOAP//AAAIAAEAAAAOAAAAAAAIAAIAAAAOAAEAAAAIAAMAAAAOAAIAAAAIAAQAAAAOAAMAAAAIAAUAAAAAAAAAAAAAAAEAAAAAAP//AAAAAAEAAAA=")
 tile_set = SubResource("TileSet_vlkqd")
 metadata/_edit_lock_ = true
+
+[node name="EndDialog" type="AcceptDialog" parent="." unique_id=1722684633]
+oversampling_override = 1.0
+title = "Round Complete"
+initial_position = 2
+size = Vector2i(200, 100)
+ok_button_text = "Proceed"
 
 [editable path="Healthbar"]

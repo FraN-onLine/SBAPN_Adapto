@@ -21,6 +21,8 @@ var round_started_unix := 0
 var adaptive_recorded := false
 var stats_recorded := false
 
+@onready var end_dialog: AcceptDialog = $EndDialog
+
 func _ready() -> void:
 	randomize()
 	# Capture start time for normalized speed scoring.
@@ -86,6 +88,7 @@ func _ready() -> void:
 
 	total_questions = questions.size()
 	$Submit.disabled = true
+	end_dialog.confirmed.connect(_on_end_dialog_confirmed)
 
 func _on_button_pressed(key: String) -> void:
 	if answered.has(key):
@@ -160,10 +163,10 @@ func _on_answer_input_text_changed() -> void:
 func _check_game_end() -> void:
 	if total_questions > 0 and answered.size() >= total_questions:
 		_record_user_stats()
-		# Persist normalized result before leaving the scene.
+		# Persist normalized result before showing end dialog.
 		_record_adaptive_performance()
-		# Route next scene using adaptive ranking.
-		get_tree().change_scene_to_file(UserStats.get_scene_after_game("game2"))
+		UserStats.update_overall_stats()
+		_show_end_dialog()
 
 
 func _record_user_stats() -> void:
@@ -182,6 +185,36 @@ func _record_user_stats() -> void:
 	UserStats.game_stats["game2"]["time_taken"] = elapsed
 	UserStats.game_stats["game2"]["item_times"] = [avg_time_per_item]
 	UserStats.update_overall_stats()
+
+
+func _show_end_dialog() -> void:
+	var elapsed := maxi(0, Time.get_unix_time_from_system() - round_started_unix)
+	var rating := _get_performance_rating()
+	
+	end_dialog.title = "Round Complete"
+	end_dialog.dialog_text = "Category Challenge\nMoney Earned: $%d\nCorrect: %d/%d\nTime: %ds\nRating: %s" % [money, correct_count, total_questions, elapsed, rating]
+	end_dialog.popup_centered()
+
+
+func _on_end_dialog_confirmed() -> void:
+	# Route via adaptive selector to the next game.
+	get_tree().change_scene_to_file(UserStats.get_scene_after_game("game2"))
+
+
+func _get_performance_rating() -> String:
+	var accuracy := 0.0
+	var answered_total := answered.size()
+	if answered_total > 0:
+		accuracy = (float(correct_count) / float(answered_total)) * 100.0
+	
+	if accuracy >= 80:
+		return "⭐⭐⭐ Excellent"
+	elif accuracy >= 60:
+		return "⭐⭐ Good"
+	elif accuracy >= 40:
+		return "⭐ Fair"
+	else:
+		return "Try Again"
 
 
 # Converts Game 2 outcomes into fair adaptive metrics.
