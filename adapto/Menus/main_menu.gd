@@ -477,7 +477,7 @@ func _start_python_generation_job(args: Array, loading_text: String, success_tex
 
 func _run_python_generation(args: Array) -> Dictionary:
 	var output: Array = []
-	var code := OS.execute("python", args, output, true, true)
+	var code := OS.execute("python", args, output, true, false)
 	return {
 		"code": code,
 		"output": output

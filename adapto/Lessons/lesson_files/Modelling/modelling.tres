@@ -1,0 +1,280 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=17 format=3]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://adapto/Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://adapto/Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_ai_mod1"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD1"
+term = "Modelling"
+keyword = "representation"
+definition = "Creating a simplified or abstract representation of a real-world system or concept to understand, analyze, or predict its behavior."
+simple_terms = "making a model of something"
+examples = ["A blueprint for a house", "A scale model of an airplane", "A mathematical equation representing population growth"]
+accepted_terms = ["Simulation", "Abstraction", "Representation"]
+difficulty = 1
+related_to = ["Abstraction", "Simplification", "Analysis"]
+tof_statement = {
+"false": "Modelling is the process of building the actual physical system without any simplification.", 
+"true": "Modelling involves creating an abstract representation of a system."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod2"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD2"
+term = "Abstract Data Type (ADT)"
+keyword = "interface"
+definition = "A mathematical model for data types defined by their behavior (operations) from the perspective of the user, rather than by their specific implementation."
+simple_terms = "what you can do with data, not how it's done"
+examples = ["List", "Stack", "Queue", "Map"]
+accepted_terms = ["ADT", "Abstract Type"]
+difficulty = 2
+related_to = ["Data Structures", "Encapsulation", "Interface"]
+tof_statement = {
+"false": "An ADT specifies the exact memory layout and algorithms used for data storage.", 
+"true": "An ADT defines a set of operations that can be performed on data."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod3"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD3"
+term = "Data Structure"
+keyword = "storage"
+definition = "A particular way of organizing and storing data in a computer so that it can be accessed and modified efficiently."
+simple_terms = "how data is organized"
+examples = ["Array", "Linked List", "Tree", "Hash Table"]
+accepted_terms = ["DS"]
+difficulty = 1
+related_to = ["Abstract Data Type (ADT)", "Algorithms", "Efficiency"]
+tof_statement = {
+"false": "A linked list is a data structure where all elements are stored contiguously in memory.", 
+"true": "An array is a common data structure used for storing elements of the same type."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod4"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD4"
+term = "Algorithm"
+keyword = "steps"
+definition = "A finite sequence of well-defined, computer-implementable instructions, typically to solve a class of specific problems or to perform a computation."
+simple_terms = "a recipe for solving a problem"
+examples = ["Sorting algorithms (e.g., Bubble Sort, Quick Sort)", "Searching algorithms (e.g., Binary Search)", "Pathfinding algorithms (e.g., Dijkstra's)"]
+accepted_terms = []
+difficulty = 1
+related_to = ["Data Structures", "Problem Solving", "Efficiency"]
+tof_statement = {
+"false": "An algorithm is a graphical representation of a system's components.", 
+"true": "An algorithm provides a step-by-step procedure to achieve a desired outcome."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod5"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD5"
+term = "State Machine"
+keyword = "states"
+definition = "A computational model that can be in exactly one of a finite number of states at any given time. The machine can change from one state to another in response to some inputs."
+simple_terms = "different modes a system can be in"
+examples = ["Traffic light control", "Vending machine logic", "User interface navigation"]
+accepted_terms = ["Finite State Machine", "FSM"]
+difficulty = 2
+related_to = ["Finite Automata", "Behavioral Modelling", "Transitions"]
+tof_statement = {
+"false": "A state machine can exist in an infinite number of states simultaneously.", 
+"true": "A state machine transitions between predefined states based on events."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod6"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD6"
+term = "Entity-Relationship Model (ERM)"
+keyword = "entities"
+definition = "A conceptual data model that illustrates the structure of an information system by illustrating entity classes and relationships between them."
+simple_terms = "how different pieces of information relate"
+examples = ["Modelling a library database with books, authors, and borrowers", "Designing a customer order system with customers, products, and orders"]
+accepted_terms = ["ER Model", "ER Diagram"]
+difficulty = 2
+related_to = ["Database Design", "Conceptual Modelling", "Relationships"]
+tof_statement = {
+"false": "An ER model describes the algorithms used to process data.", 
+"true": "An ER model visualizes entities and their connections within a system."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod7"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD7"
+term = "Object-Oriented Modelling (OOM)"
+keyword = "objects"
+definition = "A modelling paradigm based on the concept of 'objects', which can contain data in the form of fields (often known as attributes or properties) and code in the form of procedures (often known as methods)."
+simple_terms = "modelling with self-contained units (objects)"
+examples = ["UML Class Diagrams", "Designing software components as reusable objects"]
+accepted_terms = ["OOM", "Object Modelling"]
+difficulty = 2
+related_to = ["Object-Oriented Programming (OOP)", "Classes", "Encapsulation", "Inheritance", "Polymorphism"]
+tof_statement = {
+"false": "Object-oriented modelling exclusively uses procedural programming concepts.", 
+"true": "Object-oriented modelling focuses on modelling systems as collections of interacting objects."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod8"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD8"
+term = "Behavioural Modelling"
+keyword = "interactions"
+definition = "Focuses on the dynamic aspects of a system, describing how the system responds to events and how its components interact over time."
+simple_terms = "how a system acts and reacts"
+examples = ["State Machine Diagrams", "Sequence Diagrams", "Activity Diagrams"]
+accepted_terms = ["Dynamic Modelling"]
+difficulty = 2
+related_to = ["State Machine", "Sequence Diagram", "Activity Diagram", "System Dynamics"]
+tof_statement = {
+"false": "Behavioural modelling is solely concerned with the static structure of data.", 
+"true": "Behavioural modelling illustrates the flow of control and interactions within a system."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod9"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD9"
+term = "Structural Modelling"
+keyword = "structure"
+definition = "Focuses on the static aspects of a system, describing its components, their attributes, and their relationships."
+simple_terms = "what the system is made of"
+examples = ["Class Diagrams", "Component Diagrams", "Object Diagrams"]
+accepted_terms = ["Static Modelling"]
+difficulty = 2
+related_to = ["Object-Oriented Modelling (OOM)", "Class Diagram", "Component Diagram", "Entity-Relationship Model (ERM)"]
+tof_statement = {
+"false": "Structural modelling describes the sequences of operations performed by a system.", 
+"true": "Structural modelling depicts the elements of a system and how they are interconnected."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod10"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD10"
+term = "Simulation"
+keyword = "mimics"
+definition = "The imitation of the operation of a real-world process or system over time, often used to test hypotheses or predict future outcomes."
+simple_terms = "running a model to see what happens"
+examples = ["Flight simulators", "Economic forecasting models", "Traffic flow simulations"]
+accepted_terms = ["Model Simulation"]
+difficulty = 2
+related_to = ["Modelling", "Prediction", "Experimentation"]
+tof_statement = {
+"false": "Simulation is the process of creating the physical system that is being modelled.", 
+"true": "Simulation involves running a model to observe its behavior under different conditions."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod11"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD11"
+term = "UML (Unified Modelling Language)"
+keyword = "diagrams"
+definition = "A standardized graphical notation system used for specifying, visualizing, constructing, and documenting the artifacts of a software-intensive system."
+simple_terms = "a standard way to draw models"
+examples = ["Use Case Diagrams", "Class Diagrams", "Sequence Diagrams"]
+accepted_terms = ["Unified Modelling Language"]
+difficulty = 2
+related_to = ["Object-Oriented Modelling (OOM)", "Structural Modelling", "Behavioural Modelling"]
+tof_statement = {
+"false": "UML is a programming language used to write software code.", 
+"true": "UML provides various diagrams for different aspects of system modelling."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod12"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD12"
+term = "Domain Modelling"
+keyword = "business"
+definition = "The process of identifying and defining the core concepts, entities, and relationships within a specific business or subject area."
+simple_terms = "modelling the business world"
+examples = ["Modelling customer accounts and transactions for a bank", "Defining product categories and attributes for an e-commerce site"]
+accepted_terms = ["Business Modelling"]
+difficulty = 2
+related_to = ["Ontology", "Conceptualization", "Business Logic"]
+tof_statement = {
+"false": "Domain modelling is concerned with the low-level implementation details of software.", 
+"true": "Domain modelling focuses on understanding and representing the problem space."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod13"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD13"
+term = "Conceptual Model"
+keyword = "high-level"
+definition = "A high-level representation of a system that focuses on the essential concepts and their relationships, abstracting away implementation details."
+simple_terms = "a basic idea model"
+examples = ["An ER Diagram showing tables and their links", "A mind map of key ideas"]
+accepted_terms = ["Conceptualization"]
+difficulty = 1
+related_to = ["Domain Modelling", "Abstraction", "Entity-Relationship Model (ERM)"]
+tof_statement = {
+"false": "A conceptual model describes the precise algorithms and data structures used.", 
+"true": "A conceptual model provides a broad overview of a system's key elements."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod14"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD14"
+term = "Physical Model"
+keyword = "implementation"
+definition = "A detailed representation of a system that specifies how it will be implemented, including specific data structures, algorithms, and technologies."
+simple_terms = "a detailed plan for building"
+examples = ["Database schema with specific data types", "Code structure and function signatures"]
+accepted_terms = ["Implementation Model"]
+difficulty = 3
+related_to = ["Conceptual Model", "Implementation", "Data Structures", "Algorithms"]
+tof_statement = {
+"false": "A physical model is a high-level, abstract representation of concepts.", 
+"true": "A physical model describes the concrete details of how a system will be built."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ai_mod15"]
+script = ExtResource("1_7hrog")
+id = "AI_MOD15"
+term = "Model Validation"
+keyword = "correctness"
+definition = "The process of checking whether a model accurately represents the system it is intended to model and whether it meets the specified requirements."
+simple_terms = "checking if the model is right"
+examples = ["Comparing simulation results to real-world data", "Reviewing a UML diagram for consistency and completeness"]
+accepted_terms = ["Model Verification"]
+difficulty = 3
+related_to = ["Modelling", "Testing", "Requirements"]
+tof_statement = {
+"false": "Model validation is only performed after the system has been fully deployed.", 
+"true": "Model validation ensures that the model accurately reflects the intended system."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Modelling"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_ai_mod1"), SubResource("Resource_ai_mod2"), SubResource("Resource_ai_mod3"), SubResource("Resource_ai_mod4"), SubResource("Resource_ai_mod5"), SubResource("Resource_ai_mod6"), SubResource("Resource_ai_mod7"), SubResource("Resource_ai_mod8"), SubResource("Resource_ai_mod9"), SubResource("Resource_ai_mod10"), SubResource("Resource_ai_mod11"), SubResource("Resource_ai_mod12"), SubResource("Resource_ai_mod13"), SubResource("Resource_ai_mod14"), SubResource("Resource_ai_mod15")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"
