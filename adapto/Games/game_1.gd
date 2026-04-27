@@ -46,9 +46,8 @@ func _ready() -> void:
 	question_timer.timeout.connect(_on_timer_tick)
 	end_dialog.confirmed.connect(_on_end_dialog_confirmed)
 	
-	# Reset game stats
-	
-	UserStats.reset_game_stats()
+	# Reset only game1 stats (preserves previous game stats for viewing)
+	UserStats.reset_game_stats("game1")
 	
 	# Load first question
 	load_next_question()
@@ -108,7 +107,8 @@ func load_next_question() -> void:
 	option2_value = options[1]
 	
 	# Set UI text
-	question.text =  display_text
+	question.text = display_text
+	_adjust_question_font_size()
 	if option1_button.has_method("update_text"):
 		option1_button.update_text(option1_value)
 	else:
@@ -250,13 +250,15 @@ func _show_end_dialog(won: bool) -> void:
 	option2_button.disabled = true
 	
 	var rating := _get_performance_rating()
+	var score := _calculate_score()
+	var avg_time := _calculate_average_time()
 	
 	if won:
 		end_dialog.title = "Victory!"
-		end_dialog.dialog_text = "Great job!\nCorrect: %d/5\nRating: %s\nAccuracy: %.1f%%" % [correct_items, rating, _calculate_accuracy()]
+		end_dialog.dialog_text = "Great job!\nCorrect: %d/5\nScore: %.0f\nAverage Time: %.1fs\nAccuracy: %.1f%%\nRating: %s" % [correct_items, score, avg_time, _calculate_accuracy(), rating]
 	else:
 		end_dialog.title = "Defeat"
-		end_dialog.dialog_text = "Game Over\nCorrect: %d/5\nRating: %s\nAccuracy: %.1f%%" % [correct_items, rating, _calculate_accuracy()]
+		end_dialog.dialog_text = "Game Over\nCorrect: %d/5\nScore: %.0f\nAverage Time: %.1fs\nAccuracy: %.1f%%\nRating: %s" % [correct_items, score, avg_time, _calculate_accuracy(), rating]
 	
 	end_dialog.popup_centered()
 
@@ -287,6 +289,50 @@ func _calculate_accuracy() -> float:
 	if total_questions > 0:
 		return (float(total_correct) / float(total_questions)) * 100.0
 	return 0.0
+
+
+func _calculate_score() -> float:
+	var total_correct := 0
+	var total_incorrect := 0
+	var total_timeout := 0
+	for i in range(4):
+		total_correct += int(UserStats.game_stats["game1"]["correct"][i])
+		total_incorrect += int(UserStats.game_stats["game1"]["incorrect"][i])
+		total_timeout += int(UserStats.game_stats["game1"]["timeout"][i])
+	return (float(total_correct) * 100.0) - (float(total_incorrect) * 25.0) - (float(total_timeout) * 20.0)
+
+
+func _calculate_average_time() -> float:
+	var total_questions := 0
+	var total_time := 0.0
+	for i in range(4):
+		total_questions += int(UserStats.game_stats["game1"]["questions"][i])
+		total_time += float(UserStats.game_stats["game1"]["sum_time"][i])
+	if total_questions > 0:
+		return total_time / float(total_questions)
+	return 0.0
+
+
+func _adjust_question_font_size() -> void:
+	# Get the text size at current font size
+	var font_size = 28
+	var max_font_size = 28
+	var min_font_size = 12
+	
+	# Keep trying smaller font sizes until text fits
+	while font_size >= min_font_size:
+		question.add_theme_font_size_override("font_size", font_size)
+		await get_tree().process_frame
+		
+		# Check if text fits within the boundaries
+		var text_size = question.get_minimum_size()
+		if text_size.y <= 121:  # 595 - 474 = 121 pixels available
+			break
+		
+		font_size -= 2
+	
+	# Ensure font size is at least min_font_size
+	question.add_theme_font_size_override("font_size", maxi(font_size, min_font_size))
 
 
 func _record_user_stats() -> void:

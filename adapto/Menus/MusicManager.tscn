@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bnbv1v3mpg4l6"]
+
+[ext_resource type="Script" uid="uid://cnkva1adt1oy2" path="res://Menus/music_manager.gd" id="1_gqfgg"]
+[ext_resource type="AudioStream" uid="uid://duw3spmrqoabp" path="res://Assets/Walen - Gameboy (freetouse.com).mp3" id="2_pbajx"]
+
+[node name="MusicManager" type="Node" unique_id=1523359526]
+script = ExtResource("1_gqfgg")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=625069403]
+stream = ExtResource("2_pbajx")

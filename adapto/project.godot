@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 UserStats="*res://Globals/user_stats.gd"
 Global="*res://Globals/global.gd"
 Database="*res://Database/database.gd"
+MusicManager="*uid://bnbv1v3mpg4l6"
 
 [display]
 

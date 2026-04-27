@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://guswsr0lp0ri"
+path="res://.godot/imported/Dagored - Harlem Heat (freetouse.com).mp3-1bd9989482c382faeb0ba7e7c9229344.mp3str"
+
+[deps]
+
+source_file="res://Assets/Dagored - Harlem Heat (freetouse.com).mp3"
+dest_files=["res://.godot/imported/Dagored - Harlem Heat (freetouse.com).mp3-1bd9989482c382faeb0ba7e7c9229344.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

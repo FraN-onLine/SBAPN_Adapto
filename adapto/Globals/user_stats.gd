@@ -172,6 +172,7 @@ func save_user_stats():
 		if typeof(perf) != TYPE_DICTIONARY:
 			perf = {}
 		perf["overall_stats"] = overall_stats.duplicate(true)
+		perf["game_stats"] = game_stats.duplicate(true)
 		perf["adaptive_history"] = adaptive_history.duplicate(true)
 		perf["diagnostic_runs_completed"] = diagnostic_runs_completed
 		perf["adaptive_started_once"] = adaptive_started_once
@@ -184,6 +185,8 @@ func load_user_stats():
 		if perf != null and typeof(perf) == TYPE_DICTIONARY:
 			if perf.has("overall_stats"):
 				overall_stats = perf["overall_stats"]
+			if perf.has("game_stats"):
+				game_stats = perf["game_stats"]
 			if perf.has("adaptive_history"):
 				adaptive_history = perf["adaptive_history"]
 			if perf.has("diagnostic_runs_completed"):
@@ -364,46 +367,71 @@ func get_adaptive_ranked_games() -> Array[String]:
 	_update_adaptive_ranking()
 	return adaptive_last_ranked.duplicate()
 
-func reset_game_stats():
-	game_stats["game1"] = {
-		"type": ["keyword", "simple_terms", "definition", "tof"],
-		"correct": [0, 0, 0, 0],
-		"incorrect": [0, 0, 0, 0],
-		"timeout": [0, 0, 0, 0],
-		"accuracy": [0, 0, 0, 0],
-		"sum_time": [0, 0, 0, 0],
-		"questions": [0, 0, 0, 0],
-		"item_times": [[], [], [], []],
-	}
-	game_stats["game2"] = {
-		"questions_answered": 0,
-		"questions_correct": 0,
-		"total_score": 0,
-		"time_taken": 0,
-		"item_times": [],
-	}
-	game_stats["game3"] = {
-		"questions_answered": 0,
-		"questions_correct": 0,
-		"total_score": 0,
-		"time_taken": 0,
-		"item_times": [],
-		"puzzles_completed": 0,
-	}
-	game_stats["game4"] = {
-		"questions_answered": 0,
-		"questions_correct": 0,
-		"total_score": 0,
-		"time_taken": 0,
-		"item_times": [],
-	}
-	game_stats["game5"] = {
-		"questions_answered": 0,
-		"questions_correct": 0,
-		"total_score": 0,
-		"time_taken": 0,
-		"item_times": [],
-	}
+# Reset stats for a specific game. If game_id is empty, reset all games.
+func reset_game_stats(game_id: String = "") -> void:
+	if game_id == "":
+		# Reset all games
+		game_stats["game1"] = {
+			"type": ["keyword", "simple_terms", "definition", "tof"],
+			"correct": [0, 0, 0, 0],
+			"incorrect": [0, 0, 0, 0],
+			"timeout": [0, 0, 0, 0],
+			"accuracy": [0, 0, 0, 0],
+			"sum_time": [0, 0, 0, 0],
+			"questions": [0, 0, 0, 0],
+			"item_times": [[], [], [], []],
+		}
+		game_stats["game2"] = {
+			"questions_answered": 0,
+			"questions_correct": 0,
+			"total_score": 0,
+			"time_taken": 0,
+			"item_times": [],
+		}
+		game_stats["game3"] = {
+			"questions_answered": 0,
+			"questions_correct": 0,
+			"total_score": 0,
+			"time_taken": 0,
+			"item_times": [],
+			"puzzles_completed": 0,
+		}
+		game_stats["game4"] = {
+			"questions_answered": 0,
+			"questions_correct": 0,
+			"total_score": 0,
+			"time_taken": 0,
+			"item_times": [],
+		}
+		game_stats["game5"] = {
+			"questions_answered": 0,
+			"questions_correct": 0,
+			"total_score": 0,
+			"time_taken": 0,
+			"item_times": [],
+		}
+	elif game_id == "game1":
+		game_stats["game1"] = {
+			"type": ["keyword", "simple_terms", "definition", "tof"],
+			"correct": [0, 0, 0, 0],
+			"incorrect": [0, 0, 0, 0],
+			"timeout": [0, 0, 0, 0],
+			"accuracy": [0, 0, 0, 0],
+			"sum_time": [0, 0, 0, 0],
+			"questions": [0, 0, 0, 0],
+			"item_times": [[], [], [], []],
+		}
+	elif game_id in ["game2", "game3", "game4", "game5"]:
+		var puzzle_completed = 0 if game_id != "game3" else 0
+		game_stats[game_id] = {
+			"questions_answered": 0,
+			"questions_correct": 0,
+			"total_score": 0,
+			"time_taken": 0,
+			"item_times": [],
+		}
+		if game_id == "game3":
+			game_stats[game_id]["puzzles_completed"] = 0
 
 func update_overall_stats():
 	# Defensive: ensure all overall_stats keys exist
