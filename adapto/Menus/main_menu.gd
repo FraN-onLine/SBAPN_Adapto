@@ -64,6 +64,7 @@ func _show_main_menu_for_user():
 		$Control/VBoxContainer/Back.visible = false
 		$ImportChoicePanel.visible = false
 		$PromptImportPanel.visible = false
+		$UserDataModal.visible = false
 
 
 func _on_button_3_pressed() -> void:
@@ -85,40 +86,97 @@ func _on_back_button_pressed():
 	$Control/VBoxContainer/Back.visible = false
 	$Control/VBoxContainer/Button4.visible = false
 	$Control/VBoxContainer/Button5.visible = false
+	$UserDataModal.visible = false
 	
-func _on_stats_button_pressed():
-		var game_names = {
-			"game1": "Multiple Choice",
-			"game2": "Jeopardy",
-			"game3": "Crossword",
-			"game4": "Matching Game",
-			"game5": "Hangman"
-		}
-		var scores = UserStats.get_average_scores_per_game()
-		var analysis = UserStats.get_diagnostic_analysis()
-		var msg = "Average Score and Time per Game (per play session):\n"
-		for game_id in UserStats.GAME_SEQUENCE:
-			var gname = game_names[game_id] if game_names.has(game_id) else game_id
-			var avg_score = 0.0
-			var avg_time = 0.0
-			if UserStats.overall_stats.has(game_id):
-				avg_score = UserStats.overall_stats[game_id].get("average_score", 0.0)
-				avg_time = UserStats.overall_stats[game_id].get("average_time_per_play", 0.0)
-			msg += gname + ": Score " + str(round(avg_score)) + ", Time " + str(round(avg_time)) + "s\n"
+func _on_stats_button_pressed() -> void:
+	if Global.current_user == null:
+		show_error_dialog("Please log in first.")
+		return
 
-		var best = analysis["best_game"]
-		var worst = analysis["worst_game"]
-		var fastest = analysis["fastest_game"]
-		var slowest = analysis["slowest_game"]
-		var best_name = game_names[best] if game_names.has(best) else best
-		var worst_name = game_names[worst] if game_names.has(worst) else worst
-		var fastest_name = game_names[fastest] if game_names.has(fastest) else fastest
-		var slowest_name = game_names[slowest] if game_names.has(slowest) else slowest
-		msg += "\nBest Game: " + best_name.capitalize()
-		msg += "\nWorst Game: " + worst_name.capitalize()
-		msg += "\nFastest Game: " + fastest_name.capitalize()
-		msg += "\nSlowest Game: " + slowest_name.capitalize()
-		show_success_dialog(msg)
+	# Refresh from persistence before opening the modal.
+	UserStats.load_user_stats()
+	_refresh_user_data_modal()
+	$UserDataModal.visible = true
+
+
+func _refresh_user_data_modal() -> void:
+	var game_names = {
+		"game1": "Multiple Choice",
+		"game2": "Jeopardy",
+		"game3": "Crossword",
+		"game4": "Matching Game",
+		"game5": "Hangman"
+	}
+
+	var username_text := str(Global.current_user)
+	if username_text.strip_edges() == "":
+		username_text = "Guest"
+	$UserDataModal/ModalPanel/VBoxContainer/UsernameLabel.text = "User: " + username_text
+
+	# Clear previous stats in GridContainer
+	var stats_grid = $UserDataModal/ModalPanel/VBoxContainer/StatsPanel/VBox/ScrollContainer/StatsGrid
+	for child in stats_grid.get_children():
+		child.queue_free()
+
+	for game_id in UserStats.GAME_SEQUENCE:
+		var gname = game_names[game_id] if game_names.has(game_id) else game_id
+		var avg_score = 0.0
+		var avg_time = 0.0
+		if UserStats.overall_stats.has(game_id):
+			avg_score = UserStats.overall_stats[game_id].get("average_score", 0.0)
+			avg_time = UserStats.overall_stats[game_id].get("average_time_per_play", 0.0)
+		
+		_add_stat_row(stats_grid, gname, str(int(round(avg_score))), str(int(round(avg_time))) + "s")
+
+	var analysis = UserStats.get_diagnostic_analysis()
+	var best = analysis.get("best_game", "")
+	var worst = analysis.get("worst_game", "")
+	var fastest = analysis.get("fastest_game", "")
+	var slowest = analysis.get("slowest_game", "")
+	var best_name = game_names[best] if game_names.has(best) else (str(best) if best != "" else "N/A")
+	var worst_name = game_names[worst] if game_names.has(worst) else (str(worst) if worst != "" else "N/A")
+	var fastest_name = game_names[fastest] if game_names.has(fastest) else (str(fastest) if fastest != "" else "N/A")
+	var slowest_name = game_names[slowest] if game_names.has(slowest) else (str(slowest) if slowest != "" else "N/A")
+
+	var vbox_analysis = $UserDataModal/ModalPanel/VBoxContainer/AnalysisBox/VBox
+	vbox_analysis.get_node("BestLabel").text = "Best Game: " + best_name
+	vbox_analysis.get_node("WorstLabel").text = "Worst Game: " + worst_name
+	vbox_analysis.get_node("FastestLabel").text = "Fastest Game: " + fastest_name
+	vbox_analysis.get_node("SlowestLabel").text = "Slowest Game: " + slowest_name
+	vbox_analysis.get_node("DiagStatusLabel").text = "Diagnostic Completed: " + ("Yes" if UserStats.has_completed_diagnostic() else "No")
+
+
+func _add_stat_row(grid: GridContainer, game: String, score: String, time: String) -> void:
+	var label_game = Label.new()
+	label_game.text = game
+	label_game.custom_minimum_size = Vector2(200, 0)
+	label_game.add_theme_font_override("font", load("res://Assets/Fonts/Silkscreen-Regular.ttf"))
+	label_game.add_theme_font_size_override("font_size", 14)
+	label_game.add_theme_color_override("font_color", Color(0.1, 0.1, 0.1, 1))
+	
+	var label_score = Label.new()
+	label_score.text = score
+	label_score.custom_minimum_size = Vector2(100, 0)
+	label_score.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label_score.add_theme_font_override("font", load("res://Assets/Fonts/Silkscreen-Regular.ttf"))
+	label_score.add_theme_font_size_override("font_size", 14)
+	label_score.add_theme_color_override("font_color", Color(0.1, 0.1, 0.1, 1))
+	
+	var label_time = Label.new()
+	label_time.text = time
+	label_time.custom_minimum_size = Vector2(100, 0)
+	label_time.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label_time.add_theme_font_override("font", load("res://Assets/Fonts/Silkscreen-Regular.ttf"))
+	label_time.add_theme_font_size_override("font_size", 14)
+	label_time.add_theme_color_override("font_color", Color(0.1, 0.1, 0.1, 1))
+	
+	grid.add_child(label_game)
+	grid.add_child(label_score)
+	grid.add_child(label_time)
+
+
+func _on_user_data_close_pressed() -> void:
+	$UserDataModal.visible = false
 
 
 func _on_topic_select_pressed() -> void:
@@ -477,7 +535,7 @@ func _start_python_generation_job(args: Array, loading_text: String, success_tex
 
 func _run_python_generation(args: Array) -> Dictionary:
 	var output: Array = []
-	var code := OS.execute("python", args, output, true, true)
+	var code := OS.execute("python", args, output, true, false)
 	return {
 		"code": code,
 		"output": output

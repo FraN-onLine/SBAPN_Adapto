@@ -1,6 +1,56 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1yqgq8h7g7w7"]
+[gd_scene load_steps=11 format=3 uid="uid://d1yqgq8h7g7w7"]
 
 [ext_resource type="Script" uid="uid://cugxp7du4shwx" path="res://Menus/register.gd" id="1_abcde"]
+[ext_resource type="FontFile" uid="uid://bgrgca3qc6dxo" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.85, 0.92, 0.98, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.196, 0.435, 0.765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blue"]
+bg_color = Color(0.196, 0.435, 0.765, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_white"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.196, 0.435, 0.765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input_focus"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.18, 0.616, 0.306, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_label"]
+bg_color = Color(1, 1, 1, 0)
 
 [node name="RegisterScreen" type="Control"]
 layout_mode = 3
@@ -18,12 +68,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -120.0
-offset_right = 150.0
-offset_bottom = 120.0
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -32,48 +83,83 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -80.0
-offset_right = 100.0
-offset_bottom = 80.0
+offset_left = -150.0
+offset_top = -110.0
+offset_right = 150.0
+offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 12
 
 [node name="TitleLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Register"
 horizontal_alignment = 1
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.0, 0.0, 0.0, 1)
 
 [node name="UsernameEdit" type="LineEdit" parent="Panel/VBoxContainer"]
 layout_mode = 2
 placeholder_text = "Username"
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+theme_override_styles/focus = SubResource("StyleBoxFlat_input_focus")
+theme_override_colors/font_color = Color(0.0, 0.0, 0.0, 1)
 
 [node name="PasswordEdit" type="LineEdit" parent="Panel/VBoxContainer"]
 layout_mode = 2
 placeholder_text = "Password"
 secret = true
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+theme_override_styles/focus = SubResource("StyleBoxFlat_input_focus")
+theme_override_colors/font_color = Color(0.0, 0.0, 0.0, 1)
 
 [node name="ConfirmPasswordEdit" type="LineEdit" parent="Panel/VBoxContainer"]
 layout_mode = 2
 placeholder_text = "Confirm Password"
 secret = true
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+theme_override_styles/focus = SubResource("StyleBoxFlat_input_focus")
+theme_override_colors/font_color = Color(0.0, 0.0, 0.0, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
 alignment = 1
+theme_override_constants/separation = 12
 
 [node name="RegisterButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+custom_minimum_size = Vector2(110, 40)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_blue")
 text = "Register"
 
 [node name="BackButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+custom_minimum_size = Vector2(90, 40)
+theme_override_colors/font_color = Color(0.0, 0.0, 0.0, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_white")
 text = "Back"
 
 [node name="FeedbackLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+text = ""
 horizontal_alignment = 1
 autowrap_mode = 2
+custom_minimum_size = Vector2(300, 40)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.0, 0.0, 0.0, 1)
 
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/RegisterButton" to="." method="_on_register_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
