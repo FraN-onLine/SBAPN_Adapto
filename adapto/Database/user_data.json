@@ -30,48 +30,48 @@
 						66.0
 					],
 					"game4": [
-						57.093137254902,
 						57.875,
 						80.125,
 						87.225,
 						91.675,
-						93.5583333333333
+						93.5583333333333,
+						50.1590909090909
 					],
 					"game5": [
-						36.9857142857143,
 						59.375,
 						63.1,
 						79.15,
 						30.0,
-						40.1714285714286
+						40.1714285714286,
+						39.0642857142857
 					]
 				},
 				"adaptive_started_once": true,
 				"diagnostic_runs_completed": 1.0,
 				"game4": {
-					"accuracy": 100.0,
+					"accuracy": 24.2424242424242,
 					"completed": true,
 					"correct": 8.0,
-					"hints_used": 8.0,
-					"incorrect": 0.0,
+					"hints_used": 1.0,
+					"incorrect": 25.0,
 					"lesson_title": "Object Oriented Programming",
-					"max_streak": 8.0,
+					"max_streak": 2.0,
 					"pairs_total": 8.0,
-					"score": 622.0,
-					"time_spent": 13.0,
-					"timestamp": 1777259723.907
+					"score": -22.0,
+					"time_spent": 46.0,
+					"timestamp": 1777296987.431
 				},
 				"game5": {
 					"accuracy": 0.0,
 					"completed": true,
 					"hints_used": 0.0,
 					"lesson_title": "Object Oriented Programming",
-					"max_streak": 8.0,
-					"mistakes": 41.0,
-					"score": 990.0,
+					"max_streak": 6.0,
+					"mistakes": 44.0,
+					"score": 835.0,
 					"skips_used": 0.0,
 					"time_spent": 69.0,
-					"timestamp": 1777259794.553,
+					"timestamp": 1777296939.674,
 					"words_total": 6.0
 				},
 				"overall_stats": {
@@ -82,7 +82,7 @@
 							52.9411764705882,
 							60.4938271604938
 						],
-						"average_score": 55.0,
+						"average_score": 0.0,
 						"correct": [
 							85.0,
 							65.0,
@@ -266,7 +266,7 @@
 						"total_time": 4773.0
 					},
 					"game4": {
-						"accuracy": 86.2068965517241,
+						"accuracy": 86.8131868131868,
 						"all_session_scores": [
 							731.666666666667,
 							731.666666666667,
@@ -282,7 +282,8 @@
 							880.0,
 							880.0,
 							518.333333333333,
-							518.333333333333
+							518.333333333333,
+							0.0
 						],
 						"all_session_times": [
 							23.0,
@@ -299,17 +300,18 @@
 							57.0,
 							57.0,
 							13.0,
-							13.0
+							13.0,
+							46.0
 						],
-						"average_score": 700.055555555556,
+						"average_score": 656.302083333333,
 						"average_time_per_item": 15.0,
-						"average_time_per_play": 64.6666666666667,
-						"total_questions_answered": 174.0,
-						"total_questions_correct": 150.0,
-						"total_time": 1298.0
+						"average_time_per_play": 63.5,
+						"total_questions_answered": 182.0,
+						"total_questions_correct": 158.0,
+						"total_time": 1344.0
 					},
 					"game5": {
-						"accuracy": 26.530612244898,
+						"accuracy": 23.6363636363636,
 						"all_session_scores": [
 							0.0,
 							753.571428571429,
@@ -320,7 +322,9 @@
 							1000.0,
 							1000.0,
 							1000.0,
-							707.142857142857
+							707.142857142857,
+							596.428571428571,
+							596.428571428571
 						],
 						"all_session_times": [
 							11.0,
@@ -332,14 +336,16 @@
 							79.0,
 							46.0,
 							150.0,
+							69.0,
+							69.0,
 							69.0
 						],
-						"average_score": 753.571428571429,
+						"average_score": 727.380952380952,
 						"average_time_per_item": 5.66666666666667,
-						"average_time_per_play": 77.4,
-						"total_questions_answered": 98.0,
+						"average_time_per_play": 76.0,
+						"total_questions_answered": 110.0,
 						"total_questions_correct": 26.0,
-						"total_time": 893.0
+						"total_time": 1031.0
 					}
 				}
 			},

@@ -155,6 +155,65 @@ corner_radius_top_right = 14
 corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_user_data_panel"]
+content_margin_left = 35
+content_margin_top = 35
+content_margin_right = 35
+content_margin_bottom = 35
+bg_color = Color(0.85, 0.92, 0.98, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.196, 0.435, 0.765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_stats_bg"]
+bg_color = Color(1, 1, 1, 0.9)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.85, 0.92, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_analysis_box"]
+bg_color = Color(1, 1, 1, 0.5)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.85, 0.92, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
+bg_color = Color(0.196, 0.435, 0.765, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_user_data_box"]
+bg_color = Color(1, 1, 1, 0.9)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.85, 0.92, 1)
+
 [node name="ColorRect" type="TextureRect" unique_id=88508662]
 anchors_preset = 15
 anchor_right = 1.0
@@ -577,6 +636,169 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_red")
 text = "Cancel"
 
+[node name="UserDataModal" type="Control" parent="." unique_id=1148301201]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ModalBG" type="ColorRect" parent="UserDataModal" unique_id=1273109072]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="ModalPanel" type="Panel" parent="UserDataModal" unique_id=1607454988]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -270.0
+offset_right = 330.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_user_data_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserDataModal/ModalPanel" unique_id=314532840]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="UserDataModal/ModalPanel/VBoxContainer" unique_id=318532659]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 30
+text = "User Data"
+horizontal_alignment = 1
+
+[node name="UsernameLabel" type="Label" parent="UserDataModal/ModalPanel/VBoxContainer" unique_id=486605712]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.15, 0.15, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 20
+text = "User:"
+
+[node name="StatsPanel" type="PanelContainer" parent="UserDataModal/ModalPanel/VBoxContainer" unique_id=1959249754]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_user_data_box")
+
+[node name="VBox" type="VBoxContainer" parent="UserDataModal/ModalPanel/VBoxContainer/StatsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HeaderPanel" type="PanelContainer" parent="UserDataModal/ModalPanel/VBoxContainer/StatsPanel/VBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_header")
+
+[node name="GridContainer" type="GridContainer" parent="UserDataModal/ModalPanel/VBoxContainer/StatsPanel/VBox/HeaderPanel"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+columns = 3
+
+[node name="Label" type="Label" parent="UserDataModal/ModalPanel/VBoxContainer/StatsPanel/VBox/HeaderPanel/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 14
+text = "GAME"
+
+[node name="Label2" type="Label" parent="UserDataModal/ModalPanel/VBoxContainer/StatsPanel/VBox/HeaderPanel/GridContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 14
+text = "SCORE"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="UserDataModal/ModalPanel/VBoxContainer/StatsPanel/VBox/HeaderPanel/GridContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 14
+text = "TIME"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UserDataModal/ModalPanel/VBoxContainer/StatsPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="StatsGrid" type="GridContainer" parent="UserDataModal/ModalPanel/VBoxContainer/StatsPanel/VBox/ScrollContainer" unique_id=1234567]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="AnalysisBox" type="PanelContainer" parent="UserDataModal/ModalPanel/VBoxContainer" unique_id=7654321]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_analysis_box")
+
+[node name="VBox" type="VBoxContainer" parent="UserDataModal/ModalPanel/VBoxContainer/AnalysisBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BestLabel" type="Label" parent="UserDataModal/ModalPanel/VBoxContainer/AnalysisBox/VBox" unique_id=1111111]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.4, 0.1, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 15
+text = "Best Game: -"
+
+[node name="WorstLabel" type="Label" parent="UserDataModal/ModalPanel/VBoxContainer/AnalysisBox/VBox" unique_id=2222222]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.1, 0.1, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 15
+text = "Worst Game: -"
+
+[node name="FastestLabel" type="Label" parent="UserDataModal/ModalPanel/VBoxContainer/AnalysisBox/VBox" unique_id=3333333]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.5, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 15
+text = "Fastest Game: -"
+
+[node name="SlowestLabel" type="Label" parent="UserDataModal/ModalPanel/VBoxContainer/AnalysisBox/VBox" unique_id=4444444]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.3, 0.1, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 15
+text = "Slowest Game: -"
+
+[node name="DiagStatusLabel" type="Label" parent="UserDataModal/ModalPanel/VBoxContainer/AnalysisBox/VBox" unique_id=5555555]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 14
+text = "Diagnostic Completed: No"
+horizontal_alignment = 2
+
+[node name="CloseBtn" type="Button" parent="UserDataModal/ModalPanel/VBoxContainer" unique_id=167557382]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_cxdly")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_red")
+text = "Close"
+
 [node name="LoginScreen" parent="." unique_id=959997949 instance=ExtResource("5_abcde")]
 visible = false
 layout_mode = 1
@@ -604,3 +826,4 @@ layout_mode = 1
 [connection signal="file_selected" from="TresImportDialog" to="." method="_on_tres_import_file_selected"]
 [connection signal="file_selected" from="TresExportDialog" to="." method="_on_tres_export_file_selected"]
 [connection signal="pressed" from="TopicSelectPanel/TopicBox/VBox/TopicCancelBtn" to="." method="_on_topic_select_cancel_pressed"]
+[connection signal="pressed" from="UserDataModal/ModalPanel/VBoxContainer/CloseBtn" to="." method="_on_user_data_close_pressed"]
