@@ -36,6 +36,7 @@ var available_height: int = 0
 # UI button that reveals a partial answer pattern.
 @onready var hint_btn       = $AnswerBar/AnswerVBox/AnswerHBox/HintBtn
 @onready var grid_node      = $GridNode
+@onready var skip = $AnswerBar/AnswerVBox/SkipButton
 
 # ── State ─────────────────────────────────────────────────────────────────────
 var lesson: Lesson
@@ -92,6 +93,7 @@ func _ready() -> void:
 	submit_btn.pressed.connect(_on_submit)
 	# Enable hint feature for crossword words.
 	hint_btn.pressed.connect(_on_hint_pressed)
+	skip.pressed.connect(_on_skip_pressed)
 	answer_input.text_submitted.connect(func(_t): _on_submit())
 	_update_hud()
 
@@ -481,6 +483,13 @@ func _on_hint_pressed() -> void:
 	answer_input.grab_focus()
 
 
+func _on_skip_pressed() -> void:
+	if game_over:
+		return
+	# End game as a loss with skip reason displayed
+	_end_game(false, true)
+
+
 func _mark_clue_solved(idx: int) -> void:
 	var dir: int = placements[idx]["dir"]
 	var list: VBoxContainer = across_items if dir == 0 else down_items
@@ -512,7 +521,7 @@ func _update_hud() -> void:
 	score_label.text = "Score: %d"  % score
 
 
-func _end_game(won: bool) -> void:
+func _end_game(won: bool, skipped: bool = false) -> void:
 	game_over = true
 	game_timer.stop()
 	submit_btn.disabled   = true
@@ -521,6 +530,8 @@ func _end_game(won: bool) -> void:
 	grid_node.queue_redraw()
 	if won:
 		feedback_label.text = "🎉  Excellent!  Crossword complete!  Final score: %d" % score
+	elif skipped:
+		feedback_label.text = "⏭️  Skipped!  Score: %d  (answers revealed)" % score
 	else:
 		feedback_label.text = "⏰  Time's up!  Score: %d  (answers revealed)" % score
 	_record_user_stats(won)

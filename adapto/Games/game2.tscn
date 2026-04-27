@@ -232,6 +232,18 @@ offset_bottom = 620.0
 theme_override_fonts/font = ExtResource("1_d3qvd")
 theme_override_font_sizes/font_size = 32
 
+[node name="FeedbackLabel" type="Label" parent="." unique_id=-1294967296]
+visible = false
+z_index = 2
+offset_left = 766.0
+offset_top = 121.0
+offset_right = 1182.0
+offset_bottom = 480.0
+theme_override_fonts/font = ExtResource("1_d3qvd")
+theme_override_font_sizes/font_size = 24
+text = "sdadadadasdadasdasdasdadadas"
+autowrap_mode = 3
+
 [node name="Submit" type="Button" parent="." unique_id=219845388]
 offset_left = 538.0
 offset_top = 632.0

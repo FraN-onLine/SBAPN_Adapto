@@ -252,6 +252,14 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_submitbtn")
 text = "HINT"
 
+[node name="SkipButton" type="Button" parent="AnswerBar/AnswerVBox" unique_id=828768329]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g3fn")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_submitbtn")
+text = "Skip Game?"
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=871682643]
 z_index = 1
 position = Vector2(1204.0001, 116)

@@ -109,23 +109,37 @@ func check_answer() -> void:
 		return
 	var user_answer = _normalize_answer($AnswerInput.text)
 	var accepted_answers: Array = questions[current_key].get("accepted_answers", [])
+	var question_data = questions[current_key]
+	var correct_answer = question_data.answer
+	var value = question_data.value
+	
 	if accepted_answers.has(user_answer):
-		money += questions[current_key].value
+		money += value
 		correct_count += 1
+		$QuestionDialog.text = ""
+		# Show feedback: "Correct! The answer is [answer]. +$[value]"
+		$FeedbackLabel.text = "Correct! The answer is %s. +$%d" % [correct_answer, value]
 	else:
-		money -= questions[current_key].value
+		money -= value
 		incorrect_count += 1
+		$QuestionDialog.text = ""
+		# Show feedback: "Incorrect. The answer is [answer]. -$[value]"
+		$FeedbackLabel.text = "Incorrect. The answer is %s. -$%d" % [correct_answer, value]
+	
 	answered[current_key] = true
 	$TopBar/TopBarHBox/MoneyLabel.text = "Money: $" + str(money)
-	$QuestionBackground.visible = false
-	$QuestionDialog.text = ""
 	button_by_key[current_key].disabled = true
 	current_key = ""
+	
+	# Wait before re-enabling buttons so player can read feedback
+	await get_tree().create_timer(1.5).timeout
+	
 	#re-enable buttons that haven't been answered yet
 	for btn_key in button_by_key.keys():
 		if not answered.has(btn_key):
 			button_by_key[btn_key].disabled = false
 	$AnswerInput.text = ""
+	$FeedbackLabel.text = ""
 	_check_game_end()
 
 
@@ -208,11 +222,11 @@ func _get_performance_rating() -> String:
 		accuracy = (float(correct_count) / float(answered_total)) * 100.0
 	
 	if accuracy >= 80:
-		return "⭐⭐⭐ Excellent"
+		return "Excellent"
 	elif accuracy >= 60:
-		return "⭐⭐ Good"
+		return "Good"
 	elif accuracy >= 40:
-		return "⭐ Fair"
+		return "Fair"
 	else:
 		return "Try Again"
 
