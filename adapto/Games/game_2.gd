@@ -94,6 +94,7 @@ func _on_button_pressed(key: String) -> void:
 	if answered.has(key):
 		return
 	current_key = key
+	$FeedbackLabel.visible = false
 	$QuestionBackground.visible = true
 	$QuestionDialog.text = questions[key].question
 	$AnswerInput.text = ""
@@ -112,7 +113,7 @@ func check_answer() -> void:
 	var question_data = questions[current_key]
 	var correct_answer = question_data.answer
 	var value = question_data.value
-	
+	$FeedbackLabel.visible = true
 	if accepted_answers.has(user_answer):
 		money += value
 		correct_count += 1

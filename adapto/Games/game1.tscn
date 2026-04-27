@@ -330,17 +330,6 @@ theme_override_font_sizes/font_size = 24
 text = "Time: 30s"
 horizontal_alignment = 2
 
-[node name="NAme" type="Label" parent="." unique_id=1284530065]
-offset_left = 1133.0
-offset_top = 62.0
-offset_right = 1313.0
-offset_bottom = 191.0
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("2_4h6do")
-theme_override_font_sizes/font_size = 32
-text = "LUCKY"
-metadata/_edit_use_anchors_ = true
-
 [node name="Question" type="Label" parent="." unique_id=406874567]
 custom_minimum_size = Vector2(900, 70)
 offset_left = 10.0
@@ -445,7 +434,7 @@ position = Vector2(1027, 245)
 scale = Vector2(4.55859, 4.58203)
 sprite_frames = SubResource("SpriteFrames_d2u18")
 autoplay = "default"
-frame_progress = 0.697455
+frame_progress = 0.14547645
 metadata/_edit_lock_ = true
 
 [node name="HPItem" type="TextureRect" parent="." unique_id=345145667]

@@ -4,6 +4,8 @@
 [ext_resource type="FontFile" uid="uid://bgrgca3qc6dxo" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="2_g5fn"]
 [ext_resource type="Texture2D" uid="uid://cdoecq6a7hk05" path="res://Assets/Background/3.png" id="3_g5bg"]
 [ext_resource type="Texture2D" uid="uid://cm7m58hhdoske" path="res://Assets/Sabine/SabineFace-Sheet.png" id="4_uqoxm"]
+[ext_resource type="Texture2D" uid="uid://c761nbnwfthkn" path="res://Assets/Caius/Caius-Sheet.png" id="5_u8vov"]
+[ext_resource type="Texture2D" uid="uid://tfibasyuhtkt" path="res://Assets/Caius/Dialog.png" id="6_gmugn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
 content_margin_left = 14.0
@@ -71,6 +73,49 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_75f8o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r38y"]
+atlas = ExtResource("5_u8vov")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wx7mq"]
+atlas = ExtResource("5_u8vov")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_if57j"]
+atlas = ExtResource("5_u8vov")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8fox"]
+atlas = ExtResource("5_u8vov")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq25v"]
+atlas = ExtResource("5_u8vov")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x6b1f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r38y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wx7mq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_if57j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8fox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vq25v")
 }],
 "loop": true,
 "name": &"default",
@@ -280,12 +325,46 @@ size = Vector2i(200, 100)
 ok_button_text = "Proceed"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=218117800]
+visible = false
 z_index = 1
 position = Vector2(113, 597)
 scale = Vector2(4.84375, 4.75)
 sprite_frames = SubResource("SpriteFrames_cdmxg")
 autoplay = "default"
 frame_progress = 0.5173537
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=2007121751]
+z_index = 1
+position = Vector2(1194, 537)
+scale = Vector2(5.2460938, 5.0234375)
+sprite_frames = SubResource("SpriteFrames_x6b1f")
+autoplay = "default"
+frame_progress = 0.50811756
+flip_h = true
+
+[node name="LetterUsed" type="Label" parent="." unique_id=896143491]
+visible = false
+modulate = Color(0, 0, 0, 1)
+z_index = 2
+layout_mode = 0
+offset_left = 948.0
+offset_top = 345.0
+offset_right = 1122.0
+offset_bottom = 427.0
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_g5fn")
+theme_override_font_sizes/font_size = 64
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Dialog" type="Sprite2D" parent="." unique_id=1846447978]
+visible = false
+position = Vector2(1040, 396.99997)
+scale = Vector2(3.209091, 3.1551723)
+texture = ExtResource("6_gmugn")
+metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="GameTimer" to="." method="_on_timer_tick"]
 [connection signal="pressed" from="MainVBox/BottomBar/BottomHBox/HintBtn" to="." method="_on_hint_pressed"]

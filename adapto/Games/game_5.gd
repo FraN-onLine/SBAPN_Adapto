@@ -32,6 +32,9 @@ const REWARD_WORD := 150
 @onready var skip_btn: Button = $MainVBox/BottomBar/BottomHBox/SkipBtn
 @onready var end_dialog: AcceptDialog = $EndDialog
 
+@onready var dialogasset = $Dialog
+@onready var letterused = $LetterUsed
+
 var lesson: Lesson
 var game_data: Array = []
 var current_word_index := 0
@@ -142,7 +145,10 @@ func _start_word(idx: int) -> void:
 	if idx >= game_data.size():
 		_end_game(true)
 		return
-		
+	
+	dialogasset.visible = false
+	letterused.visible = false
+	letterused.text = ""
 	current_word_index = idx
 	current_term = game_data[idx]["term"]
 	current_definition = game_data[idx]["def"]
@@ -189,10 +195,16 @@ func _on_key_pressed(letter: String, from_hint := false) -> void:
 		return
 		
 	guessed_letters.append(letter)
+	# Show dialog + last letter used
+	dialogasset.visible = true
+	letterused.visible = true
+	letterused.text = letter
 	var btn: Button = keyboard_buttons[letter]
 	btn.disabled = true
-	
-	if current_term.contains(letter):
+	var is_correct := current_term.contains(letter)
+
+	if is_correct:
+		letterused.modulate = Color(0, 0, 0) # black
 		btn.modulate = Color(0.4, 1.0, 0.4) # Greenish for correct
 		if not from_hint:
 			score += REWARD_LETTER
@@ -202,6 +214,7 @@ func _on_key_pressed(letter: String, from_hint := false) -> void:
 		if current_streak > 0 and current_streak % 5 == 0:
 			score += 50 # Streak bonus
 	else:
+		letterused.modulate = Color(1, 0, 0) # red
 		btn.modulate = Color(1.0, 0.4, 0.4) # Reddish for incorrect
 		score = maxi(0, score - PENALTY_MISS)
 		current_streak = 0
@@ -246,6 +259,7 @@ func _on_skip_pressed() -> void:
 	_word_completed(false)
 
 func _word_completed(success: bool) -> void:
+	
 	if success and not hint_used_on_current_word:
 		score += REWARD_WORD
 		feedback_label.text = "Excellent! +%d" % REWARD_WORD
@@ -254,6 +268,8 @@ func _word_completed(success: bool) -> void:
 		
 	_update_hud()
 	await get_tree().create_timer(1.5).timeout
+	dialogasset.visible = false
+	letterused.visible = false
 	_start_word(current_word_index + 1)
 
 func _on_timer_tick() -> void:
