@@ -47,7 +47,7 @@
 					]
 				},
 				"adaptive_started_once": true,
-				"diagnostic_runs_completed": 1.0,
+				"diagnostic_runs_completed": 1,
 				"game4": {
 					"accuracy": 24.2424242424242,
 					"completed": true,

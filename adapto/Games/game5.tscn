@@ -285,7 +285,7 @@ position = Vector2(113, 597)
 scale = Vector2(4.84375, 4.75)
 sprite_frames = SubResource("SpriteFrames_cdmxg")
 autoplay = "default"
-frame_progress = 0.320725
+frame_progress = 0.5173537
 
 [connection signal="timeout" from="GameTimer" to="." method="_on_timer_tick"]
 [connection signal="pressed" from="MainVBox/BottomBar/BottomHBox/HintBtn" to="." method="_on_hint_pressed"]
