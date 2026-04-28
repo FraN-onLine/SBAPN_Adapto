@@ -91,10 +91,13 @@ func _ready() -> void:
 	game_timer.timeout.connect(_on_tick)
 	game_timer.start()
 	submit_btn.pressed.connect(_on_submit)
+	submit_btn.focus_mode = Control.FOCUS_NONE
 	# Enable hint feature for crossword words.
 	hint_btn.pressed.connect(_on_hint_pressed)
+	hint_btn.focus_mode = Control.FOCUS_NONE
 	skip.pressed.connect(_on_skip_pressed)
-	answer_input.text_submitted.connect(func(_t): _on_submit())
+	skip.focus_mode = Control.FOCUS_NONE
+	answer_input.gui_input.connect(_on_answer_gui_input)
 	_update_hud()
 
 
@@ -323,12 +326,14 @@ func _build_clue_ui() -> void:
 	for idx in range(placements.size()):
 		var p: Dictionary = placements[idx]
 		var btn := Button.new()
+		btn.add_theme_font_override("font", preload("res://Assets/Fonts/Silkscreen-Regular.ttf"))
 		btn.text = "%d. %s" % [p["number"], p["clue"]]
 		btn.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		btn.custom_minimum_size = Vector2(0, 56)
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.clip_text = false
+		btn.focus_mode = Control.FOCUS_NONE
 		btn.pressed.connect(_on_clue_selected.bind(idx))
 		if p["dir"] == 0:
 			across_items.add_child(btn)
@@ -342,7 +347,7 @@ func _on_clue_selected(idx: int) -> void:
 	clue_display.text = "→  %d %s:   %s" % [
 		p["number"], "Across" if p["dir"] == 0 else "Down", p["clue"]]
 	answer_input.text = ""
-	answer_input.grab_focus()
+	answer_input.call_deferred("grab_focus")
 	grid_node.queue_redraw()
 
 
@@ -351,7 +356,7 @@ func _on_clue_selected(idx: int) -> void:
 # ─────────────────────────────────────────────────────────────────────────────
 
 func _draw_grid() -> void:
-	var font := ThemeDB.fallback_font
+	var font := preload("res://Assets/Fonts/Silkscreen-Regular.ttf")
 	var word_cells  := {}   # Vector2i → true
 	var sel_cells   := {}   # Vector2i → true
 	var solved_cells := {}  # Vector2i → letter
@@ -434,6 +439,11 @@ func _on_grid_input(event: InputEvent) -> void:
 # Answer Submission
 # ─────────────────────────────────────────────────────────────────────────────
 
+func _on_answer_gui_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER):
+		_on_submit()
+		answer_input.accept_event() # This swallows the Enter key! Godot's native unfocus won't run.
+
 func _on_submit() -> void:
 	if game_over:
 		return
@@ -445,6 +455,7 @@ func _on_submit() -> void:
 		return
 	var p: Dictionary = placements[selected_idx]
 	var ans: String = answer_input.text.strip_edges().to_upper()
+
 	if ans == p["word"]:
 		solved[selected_idx] = true
 		score += 100
@@ -452,13 +463,20 @@ func _on_submit() -> void:
 		_mark_clue_solved(selected_idx)
 		grid_node.queue_redraw()
 		_update_hud()
+
+		answer_input.text = ""
+		answer_input.grab_focus()
+
 		if solved.all(func(s): return s):
 			_end_game(true)
 	else:
 			# Count failed attempts for adaptive accuracy metrics.
 		wrong_attempts += 1
 		feedback_label.text = "❌  Wrong — try again!"
+
 		answer_input.text = ""
+		answer_input.grab_focus()
+		answer_input.select_all()
 
 
 	# Reveals partial letters for the selected word and applies penalty.
@@ -467,20 +485,20 @@ func _on_hint_pressed() -> void:
 		return
 	if selected_idx < 0 or selected_idx >= placements.size():
 		feedback_label.text = "Select a clue first to get a hint."
-		answer_input.grab_focus()
+		answer_input.call_deferred("grab_focus")
 		return
 	if solved[selected_idx]:
 		feedback_label.text = "That word is already solved."
-		answer_input.grab_focus()
+		answer_input.call_deferred("grab_focus")
 		return
 
-	var p: Dictionary = placements[selected_idx]
-	var hint_text := _build_hint(str(p["word"]))
+	# Pass the index instead of the string so we can check the grid
+	var hint_text := _build_hint(selected_idx)
 	hints_used += 1
 	score = maxi(0, score - HINT_PENALTY)
 	feedback_label.text = "💡  Hint: %s" % hint_text
 	_update_hud()
-	answer_input.grab_focus()
+	answer_input.call_deferred("grab_focus")
 
 
 func _on_skip_pressed() -> void:
@@ -567,17 +585,65 @@ func _record_user_stats(won: bool) -> void:
 
 
 # Returns a masked hint with first/last + one random internal letter.
-func _build_hint(word: String) -> String:
-	if word.length() <= 2:
-		return "%s (%d letters)" % [word, word.length()]
+func _build_hint(idx: int) -> String:
+	var p: Dictionary = placements[idx]
+	var word: String = str(p["word"])
 
-	var reveal_index := 1 + randi() % maxi(1, word.length() - 2)
+	# If the word is 3 letters or shorter, just reveal the whole thing
+	if word.length() <= 3:
+		return "%s (%d letters)" % [" ".join(word.split("")), word.length()]
+
+	# 1. Identify which cells are already solved by other intersecting words
+	var solved_cells := {}
+	for pi in range(placements.size()):
+		if solved[pi]:
+			var sp: Dictionary = placements[pi]
+			var sdr := 1 if sp["dir"] == 1 else 0
+			var sdc := 1 if sp["dir"] == 0 else 0
+			for i in range(sp["word"].length()):
+				solved_cells[Vector2i(sp["row"] + sdr * i, sp["col"] + sdc * i)] = true
+
+	# 2. Sort indices into 'unrevealed' and a general fallback pool
+	var dr := 1 if p["dir"] == 1 else 0
+	var dc := 1 if p["dir"] == 0 else 0
+	var unrevealed_indices := []
+	var fallback_indices := [] 
+
+	for i in range(1, word.length()): # Start at 1 to skip the constant first letter
+		if word[i] == " ":
+			continue
+			
+		var key := Vector2i(p["row"] + dr * i, p["col"] + dc * i)
+		if not solved_cells.has(key):
+			unrevealed_indices.append(i)
+		else:
+			fallback_indices.append(i)
+
+	# 3. Pick exactly 2 characters to reveal
+	var chosen_reveals := []
+	
+	# Shuffle pools so the hints are random
+	unrevealed_indices.shuffle()
+	fallback_indices.shuffle()
+
+	# Try to grab from the hidden letters first
+	while chosen_reveals.size() < 2 and unrevealed_indices.size() > 0:
+		chosen_reveals.append(unrevealed_indices.pop_back())
+
+	# If there weren't enough hidden letters (due to intersections), grab from the fallback
+	while chosen_reveals.size() < 2 and fallback_indices.size() > 0:
+		chosen_reveals.append(fallback_indices.pop_back())
+
+	# 4. Construct the hint string
 	var tokens := []
 	for i in range(word.length()):
-		if i == 0 or i == reveal_index or i == word.length() - 1:
+		if i == 0 or chosen_reveals.has(i):
 			tokens.append(word[i])
+		elif word[i] == " ":
+			tokens.append(" ") # Preserve any spaces between words
 		else:
 			tokens.append("_")
+
 	return "%s (%d letters)" % [" ".join(tokens), word.length()]
 
 

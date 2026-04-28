@@ -125,6 +125,7 @@ func _build_board() -> void:
 	card_buttons.clear()
 	for card in cards:
 		var btn := Button.new()
+		btn.add_theme_font_override("font", preload("res://Assets/Fonts/Silkscreen-Regular.ttf"))
 		btn.custom_minimum_size = Vector2(240, 100)
 		btn.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		btn.text = str(card["text"])
