@@ -6,119 +6,119 @@
 			"performance": {
 				"adaptive_history": {
 					"game1": [
-						78.0,
-						41.3571428571429,
-						86.1428571428571,
 						86.1428571428571,
 						41.3571428571429,
-						42.475
+						42.475,
+						64.2,
+						64.5,
+						85.9428571428572
 					],
 					"game2": [
-						43.9166666666667,
-						42.0833333333333,
 						44.0833333333333,
 						42.5833333333333,
 						46.4166666666667,
-						43.0
+						43.0,
+						42.8333333333333,
+						42.75
 					],
 					"game3": [
-						73.125,
 						67.3522727272727,
 						66.0,
 						89.9166666666667,
 						89.9166666666667,
-						89.9166666666667
+						89.9166666666667,
+						80.9166666666667
 					],
 					"game4": [
-						91.675,
 						93.5583333333333,
 						50.1590909090909,
 						64.5833333333333,
 						52.0590909090909,
-						0.0
+						0.0,
+						84.7916666666667
 					],
 					"game5": [
-						63.1,
 						79.15,
 						30.0,
 						40.1714285714286,
 						39.0642857142857,
-						39.0
+						39.0,
+						37.3
 					]
 				},
 				"adaptive_started_once": true,
-				"diagnostic_runs_completed": 1,
+				"diagnostic_runs_completed": 1.0,
 				"game4": {
-					"accuracy": 0.0,
-					"completed": false,
-					"correct": 0,
-					"hints_used": 0,
-					"incorrect": 0,
+					"accuracy": 88.8888888888889,
+					"completed": true,
+					"correct": 8.0,
+					"hints_used": 11.0,
+					"incorrect": 1.0,
 					"lesson_title": "Object Oriented Programming",
-					"max_streak": 0,
-					"pairs_total": 8,
-					"score": 0,
-					"time_spent": 120,
-					"timestamp": 1777311395.757
+					"max_streak": 5.0,
+					"pairs_total": 8.0,
+					"score": 395.0,
+					"time_spent": 28.0,
+					"timestamp": 1777376137.664
 				},
 				"game5": {
 					"accuracy": 0.0,
 					"completed": true,
 					"hints_used": 0.0,
 					"lesson_title": "Object Oriented Programming",
-					"max_streak": 0.0,
-					"mistakes": 0.0,
+					"max_streak": 2.0,
+					"mistakes": 23.0,
 					"score": 0.0,
-					"skips_used": 6.0,
-					"time_spent": 10.0,
-					"timestamp": 1777307598.913,
+					"skips_used": 5.0,
+					"time_spent": 27.0,
+					"timestamp": 1777376166.207,
 					"words_total": 6.0
 				},
 				"game_stats": {
 					"game1": {
 						"accuracy": [
-							0,
-							0,
-							0,
-							0
+							0.0,
+							0.0,
+							0.0,
+							0.0
 						],
 						"correct": [
-							0,
-							1,
-							1,
-							1
+							1.0,
+							1.0,
+							1.0,
+							2.0
 						],
 						"incorrect": [
-							1,
-							1,
-							0,
-							0
+							0.0,
+							1.0,
+							0.0,
+							1.0
 						],
 						"item_times": [
-							14.0
+							0.285714285714286
 						],
 						"questions": [
-							1,
-							3,
-							2,
-							2
+							1.0,
+							2.0,
+							1.0,
+							3.0
 						],
-						"questions_answered": 8,
-						"questions_correct": 3,
+						"questions_answered": 7.0,
+						"questions_correct": 5.0,
 						"sum_time": [
-							0,
-							52,
-							30,
-							30
+							0.0,
+							0.0,
+							2.0,
+							0.0
 						],
-						"time_taken": 112,
+						"time_taken": 2.0,
 						"timeout": [
-							0,
-							1,
-							1,
-							1
+							0.0,
+							0.0,
+							0.0,
+							0.0
 						],
-						"total_score": 300,
+						"total_score": 500.0,
 						"type": [
 							"keyword",
 							"simple_terms",
@@ -128,62 +128,62 @@
 					},
 					"game2": {
 						"item_times": [
-							2.66666666666667
+							3.0
 						],
-						"questions_answered": 9,
-						"questions_correct": 0,
-						"time_taken": 24,
-						"total_score": -2550
+						"questions_answered": 9.0,
+						"questions_correct": 0.0,
+						"time_taken": 27.0,
+						"total_score": -2550.0
 					},
 					"game3": {
 						"item_times": [
-							25.7142857142857
+							22.5
 						],
-						"puzzles_completed": 7,
-						"questions_answered": 7,
-						"questions_correct": 7,
-						"time_taken": 180,
-						"total_score": 0
+						"puzzles_completed": 8.0,
+						"questions_answered": 8.0,
+						"questions_correct": 8.0,
+						"time_taken": 180.0,
+						"total_score": 100.0
 					},
 					"game4": {
 						"item_times": [
-							15.0
+							3.5
 						],
-						"questions_answered": 8,
-						"questions_correct": 0,
-						"time_taken": 120,
-						"total_score": 0
+						"questions_answered": 8.0,
+						"questions_correct": 8.0,
+						"time_taken": 28.0,
+						"total_score": 395.0
 					},
 					"game5": {
 						"item_times": [
-							1.66666666666667
+							4.5
 						],
 						"questions_answered": 6.0,
 						"questions_correct": 0.0,
-						"time_taken": 10.0,
+						"time_taken": 27.0,
 						"total_score": 0.0
 					}
 				},
 				"overall_stats": {
 					"game1": {
 						"accuracy": [
-							68.75,
-							47.5609756097561,
-							49.645390070922,
-							58.4
+							63.2978723404255,
+							48.9473684210526,
+							49.0196078431373,
+							60.8391608391608
 						],
-						"average_score": 38.0,
+						"average_score": 90.0,
 						"correct": [
-							110.0,
-							78.0,
-							70.0,
-							73.0
+							119.0,
+							93.0,
+							75.0,
+							87.0
 						],
 						"incorrect": [
-							50.0,
-							81.0,
-							66.0,
-							47.0
+							69.0,
+							92.0,
+							73.0,
+							51.0
 						],
 						"timeout": [
 							0.0,
@@ -192,15 +192,15 @@
 							5.0
 						],
 						"total_questions": [
-							160.0,
-							164.0,
-							141.0,
-							125.0
+							188.0,
+							190.0,
+							153.0,
+							143.0
 						],
 						"total_sum_time": [
-							424.0,
+							436.0,
 							764.0,
-							770.0,
+							782.0,
 							440.0
 						],
 						"type": [
@@ -211,7 +211,7 @@
 						]
 					},
 					"game2": {
-						"accuracy": 22.8070175438597,
+						"accuracy": 19.6969696969697,
 						"all_session_scores": [
 							0.0,
 							0.0,
@@ -239,6 +239,16 @@
 							129.62962962963,
 							129.62962962963,
 							129.62962962963,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
 							0.0,
 							0.0,
 							0.0,
@@ -317,20 +327,30 @@
 							43.0,
 							43.0,
 							43.0,
-							24,
-							24,
-							24,
-							24
+							24.0,
+							24.0,
+							24.0,
+							24.0,
+							24.0,
+							26.0,
+							26.0,
+							26.0,
+							26.0,
+							26.0,
+							26.0,
+							26.0,
+							27.0,
+							27.0
 						],
-						"average_score": 103.074772886094,
+						"average_score": 86.7136978248089,
 						"average_time_per_item": 9.22222222222222,
-						"average_time_per_play": 114.0,
-						"total_questions_answered": 570.0,
+						"average_time_per_play": 100.031746031746,
+						"total_questions_answered": 660.0,
 						"total_questions_correct": 130.0,
-						"total_time": 6462.0
+						"total_time": 6722.0
 					},
 					"game3": {
-						"accuracy": 95.8100558659218,
+						"accuracy": 96.551724137931,
 						"all_session_scores": [
 							762.5,
 							762.5,
@@ -367,7 +387,17 @@
 							0.0,
 							0.0,
 							0.0,
-							0.0
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							125.0,
+							125.0,
+							125.0,
+							125.0,
+							125.0,
+							125.0,
+							125.0
 						],
 						"all_session_times": [
 							71.0,
@@ -404,19 +434,29 @@
 							180.0,
 							180.0,
 							180.0,
-							180,
-							180
+							180.0,
+							180.0,
+							180.0,
+							180.0,
+							180.0,
+							180.0,
+							180.0,
+							180.0,
+							180.0,
+							180.0,
+							180.0,
+							180.0
 						],
-						"average_score": 242.708333333333,
+						"average_score": 208.967391304348,
 						"average_time_per_item": 25.7142857142857,
-						"average_time_per_play": 170.916666666667,
+						"average_time_per_play": 172.891304347826,
 						"total_puzzles_completed": 0.0,
-						"total_questions_answered": 358.0,
-						"total_questions_correct": 343.0,
-						"total_time": 7293.0
+						"total_questions_answered": 435.0,
+						"total_questions_correct": 420.0,
+						"total_time": 9093.0
 					},
 					"game4": {
-						"accuracy": 88.8111888111888,
+						"accuracy": 82.5136612021858,
 						"all_session_scores": [
 							731.666666666667,
 							731.666666666667,
@@ -446,7 +486,17 @@
 							102.5,
 							102.5,
 							102.5,
-							0.0
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							329.166666666667,
+							329.166666666667,
+							329.166666666667,
+							329.166666666667,
+							329.166666666667,
+							329.166666666667
 						],
 						"all_session_times": [
 							23.0,
@@ -477,17 +527,27 @@
 							39.0,
 							39.0,
 							39.0,
-							120
+							120.0,
+							120.0,
+							120.0,
+							120.0,
+							120.0,
+							28.0,
+							28.0,
+							28.0,
+							28.0,
+							28.0,
+							28.0
 						],
-						"average_score": 499.454022988505,
+						"average_score": 422.029914529914,
 						"average_time_per_item": 15.0,
-						"average_time_per_play": 52.4137931034483,
-						"total_questions_answered": 286.0,
-						"total_questions_correct": 254.0,
-						"total_time": 1848.0
+						"average_time_per_play": 55.5897435897436,
+						"total_questions_answered": 366.0,
+						"total_questions_correct": 302.0,
+						"total_time": 2496.0
 					},
 					"game5": {
-						"accuracy": 14.2857142857143,
+						"accuracy": 10.7438016528926,
 						"all_session_scores": [
 							0.0,
 							753.571428571429,
@@ -501,6 +561,16 @@
 							707.142857142857,
 							596.428571428571,
 							596.428571428571,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
 							0.0,
 							0.0,
 							0.0,
@@ -538,14 +608,24 @@
 							10.0,
 							10.0,
 							10.0,
-							10.0
+							10.0,
+							10.0,
+							10.0,
+							10.0,
+							10.0,
+							10.0,
+							27.0,
+							27.0,
+							27.0,
+							27.0,
+							27.0
 						],
-						"average_score": 363.690476190476,
+						"average_score": 256.72268907563,
 						"average_time_per_item": 5.66666666666667,
-						"average_time_per_play": 43.0,
-						"total_questions_answered": 182.0,
+						"average_time_per_play": 35.7941176470588,
+						"total_questions_answered": 242.0,
 						"total_questions_correct": 26.0,
-						"total_time": 1151.0
+						"total_time": 1336.0
 					}
 				}
 			},

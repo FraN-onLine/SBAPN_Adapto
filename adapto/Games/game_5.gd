@@ -133,6 +133,7 @@ func _build_keyboard() -> void:
 			
 		for letter in row_str:
 			var btn := Button.new()
+			btn.add_theme_font_override("font", preload("res://Assets/Fonts/Silkscreen-Regular.ttf"))
 			btn.custom_minimum_size = Vector2(50, 60)
 			btn.text = letter
 			btn.add_theme_font_size_override("font_size", 24)
