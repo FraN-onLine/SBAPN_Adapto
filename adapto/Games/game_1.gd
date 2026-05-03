@@ -31,6 +31,8 @@ var correct_items = 0
 var correct_ans
 var adaptive_recorded := false
 var stats_recorded := false
+var current_streak := 0
+var max_streak := 0
 
 func _ready() -> void:
 	# Load the selected lesson, fall back to OOP if none chosen
@@ -185,6 +187,11 @@ func answer_check() -> void:
 		await get_tree().create_timer(0.5).timeout
 		option1_button.disabled = false
 		option2_button.disabled = false
+		current_streak += 1
+		max_streak = maxi(max_streak, current_streak)
+		# Play success sfx
+		if SFXManager != null:
+			SFXManager.play_success(current_streak)
 		if correct_items >= 5:
 			# Save this run to adaptive history before showing end dialog.
 			_record_adaptive_performance()
@@ -214,6 +221,10 @@ func answer_check() -> void:
 			option1_button.disabled = false
 			option2_button.disabled = false
 			load_next_question()
+		# incorrect answer: reset streak and play fail
+		current_streak = 0
+		if SFXManager != null:
+			SFXManager.play_fail()
 
 func _on_timer_tick() -> void:
 	time_remaining -= 1
