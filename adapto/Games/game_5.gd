@@ -336,13 +336,20 @@ func _end_game(won: bool) -> void:
 	# Report fair adaptive metrics after persisting local payload.
 	_record_adaptive_performance(accuracy, elapsed)
 
+	var dialog_title = ""
+	var dialog_text = ""
+	
 	if won:
-		end_dialog.title = "Round Complete"
-		end_dialog.dialog_text = "Amazing!\nScore: %d\nCompleted all words." % score
+		dialog_title = "Round Complete"
+		dialog_text = "Amazing!\nScore: %d\nCompleted all words." % score
 	else:
-		end_dialog.title = "Time Up"
-		end_dialog.dialog_text = "Time's up!\nScore: %d\nWords: %d/%d" % [score, current_word_index, game_data.size()]
-	end_dialog.popup_centered()
+		dialog_title = "Time Up"
+		dialog_text = "Time's up!\nScore: %d\nWords: %d/%d" % [score, current_word_index, game_data.size()]
+		
+	var end_modal = preload("res://Games/game_end_modal.tscn").instantiate()
+	add_child(end_modal)
+	end_modal.show_stats(dialog_title, dialog_text)
+	end_modal.confirmed.connect(_on_end_dialog_confirmed)
 
 
 func _record_user_stats(elapsed: int) -> void:

@@ -60,13 +60,18 @@ func _ready() -> void:
 	feedback_label.text = "Pick two cards that match (term ↔ meaning)."
 
 	game_timer.wait_time = 1.0
-	game_timer.timeout.connect(_on_timer_tick)
+	if not game_timer.timeout.is_connected(_on_timer_tick):
+		game_timer.timeout.connect(_on_timer_tick)
 	game_timer.start()
 
-	shuffle_btn.pressed.connect(_on_shuffle_pressed)
-	hint_btn.pressed.connect(_on_hint_pressed)
-	submit_pair_btn.pressed.connect(_on_submit_pair_pressed)
-	end_dialog.confirmed.connect(_on_end_dialog_confirmed)
+	if not shuffle_btn.pressed.is_connected(_on_shuffle_pressed):
+		shuffle_btn.pressed.connect(_on_shuffle_pressed)
+	if not hint_btn.pressed.is_connected(_on_hint_pressed):
+		hint_btn.pressed.connect(_on_hint_pressed)
+	if not submit_pair_btn.pressed.is_connected(_on_submit_pair_pressed):
+		submit_pair_btn.pressed.connect(_on_submit_pair_pressed)
+	if not end_dialog.confirmed.is_connected(_on_end_dialog_confirmed):
+		end_dialog.confirmed.connect(_on_end_dialog_confirmed)
 
 
 func _apply_main_layout() -> void:
@@ -261,8 +266,9 @@ func _on_hint_pressed() -> void:
 		var ids = unsolved_by_pair[pair_id]
 		if ids.size() >= 2:
 			hints_used += 1
-			score -= 60
-			feedback_label.text = "Hint used: highlighted one pair."
+			current_streak = 0 # Hint usage resets the streak
+			score -= 150
+			feedback_label.text = "Hint used (-150): highlighted one pair."
 
 			for card_id in ids:
 				var idx := _find_card_index(int(card_id))
@@ -363,13 +369,20 @@ func _end_game(won: bool) -> void:
 	# Report fair adaptive metrics after persisting local payload.
 	_record_adaptive_performance(accuracy, elapsed)
 
+	var dialog_title = ""
+	var dialog_text = ""
+	
 	if won:
-		end_dialog.title = "Round Complete"
-		end_dialog.dialog_text = "Great job!\nScore: %d\nMatched all %d pairs." % [score, total_pairs]
+		dialog_title = "Round Complete"
+		dialog_text = "Great job!\nScore: %d\nMatched all %d pairs." % [score, total_pairs]
 	else:
-		end_dialog.title = "Time Up"
-		end_dialog.dialog_text = "Time's up!\nScore: %d\nMatched %d/%d pairs." % [score, matched_pairs, total_pairs]
-	end_dialog.popup_centered()
+		dialog_title = "Time Up"
+		dialog_text = "Time's up!\nScore: %d\nMatched %d/%d pairs." % [score, matched_pairs, total_pairs]
+		
+	var end_modal = preload("res://Games/game_end_modal.tscn").instantiate()
+	add_child(end_modal)
+	end_modal.show_stats(dialog_title, dialog_text)
+	end_modal.confirmed.connect(_on_end_dialog_confirmed)
 
 
 func _record_user_stats(elapsed: int) -> void:

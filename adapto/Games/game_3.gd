@@ -546,19 +546,30 @@ func _end_game(won: bool, skipped: bool = false) -> void:
 	answer_input.editable = false
 	solved.fill(true)
 	grid_node.queue_redraw()
+	var dialog_title = ""
+	var dialog_text = ""
 	if won:
 		feedback_label.text = "🎉  Excellent!  Crossword complete!  Final score: %d" % score
+		dialog_title = "Victory!"
+		dialog_text = "Excellent!\nCrossword complete!\nFinal score: %d\nAccuracy: %.1f%%" % [score, _calculate_accuracy()]
 	elif skipped:
 		feedback_label.text = "⏭️  Skipped!  Score: %d  (answers revealed)" % score
+		dialog_title = "Skipped"
+		dialog_text = "Skipped!\nFinal score: %d\nAccuracy: %.1f%%" % [score, _calculate_accuracy()]
 	else:
 		feedback_label.text = "⏰  Time's up!  Score: %d  (answers revealed)" % score
+		dialog_title = "Time's up!"
+		dialog_text = "Time's up!\nFinal score: %d\nAccuracy: %.1f%%" % [score, _calculate_accuracy()]
 	_record_user_stats(won)
 	# Save normalized performance before adaptive routing.
 	_record_adaptive_performance()
-	var transition_delay := WIN_TRANSITION_DELAY if won else TIMEOUT_REVEAL_DELAY
-	await get_tree().create_timer(transition_delay).timeout
-	# Route to next game using adaptive rank order.
-	get_tree().change_scene_to_file(UserStats.get_scene_after_game("game3"))
+	
+	var end_modal = preload("res://Games/game_end_modal.tscn").instantiate()
+	add_child(end_modal)
+	end_modal.show_stats(dialog_title, dialog_text)
+	end_modal.confirmed.connect(func():
+		get_tree().change_scene_to_file(UserStats.get_scene_after_game("game3"))
+	)
 
 
 func _record_user_stats(won: bool) -> void:
@@ -582,6 +593,17 @@ func _record_user_stats(won: bool) -> void:
 	UserStats.game_stats["game3"]["item_times"] = [avg_time_per_item]
 	UserStats.game_stats["game3"]["puzzles_completed"] = solved_count
 	UserStats.update_overall_stats()
+
+
+func _calculate_accuracy() -> float:
+	var solved_count := 0
+	for state in solved:
+		if bool(state):
+			solved_count += 1
+	var attempts := solved_count + wrong_attempts
+	if attempts > 0:
+		return (float(solved_count) / float(attempts)) * 100.0
+	return 0.0
 
 
 # Returns a masked hint with first/last + one random internal letter.

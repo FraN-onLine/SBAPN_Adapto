@@ -206,9 +206,13 @@ func _show_end_dialog() -> void:
 	var elapsed := maxi(0, Time.get_unix_time_from_system() - round_started_unix)
 	var rating := _get_performance_rating()
 	
-	end_dialog.title = "Round Complete"
-	end_dialog.dialog_text = "Category Challenge\nMoney Earned: $%d\nCorrect: %d/%d\nTime: %ds\nRating: %s" % [money, correct_count, total_questions, elapsed, rating]
-	end_dialog.popup_centered()
+	var dialog_title = "Round Complete"
+	var dialog_text = "Category Challenge\nMoney Earned: $%d\nCorrect: %d/%d\nTime: %ds\nRating: %s" % [money, correct_count, total_questions, elapsed, rating]
+	
+	var end_modal = preload("res://Games/game_end_modal.tscn").instantiate()
+	add_child(end_modal)
+	end_modal.show_stats(dialog_title, dialog_text)
+	end_modal.confirmed.connect(_on_end_dialog_confirmed)
 
 
 func _on_end_dialog_confirmed() -> void:
