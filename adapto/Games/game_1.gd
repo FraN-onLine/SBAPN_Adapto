@@ -253,14 +253,20 @@ func _show_end_dialog(won: bool) -> void:
 	var score := _calculate_score()
 	var avg_time := _calculate_average_time()
 	
-	if won:
-		end_dialog.title = "Victory!"
-		end_dialog.dialog_text = "Great job!\nCorrect: %d/5\nScore: %.0f\nAverage Time: %.1fs\nAccuracy: %.1f%%\nRating: %s" % [correct_items, score, avg_time, _calculate_accuracy(), rating]
-	else:
-		end_dialog.title = "Defeat"
-		end_dialog.dialog_text = "Game Over\nCorrect: %d/5\nScore: %.0f\nAverage Time: %.1fs\nAccuracy: %.1f%%\nRating: %s" % [correct_items, score, avg_time, _calculate_accuracy(), rating]
+	var dialog_title = ""
+	var dialog_text = ""
 	
-	end_dialog.popup_centered()
+	if won:
+		dialog_title = "Victory!"
+		dialog_text = "Great job!\nCorrect: %d/5\nScore: %.0f\nAverage Time: %.1fs\nAccuracy: %.1f%%\nRating: %s" % [correct_items, score, avg_time, _calculate_accuracy(), rating]
+	else:
+		dialog_title = "Defeat"
+		dialog_text = "Game Over\nCorrect: %d/5\nScore: %.0f\nAverage Time: %.1fs\nAccuracy: %.1f%%\nRating: %s" % [correct_items, score, avg_time, _calculate_accuracy(), rating]
+	
+	var end_modal = preload("res://Games/game_end_modal.tscn").instantiate()
+	add_child(end_modal)
+	end_modal.show_stats(dialog_title, dialog_text)
+	end_modal.confirmed.connect(_on_end_dialog_confirmed)
 
 
 func _on_end_dialog_confirmed() -> void:

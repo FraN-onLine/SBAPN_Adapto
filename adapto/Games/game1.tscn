@@ -411,6 +411,7 @@ expand_icon = true
 script = ExtResource("8_fit_script")
 
 [node name="FeedbackLabel" type="Label" parent="." unique_id=1573611042]
+theme_override_fonts/font = ExtResource("2_4h6do")
 custom_minimum_size = Vector2(700, 100)
 offset_left = 236.0
 offset_top = 529.0
