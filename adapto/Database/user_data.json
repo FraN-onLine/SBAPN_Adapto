@@ -49,7 +49,7 @@
 				"adaptive_started_once": true,
 				"diagnostic_runs_completed": 1,
 				"game4": {
-					"accuracy": 100.0,
+					"accuracy": 36.3636363636364,
 					"completed": true,
 					"correct": 8,
 					"hints_used": 8,
@@ -62,7 +62,7 @@
 					"timestamp": 1777814983.081
 				},
 				"game5": {
-					"accuracy": 0.0,
+					"accuracy": 8.33333333333333,
 					"completed": true,
 					"hints_used": 4,
 					"lesson_title": "Object Oriented Programming",
@@ -147,7 +147,7 @@
 					},
 					"game4": {
 						"item_times": [
-							1.5
+							11.25
 						],
 						"questions_answered": 8,
 						"questions_correct": 8,

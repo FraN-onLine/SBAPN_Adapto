@@ -1,0 +1,748 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=43 format=3]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://adapto/Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://adapto/Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_ds_com1"]
+script = ExtResource("1_7hrog")
+id = "DS_COM1"
+term = "Inter-Process Communication (IPC)"
+keyword = "communication"
+definition = "Mechanisms that allow different processes to communicate and synchronize their actions."
+simple_terms = "processes talking to each other"
+examples = ["Pipes", "Message Queues", "Shared Memory"]
+accepted_terms = ["IPC", "process communication"]
+difficulty = 1
+related_to = ["processes", "synchronization"]
+tof_statement = {
+"false": "IPC is only used for processes running on separate machines.", 
+"true": "IPC is essential for enabling collaboration between independent processes."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_com2"]
+script = ExtResource("1_7hrog")
+id = "DS_COM2"
+term = "Message Passing"
+keyword = "messages"
+definition = "A communication paradigm where processes exchange data by sending and receiving messages."
+simple_terms = "sending letters between programs"
+examples = ["Remote Procedure Calls (RPC)", "Message Queues"]
+accepted_terms = ["message passing communication"]
+difficulty = 1
+related_to = ["IPC", "RPC", "message queues"]
+tof_statement = {
+"false": "In message passing, the sender and receiver must be tightly coupled and aware of each other's exact location.", 
+"true": "Message passing decouples sender and receiver in distributed systems."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_com3"]
+script = ExtResource("1_7hrog")
+id = "DS_COM3"
+term = "Remote Procedure Call (RPC)"
+keyword = "remote"
+definition = "A protocol that allows a program to execute a procedure (subroutine) in another address space (on another computer on a shared network) without the programmer explicitly coding the details of the remote interaction."
+simple_terms = "calling a function on another computer"
+examples = ["gRPC", "Apache Thrift"]
+accepted_terms = ["remote procedure call", "RPC communication"]
+difficulty = 2
+related_to = ["message passing", "client-server"]
+tof_statement = {
+"false": "When using RPC, the client must manually serialize and deserialize data for network transmission.", 
+"true": "RPC abstracts away the network communication details, making remote function calls look like local ones."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_com4"]
+script = ExtResource("1_7hrog")
+id = "DS_COM4"
+term = "Synchronous Communication"
+keyword = "wait"
+definition = "A communication model where the sender blocks until the receiver has acknowledged the message, or the message is processed."
+simple_terms = "waiting for a reply"
+examples = ["Blocking RPC", "Many synchronous message queues"]
+accepted_terms = ["blocking communication"]
+difficulty = 2
+related_to = ["asynchronous communication", "RPC"]
+tof_statement = {
+"false": "In synchronous communication, the sender can continue its work immediately after sending a message.", 
+"true": "Synchronous communication simplifies program logic but can lead to performance bottlenecks."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_com5"]
+script = ExtResource("1_7hrog")
+id = "DS_COM5"
+term = "Asynchronous Communication"
+keyword = "non-blocking"
+definition = "A communication model where the sender does not block after sending a message; it can continue its execution immediately."
+simple_terms = "sending without waiting"
+examples = ["Message Queues (e.g., RabbitMQ, Kafka)", "Event-driven architectures"]
+accepted_terms = ["non-blocking communication"]
+difficulty = 2
+related_to = ["synchronous communication", "message queues"]
+tof_statement = {
+"false": "Asynchronous communication requires the sender to wait for the receiver to process the message before proceeding.", 
+"true": "Asynchronous communication improves responsiveness and throughput by allowing concurrent operations."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_com6"]
+script = ExtResource("1_7hrog")
+id = "DS_COM6"
+term = "Publish-Subscribe (Pub/Sub)"
+keyword = "publish"
+definition = "A messaging pattern where senders of messages (publishers) do not send messages directly to specific receivers (subscribers). Instead, publishers categorize messages into topics, without knowledge of which subscribers, if any, exist."
+simple_terms = "broadcasting messages to interested parties"
+examples = ["Kafka topics", "AWS SNS", "Google Cloud Pub/Sub"]
+accepted_terms = ["pub-sub", "publish subscribe"]
+difficulty = 2
+related_to = ["message queues", "decoupling"]
+tof_statement = {
+"false": "In a publish-subscribe system, publishers must know the exact addresses of all subscribers.", 
+"true": "Publish-subscribe systems enable loose coupling between producers and consumers of information."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_com7"]
+script = ExtResource("1_7hrog")
+id = "DS_COM7"
+term = "Message Queue"
+keyword = "queue"
+definition = "An intermediary component that stores messages sent by a producer until a consumer retrieves them. It decouples producers and consumers."
+simple_terms = "a waiting line for messages"
+examples = ["RabbitMQ", "ActiveMQ", "Redis Streams"]
+accepted_terms = ["MQ", "message broker"]
+difficulty = 1
+related_to = ["asynchronous communication", "pub/sub", "buffering"]
+tof_statement = {
+"false": "Message queues require the sender and receiver to be online simultaneously.", 
+"true": "Message queues can act as buffers to handle temporary differences in production and consumption rates."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_com8"]
+script = ExtResource("1_7hrog")
+id = "DS_COM8"
+term = "REST (Representational State Transfer)"
+keyword = "resource"
+definition = "An architectural style for designing networked applications, often used for web services, that emphasizes statelessness, client-server separation, and the use of standard HTTP methods."
+simple_terms = "web-based communication protocol using standard methods"
+examples = ["RESTful APIs for web services", "Microservices communication"]
+accepted_terms = ["RESTful API"]
+difficulty = 2
+related_to = ["web services", "HTTP", "client-server"]
+tof_statement = {
+"false": "REST inherently requires the server to maintain client session state between requests.", 
+"true": "RESTful services are typically stateless, meaning each request from a client to a server must contain all the information needed to understand and complete the request."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_com9"]
+script = ExtResource("1_7hrog")
+id = "DS_COM9"
+term = "WebSockets"
+keyword = "persistent"
+definition = "A communication protocol that provides a full-duplex communication channel over a single TCP connection, allowing for real-time, two-way data exchange between client and server."
+simple_terms = "always-on connection for real-time chat"
+examples = ["Real-time chat applications", "Live sports score updates", "Collaborative editing tools"]
+accepted_terms = ["WebSocket"]
+difficulty = 3
+related_to = ["real-time", "HTTP", "TCP"]
+tof_statement = {
+"false": "WebSockets are primarily designed for scenarios where only the server needs to push data to the client.", 
+"true": "WebSockets enable efficient, low-latency, bidirectional communication, unlike traditional HTTP request-response cycles."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_com10"]
+script = ExtResource("1_7hrog")
+id = "DS_COM10"
+term = "gRPC (gRPC Remote Procedure Calls)"
+keyword = "protocol buffers"
+definition = "A high-performance, open-source universal RPC framework that uses Protocol Buffers as its interface definition language and HTTP/2 for transport."
+simple_terms = "fast, modern RPC framework"
+examples = ["Microservices communication", "API development"]
+accepted_terms = ["gRPC"]
+difficulty = 3
+related_to = ["RPC", "Protocol Buffers", "HTTP/2"]
+tof_statement = {
+"false": "gRPC typically uses JSON for message serialization, similar to REST.", 
+"true": "gRPC leverages HTTP/2 for features like multiplexing and header compression, leading to efficient communication."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_com11"]
+script = ExtResource("1_7hrog")
+id = "DS_COM11"
+term = "Protocol Buffers (Protobuf)"
+keyword = "serialization"
+definition = "A language-neutral, platform-neutral, extensible mechanism for serializing structured data, developed by Google. Often used with RPC frameworks like gRPC."
+simple_terms = "efficient data format for sending information"
+examples = ["Data serialization for gRPC", "Storing structured data"]
+accepted_terms = ["protobuf", "Protobuf"]
+difficulty = 2
+related_to = ["serialization", "gRPC", "data format"]
+tof_statement = {
+"false": "Protocol Buffers are human-readable by default, making them easy to debug directly.", 
+"true": "Protocol Buffers offer a more compact and faster serialization format compared to text-based formats like JSON or XML."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_nam1"]
+script = ExtResource("1_7hrog")
+id = "DS_NAM1"
+term = "Naming Service"
+keyword = "lookup"
+definition = "A distributed service that maps human-readable names to machine-readable addresses or other identifiers."
+simple_terms = "phone book for distributed services"
+examples = ["DNS (Domain Name System)", "LDAP (Lightweight Directory Access Protocol)", "Consul"]
+accepted_terms = ["name resolution service"]
+difficulty = 1
+related_to = ["naming", "distributed systems", "discovery"]
+tof_statement = {
+"false": "Naming services are typically centralized and single points of failure in distributed systems.", 
+"true": "A naming service allows clients to find the location of services without needing to know their IP addresses beforehand."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_nam2"]
+script = ExtResource("1_7hrog")
+id = "DS_NAM2"
+term = "DNS (Domain Name System)"
+keyword = "domain name"
+definition = "The hierarchical and decentralized naming system for computers, services, or any resource connected to the Internet or a private network. It translates domain names into the numerical IP addresses needed for locating and identifying computer services and devices."
+simple_terms = "translates website names to IP addresses"
+examples = ["Resolving google.com to an IP address", "Mapping hostnames to IP addresses"]
+accepted_terms = ["DNS"]
+difficulty = 1
+related_to = ["naming service", "networking", "IP address"]
+tof_statement = {
+"false": "DNS is a simple mapping system that only works for web servers.", 
+"true": "DNS is a crucial component that enables users to access websites using memorable domain names instead of IP addresses."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_nam3"]
+script = ExtResource("1_7hrog")
+id = "DS_NAM3"
+term = "Service Discovery"
+keyword = "discovery"
+definition = "The process by which a service running in a distributed system automatically finds the network location (IP address and port) of other services it needs to communicate with."
+simple_terms = "finding where other services are running"
+examples = ["Consul", "etcd", "Kubernetes Service Discovery"]
+accepted_terms = ["service registry"]
+difficulty = 2
+related_to = ["naming service", "microservices", "dynamic environments"]
+tof_statement = {
+"false": "Service discovery is only needed when services are deployed on separate physical machines.", 
+"true": "Service discovery is essential in dynamic environments where service instances are frequently created, destroyed, or moved."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_nam4"]
+script = ExtResource("1_7hrog")
+id = "DS_NAM4"
+term = "Client-Side Discovery"
+keyword = "client lookup"
+definition = "A service discovery pattern where the client is responsible for querying the service registry and selecting a service instance to connect to."
+simple_terms = "client asks where to find a service"
+examples = ["Netflix Eureka client", "Spring Cloud Discovery Client"]
+accepted_terms = ["client discovery"]
+difficulty = 3
+related_to = ["service discovery", "server-side discovery", "load balancing"]
+tof_statement = {
+"false": "Server-side discovery is a type of client-side discovery.", 
+"true": "In client-side discovery, the client needs to implement logic for service lookup and potentially load balancing."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_nam5"]
+script = ExtResource("1_7hrog")
+id = "DS_NAM5"
+term = "Server-Side Discovery"
+keyword = "load balancer"
+definition = "A service discovery pattern where a load balancer or API gateway queries the service registry and routes requests to an appropriate service instance."
+simple_terms = "a router finds and sends requests to services"
+examples = ["Kubernetes Ingress with Service Discovery", "AWS Elastic Load Balancer"]
+accepted_terms = ["gateway discovery"]
+difficulty = 3
+related_to = ["service discovery", "client-side discovery", "API gateway"]
+tof_statement = {
+"false": "In server-side discovery, the client is responsible for choosing which instance of a service to connect to.", 
+"true": "Server-side discovery centralizes the routing logic, simplifying the client's responsibilities."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_nam6"]
+script = ExtResource("1_7hrog")
+id = "DS_NAM6"
+term = "Consul"
+keyword = "service mesh"
+definition = "A tool for discovering, configuring, and orchestrating services in distributed systems. It provides a service registry, health checking, and a distributed key-value store."
+simple_terms = "a hub for service management and discovery"
+examples = ["Service discovery for microservices", "Distributed configuration management"]
+accepted_terms = ["Consul.io"]
+difficulty = 2
+related_to = ["service discovery", "naming service", "distributed key-value store"]
+tof_statement = {
+"false": "Consul is primarily a database and does not offer service discovery features.", 
+"true": "Consul can perform health checks on services to ensure that only healthy instances are registered and available for requests."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_nam7"]
+script = ExtResource("1_7hrog")
+id = "DS_NAM7"
+term = "etcd"
+keyword = "distributed key-value"
+definition = "A distributed, reliable key-value store for the most critical data of a distributed system. It is often used for service discovery, configuration management, and coordinating distributed applications."
+simple_terms = "reliable distributed storage for system configuration"
+examples = ["Kubernetes etcd datastore", "Configuration management for distributed systems"]
+accepted_terms = ["etcd"]
+difficulty = 2
+related_to = ["distributed key-value store", "service discovery", "consensus"]
+tof_statement = {
+"false": "etcd is designed for storing large binary files and large amounts of unstructured data.", 
+"true": "etcd uses the Raft consensus algorithm to ensure consistency across its distributed nodes."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_nam8"]
+script = ExtResource("1_7hrog")
+id = "DS_NAM8"
+term = "DNS SRV Record"
+keyword = "service location"
+definition = "A type of DNS record that specifies the location (hostname and port number) of servers for specific services."
+simple_terms = "DNS record for finding specific services"
+examples = ["Locating an LDAP server", "Finding a SIP server"]
+accepted_terms = ["SRV record"]
+difficulty = 3
+related_to = ["DNS", "naming service", "service discovery"]
+tof_statement = {
+"false": "SRV records are used to store the actual content of a website.", 
+"true": "DNS SRV records allow for dynamic configuration of service endpoints without changing client code."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_nam9"]
+script = ExtResource("1_7hrog")
+id = "DS_NAM9"
+term = "UUID (Universally Unique Identifier)"
+keyword = "unique identifier"
+definition = "A 128-bit number used to uniquely identify information in computer systems. While unique, they are not necessarily globally unique in all contexts."
+simple_terms = "a very long random number to identify things"
+examples = ["Database primary keys", "Object identification in distributed systems"]
+accepted_terms = ["GUID (Globally Unique Identifier)"]
+difficulty = 1
+related_to = ["identifier", "uniqueness", "distributed systems"]
+tof_statement = {
+"false": "UUIDs guarantee global uniqueness across all possible generated values with absolute certainty.", 
+"true": "UUIDs are generated without central coordination, making them suitable for distributed environments."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_nam10"]
+script = ExtResource("1_7hrog")
+id = "DS_NAM10"
+term = "Fully Qualified Domain Name (FQDN)"
+keyword = "full domain name"
+definition = "The complete domain name for a specific computer, or host, on the Internet. It consists of the hostname and the domain name, separated by dots."
+simple_terms = "the complete address of a computer on the internet"
+examples = ["www.example.com.", "mail.google.com."]
+accepted_terms = ["FQDN"]
+difficulty = 2
+related_to = ["DNS", "hostname", "domain name"]
+tof_statement = {
+"false": "The FQDN does not include the top-level domain (e.g., .com, .org).", 
+"true": "A FQDN uniquely identifies a host within the entire DNS hierarchy."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn1"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN1"
+term = "Synchronization"
+keyword = "coordination"
+definition = "The process of coordinating the timing of events or actions among multiple processes or threads in a distributed system."
+simple_terms = "making sure things happen in the right order"
+examples = ["Ensuring all nodes agree on a transaction", "Controlling access to shared resources"]
+accepted_terms = ["sync"]
+difficulty = 1
+related_to = ["distributed systems", "concurrency", "coordination"]
+tof_statement = {
+"false": "Synchronization is only relevant for single-threaded applications.", 
+"true": "Synchronization is critical for maintaining data consistency and preventing race conditions in distributed systems."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn2"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN2"
+term = "Clock Synchronization"
+keyword = "time"
+definition = "The process of ensuring that clocks across different machines in a distributed system are set to a consistent time."
+simple_terms = "keeping all computer clocks in sync"
+examples = ["NTP (Network Time Protocol)", "Google's TrueTime"]
+accepted_terms = ["time synchronization"]
+difficulty = 2
+related_to = ["synchronization", "NTP", "distributed systems"]
+tof_statement = {
+"false": "Clock synchronization is unnecessary if systems use logical clocks.", 
+"true": "Accurate clock synchronization is important for event ordering and debugging in distributed systems."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn3"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN3"
+term = "NTP (Network Time Protocol)"
+keyword = "accurate time"
+definition = "A networking protocol for clock synchronization over packet-switched, variable-latency data networks. It aims to synchronize all participating computers to within a few milliseconds of Coordinated Universal Time (UTC)."
+simple_terms = "protocol for keeping computer clocks accurate"
+examples = ["Synchronizing servers in a data center", "Ensuring accurate timestamps in logs"]
+accepted_terms = ["NTP"]
+difficulty = 2
+related_to = ["clock synchronization", "UTC", "networking"]
+tof_statement = {
+"false": "NTP guarantees perfect synchronization with zero latency.", 
+"true": "NTP uses a hierarchical system of time servers to distribute accurate time across networks."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn4"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN4"
+term = "Logical Clocks"
+keyword = "event order"
+definition = "A mechanism to order events in a distributed system without relying on physical clocks. Each process maintains a clock, and events are timestamped based on causality."
+simple_terms = "ordering events based on cause and effect"
+examples = ["Lamport timestamps", "Vector clocks"]
+accepted_terms = ["logical time"]
+difficulty = 3
+related_to = ["clock synchronization", "causality", "distributed systems"]
+tof_statement = {
+"false": "Logical clocks provide the same wall-clock time as physical clocks.", 
+"true": "Logical clocks are crucial for determining the causal order of events in distributed systems where physical clock drift is a concern."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn5"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN5"
+term = "Lamport Clocks"
+keyword = "happened-before"
+definition = "A distributed system algorithm that provides a way to assign unique timestamps to events, capturing the 'happened-before' relationship."
+simple_terms = "assigning timestamps that show event order"
+examples = ["Ordering messages in a distributed system", "Detecting causal relationships"]
+accepted_terms = ["Lamport timestamps"]
+difficulty = 3
+related_to = ["logical clocks", "causality", "event ordering"]
+tof_statement = {
+"false": "Lamport timestamps can accurately reflect the real-world time difference between events.", 
+"true": "Lamport timestamps ensure that if event A happened before event B, then the timestamp of A is less than the timestamp of B."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn6"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN6"
+term = "Vector Clocks"
+keyword = "concurrent events"
+definition = "A mechanism used in distributed systems to detect causality and concurrency between events. Each process maintains a vector of counters, one for each process in the system."
+simple_terms = "tracking event order and concurrency across multiple systems"
+examples = ["Detecting concurrent updates in distributed databases", "Causality tracking in distributed systems"]
+accepted_terms = ["vector clock"]
+difficulty = 3
+related_to = ["logical clocks", "causality", "concurrency"]
+tof_statement = {
+"false": "Vector clocks require a central server to coordinate timestamps.", 
+"true": "Vector clocks can distinguish between causally related events and concurrent events."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn7"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN7"
+term = "Mutual Exclusion"
+keyword = "exclusive access"
+definition = "A property of concurrency control that specifies that no two processes may be in the same critical section at the same time."
+simple_terms = "only one process can access a resource at a time"
+examples = ["Locking a file before writing", "Ensuring atomic updates to a shared variable"]
+accepted_terms = ["mutex"]
+difficulty = 2
+related_to = ["synchronization", "critical section", "concurrency control"]
+tof_statement = {
+"false": "Mutual exclusion is automatically handled by the operating system for all processes.", 
+"true": "Mutual exclusion is essential to prevent data corruption when multiple processes access shared resources."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn8"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN8"
+term = "Distributed Lock"
+keyword = "lock manager"
+definition = "A mechanism that ensures mutual exclusion for accessing shared resources across multiple nodes in a distributed system."
+simple_terms = "a lock that works across multiple computers"
+examples = ["Zookeeper locks", "Redis distributed locks"]
+accepted_terms = ["distributed locking"]
+difficulty = 3
+related_to = ["mutual exclusion", "synchronization", "distributed coordination"]
+tof_statement = {
+"false": "A simple mutex implemented on a single node is sufficient for distributed lock requirements.", 
+"true": "Distributed locks are complex to implement correctly due to network latency and potential failures."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn9"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN9"
+term = "Consensus Problem"
+keyword = "agreement"
+definition = "The problem of achieving agreement among a group of distributed processes on a single value, even in the presence of failures."
+simple_terms = "getting everyone to agree on something"
+examples = ["Distributed databases agreeing on transaction commit/abort", "Leader election in a distributed system"]
+accepted_terms = ["distributed consensus"]
+difficulty = 3
+related_to = ["synchronization", "fault tolerance", "distributed coordination"]
+tof_statement = {
+"false": "The consensus problem is trivial to solve if all processes are guaranteed to be available and reliable.", 
+"true": "Solving the consensus problem is fundamental for building reliable distributed systems that can tolerate failures."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn10"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN10"
+term = "Raft Consensus Algorithm"
+keyword = "leader election"
+definition = "A consensus algorithm designed to be understandable. It is used for managing a replicated log in a cluster. It works by having a strong leader."
+simple_terms = "algorithm for agreeing on state in a cluster"
+examples = ["etcd", "Consul", "Kubernetes control plane"]
+accepted_terms = ["Raft"]
+difficulty = 3
+related_to = ["consensus problem", "distributed systems", "leader election"]
+tof_statement = {
+"false": "Raft allows multiple nodes to simultaneously propose new log entries.", 
+"true": "Raft simplifies consensus by electing a leader and ensuring that the leader manages the replicated state machine."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn11"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN11"
+term = "Paxos Consensus Algorithm"
+keyword = "distributed agreement"
+definition = "A family of protocols for solving consensus in a network of unreliable or failure-prone processes. It's known for its correctness but also its complexity."
+simple_terms = "a classic algorithm for distributed agreement"
+examples = ["Google's Chubby lock service", "Some distributed databases"]
+accepted_terms = ["Paxos"]
+difficulty = 4
+related_to = ["consensus problem", "distributed systems", "fault tolerance"]
+tof_statement = {
+"false": "Paxos is a simple algorithm that is easy to implement and debug.", 
+"true": "Paxos provides a robust solution for achieving consensus, but its implementation can be challenging to understand and get right."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn12"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN12"
+term = "Two-Phase Commit (2PC)"
+keyword = "transaction commit"
+definition = "A distributed transaction coordination protocol that ensures all participants either commit or abort a transaction. It involves a coordinator and participants."
+simple_terms = "protocol for ensuring distributed transactions succeed or fail together"
+examples = ["Distributed database transactions", "Coordinating updates across multiple services"]
+accepted_terms = ["2PC"]
+difficulty = 3
+related_to = ["distributed transactions", "synchronization", "atomicity"]
+tof_statement = {
+"false": "2PC is immune to failures of any participant or the coordinator.", 
+"true": "Two-Phase Commit aims to provide atomicity for distributed transactions but can be blocking if the coordinator fails."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn13"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN13"
+term = "Three-Phase Commit (3PC)"
+keyword = "non-blocking commit"
+definition = "An extension of the Two-Phase Commit protocol designed to overcome the blocking problem by adding a 'pre-commit' phase."
+simple_terms = "an improved version of 2PC to avoid blocking"
+examples = ["Rarely used in practice due to complexity and overhead"]
+accepted_terms = ["3PC"]
+difficulty = 4
+related_to = ["two-phase commit", "distributed transactions", "fault tolerance"]
+tof_statement = {
+"false": "3PC is widely adopted and simpler to implement than 2PC.", 
+"true": "Three-Phase Commit aims to be non-blocking under certain failure conditions, unlike 2PC."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn14"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN14"
+term = "Leader Election"
+keyword = "leader"
+definition = "The process by which nodes in a distributed system agree on a single node to act as a leader, often responsible for coordinating tasks or managing state."
+simple_terms = "choosing one node to be in charge"
+examples = ["Raft leader election", "Choosing a master node in a distributed database"]
+accepted_terms = ["election"]
+difficulty = 2
+related_to = ["synchronization", "consensus", "distributed coordination"]
+tof_statement = {
+"false": "Leader election is only necessary when all nodes are identical and have the same responsibilities.", 
+"true": "Leader election is a common mechanism for simplifying coordination in distributed systems."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn15"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN15"
+term = "Distributed Transaction"
+keyword = "transaction"
+definition = "A transaction that operates on multiple distinct data sources or resources, potentially located on different machines in a distributed system."
+simple_terms = "a transaction that spans multiple databases or services"
+examples = ["Transferring money between accounts in different banks", "Updating data in multiple microservices atomically"]
+accepted_terms = ["distributed atomic transaction"]
+difficulty = 3
+related_to = ["transaction", "atomicity", "two-phase commit"]
+tof_statement = {
+"false": "Distributed transactions are inherently simpler to manage than local transactions.", 
+"true": "Ensuring atomicity in distributed transactions is significantly more challenging than in single-resource transactions."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn16"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN16"
+term = "Atomicity"
+keyword = "all or nothing"
+definition = "The property that a transaction, whether distributed or local, must be executed in its entirety or not at all. It cannot be partially completed."
+simple_terms = "either all parts of an operation happen, or none of them do"
+examples = ["Ensuring a bank transfer completes fully or not at all", "Atomic updates in a distributed database"]
+accepted_terms = ["atomic operation"]
+difficulty = 2
+related_to = ["distributed transaction", "ACID", "consistency"]
+tof_statement = {
+"false": "Atomicity means that a transaction can be completed by some participants and aborted by others.", 
+"true": "Atomicity guarantees that a transaction will not leave the system in an intermediate, inconsistent state."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn17"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN17"
+term = "Consistency"
+keyword = "valid state"
+definition = "The property that a transaction brings the system from one valid state to another. In distributed systems, this can refer to strong consistency, eventual consistency, etc."
+simple_terms = "data remains valid and correct"
+examples = ["Ensuring all replicas of a database have the same data", "Maintaining data integrity after operations"]
+accepted_terms = ["data consistency"]
+difficulty = 2
+related_to = ["ACID", "distributed systems", "replication"]
+tof_statement = {
+"false": "All distributed systems must provide strong consistency for all operations.", 
+"true": "Consistency in distributed systems often involves trade-offs with availability and partition tolerance (CAP theorem)."
+}
+type_of_information = ["definition"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn18"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN18"
+term = "Eventual Consistency"
+keyword = "eventually consistent"
+definition = "A consistency model in distributed systems where, if no new updates are made to a given data item, eventually all accesses to that item will return the last updated value."
+simple_terms = "data will become consistent over time"
+examples = ["Social media feeds", "DNS propagation", "Many NoSQL databases"]
+accepted_terms = ["eventual consistency"]
+difficulty = 2
+related_to = ["consistency", "distributed systems", "CAP theorem"]
+tof_statement = {
+"false": "In eventually consistent systems, all replicas are updated instantaneously.", 
+"true": "Eventual consistency prioritizes availability and partition tolerance, accepting temporary inconsistencies."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn19"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN19"
+term = "CAP Theorem"
+keyword = "trade-offs"
+definition = "A fundamental theorem in distributed systems stating that it is impossible for a distributed data store to simultaneously provide more than two out of the following three guarantees: Consistency, Availability, and Partition Tolerance."
+simple_terms = "you can only have two out of three: consistency, availability, partition tolerance"
+examples = ["Choosing between CP (Consistency and Partition Tolerance) and AP (Availability and Partition Tolerance) systems"]
+accepted_terms = ["CAP"]
+difficulty = 3
+related_to = ["consistency", "availability", "partition tolerance", "distributed systems"]
+tof_statement = {
+"false": "The CAP theorem states that a system can always achieve Consistency, Availability, and Partition Tolerance simultaneously.", 
+"true": "In the presence of a network partition, a distributed system must choose between maintaining consistency or availability."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_ds_syn20"]
+script = ExtResource("1_7hrog")
+id = "DS_SYN20"
+term = "Partition Tolerance"
+keyword = "network partition"
+definition = "The ability of a distributed system to continue operating despite network partitions, where communication between different parts of the system is lost."
+simple_terms = "system works even if network connections break"
+examples = ["Distributed databases that remain available when nodes can't communicate", "Cloud services across different availability zones"]
+accepted_terms = ["network partitioning"]
+difficulty = 2
+related_to = ["CAP theorem", "availability", "consistency", "distributed systems"]
+tof_statement = {
+"false": "A system can achieve perfect consistency and availability even if network partitions occur.", 
+"true": "Partition tolerance is a non-negotiable requirement for most practical distributed systems."
+}
+type_of_information = ["definition", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Distributed Systems - communication, naming and syncronization"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_ds_com1"), SubResource("Resource_ds_com2"), SubResource("Resource_ds_com3"), SubResource("Resource_ds_com4"), SubResource("Resource_ds_com5"), SubResource("Resource_ds_com6"), SubResource("Resource_ds_com7"), SubResource("Resource_ds_com8"), SubResource("Resource_ds_com9"), SubResource("Resource_ds_com10"), SubResource("Resource_ds_com11"), SubResource("Resource_ds_nam1"), SubResource("Resource_ds_nam2"), SubResource("Resource_ds_nam3"), SubResource("Resource_ds_nam4"), SubResource("Resource_ds_nam5"), SubResource("Resource_ds_nam6"), SubResource("Resource_ds_nam7"), SubResource("Resource_ds_nam8"), SubResource("Resource_ds_nam9"), SubResource("Resource_ds_nam10"), SubResource("Resource_ds_syn1"), SubResource("Resource_ds_syn2"), SubResource("Resource_ds_syn3"), SubResource("Resource_ds_syn4"), SubResource("Resource_ds_syn5"), SubResource("Resource_ds_syn6"), SubResource("Resource_ds_syn7"), SubResource("Resource_ds_syn8"), SubResource("Resource_ds_syn9"), SubResource("Resource_ds_syn10"), SubResource("Resource_ds_syn11"), SubResource("Resource_ds_syn12"), SubResource("Resource_ds_syn13"), SubResource("Resource_ds_syn14"), SubResource("Resource_ds_syn15"), SubResource("Resource_ds_syn16"), SubResource("Resource_ds_syn17"), SubResource("Resource_ds_syn18"), SubResource("Resource_ds_syn19"), SubResource("Resource_ds_syn20")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"

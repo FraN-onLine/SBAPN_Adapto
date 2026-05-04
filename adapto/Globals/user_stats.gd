@@ -74,6 +74,7 @@ var adaptive_history := _default_adaptive_history()
 var adaptive_last_ranked: Array[String] = []
 # Tracks the current leader game during adaptive phase
 var adaptive_current_leader: String = ""
+var adaptive_games_played := 0
 var diagnostic_runs_completed := 0
 var adaptive_started_once := false
 
@@ -176,6 +177,7 @@ func save_user_stats():
 		perf["adaptive_history"] = adaptive_history.duplicate(true)
 		perf["diagnostic_runs_completed"] = diagnostic_runs_completed
 		perf["adaptive_started_once"] = adaptive_started_once
+		perf["adaptive_games_played"] = adaptive_games_played
 		Database.save_user_performance(Global.current_user, perf)
 
 # Load user stats from database
@@ -193,10 +195,20 @@ func load_user_stats():
 				diagnostic_runs_completed = int(perf["diagnostic_runs_completed"])
 			if perf.has("adaptive_started_once"):
 				adaptive_started_once = bool(perf["adaptive_started_once"])
+			if perf.has("adaptive_games_played"):
+				adaptive_games_played = int(perf["adaptive_games_played"])
 
 	for game_id in GAME_SEQUENCE:
 		if not adaptive_history.has(game_id) or typeof(adaptive_history[game_id]) != TYPE_ARRAY:
 			adaptive_history[game_id] = []
+
+	# Ensure overall_stats have required arrays
+	for gid in ["game1", "game2", "game3", "game4", "game5"]:
+		if overall_stats.has(gid):
+			if not overall_stats[gid].has("all_session_times") or typeof(overall_stats[gid]["all_session_times"]) != TYPE_ARRAY:
+				overall_stats[gid]["all_session_times"] = []
+			if not overall_stats[gid].has("all_session_scores") or typeof(overall_stats[gid]["all_session_scores"]) != TYPE_ARRAY:
+				overall_stats[gid]["all_session_scores"] = []
 
 	# Backward-compat migration: infer unlock for older saves that already completed diagnostics.
 	if diagnostic_runs_completed <= 0 and _legacy_has_completed_diagnostic_stats():
@@ -215,6 +227,7 @@ func start_adaptive_session() -> void:
 	adaptive_phase = "adaptive"
 	adaptive_last_ranked = []
 	adaptive_current_leader = get_leading_game()
+	adaptive_games_played = 0
 	adaptive_started_once = true
 	save_user_stats()
 # Returns average score for each game for the current user
@@ -263,6 +276,10 @@ func get_scene_after_game(current_game_id: String) -> String:
 			adaptive_current_leader = ranked[idx]
 		if adaptive_current_leader == "":
 			adaptive_current_leader = "game1"
+		adaptive_games_played += 1
+		if adaptive_games_played >= 5:
+			stop_adaptive_session()
+			return "res://Menus/main_menu.tscn"
 		return get_scene_for_game(adaptive_current_leader)
 
 	return get_scene_for_game("game1")
@@ -446,6 +463,8 @@ func update_overall_stats():
 					"accuracy": [0, 0, 0, 0],
 					"total_sum_time": [0, 0, 0, 0],
 					"total_questions": [0, 0, 0, 0],
+					"all_session_times": [],
+					"all_session_scores": [],
 				}
 			else:
 				overall_stats[gid] = {
@@ -454,6 +473,8 @@ func update_overall_stats():
 					"highest_score": 0,
 					"total_time": 0,
 					"accuracy": 0.0,
+					"all_session_times": [],
+					"all_session_scores": [],
 				}
 
 	# Track average time and average score per play session for all games
@@ -497,7 +518,24 @@ func update_overall_stats():
 		game1_total_score += type_score
 		game1_total_questions += game_stats["game1"]["questions"][i]
 	var norm_score1 = clampf(_safe_ratio(game1_total_score, float(SCORE_REFERENCE.get("game1", 1000.0))), 0.0, 1.0) * 100.0 if game1_total_questions > 0 else 0.0
-	overall_stats["game1"]["average_score"] = norm_score1
+	# Track session time and score for game1
+	if game_stats["game1"].has("item_times"):
+		var session_time = 0.0
+		for type_times in game_stats["game1"]["item_times"]:
+			for t in type_times:
+				session_time += t
+		overall_stats["game1"]["all_session_times"].append(session_time)
+		overall_stats["game1"]["all_session_scores"].append(norm_score1)
+	# Compute average time and score per play for game1
+	var session_count1 = overall_stats["game1"]["all_session_times"].size()
+	var total_time1 = 0.0
+	var total_score1 = 0.0
+	for t in overall_stats["game1"]["all_session_times"]:
+		total_time1 += t
+	for s in overall_stats["game1"]["all_session_scores"]:
+		total_score1 += s
+	overall_stats["game1"]["average_time_per_play"] = total_time1 / session_count1 if session_count1 > 0 else 0.0
+	overall_stats["game1"]["average_score"] = total_score1 / session_count1 if session_count1 > 0 else 0.0
 
 	# Games 2, 3, 4, 5 (aggregate)
 	for gid in ["game2", "game3", "game4", "game5"]:

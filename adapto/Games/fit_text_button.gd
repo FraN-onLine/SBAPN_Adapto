@@ -81,3 +81,5 @@ func update_text(new_text: String):
 	text = new_text
 	_last_text = new_text
 	_queue_adjust_font_for_size()
+
+#hmm

@@ -1,0 +1,154 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=10 format=3 uid="uid://5brfluuma4e9s"]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_item-1"]
+script = ExtResource("1_7hrog")
+id = "item-1"
+term = "Naming in Distributed Systems"
+keyword = "Naming"
+definition = "The process by which entities in a distributed system are uniquely identified and located across networks."
+simple_terms = "How systems find and identify each other."
+examples = ["DNS for websites", "IP addresses for devices", "Usernames for online accounts"]
+accepted_terms = ["Distributed Naming", "System Identification"]
+difficulty = 1
+related_to = ["Network Protocols", "Distributed Databases"]
+tof_statement = {
+"false": "Naming is only important for centralized systems, not distributed ones.", 
+"true": "Naming is essential for uniquely identifying and locating entities in distributed systems."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item-2"]
+script = ExtResource("1_7hrog")
+id = "item-2"
+term = "Name Resolution"
+keyword = "Resolution"
+definition = "The process of resolving a name into the specific entity it refers to, typically by mapping a human-readable name to a network address."
+simple_terms = "Figuring out where something is based on its name."
+examples = ["Looking up a website's IP address from its URL", "Finding a user's account based on their username", "Resolving a device's name to its IP address"]
+accepted_terms = ["Name Lookup", "Address Resolution"]
+difficulty = 1
+related_to = ["Naming in Distributed Systems", "DNS"]
+tof_statement = {
+"false": "Name resolution is a complex process that only applies to very large-scale systems.", 
+"true": "Name resolution is the core function of any naming system, translating names into entities."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item-3"]
+script = ExtResource("1_7hrog")
+id = "item-3"
+term = "Flat Naming"
+keyword = "Flat Naming"
+definition = "A naming approach where entities are referred to by identifiers with no inherent meaning or structure, requiring special routing mechanisms to locate them."
+simple_terms = "Using random codes to identify things, needing special wa..."
+examples = ["Peer-to-peer networks", "Distributed Hash Tables (DHTs)", "Chord protocol identifiers"]
+accepted_terms = ["Structureless Identifiers", "Unstructured Naming"]
+difficulty = 2
+related_to = ["Distributed Hash Tables", "Peer-to-Peer Networks"]
+tof_statement = {
+"false": "Flat naming is ideal for human-readable addresses and easy navigation.", 
+"true": "Flat naming requires special mechanisms to trace entity locations because identifiers lack structure"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item-4"]
+script = ExtResource("1_7hrog")
+id = "item-4"
+term = "Structured Naming"
+keyword = "Structured Naming"
+definition = "A naming approach where names are organized hierarchically, often in a tree structure, allowing for path-based resolution."
+simple_terms = "Using organized names like file paths to find things."
+examples = ["Domain Name System (DNS)", "File system paths", "Hierarchical directory structures"]
+accepted_terms = ["Hierarchical Naming", "Tree-based Naming"]
+difficulty = 1
+related_to = ["DNS", "File Systems"]
+tof_statement = {
+"false": "Structured naming uses random identifiers without any logical organization.", 
+"true": "Structured naming uses a hierarchical organization, similar to how files are organized in folders."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item-5"]
+script = ExtResource("1_7hrog")
+id = "item-5"
+term = "Attribute-based Naming"
+keyword = "Attribute Naming"
+definition = "A naming approach where resources are looked up by evaluating pairs of attributes and their values, rather than relying on single distinct names."
+simple_terms = "Finding things by describing their properties."
+examples = ["Searching for a product by color and size", "LDAP directory searches", "Resource Description Framework (RDF) triplets"]
+accepted_terms = ["Content-based Naming", "Descriptive Lookup"]
+difficulty = 2
+related_to = ["LDAP", "Databases"]
+tof_statement = {
+"false": "Attribute-based naming is only useful for finding exact matches by a single name.", 
+"true": "Attribute-based naming allows users to search for resources based on their characteristics."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item-6"]
+script = ExtResource("1_7hrog")
+id = "item-6"
+term = "Remote Procedure Call"
+keyword = "RPC"
+definition = "A communication protocol that allows a program on one computer to execute a procedure or function on another computer as if it were a local call."
+simple_terms = "Making a computer run a program on another computer."
+examples = ["Microservices communication", "Distributed database synchronization", "Cloud application interactions"]
+accepted_terms = ["Remote Procedure Calls", "Distributed Function Call"]
+difficulty = 1
+related_to = ["Message-Oriented Communication", "Middleware"]
+tof_statement = {
+"false": "RPC is only used for simple data transfer, not for executing functions.", 
+"true": "RPC enables programs to execute code on remote machines, simplifying distributed application develop"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item-7"]
+script = ExtResource("1_7hrog")
+id = "item-7"
+term = "Synchronous RPC"
+keyword = "Sync RPC"
+definition = "A type of RPC where the client sends a request and waits for the server's response before continuing execution."
+simple_terms = "Asking for something and waiting until you get an answer..."
+examples = ["Basic client-server interactions", "Operations requiring immediate results", "Simple function calls"]
+accepted_terms = ["Blocking RPC", "Synchronous Remote Call"]
+difficulty = 1
+related_to = ["Asynchronous RPC", "RPC"]
+tof_statement = {
+"false": "Synchronous RPC allows the client to continue other tasks while waiting for a response.", 
+"true": "Synchronous RPC simplifies programming by mimicking local function calls, but can lead to performanc"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_item-8"]
+script = ExtResource("1_7hrog")
+id = "item-8"
+term = "Asynchronous RPC"
+keyword = "Async RPC"
+definition = "A type of RPC where the client sends a request and immediately continues its execution without waiting for the server's response."
+simple_terms = "Asking for something and then continuing your work withou..."
+examples = ["Background task processing", "UI updates without freezing", "High-latency network operations"]
+accepted_terms = ["Non-blocking RPC", "Asynchronous Remote Call"]
+difficulty = 1
+related_to = ["Synchronous RPC", "RPC"]
+tof_statement = {
+"false": "Asynchronous RPC is simpler to implement than synchronous RPC.", 
+"true": "Asynchronous RPC improves responsiveness by allowing the client to perform other operations while wa"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Distributed Systems Communication"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_item-1"), SubResource("Resource_item-2"), SubResource("Resource_item-3"), SubResource("Resource_item-4"), SubResource("Resource_item-5"), SubResource("Resource_item-6"), SubResource("Resource_item-7"), SubResource("Resource_item-8")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"
