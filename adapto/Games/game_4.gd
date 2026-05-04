@@ -215,11 +215,17 @@ func _check_selected_pair() -> void:
 			score += 75
 
 		feedback_label.text = "✅ Match!"
+		# Play success sound, pass current streak to scale pitch
+		if SFXManager != null:
+			SFXManager.play_success(current_streak)
 	else:
 		wrong_attempts += 1
 		current_streak = 0
 		score -= 35
 		feedback_label.text = "❌ Not a match."
+		# Play fail sound
+		if SFXManager != null:
+			SFXManager.play_fail()
 		await get_tree().create_timer(0.4).timeout
 		if cards[idx_a]["state"] != "solved":
 			cards[idx_a]["state"] = "idle"

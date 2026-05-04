@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dfasf32dasd34"]
+
+[ext_resource type="Script" uid="uid://sfxmanager1" path="res://Globals/sfx_manager.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://success123" path="res://Assets/success.wav" id="2_success"]
+[ext_resource type="AudioStream" uid="uid://fail123" path="res://Assets/fail.mp3" id="3_fail"]
+
+[node name="SFXManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_script")
+
+[node name="SuccessSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_success")
+volume_db = 0.0
+
+[node name="FailSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_fail")
+volume_db = 0.0

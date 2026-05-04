@@ -56,6 +56,7 @@ var wrong_attempts := 0
 var hints_used := 0
 var adaptive_recorded := false
 var stats_recorded := false
+var current_streak := 0
 
 
 func _ready() -> void:
@@ -467,12 +468,21 @@ func _on_submit() -> void:
 		answer_input.text = ""
 		answer_input.grab_focus()
 
+		# Success: increment streak and play success SFX
+		current_streak += 1
+		if SFXManager != null:
+			SFXManager.play_success(current_streak)
+
 		if solved.all(func(s): return s):
 			_end_game(true)
 	else:
 			# Count failed attempts for adaptive accuracy metrics.
 		wrong_attempts += 1
 		feedback_label.text = "❌  Wrong — try again!"
+		# Failure: reset streak and play fail SFX
+		current_streak = 0
+		if SFXManager != null:
+			SFXManager.play_fail()
 
 		answer_input.text = ""
 		answer_input.grab_focus()

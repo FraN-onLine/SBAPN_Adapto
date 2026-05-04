@@ -212,6 +212,10 @@ func _on_key_pressed(letter: String, from_hint := false) -> void:
 		current_streak += 1
 		max_streak = maxi(max_streak, current_streak)
 		feedback_label.text = "Hint revealed a letter." if from_hint else "Correct!"
+		if not from_hint:
+			# Play success SFX with current streak scaling
+			if SFXManager != null:
+				SFXManager.play_success(current_streak)
 		if current_streak > 0 and current_streak % 5 == 0:
 			score += 50 # Streak bonus
 	else:
@@ -221,6 +225,10 @@ func _on_key_pressed(letter: String, from_hint := false) -> void:
 		current_streak = 0
 		mistakes_total += 1
 		feedback_label.text = "Miss!"
+		# reset streak and play fail SFX
+		current_streak = 0
+		if SFXManager != null:
+			SFXManager.play_fail()
 		
 	_update_word_display()
 	_update_hud()

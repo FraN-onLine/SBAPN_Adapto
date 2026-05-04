@@ -20,6 +20,7 @@ var incorrect_count := 0
 var round_started_unix := 0
 var adaptive_recorded := false
 var stats_recorded := false
+var current_streak := 0
 
 @onready var end_dialog: AcceptDialog = $EndDialog
 
@@ -117,12 +118,20 @@ func check_answer() -> void:
 	if accepted_answers.has(user_answer):
 		money += value
 		correct_count += 1
+		# success streak
+		current_streak += 1
+		if SFXManager != null:
+			SFXManager.play_success(current_streak)
 		$QuestionDialog.text = ""
 		# Show feedback: "Correct! The answer is [answer]. +$[value]"
 		$FeedbackLabel.text = "Correct! The answer is %s. +$%d" % [correct_answer, value]
 	else:
 		money -= value
 		incorrect_count += 1
+		# reset streak on failure
+		current_streak = 0
+		if SFXManager != null:
+			SFXManager.play_fail()
 		$QuestionDialog.text = ""
 		# Show feedback: "Incorrect. The answer is [answer]. -$[value]"
 		$FeedbackLabel.text = "Incorrect. The answer is %s. -$%d" % [correct_answer, value]
