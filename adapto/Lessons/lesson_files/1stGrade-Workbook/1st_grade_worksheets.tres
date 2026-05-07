@@ -1,0 +1,154 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=10 format=3 uid="uid://4iguwru7u59kk"]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_6407b4a5-8e8b-4b3a-8d7d-9a7b2c1d0e3f"]
+script = ExtResource("1_7hrog")
+id = "6407b4a5-8e8b-4b3a-8d7d-9a7b2c1d0e3f"
+term = "Math Activities"
+keyword = "Math"
+definition = "Worksheets focused on mathematical concepts for 1st graders, including addition, subtraction, and time-telling."
+simple_terms = "Math problems"
+examples = ["Time matching worksheet", "Addition problems with alien lamps", "Measuring length with non-standard units"]
+accepted_terms = ["Mathematics", "Arithmetic"]
+difficulty = 1
+related_to = ["Addition", "Subtraction", "Telling Time", "Measurement"]
+tof_statement = {
+"false": "Math activities in this bundle only cover addition problems.", 
+"true": "Math activities in this bundle include problems about telling time."
+}
+type_of_information = ["definition", "apply", "explain"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_a1b2c3d4-e5f6-7890-1234-567890abcdef"]
+script = ExtResource("1_7hrog")
+id = "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+term = "Reading and Literacy"
+keyword = "Reading"
+definition = "Worksheets focused on reading comprehension, retelling stories, and understanding language concepts like syllables and homophones."
+simple_terms = "Reading skills"
+examples = ["Retelling stories worksheet", "Syllable counting worksheet", "Homophone identification"]
+accepted_terms = ["Literacy", "Language Arts"]
+difficulty = 1
+related_to = ["Reading Comprehension", "Story Retelling", "Phonics", "Vocabulary"]
+tof_statement = {
+"false": "Reading and Literacy worksheets focus only on spelling.", 
+"true": "Reading and Literacy worksheets include activities on retelling stories."
+}
+type_of_information = ["definition", "apply", "explain"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_f0e9d8c7-b6a5-4321-fedc-ba9876543210"]
+script = ExtResource("1_7hrog")
+id = "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
+term = "Alphabet and Word Families"
+keyword = "Alphabet"
+definition = "Worksheets designed to teach the alphabet, letter recognition, and basic word families."
+simple_terms = "Letters and words"
+examples = ["Alphabet snakes", "Word family machines", "Rhyming pairs"]
+accepted_terms = ["ABC", "Phonics", "Word Building"]
+difficulty = 1
+related_to = ["Letter Recognition", "Phonics", "Word Formation"]
+tof_statement = {
+"false": "Alphabet worksheets do not cover word families.", 
+"true": "Alphabet worksheets include activities like completing alphabet snakes."
+}
+type_of_information = ["definition", "apply", "explain"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_12345678-90ab-cdef-1234-567890abcdef"]
+script = ExtResource("1_7hrog")
+id = "12345678-90ab-cdef-1234-567890abcdef"
+term = "Spelling Games"
+keyword = "Spelling"
+definition = "Interactive spelling worksheets that reinforce vocabulary and word construction through games and challenges."
+simple_terms = "Spelling practice"
+examples = ["Beat the Bomb spelling game", "Making new words from a given word", "Compound word completion"]
+accepted_terms = ["Word Games", "Vocabulary Building"]
+difficulty = 1
+related_to = ["Vocabulary", "Word Recognition", "Spelling Rules"]
+tof_statement = {
+"false": "Spelling games only focus on unscrambling letters.", 
+"true": "Spelling games include activities like completing compound words."
+}
+type_of_information = ["definition", "apply", "explain"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_abcdef12-3456-7890-abcd-ef1234567890"]
+script = ExtResource("1_7hrog")
+id = "abcdef12-3456-7890-abcd-ef1234567890"
+term = "Science Seasons and Life Cycles"
+keyword = "Science"
+definition = "Educational content about the seasons in Kakadu National Park and the life cycle of a magpie goose, including explanations and activities."
+simple_terms = "Seasons and animals"
+examples = ["Seasons in Kakadu National Park", "Life cycle of a magpie goose", "Identifying text types"]
+accepted_terms = ["Nature", "Biology", "Ecology"]
+difficulty = 1
+related_to = ["Seasons", "Animal Life Cycles", "Ecosystems", "Geography"]
+tof_statement = {
+"false": "Science content focuses only on weather patterns.", 
+"true": "Science content covers the life cycle of a magpie goose."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_87654321-0fed-cba9-8765-43210fedcba9"]
+script = ExtResource("1_7hrog")
+id = "87654321-0fed-cba9-8765-43210fedcba9"
+term = "Grammar Conjunctions and Sentences"
+keyword = "Grammar"
+definition = "Worksheets explaining and practicing the use of conjunctions to join sentences and identifying different types of sentences."
+simple_terms = "Sentence structure"
+examples = ["Using conjunctions like 'and' and 'but'", "Identifying sentence types (question, command, statement, exclamation)", "Adding punctuation marks"]
+accepted_terms = ["Sentence Structure", "Punctuation", "Parts of Speech"]
+difficulty = 1
+related_to = ["Conjunctions", "Sentence Types", "Punctuation", "Grammar Rules"]
+tof_statement = {
+"false": "Grammar worksheets only cover sentence types.", 
+"true": "Grammar worksheets explain how to use conjunctions to join sentences."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_01234567-89ab-cdef-0123-456789abcdef"]
+script = ExtResource("1_7hrog")
+id = "01234567-89ab-cdef-0123-456789abcdef"
+term = "Cooking Pancake Recipe"
+keyword = "Cooking"
+definition = "A step-by-step guide on how to make pancakes, including ingredients, tools, and procedures."
+simple_terms = "How to make pancakes"
+examples = ["Pancake recipe instructions", "Identifying ingredients and tools", "Ordering recipe steps"]
+accepted_terms = ["Baking", "Food Preparation", "Recipes"]
+difficulty = 1
+related_to = ["Recipes", "Following Instructions", "Food Preparation"]
+tof_statement = {
+"false": "The pancake recipe only provides the steps for cooking.", 
+"true": "The pancake recipe includes a list of ingredients and tools."
+}
+type_of_information = ["definition", "apply", "explain"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_fedcba98-7654-3210-fedc-ba9876543210"]
+script = ExtResource("1_7hrog")
+id = "fedcba98-7654-3210-fedc-ba9876543210"
+term = "Assessment Units 7 and 8"
+keyword = "Assessment"
+definition = "A comprehensive assessment covering the topics from Units 7 and 8, including reading comprehension, grammar, spelling, and science concepts."
+simple_terms = "Unit review"
+examples = ["Answering questions about seasons", "Identifying sentence types", "Writing a procedure for making a sandwich"]
+accepted_terms = ["Test", "Evaluation", "Quiz"]
+difficulty = 1
+related_to = ["Reading Comprehension", "Grammar", "Spelling", "Science"]
+tof_statement = {
+"false": "The assessment only covers grammar and sentence structure.", 
+"true": "The assessment includes questions about the seasons in Kakadu National Park."
+}
+type_of_information = ["definition", "apply", "explain"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "1st Grade Worksheets"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_6407b4a5-8e8b-4b3a-8d7d-9a7b2c1d0e3f"), SubResource("Resource_a1b2c3d4-e5f6-7890-1234-567890abcdef"), SubResource("Resource_f0e9d8c7-b6a5-4321-fedc-ba9876543210"), SubResource("Resource_12345678-90ab-cdef-1234-567890abcdef"), SubResource("Resource_abcdef12-3456-7890-abcd-ef1234567890"), SubResource("Resource_87654321-0fed-cba9-8765-43210fedcba9"), SubResource("Resource_01234567-89ab-cdef-0123-456789abcdef"), SubResource("Resource_fedcba98-7654-3210-fedc-ba9876543210")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"

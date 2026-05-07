@@ -1,0 +1,532 @@
+[gd_resource type="Resource" script_class="Lesson" format=3]
+
+[ext_resource type="Script" path="res://Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" path="res://Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_web_01"]
+script = ExtResource("1_7hrog")
+id = "WEB_01"
+term = "Responsive Web Design"
+keyword = "adapt"
+definition = "Designing websites that adapt their layout to different screen sizes and devices."
+simple_terms = "looks good on phone and desktop"
+examples = ["mobile view", "tablet layout", "desktop site"]
+accepted_terms = ["RWD"]
+difficulty = 1
+related_to = ["design", "layout", "usability", "accessibility"]
+tof_statement = {
+"false": "Responsive design only focuses on making a site look good on a desktop.",
+"true": "Responsive design ensures a good user experience across all devices."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_02"]
+script = ExtResource("1_7hrog")
+id = "WEB_02"
+term = "User Interface Design"
+keyword = "visuals"
+definition = "Focuses on the visual elements and interactive components of a website."
+simple_terms = "how the website looks and feels"
+examples = ["buttons", "icons", "color schemes"]
+accepted_terms = ["UI Design"]
+difficulty = 1
+related_to = ["design", "usability", "aesthetics", "interaction"]
+tof_statement = {
+"false": "UI design is only about making a website look pretty, not functional.",
+"true": "Good UI design makes a website intuitive and pleasant to use."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_03"]
+script = ExtResource("1_7hrog")
+id = "WEB_03"
+term = "User Experience Design"
+keyword = "journey"
+definition = "Enhances user satisfaction by improving the usability and accessibility of a website."
+simple_terms = "how easy and enjoyable website is"
+examples = ["navigation", "task completion", "feedback"]
+accepted_terms = ["UX Design"]
+difficulty = 1
+related_to = ["design", "usability", "interaction", "accessibility"]
+tof_statement = {
+"false": "UX design is the same as UI design, focusing only on visuals.",
+"true": "UX design focuses on the overall satisfaction a user gets from a website."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_04"]
+script = ExtResource("1_7hrog")
+id = "WEB_04"
+term = "HTML Structure"
+keyword = "content"
+definition = "The fundamental markup language used to create the structure and content of web pages."
+simple_terms = "the skeleton of a web page"
+examples = ["headings", "paragraphs", "links"]
+accepted_terms = ["HyperText Markup Language"]
+difficulty = 1
+related_to = ["structure", "content", "coding", "semantics"]
+tof_statement = {
+"false": "HTML is used to style the appearance of web elements.",
+"true": "HTML defines the meaning and structure of web content."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_05"]
+script = ExtResource("1_7hrog")
+id = "WEB_05"
+term = "CSS Styling"
+keyword = "appearance"
+definition = "Cascading Style Sheets control the presentation and visual appearance of HTML elements."
+simple_terms = "the clothes and makeup of a web page"
+examples = ["colors", "fonts", "layouts"]
+accepted_terms = ["Cascading Style Sheets"]
+difficulty = 1
+related_to = ["styling", "presentation", "coding", "visuals"]
+tof_statement = {
+"false": "CSS is used to define the core content structure of a webpage.",
+"true": "CSS is used to change the font size and color of text on a webpage."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_06"]
+script = ExtResource("1_7hrog")
+id = "WEB_06"
+term = "JavaScript Interactivity"
+keyword = "dynamic"
+definition = "Adds dynamic behavior and interactivity to web pages, making them more engaging."
+simple_terms = "makes web pages do things"
+examples = ["animations", "forms", "updates"]
+accepted_terms = ["JS"]
+difficulty = 1
+related_to = ["coding", "behavior", "dynamic", "scripting"]
+tof_statement = {
+"false": "JavaScript is only used for basic text formatting on websites.",
+"true": "JavaScript can be used to create image sliders or validate form input."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_07"]
+script = ExtResource("1_7hrog")
+id = "WEB_07"
+term = "Web Accessibility"
+keyword = "inclusive"
+definition = "Designing websites so that people with disabilities can perceive, understand, and interact."
+simple_terms = "usable by everyone, regardless of ability"
+examples = ["alt text", "keyboard nav", "contrast"]
+accepted_terms = ["a11y"]
+difficulty = 1
+related_to = ["usability", "accessibility", "design", "inclusion"]
+tof_statement = {
+"false": "Web accessibility is only about making websites look good for disabled users.",
+"true": "Providing alt text for images is a key aspect of web accessibility."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_08"]
+script = ExtResource("1_7hrog")
+id = "WEB_08"
+term = "Search Engine Optimization"
+keyword = "visibility"
+definition = "Improving website visibility in search engine results to increase organic traffic."
+simple_terms = "making your site easy to find online"
+examples = ["keywords", "meta descriptions", "backlinks"]
+accepted_terms = ["SEO"]
+difficulty = 1
+related_to = ["visibility", "marketing", "content", "search"]
+tof_statement = {
+"false": "SEO focuses on making a website visually appealing to users.",
+"true": "Using relevant keywords in your content helps with SEO."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_09"]
+script = ExtResource("1_7hrog")
+id = "WEB_09"
+term = "Wireframing"
+keyword = "blueprint"
+definition = "A basic visual guide representing the skeletal framework of a website's layout."
+simple_terms = "a basic sketch of a webpage layout"
+examples = ["layout blocks", "content placement", "navigation flow"]
+difficulty = 1
+related_to = ["design", "layout", "prototyping", "planning"]
+tof_statement = {
+"false": "Wireframes are detailed visual mockups of a finished website.",
+"true": "Wireframes focus on structure and content placement, not visual design."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_10"]
+script = ExtResource("1_7hrog")
+id = "WEB_10"
+term = "Mockups"
+keyword = "visual"
+definition = "High-fidelity static representations of a website's design, showing visual details."
+simple_terms = "a realistic visual preview of the design"
+examples = ["color palettes", "typography", "imagery"]
+difficulty = 1
+related_to = ["design", "visuals", "prototyping", "aesthetics"]
+tof_statement = {
+"false": "Mockups are interactive prototypes used for user testing.",
+"true": "Mockups show the intended visual style and branding of a website."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_11"]
+script = ExtResource("1_7hrog")
+id = "WEB_11"
+term = "Prototypes"
+keyword = "interactive"
+definition = "Interactive models that simulate user interaction with a website's design."
+simple_terms = "a clickable, interactive version of the design"
+examples = ["user flows", "clickable links", "animations"]
+difficulty = 1
+related_to = ["design", "interaction", "usability", "prototyping"]
+tof_statement = {
+"false": "Prototypes are static images showing only the visual design.",
+"true": "Prototypes allow users to click through pages and test navigation."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_12"]
+script = ExtResource("1_7hrog")
+id = "WEB_12"
+term = "Grid Systems"
+keyword = "alignment"
+definition = "Frameworks of intersecting lines used to structure content and align elements on a page."
+simple_terms = "organizing elements into columns and rows"
+examples = ["12-column grid", "baseline grid", "fluid grid"]
+difficulty = 1
+related_to = ["layout", "design", "structure", "alignment"]
+tof_statement = {
+"false": "Grid systems are only used for text formatting in web design.",
+"true": "Grid systems help create consistent and organized layouts."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_13"]
+script = ExtResource("1_7hrog")
+id = "WEB_13"
+term = "Typography"
+keyword = "fonts"
+definition = "The art and technique of arranging typefaces to make written language legible and appealing."
+simple_terms = "the style and appearance of text"
+examples = ["font families", "line height", "kerning"]
+difficulty = 1
+related_to = ["design", "aesthetics", "visuals", "content"]
+tof_statement = {
+"false": "Typography is only about selecting the largest font size for headings.",
+"true": "Typography involves choosing appropriate fonts and spacing for readability."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_14"]
+script = ExtResource("1_7hrog")
+id = "WEB_14"
+term = "Color Theory"
+keyword = "palette"
+definition = "The study of color and its use in design to evoke emotions and create visual harmony."
+simple_terms = "how colors affect perception and design"
+examples = ["color wheel", "contrast", "harmony"]
+difficulty = 1
+related_to = ["design", "aesthetics", "visuals", "psychology"]
+tof_statement = {
+"false": "Color theory is irrelevant to the emotional impact of a website.",
+"true": "Color theory helps in choosing a brand's color palette effectively."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_15"]
+script = ExtResource("1_7hrog")
+id = "WEB_15"
+term = "White Space"
+keyword = "breathing room"
+definition = "The empty or negative space between design elements, crucial for clarity and focus."
+simple_terms = "the empty space around elements"
+examples = ["margins", "padding", "between lines"]
+accepted_terms = ["negative space"]
+difficulty = 1
+related_to = ["design", "layout", "usability", "aesthetics"]
+tof_statement = {
+"false": "White space is wasted space that should be filled with content.",
+"true": "Sufficient white space improves readability and reduces clutter."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_16"]
+script = ExtResource("1_7hrog")
+id = "WEB_16"
+term = "Call to Action"
+keyword = "prompt"
+definition = "A design element intended to prompt an immediate response or encourage a specific action."
+simple_terms = "a button or link to get users to do something"
+examples = ["Buy Now", "Sign Up", "Learn More"]
+accepted_terms = ["CTA"]
+difficulty = 1
+related_to = ["design", "conversion", "interaction", "marketing"]
+tof_statement = {
+"false": "CTAs are only used on e-commerce websites for purchasing.",
+"true": "A clear CTA guides users towards the desired outcome."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_17"]
+script = ExtResource("1_7hrog")
+id = "WEB_17"
+term = "Navigation Design"
+keyword = "guidance"
+definition = "The process of designing how users move through and find information on a website."
+simple_terms = "how users find their way around a site"
+examples = ["menus", "breadcrumbs", "sitemaps"]
+difficulty = 1
+related_to = ["usability", "interaction", "layout", "structure"]
+tof_statement = {
+"false": "Navigation design is only important for very large websites.",
+"true": "Intuitive navigation is key to a positive user experience."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_18"]
+script = ExtResource("1_7hrog")
+id = "WEB_18"
+term = "Content Management System"
+keyword = "platform"
+definition = "Software that helps users create, manage, and modify website content without specialized knowledge."
+simple_terms = "a tool to easily update website content"
+examples = ["WordPress", "Joomla", "Drupal"]
+accepted_terms = ["CMS"]
+difficulty = 1
+related_to = ["content", "platform", "management", "tools"]
+tof_statement = {
+"false": "CMS platforms are used to write the underlying code of a website.",
+"true": "A CMS allows non-technical users to update website text and images."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_19"]
+script = ExtResource("1_7hrog")
+id = "WEB_19"
+term = "Web Hosting"
+keyword = "server"
+definition = "The service that provides the necessary technology and services for a website to be viewed online."
+simple_terms = "where your website files live on the internet"
+examples = ["shared hosting", "VPS", "dedicated server"]
+difficulty = 1
+related_to = ["infrastructure", "online", "technical", "server"]
+tof_statement = {
+"false": "Web hosting is the process of designing the website's appearance.",
+"true": "Web hosting makes your website accessible to visitors."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_20"]
+script = ExtResource("1_7hrog")
+id = "WEB_20"
+term = "Domain Name"
+keyword = "address"
+definition = "The unique, human-readable address used to identify a website on the internet."
+simple_terms = "the name of your website, like google.com"
+examples = ["example.com", "mysite.org", "yourbrand.net"]
+difficulty = 1
+related_to = ["address", "online", "technical", "branding"]
+tof_statement = {
+"false": "A domain name is the same as web hosting.",
+"true": "A domain name is essential for users to find your website."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_21"]
+script = ExtResource("1_7hrog")
+id = "WEB_21"
+term = "Browser Compatibility"
+keyword = "cross-browser"
+definition = "Ensuring a website functions and displays correctly across different web browsers."
+simple_terms = "works in Chrome, Firefox, Safari, etc."
+examples = ["rendering issues", "broken layouts", "script errors"]
+difficulty = 1
+related_to = ["usability", "technical", "testing", "compatibility"]
+tof_statement = {
+"false": "Browser compatibility is only important for visual design elements.",
+"true": "Testing for browser compatibility ensures all users have a similar experience."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_22"]
+script = ExtResource("1_7hrog")
+id = "WEB_22"
+term = "Website Performance"
+keyword = "speed"
+definition = "How quickly a website loads and responds to user interactions, impacting user experience."
+simple_terms = "how fast your website loads"
+examples = ["page load time", "response time", "image optimization"]
+difficulty = 1
+related_to = ["usability", "technical", "optimization", "speed"]
+tof_statement = {
+"false": "Website performance is only about the visual appeal of the site.",
+"true": "Optimizing images significantly improves website performance."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_23"]
+script = ExtResource("1_7hrog")
+id = "WEB_23"
+term = "Website Security"
+keyword = "protection"
+definition = "Measures taken to protect a website from unauthorized access, data breaches, and other threats."
+simple_terms = "keeping your website safe from hackers"
+examples = ["SSL certificate", "firewalls", "updates"]
+difficulty = 1
+related_to = ["technical", "security", "protection", "trust"]
+tof_statement = {
+"false": "Website security only involves protecting user passwords.",
+"true": "Using HTTPS encrypts data transmitted between the user and the website."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_24"]
+script = ExtResource("1_7hrog")
+id = "WEB_24"
+term = "Mobile-First Design"
+keyword = "mobile"
+definition = "Designing a website for mobile devices first, then scaling up for larger screens."
+simple_terms = "designing for small screens first"
+examples = ["touch targets", "limited bandwidth", "simple navigation"]
+difficulty = 1
+related_to = ["design", "layout", "usability", "mobile"]
+tof_statement = {
+"false": "Mobile-first design means creating a separate website just for phones.",
+"true": "Mobile-first design prioritizes essential content and functionality."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_25"]
+script = ExtResource("1_7hrog")
+id = "WEB_25"
+term = "Progressive Web Apps"
+keyword = "app-like"
+definition = "Web applications that offer an app-like experience to users, including offline access."
+simple_terms = "websites that act like mobile apps"
+examples = ["offline access", "push notifications", "installable"]
+accepted_terms = ["PWA"]
+difficulty = 1
+related_to = ["application", "experience", "hybrid", "modern"]
+tof_statement = {
+"false": "PWAs require users to download them from an app store.",
+"true": "PWAs can be added to a user's home screen like native apps."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_26"]
+script = ExtResource("1_7hrog")
+id = "WEB_26"
+term = "Web Analytics"
+keyword = "data"
+definition = "Collecting, measuring, and analyzing website data to understand user behavior and improve performance."
+simple_terms = "tracking website visitor statistics"
+examples = ["page views", "bounce rate", "traffic sources"]
+difficulty = 1
+related_to = ["data", "analysis", "marketing", "optimization"]
+tof_statement = {
+"false": "Web analytics is only used to count the total number of website visitors.",
+"true": "Web analytics helps identify popular content and user engagement."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_27"]
+script = ExtResource("1_7hrog")
+id = "WEB_27"
+term = "A B Testing"
+keyword = "variants"
+definition = "Comparing two versions of a webpage against each other to determine which performs better."
+simple_terms = "testing different versions to see which works best"
+examples = ["button colors", "headlines", "layouts"]
+difficulty = 1
+related_to = ["testing", "optimization", "data", "conversion"]
+tof_statement = {
+"false": "A/B testing is used to check if a website works on different browsers.",
+"true": "A/B testing helps optimize conversion rates by comparing design choices."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_28"]
+script = ExtResource("1_7hrog")
+id = "WEB_28"
+term = "Image Optimization"
+keyword = "file size"
+definition = "Reducing the file size of images without significantly compromising visual quality for faster loading."
+simple_terms = "making images smaller for faster loading"
+examples = ["compression", "formats", "resizing"]
+difficulty = 1
+related_to = ["performance", "optimization", "speed", "assets"]
+tof_statement = {
+"false": "Image optimization involves increasing the resolution of images.",
+"true": "Optimizing images is crucial for improving website loading speed."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_29"]
+script = ExtResource("1_7hrog")
+id = "WEB_29"
+term = "Web Fonts"
+keyword = "typography"
+definition = "Fonts used in web design that are downloaded by the browser to display text correctly."
+simple_terms = "fonts that work on websites"
+examples = ["Google Fonts", "custom fonts", "licensing"]
+difficulty = 1
+related_to = ["typography", "design", "assets", "fonts"]
+tof_statement = {
+"false": "Web fonts are only available for use in print design.",
+"true": "Web fonts allow designers to use a wider range of typography."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_web_30"]
+script = ExtResource("1_7hrog")
+id = "WEB_30"
+term = "Favicon"
+keyword = "icon"
+definition = "A small icon representing a website, typically displayed in browser tabs or bookmarks."
+simple_terms = "the small icon in the browser tab"
+examples = ["tab icon", "bookmark icon", "app icon"]
+difficulty = 1
+related_to = ["branding", "visuals", "design", "identity"]
+tof_statement = {
+"false": "A favicon is the main logo displayed on the homepage.",
+"true": "A favicon helps users quickly identify your site among many tabs."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Web Design"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_web_01"), SubResource("Resource_web_02"), SubResource("Resource_web_03"), SubResource("Resource_web_04"), SubResource("Resource_web_05"), SubResource("Resource_web_06"), SubResource("Resource_web_07"), SubResource("Resource_web_08"), SubResource("Resource_web_09"), SubResource("Resource_web_10"), SubResource("Resource_web_11"), SubResource("Resource_web_12"), SubResource("Resource_web_13"), SubResource("Resource_web_14"), SubResource("Resource_web_15"), SubResource("Resource_web_16"), SubResource("Resource_web_17"), SubResource("Resource_web_18"), SubResource("Resource_web_19"), SubResource("Resource_web_20"), SubResource("Resource_web_21"), SubResource("Resource_web_22"), SubResource("Resource_web_23"), SubResource("Resource_web_24"), SubResource("Resource_web_25"), SubResource("Resource_web_26"), SubResource("Resource_web_27"), SubResource("Resource_web_28"), SubResource("Resource_web_29"), SubResource("Resource_web_30")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"

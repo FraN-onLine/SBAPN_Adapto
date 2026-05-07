@@ -254,6 +254,7 @@ func _populate_topic_list() -> void:
 		btn.add_theme_font_size_override("font_size", 20)
 		btn.add_theme_color_override("font_color", Color(0.1, 0.1, 0.1, 1))
 		btn.add_theme_stylebox_override("normal", SubResource_white_rounded())
+		btn.set_text_alignment(HORIZONTAL_ALIGNMENT_LEFT)
 		btn.pressed.connect(_on_topic_entry_selected.bind(path, label_text))
 		vbox.add_child(btn)
 

@@ -1,0 +1,910 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=52 format=3 uid="uid://x7iq6nylvzcsi"]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_aut01"]
+script = ExtResource("1_7hrog")
+id = "AUT01"
+term = "Automata Theory Basics"
+keyword = "models"
+definition = "The study of abstract machines and computational problems they can solve."
+simple_terms = "Abstract computers and their capabilities"
+examples = ["Finite automata", "Turing machines", "Pushdown automata"]
+accepted_terms = []
+difficulty = 1
+related_to = ["computation", "logic", "formal systems"]
+tof_statement = {
+"false": "Automata theory focuses on real-world hardware limitations.", 
+"true": "Automata theory deals with abstract computational models."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut02"]
+script = ExtResource("1_7hrog")
+id = "AUT02"
+term = "Set Theory Fundamentals"
+keyword = "collections"
+definition = "A branch of mathematical logic studying sets, which are collections of objects."
+simple_terms = "Basic math of groups and elements"
+examples = ["Union", "Intersection", "Subset"]
+accepted_terms = []
+difficulty = 1
+related_to = ["logic", "mathematics", "formal systems"]
+tof_statement = {
+"false": "Sets must contain only numbers.", 
+"true": "Sets can contain any type of distinct element."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut03"]
+script = ExtResource("1_7hrog")
+id = "AUT03"
+term = "Deterministic Finite Automaton"
+keyword = "states"
+definition = "A finite automaton that for each pair of state and input symbol, has exactly one transition."
+simple_terms = "One path for each input symbol"
+examples = ["Lexical analysis", "Simple parsers", "Pattern matching"]
+accepted_terms = ["DFA"]
+difficulty = 1
+related_to = ["computation", "languages", "automata"]
+tof_statement = {
+"false": "A DFA can have multiple next states for one input.", 
+"true": "A DFA has a unique next state for every input."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut04"]
+script = ExtResource("1_7hrog")
+id = "AUT04"
+term = "Nondeterministic Finite Automaton"
+keyword = "choices"
+definition = "A finite automaton that may have multiple transitions for the same input symbol from a given state."
+simple_terms = "Multiple paths possible for an input"
+examples = ["Regular expression matching", "Text searching", "Network protocols"]
+accepted_terms = ["NFA"]
+difficulty = 1
+related_to = ["computation", "languages", "automata"]
+tof_statement = {
+"false": "An NFA must always have a single next state.", 
+"true": "An NFA can transition to multiple states on the same input."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut05"]
+script = ExtResource("1_7hrog")
+id = "AUT05"
+term = "Turing Machine Model"
+keyword = "tape"
+definition = "A mathematical model of computation that defines an abstract machine manipulating symbols on a tape."
+simple_terms = "A theoretical computer with a tape"
+examples = ["Universal computation", "Halting problem", "Complexity theory"]
+accepted_terms = []
+difficulty = 2
+related_to = ["computation", "theory", "logic"]
+tof_statement = {
+"false": "A Turing machine is limited to simple calculations.", 
+"true": "A Turing machine can simulate any algorithm."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut06"]
+script = ExtResource("1_7hrog")
+id = "AUT06"
+term = "Context-Free Grammar"
+keyword = "rules"
+definition = "A formal grammar where each production rule's left side is a single non-terminal symbol."
+simple_terms = "Grammar rules with single symbols"
+examples = ["Parsing programming languages", "Natural language syntax", "XML structure"]
+accepted_terms = ["CFG"]
+difficulty = 2
+related_to = ["languages", "parsing", "formal systems"]
+tof_statement = {
+"false": "CFGs can describe all aspects of human language.", 
+"true": "CFGs are used to define the syntax of many programming languages."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut07"]
+script = ExtResource("1_7hrog")
+id = "AUT07"
+term = "Pumping Lemma for Regular"
+keyword = "strings"
+definition = "A property that all infinite regular languages satisfy, used to prove a language is not regular."
+simple_terms = "Proving languages are not regular"
+examples = ["L = {a^n b^n}", "L = {ww}", "L = {a^p | p prime}"]
+accepted_terms = []
+difficulty = 2
+related_to = ["languages", "theory", "proofs"]
+tof_statement = {
+"false": "The pumping lemma proves all languages are regular.", 
+"true": "The pumping lemma helps identify non-regular languages."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut08"]
+script = ExtResource("1_7hrog")
+id = "AUT08"
+term = "Noam Chomsky Hierarchy"
+keyword = "generates"
+definition = "A classification of formal grammars that generate languages based on their generative power."
+simple_terms = "Levels of language complexity"
+examples = ["Regular languages", "Context-free languages", "Context-sensitive languages"]
+accepted_terms = []
+difficulty = 2
+related_to = ["languages", "theory", "classification"]
+tof_statement = {
+"false": "The Chomsky hierarchy describes language translation.", 
+"true": "The Chomsky hierarchy orders grammars by complexity."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut09"]
+script = ExtResource("1_7hrog")
+id = "AUT09"
+term = "Turing Machine Operation"
+keyword = "tape"
+definition = "A model with a tape, a head, and states that reads, writes, and moves to compute."
+simple_terms = "How a theoretical computer works"
+examples = ["Read symbol", "Write symbol", "Move tape"]
+accepted_terms = []
+difficulty = 2
+related_to = ["computation", "theory", "automata"]
+tof_statement = {
+"false": "A Turing machine's head can only read.", 
+"true": "A Turing machine's head can read and write symbols."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut10"]
+script = ExtResource("1_7hrog")
+id = "AUT10"
+term = "Formal Languages"
+keyword = "alphabet"
+definition = "A set of strings over a given alphabet, precisely defined by a grammar or automaton."
+simple_terms = "Languages defined by rules"
+examples = ["Binary strings", "Palindromes", "Valid code syntax"]
+accepted_terms = []
+difficulty = 1
+related_to = ["computation", "theory", "grammar"]
+tof_statement = {
+"false": "Formal languages are like natural human languages.", 
+"true": "Formal languages have strict, defined structures."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut11"]
+script = ExtResource("1_7hrog")
+id = "AUT11"
+term = "Tree Data Structures"
+keyword = "nodes"
+definition = "A hierarchical data structure consisting of nodes connected by edges, with a root node."
+simple_terms = "Hierarchical structure of data"
+examples = ["File systems", "DOM", "Syntax trees"]
+accepted_terms = []
+difficulty = 1
+related_to = ["data structures", "algorithms", "parsing"]
+tof_statement = {
+"false": "Trees are linear sequences of data.", 
+"true": "Trees have a parent-child relationship between nodes."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut12"]
+script = ExtResource("1_7hrog")
+id = "AUT12"
+term = "Regular Expressions"
+keyword = "patterns"
+definition = "A sequence of characters that defines a search pattern, used for string matching."
+simple_terms = "Text searching patterns"
+examples = ["Email validation", "Log parsing", "Find and replace"]
+accepted_terms = ["Regex"]
+difficulty = 1
+related_to = ["languages", "pattern matching", "computation"]
+tof_statement = {
+"false": "Regex is used for mathematical proofs.", 
+"true": "Regex is powerful for text pattern matching."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut13"]
+script = ExtResource("1_7hrog")
+id = "AUT13"
+term = "Set Union Operation"
+keyword = "combines"
+definition = "The operation that creates a new set containing all elements from two or more sets."
+simple_terms = "Merging sets together"
+examples = ["A U B", "Students in club A or B", "Combining lists"]
+accepted_terms = []
+difficulty = 1
+related_to = ["mathematics", "logic", "set theory"]
+tof_statement = {
+"false": "The union of two sets only includes common elements.", 
+"true": "The union of two sets includes elements from both."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut14"]
+script = ExtResource("1_7hrog")
+id = "AUT14"
+term = "Set Intersection Operation"
+keyword = "common"
+definition = "The operation that creates a new set containing only elements common to two or more sets."
+simple_terms = "Finding shared elements"
+examples = ["A \u2229 B", "Shared interests", "Common factors"]
+accepted_terms = []
+difficulty = 1
+related_to = ["mathematics", "logic", "set theory"]
+tof_statement = {
+"false": "Intersection yields elements present in any set.", 
+"true": "Intersection yields elements present in all sets."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut15"]
+script = ExtResource("1_7hrog")
+id = "AUT15"
+term = "Finite State Machine"
+keyword = "states"
+definition = "A model of computation consisting of a finite number of states and transitions between them."
+simple_terms = "Machines with limited states"
+examples = ["Traffic lights", "Vending machines", "Simple controllers"]
+accepted_terms = ["FSM"]
+difficulty = 1
+related_to = ["automata", "computation", "logic"]
+tof_statement = {
+"false": "FSMs can perform complex calculations.", 
+"true": "FSMs are used in hardware and software design."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut16"]
+script = ExtResource("1_7hrog")
+id = "AUT16"
+term = "Pushdown Automaton"
+keyword = "stack"
+definition = "A finite automaton augmented with a stack, capable of recognizing context-free languages."
+simple_terms = "FSM with a memory stack"
+examples = ["Parsing context-free languages", "Context-free recognition", "Balanced parentheses"]
+accepted_terms = ["PDA"]
+difficulty = 2
+related_to = ["automata", "languages", "computation"]
+tof_statement = {
+"false": "PDAs have unlimited memory.", 
+"true": "PDAs use a stack for memory."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut17"]
+script = ExtResource("1_7hrog")
+id = "AUT17"
+term = "Context-Free Language"
+keyword = "grammar"
+definition = "A language generated by a context-free grammar, recognized by a pushdown automaton."
+simple_terms = "Languages from CFGs"
+examples = ["Arithmetic expressions", "Programming syntax", "JSON structure"]
+accepted_terms = ["CFL"]
+difficulty = 2
+related_to = ["languages", "grammar", "automata"]
+tof_statement = {
+"false": "CFLs are equivalent to regular languages.", 
+"true": "CFLs can be parsed efficiently."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut18"]
+script = ExtResource("1_7hrog")
+id = "AUT18"
+term = "Pumping Lemma for Context-Free"
+keyword = "strings"
+definition = "A property of context-free languages used to prove that certain languages are not context-free."
+simple_terms = "Proving non-context-free languages"
+examples = ["L = {a^n b^n c^n}", "L = {ww}", "L = {a^i b^j c^k | i=j or j=k}"]
+accepted_terms = []
+difficulty = 3
+related_to = ["languages", "theory", "proofs"]
+tof_statement = {
+"false": "This lemma applies to all formal languages.", 
+"true": "This lemma helps identify non-CFLs."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut19"]
+script = ExtResource("1_7hrog")
+id = "AUT19"
+term = "Chomsky Normal Form"
+keyword = "grammar"
+definition = "A restricted form of context-free grammar where all rules produce a terminal or two non-terminals."
+simple_terms = "Standardized CFG rules"
+examples = ["A -> BC", "A -> a", "S -> \u03b5"]
+accepted_terms = []
+difficulty = 2
+related_to = ["grammar", "parsing", "languages"]
+tof_statement = {
+"false": "CNF increases grammar complexity.", 
+"true": "CNF simplifies CFG analysis."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut20"]
+script = ExtResource("1_7hrog")
+id = "AUT20"
+term = "Universal Turing Machine"
+keyword = "simulates"
+definition = "A Turing machine that can simulate any other Turing machine given its description and input."
+simple_terms = "A Turing machine that runs others"
+examples = ["General computation", "Theoretical computer", "Algorithm execution"]
+accepted_terms = ["UTM"]
+difficulty = 3
+related_to = ["computation", "theory", "automata"]
+tof_statement = {
+"false": "A UTM is faster than any specific TM.", 
+"true": "A UTM can compute anything a TM can."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut21"]
+script = ExtResource("1_7hrog")
+id = "AUT21"
+term = "Alphabet and Strings"
+keyword = "symbols"
+definition = "An alphabet is a set of symbols; a string is a finite sequence of symbols from an alphabet."
+simple_terms = "Characters and sequences"
+examples = ["{0,1}", "binary strings", "{a,b,c}"]
+accepted_terms = []
+difficulty = 1
+related_to = ["languages", "theory", "sets"]
+tof_statement = {
+"false": "A string can contain any character.", 
+"true": "An alphabet defines the allowed characters for strings."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut22"]
+script = ExtResource("1_7hrog")
+id = "AUT22"
+term = "Tree Traversal Algorithms"
+keyword = "visit"
+definition = "Methods for systematically visiting each node in a tree data structure."
+simple_terms = "Ways to navigate trees"
+examples = ["In-order", "Pre-order", "Post-order"]
+accepted_terms = []
+difficulty = 1
+related_to = ["data structures", "algorithms", "trees"]
+tof_statement = {
+"false": "Tree traversals visit nodes randomly.", 
+"true": "Tree traversals visit nodes in a specific order."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut23"]
+script = ExtResource("1_7hrog")
+id = "AUT23"
+term = "Regex Quantifiers"
+keyword = "repetition"
+definition = "Metacharacters in regex that specify how many times a preceding element must occur."
+simple_terms = "How many times to match"
+examples = ["*", "+", "?"]
+accepted_terms = []
+difficulty = 1
+related_to = ["regex", "patterns", "languages"]
+tof_statement = {
+"false": "Quantifiers define character sets.", 
+"true": "Quantifiers control repetition in regex patterns."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut24"]
+script = ExtResource("1_7hrog")
+id = "AUT24"
+term = "Set Difference"
+keyword = "removes"
+definition = "The operation creating a set with elements from the first set that are not in the second set."
+simple_terms = "Elements in one set but not another"
+examples = ["A - B", "Subtracted items", "Unique elements"]
+accepted_terms = []
+difficulty = 1
+related_to = ["mathematics", "logic", "set theory"]
+tof_statement = {
+"false": "Set difference finds all elements from both sets.", 
+"true": "Set difference finds elements unique to the first set."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut25"]
+script = ExtResource("1_7hrog")
+id = "AUT25"
+term = "Empty Set"
+keyword = "no elements"
+definition = "The unique set containing no elements, denoted by {} or Ø."
+simple_terms = "A set with nothing in it"
+examples = ["{}", "\u00d8", "No items"]
+accepted_terms = []
+difficulty = 1
+related_to = ["mathematics", "logic", "set theory"]
+tof_statement = {
+"false": "The empty set has one element.", 
+"true": "The empty set has zero elements."
+}
+type_of_information = ["definition", "defined", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut26"]
+script = ExtResource("1_7hrog")
+id = "AUT26"
+term = "DFA State Transitions"
+keyword = "next state"
+definition = "Rules defining the next state of a DFA based on the current state and input symbol."
+simple_terms = "Moving between states"
+examples = ["(q0, a) -> q1", "State changes", "Flow logic"]
+accepted_terms = []
+difficulty = 1
+related_to = ["automata", "computation", "logic"]
+tof_statement = {
+"false": "DFA transitions involve choices.", 
+"true": "DFA transitions are deterministic."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut27"]
+script = ExtResource("1_7hrog")
+id = "AUT27"
+term = "NFA Epsilon Transitions"
+keyword = "no input"
+definition = "Transitions in an NFA that can occur without consuming an input symbol."
+simple_terms = "Transitions without input"
+examples = ["\u03b5-transitions", "Implicit moves", "State changes"]
+accepted_terms = []
+difficulty = 2
+related_to = ["automata", "languages", "computation"]
+tof_statement = {
+"false": "Epsilon transitions require an input symbol.", 
+"true": "Epsilon transitions allow state change without input."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut28"]
+script = ExtResource("1_7hrog")
+id = "AUT28"
+term = "Turing Machine Halting Problem"
+keyword = "decidability"
+definition = "The problem of determining whether an arbitrary program will finish running or continue forever."
+simple_terms = "Will a program stop?"
+examples = ["Program termination", "Undecidable problem", "Computability theory"]
+accepted_terms = []
+difficulty = 3
+related_to = ["computation", "theory", "logic"]
+tof_statement = {
+"false": "The Halting Problem is solvable for all programs.", 
+"true": "The Halting Problem is undecidable."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut29"]
+script = ExtResource("1_7hrog")
+id = "AUT29"
+term = "Parse Trees"
+keyword = "structure"
+definition = "A tree representation of the derivation of a string according to a formal grammar."
+simple_terms = "Grammar derivation visualization"
+examples = ["Syntax tree", "Abstract syntax tree", "Derivation tree"]
+accepted_terms = []
+difficulty = 2
+related_to = ["parsing", "languages", "grammar"]
+tof_statement = {
+"false": "Parse trees show execution speed.", 
+"true": "Parse trees show grammatical structure."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut30"]
+script = ExtResource("1_7hrog")
+id = "AUT30"
+term = "Regular Language Properties"
+keyword = "closure"
+definition = "Properties of regular languages, such as closure under union, intersection, and concatenation."
+simple_terms = "What regular languages preserve"
+examples = ["Union closure", "Intersection closure", "Concatenation closure"]
+accepted_terms = []
+difficulty = 2
+related_to = ["languages", "theory", "automata"]
+tof_statement = {
+"false": "Regular languages are not closed under Kleene star.", 
+"true": "Regular languages are closed under union."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut31"]
+script = ExtResource("1_7hrog")
+id = "AUT31"
+term = "Set Cardinality"
+keyword = "count"
+definition = "The number of elements in a set."
+simple_terms = "How many items in a set"
+examples = ["|A|", "Size of set", "Number of members"]
+accepted_terms = []
+difficulty = 1
+related_to = ["mathematics", "logic", "set theory"]
+tof_statement = {
+"false": "Cardinality refers to the order of elements.", 
+"true": "Cardinality refers to the number of elements."
+}
+type_of_information = ["definition", "defined", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut32"]
+script = ExtResource("1_7hrog")
+id = "AUT32"
+term = "Subset Relation"
+keyword = "contained"
+definition = "A set A is a subset of set B if all elements of A are also elements of B."
+simple_terms = "One set inside another"
+examples = ["A \u2286 B", "Part of a whole", "Included elements"]
+accepted_terms = []
+difficulty = 1
+related_to = ["mathematics", "logic", "set theory"]
+tof_statement = {
+"false": "A subset must contain all elements of the superset.", 
+"true": "A subset's elements are all in the superset."
+}
+type_of_information = ["definition", "defined", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut33"]
+script = ExtResource("1_7hrog")
+id = "AUT33"
+term = "DFA Acceptance"
+keyword = "final state"
+definition = "A DFA accepts an input string if it ends in an accepting (final) state after processing the string."
+simple_terms = "Reaching an end state"
+examples = ["Accepting strings", "Rejection states", "End of input"]
+accepted_terms = []
+difficulty = 1
+related_to = ["automata", "computation", "languages"]
+tof_statement = {
+"false": "Acceptance depends on the number of states.", 
+"true": "Acceptance depends on the final state reached."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut34"]
+script = ExtResource("1_7hrog")
+id = "AUT34"
+term = "NFA to DFA Conversion"
+keyword = "subset construction"
+definition = "A process to convert any NFA into an equivalent DFA, often resulting in more states."
+simple_terms = "Making an NFA into a DFA"
+examples = ["Power set construction", "State mapping", "Equivalence transformation"]
+accepted_terms = []
+difficulty = 2
+related_to = ["automata", "computation", "conversion"]
+tof_statement = {
+"false": "NFAs are fundamentally more powerful than DFAs.", 
+"true": "NFAs can be converted to equivalent DFAs."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut35"]
+script = ExtResource("1_7hrog")
+id = "AUT35"
+term = "Turing Machine Tape"
+keyword = "symbols"
+definition = "An infinite tape divided into cells, each capable of holding a single symbol."
+simple_terms = "Unlimited storage strip"
+examples = ["Infinite length", "Cells for symbols", "Read/write medium"]
+accepted_terms = []
+difficulty = 1
+related_to = ["computation", "automata", "theory"]
+tof_statement = {
+"false": "The tape has a fixed, finite length.", 
+"true": "The tape is theoretically infinite."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut36"]
+script = ExtResource("1_7hrog")
+id = "AUT36"
+term = "CFG Ambiguity"
+keyword = "multiple parse trees"
+definition = "A grammar is ambiguous if a string can be generated by more than one distinct parse tree."
+simple_terms = "Multiple ways to parse a string"
+examples = ["Operator precedence", "Ambiguous sentences", "Grammar errors"]
+accepted_terms = []
+difficulty = 2
+related_to = ["grammar", "parsing", "languages"]
+tof_statement = {
+"false": "Ambiguous grammars are always preferred.", 
+"true": "Ambiguous grammars can lead to interpretation issues."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut37"]
+script = ExtResource("1_7hrog")
+id = "AUT37"
+term = "Pumping Lemma Application"
+keyword = "proof"
+definition = "Using the lemma to demonstrate a language does not possess the properties of regular or context-free languages."
+simple_terms = "Applying lemma to prove non-regularity"
+examples = ["Showing non-regularity", "Proving language properties", "Formal demonstration"]
+accepted_terms = []
+difficulty = 2
+related_to = ["languages", "theory", "proofs"]
+tof_statement = {
+"false": "The lemma is used to prove languages are regular.", 
+"true": "The lemma is used to prove languages are not regular."
+}
+type_of_information = ["explain", "apply", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut38"]
+script = ExtResource("1_7hrog")
+id = "AUT38"
+term = "Type 0 Languages"
+keyword = "recursively enumerable"
+definition = "Languages generated by unrestricted grammars, recognized by Turing machines."
+simple_terms = "Most general computable languages"
+examples = ["Any computable function", "All programs", "General computation"]
+accepted_terms = []
+difficulty = 3
+related_to = ["languages", "computation", "theory"]
+tof_statement = {
+"false": "Type 0 languages are recognized by DFAs.", 
+"true": "Type 0 languages are recognized by Turing machines."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut39"]
+script = ExtResource("1_7hrog")
+id = "AUT39"
+term = "Type 1 Languages"
+keyword = "context-sensitive"
+definition = "Languages generated by context-sensitive grammars, recognized by linear bounded automata."
+simple_terms = "Context-dependent rules"
+examples = ["L = {a^n b^n c^n}", "Complex syntax", "Resource-limited computation"]
+accepted_terms = []
+difficulty = 3
+related_to = ["languages", "grammar", "theory"]
+tof_statement = {
+"false": "Type 1 languages are equivalent to regular languages.", 
+"true": "Type 1 languages require context for rules."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut40"]
+script = ExtResource("1_7hrog")
+id = "AUT40"
+term = "Type 2 Languages"
+keyword = "context-free"
+definition = "Languages generated by context-free grammars, recognized by pushdown automata."
+simple_terms = "Context-free grammars"
+examples = ["Programming languages", "Arithmetic expressions", "XML validation"]
+accepted_terms = ["CFL"]
+difficulty = 2
+related_to = ["languages", "grammar", "automata"]
+tof_statement = {
+"false": "Type 2 languages are recognized by DFAs.", 
+"true": "Type 2 languages are generated by CFGs."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut41"]
+script = ExtResource("1_7hrog")
+id = "AUT41"
+term = "Type 3 Languages"
+keyword = "regular"
+definition = "Languages generated by regular grammars, recognized by finite automata."
+simple_terms = "Regular expressions match these"
+examples = ["Simple patterns", "Keywords", "Lexical tokens"]
+accepted_terms = []
+difficulty = 1
+related_to = ["languages", "automata", "regex"]
+tof_statement = {
+"false": "Type 3 languages can represent all computations.", 
+"true": "Type 3 languages are the simplest formal languages."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut42"]
+script = ExtResource("1_7hrog")
+id = "AUT42"
+term = "Binary Trees"
+keyword = "two children"
+definition = "A tree data structure where each node has at most two children, referred to as left and right."
+simple_terms = "Trees with two branches"
+examples = ["Expression trees", "Binary search trees", "Heaps"]
+accepted_terms = []
+difficulty = 1
+related_to = ["data structures", "trees", "algorithms"]
+tof_statement = {
+"false": "Binary trees can have unlimited children per node.", 
+"true": "Binary trees have a maximum of two children per node."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut43"]
+script = ExtResource("1_7hrog")
+id = "AUT43"
+term = "Regex Character Classes"
+keyword = "sets"
+definition = "Special sequences in regex that match any one of a set of characters."
+simple_terms = "Matching any of several characters"
+examples = ["[abc]", "[0-9]", "[^xyz]"]
+accepted_terms = []
+difficulty = 1
+related_to = ["regex", "patterns", "languages"]
+tof_statement = {
+"false": "Character classes match an entire string.", 
+"true": "Character classes match one character from a specified set."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut44"]
+script = ExtResource("1_7hrog")
+id = "AUT44"
+term = "Regex Alternation"
+keyword = "or"
+definition = "The pipe symbol '|' in regex, matching either the expression before or the expression after it."
+simple_terms = "Matching one pattern or another"
+examples = ["a|b", "cat|dog", "yes|no"]
+accepted_terms = []
+difficulty = 1
+related_to = ["regex", "patterns", "logic"]
+tof_statement = {
+"false": "Alternation provides 'AND' logic in regex.", 
+"true": "Alternation provides 'OR' logic in regex."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut45"]
+script = ExtResource("1_7hrog")
+id = "AUT45"
+term = "Set Complement"
+keyword = "everything else"
+definition = "The set of all elements in the universal set that are not in a given set."
+simple_terms = "All elements not in a set"
+examples = ["Universal set minus A", "Outside the set", "Complement of A"]
+accepted_terms = []
+difficulty = 1
+related_to = ["mathematics", "logic", "set theory"]
+tof_statement = {
+"false": "Complement includes only elements within the set.", 
+"true": "Complement includes elements outside the set."
+}
+type_of_information = ["definition", "defined", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut46"]
+script = ExtResource("1_7hrog")
+id = "AUT46"
+term = "Cartesian Product"
+keyword = "pairs"
+definition = "The set of all ordered pairs (a, b) where 'a' is from set A and 'b' is from set B."
+simple_terms = "All possible ordered pairs"
+examples = ["A x B", "Coordinate pairs", "Combinations"]
+accepted_terms = []
+difficulty = 2
+related_to = ["mathematics", "logic", "set theory"]
+tof_statement = {
+"false": "Cartesian product forms sets of unordered pairs.", 
+"true": "Cartesian product forms ordered pairs."
+}
+type_of_information = ["definition", "defined", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut47"]
+script = ExtResource("1_7hrog")
+id = "AUT47"
+term = "DFA Minimization"
+keyword = "fewer states"
+definition = "The process of finding the DFA with the minimum number of states equivalent to a given DFA."
+simple_terms = "Simplifying a DFA"
+examples = ["State merging", "Equivalent states", "Optimal automaton"]
+accepted_terms = []
+difficulty = 2
+related_to = ["automata", "computation", "optimization"]
+tof_statement = {
+"false": "Minimization increases the number of states.", 
+"true": "Minimization reduces the number of states in a DFA."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut48"]
+script = ExtResource("1_7hrog")
+id = "AUT48"
+term = "NFA Acceptance"
+keyword = "path"
+definition = "An NFA accepts a string if there exists at least one path from start to a final state on that string."
+simple_terms = "Any valid path leads to acceptance"
+examples = ["Multiple paths", "Accepting states", "Possible computation"]
+accepted_terms = []
+difficulty = 2
+related_to = ["automata", "computation", "languages"]
+tof_statement = {
+"false": "NFA acceptance requires all paths to succeed.", 
+"true": "NFA acceptance requires at least one successful path."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut49"]
+script = ExtResource("1_7hrog")
+id = "AUT49"
+term = "Turing Machine States"
+keyword = "configurations"
+definition = "A finite set of configurations the machine can be in, dictating its behavior."
+simple_terms = "Internal memory states"
+examples = ["Start state", "Accept state", "Reject state"]
+accepted_terms = []
+difficulty = 1
+related_to = ["computation", "automata", "theory"]
+tof_statement = {
+"false": "States are the same as tape symbols.", 
+"true": "States control the TM's transitions."
+}
+type_of_information = ["definition", "explain", "defined"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_aut50"]
+script = ExtResource("1_7hrog")
+id = "AUT50"
+term = "Regex Anchors"
+keyword = "position"
+definition = "Metacharacters that assert a position within the string, like the start or end."
+simple_terms = "Matching positions in text"
+examples = ["^ (start)", "$ (end)", "\\b (word boundary)"]
+accepted_terms = []
+difficulty = 1
+related_to = ["regex", "patterns", "languages"]
+tof_statement = {
+"false": "Anchors match specific characters like 'a' or 'b'.", 
+"true": "Anchors match positions, not characters."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Automata Theory, Set Theory, DFAS, NFAS, Turning Machines, CFG, Pumping Lemma, Chomsky, Turing Machine, Languages and Trees, Regex"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_aut01"), SubResource("Resource_aut02"), SubResource("Resource_aut03"), SubResource("Resource_aut04"), SubResource("Resource_aut05"), SubResource("Resource_aut06"), SubResource("Resource_aut07"), SubResource("Resource_aut08"), SubResource("Resource_aut09"), SubResource("Resource_aut10"), SubResource("Resource_aut11"), SubResource("Resource_aut12"), SubResource("Resource_aut13"), SubResource("Resource_aut14"), SubResource("Resource_aut15"), SubResource("Resource_aut16"), SubResource("Resource_aut17"), SubResource("Resource_aut18"), SubResource("Resource_aut19"), SubResource("Resource_aut20"), SubResource("Resource_aut21"), SubResource("Resource_aut22"), SubResource("Resource_aut23"), SubResource("Resource_aut24"), SubResource("Resource_aut25"), SubResource("Resource_aut26"), SubResource("Resource_aut27"), SubResource("Resource_aut28"), SubResource("Resource_aut29"), SubResource("Resource_aut30"), SubResource("Resource_aut31"), SubResource("Resource_aut32"), SubResource("Resource_aut33"), SubResource("Resource_aut34"), SubResource("Resource_aut35"), SubResource("Resource_aut36"), SubResource("Resource_aut37"), SubResource("Resource_aut38"), SubResource("Resource_aut39"), SubResource("Resource_aut40"), SubResource("Resource_aut41"), SubResource("Resource_aut42"), SubResource("Resource_aut43"), SubResource("Resource_aut44"), SubResource("Resource_aut45"), SubResource("Resource_aut46"), SubResource("Resource_aut47"), SubResource("Resource_aut48"), SubResource("Resource_aut49"), SubResource("Resource_aut50")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"

@@ -1,0 +1,1090 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=62 format=3 uid="uid://moo0e1k2h0ilr"]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("1_7hrog")
+id = "1"
+term = "Distributed System"
+keyword = "Distributed System"
+definition = "A distributed system is a collection of independent computers that appear to its users as a single coherent system."
+simple_terms = "Computers working together like one."
+examples = ["The internet", "Cloud computing platforms", "Peer-to-peer networks"]
+accepted_terms = ["Distributed Computing System"]
+difficulty = 1
+related_to = ["Concurrency", "Scalability", "Fault Tolerance"]
+tof_statement = {
+"false": "A distributed system is a single computer with multiple processors.", 
+"true": "A distributed system relies on multiple independent computers communicating over a network."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("1_7hrog")
+id = "2"
+term = "Resource Sharing"
+keyword = "Resource Sharing"
+definition = "The ability of a distributed system to allow multiple users or components to access and utilize shared resources, such as hardware, software, or data."
+simple_terms = "Letting many people use the same stuff."
+examples = ["Shared printers in an office", "Cloud storage for files", "Distributed databases"]
+accepted_terms = []
+difficulty = 1
+related_to = ["Distributed System", "Scalability"]
+tof_statement = {
+"false": "Resource sharing requires all users to be in the same physical location.", 
+"true": "Resource sharing is a key benefit of distributed systems, allowing efficient use of hardware and sof"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("1_7hrog")
+id = "3"
+term = "Openness"
+keyword = "Openness"
+definition = "The ability of a distributed system to be extended and modified, allowing new services and components to be added easily."
+simple_terms = "Easy to add new features."
+examples = ["Adding new plugins to a software", "Integrating third-party services", "Modular software design"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Distributed System", "Scalability"]
+tof_statement = {
+"false": "Openness in a distributed system means it is accessible to anyone on the internet.", 
+"true": "An open distributed system can easily incorporate new functionalities and services."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("1_7hrog")
+id = "4"
+term = "Concurrency"
+keyword = "Concurrency"
+definition = "The ability of a distributed system to handle multiple tasks or processes executing simultaneously."
+simple_terms = "Doing many things at once."
+examples = ["Multiple users accessing a website", "Parallel processing in a supercomputer", "Handling multiple requests on a server"]
+accepted_terms = []
+difficulty = 1
+related_to = ["Distributed System", "Scalability", "Threads"]
+tof_statement = {
+"false": "Concurrency means tasks are executed in a strict sequential order.", 
+"true": "Concurrency allows a distributed system to process multiple operations at the same time."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("1_7hrog")
+id = "5"
+term = "Scalability"
+keyword = "Scalability"
+definition = "The ability of a distributed system to handle increasing amounts of work by adding resources."
+simple_terms = "Can handle more work by adding more."
+examples = ["Adding more servers to a web application", "Increasing database capacity", "Horizontal scaling of services"]
+accepted_terms = []
+difficulty = 1
+related_to = ["Distributed System", "Concurrency", "Resource Sharing"]
+tof_statement = {
+"false": "Scalable systems can only handle a fixed amount of load.", 
+"true": "Scalable systems can handle growth by adding more resources like servers or storage."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("1_7hrog")
+id = "6"
+term = "Fault Tolerance"
+keyword = "Fault Tolerance"
+definition = "The ability of a distributed system to continue operating correctly even if some of its components fail."
+simple_terms = "Keeps working even if parts break."
+examples = ["Redundant servers", "Data replication", "Failover mechanisms"]
+accepted_terms = []
+difficulty = 1
+related_to = ["Distributed System", "Redundancy"]
+tof_statement = {
+"false": "Fault tolerance means the system will never experience any failures.", 
+"true": "Fault tolerance ensures a distributed system can withstand component failures."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("1_7hrog")
+id = "7"
+term = "Transparency"
+keyword = "Transparency"
+definition = "The property of a distributed system that hides the complexity of distribution from users, making it appear as a single system."
+simple_terms = "Hides the complexity of multiple computers."
+examples = ["Location transparency", "Access transparency", "Failure transparency"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Distributed System", "Middleware"]
+tof_statement = {
+"false": "Transparency means all internal workings of the system are visible to the user.", 
+"true": "Transparency aims to make a distributed system look and feel like a single, non-distributed system."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("1_7hrog")
+id = "8"
+term = "Component"
+keyword = "Component"
+definition = "A modular unit within a distributed system with well-defined interfaces, which can be replaced or reused."
+simple_terms = "A building block with clear connections."
+examples = ["A user authentication module", "A database service", "A payment processing module"]
+accepted_terms = []
+difficulty = 1
+related_to = ["Distributed System Architecture", "Modularity"]
+tof_statement = {
+"false": "Components in a distributed system are tightly coupled and cannot be replaced.", 
+"true": "Components in a distributed system are self-contained units with defined interfaces."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("1_7hrog")
+id = "9"
+term = "Connector"
+keyword = "Connector"
+definition = "A communication link or mechanism that connects components in a distributed system, mediating coordination or cooperation."
+simple_terms = "The way parts talk to each other."
+examples = ["RPC calls", "Message queues", "Network sockets"]
+accepted_terms = []
+difficulty = 1
+related_to = ["Distributed System Architecture", "Communication"]
+tof_statement = {
+"false": "Connectors are used to store data within components.", 
+"true": "Connectors facilitate communication and interaction between components in a distributed system."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("1_7hrog")
+id = "10"
+term = "Architectural Styles"
+keyword = "Architectural Styles"
+definition = "Different ways of organizing components and connectors in a distributed system to achieve specific goals."
+simple_terms = "Different blueprints for systems."
+examples = ["Layered Architecture", "Object-Based Architecture", "Event-Based Architecture"]
+accepted_terms = ["Architectural Patterns"]
+difficulty = 2
+related_to = ["Distributed System Architecture"]
+tof_statement = {
+"false": "Architectural styles are only relevant for the user interface design.", 
+"true": "Architectural styles define the fundamental structure and organization of a distributed system."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("1_7hrog")
+id = "11"
+term = "Layered Architecture"
+keyword = "Layered Architecture"
+definition = "An architectural style where components are organized into horizontal layers, with each layer providing services to the layer above it."
+simple_terms = "System organized in stacked levels."
+examples = ["OSI Model", "Client-Server Architecture (often layered)", "Three-tier architecture"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Architectural Styles", "OSI Model"]
+tof_statement = {
+"false": "Layered architecture allows components in any layer to directly communicate with each other.", 
+"true": "In a layered architecture, components are arranged in distinct layers, with dependencies flowing dow"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("1_7hrog")
+id = "12"
+term = "Object-Based Architecture"
+keyword = "Object-Based Architecture"
+definition = "An architectural style where components are based on objects, which encapsulate data and behavior, and interact through method calls."
+simple_terms = "System built using interconnected objects."
+examples = ["CORBA", "Java RMI", "Distributed object systems"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Architectural Styles", "RPC"]
+tof_statement = {
+"false": "Object-based architecture relies on global data structures accessible by all components.", 
+"true": "Object-based architecture uses objects as the fundamental building blocks for system components."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_13"]
+script = ExtResource("1_7hrog")
+id = "13"
+term = "Data-Centered Architecture"
+keyword = "Data-Centered Architecture"
+definition = "An architectural style where components interact primarily through a shared data repository or data space."
+simple_terms = "System focused on a central data store."
+examples = ["Shared database systems", "Tuple spaces", "Content management systems"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Architectural Styles", "Shared Data"]
+tof_statement = {
+"false": "Data-centered architecture involves direct communication between all components.", 
+"true": "In a data-centered architecture, components communicate by reading from and writing to a common data"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_14"]
+script = ExtResource("1_7hrog")
+id = "14"
+term = "Event-Centered Architecture"
+keyword = "Event-Centered Architecture"
+definition = "An architectural style where components communicate by reacting to events, often using a publish-subscribe mechanism."
+simple_terms = "System reacting to occurrences."
+examples = ["Publish-subscribe systems", "Message queues", "Event-driven architectures"]
+accepted_terms = ["Event-Driven Architecture"]
+difficulty = 2
+related_to = ["Architectural Styles", "Message-Oriented Communication"]
+tof_statement = {
+"false": "Event-centered architectures require components to poll for updates constantly.", 
+"true": "Event-centered architectures use events as the primary means of communication between components."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_15"]
+script = ExtResource("1_7hrog")
+id = "15"
+term = "Hybrid Architecture"
+keyword = "Hybrid Architecture"
+definition = "An architectural style that combines elements from multiple other architectural styles to leverage their respective strengths."
+simple_terms = "Mixing different system designs."
+examples = ["Microservices combined with a monolithic core", "Client-server with peer-to-peer elements", "Layered architecture with event-driven components"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Architectural Styles"]
+tof_statement = {
+"false": "A hybrid architecture is a single, unified design with no borrowed elements.", 
+"true": "A hybrid architecture integrates features from different architectural styles."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_16"]
+script = ExtResource("1_7hrog")
+id = "16"
+term = "Client Server Architecture"
+keyword = "Client Server Architecture"
+definition = "A distributed system architecture where clients request services from servers, which provide those services."
+simple_terms = "One asks, the other answers."
+examples = ["Web browsing (browser client, web server)", "Email (email client, email server)", "Database access (application client, database server)"]
+accepted_terms = ["Client-Server Model"]
+difficulty = 1
+related_to = ["Architectural Styles", "Distributed System"]
+tof_statement = {
+"false": "In a client-server architecture, servers initiate all communication with clients.", 
+"true": "In a client-server architecture, clients initiate requests and servers fulfill them."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_17"]
+script = ExtResource("1_7hrog")
+id = "17"
+term = "Peer-to-Peer P2P Architecture"
+keyword = "Peer-to-Peer (P2P) Architecture"
+definition = "A distributed system architecture where each node acts as both a client and a server, sharing resources directly with other nodes."
+simple_terms = "Everyone is both a client and server."
+examples = ["File sharing networks (e.g., BitTorrent)", "Cryptocurrencies (e.g., Bitcoin)", "Some communication apps"]
+accepted_terms = ["P2P Architecture"]
+difficulty = 2
+related_to = ["Architectural Styles", "Distributed System"]
+tof_statement = {
+"false": "P2P architecture requires a central server to manage all interactions.", 
+"true": "In a P2P architecture, nodes have equal roles and can both request and provide services."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_18"]
+script = ExtResource("1_7hrog")
+id = "18"
+term = "Service-Oriented Architecture SOA"
+keyword = "Service-Oriented Architecture (SOA)"
+definition = "An architectural paradigm where software components are designed as reusable services that communicate over a network using standardized protocols."
+simple_terms = "System built from independent, reusable services."
+examples = ["Enterprise Resource Planning (ERP) systems", "Customer Relationship Management (CRM) systems", "Web services integration"]
+accepted_terms = ["SOA"]
+difficulty = 3
+related_to = ["Architectural Styles", "Microservices Architecture"]
+tof_statement = {
+"false": "SOA requires all services to be deployed on a single machine.", 
+"true": "SOA focuses on building systems from loosely coupled, interoperable services."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_19"]
+script = ExtResource("1_7hrog")
+id = "19"
+term = "Microservices Architecture"
+keyword = "Microservices Architecture"
+definition = "An architectural style that structures an application as a collection of small, independent, and loosely coupled services, each focused on a specific business capability."
+simple_terms = "App built from many tiny, independent services."
+examples = ["Netflix streaming platform", "Amazon e-commerce platform", "Uber ride-sharing app"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Architectural Styles", "Service-Oriented Architecture (SOA)"]
+tof_statement = {
+"false": "Microservices architecture builds applications as a single, large unit.", 
+"true": "Microservices architecture breaks down applications into small, independently deployable services."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_20"]
+script = ExtResource("1_7hrog")
+id = "20"
+term = "Node"
+keyword = "Node"
+definition = "An individual computer or server that is part of a distributed system."
+simple_terms = "A single computer in the network."
+examples = ["A web server", "A database server", "A client machine"]
+accepted_terms = []
+difficulty = 1
+related_to = ["Distributed System", "Network"]
+tof_statement = {
+"false": "A node must always be a physical server.", 
+"true": "A node is a fundamental processing unit within a distributed system."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_21"]
+script = ExtResource("1_7hrog")
+id = "21"
+term = "Network"
+keyword = "Network"
+definition = "The communication infrastructure that connects nodes in a distributed system, enabling the exchange of data and information."
+simple_terms = "The connections between computers."
+examples = ["The Internet", "Local Area Network (LAN)", "Wide Area Network (WAN)"]
+accepted_terms = []
+difficulty = 1
+related_to = ["Distributed System", "Node"]
+tof_statement = {
+"false": "Networks are only used for transferring files between computers.", 
+"true": "Networks are essential for enabling communication between nodes in a distributed system."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_22"]
+script = ExtResource("1_7hrog")
+id = "22"
+term = "Middleware"
+keyword = "Middleware"
+definition = "Software that acts as an intermediary between operating systems and applications, providing services like communication, data management, and messaging."
+simple_terms = "Software that connects other software."
+examples = ["Message Queuing Systems (MQS)", "Remote Procedure Call (RPC) frameworks", "Object Request Brokers (ORBs)"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Distributed System", "Communication", "Transparency"]
+tof_statement = {
+"false": "Middleware is the operating system itself.", 
+"true": "Middleware simplifies distributed system development by providing common services."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_23"]
+script = ExtResource("1_7hrog")
+id = "23"
+term = "Shared Data"
+keyword = "Shared Data"
+definition = "Data that is accessible and can be managed by multiple nodes in a distributed system, often distributed across nodes or replicated."
+simple_terms = "Data accessible by multiple computers."
+examples = ["Distributed databases", "Shared file systems", "Data caches"]
+accepted_terms = []
+difficulty = 1
+related_to = ["Distributed System", "Data-Centered Architecture"]
+tof_statement = {
+"false": "Shared data is always stored on a single central server.", 
+"true": "Shared data in distributed systems can be stored in various ways, such as replication or partitionin"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_24"]
+script = ExtResource("1_7hrog")
+id = "24"
+term = "Distributed Algorithms"
+keyword = "Distributed Algorithms"
+definition = "Algorithms designed to run on multiple nodes in a distributed system, coordinating their actions to achieve a common goal."
+simple_terms = "Instructions for multiple computers to follow together."
+examples = ["Consensus algorithms (e.g., Paxos, Raft)", "Leader election algorithms", "Distributed sorting algorithms"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Distributed System", "Concurrency", "Fault Tolerance"]
+tof_statement = {
+"false": "Distributed algorithms are only used for single-machine computations.", 
+"true": "Distributed algorithms are crucial for coordinating activities among nodes in a distributed system."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_25"]
+script = ExtResource("1_7hrog")
+id = "25"
+term = "System Management Tools"
+keyword = "System Management Tools"
+definition = "Software tools used to monitor, manage, and troubleshoot distributed systems, providing functions like load balancing and configuration."
+simple_terms = "Tools to keep the system running smoothly."
+examples = ["Monitoring dashboards", "Configuration management tools", "Load balancers"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Distributed System", "Scalability", "Fault Tolerance"]
+tof_statement = {
+"false": "System management tools are only for single-computer systems.", 
+"true": "System management tools are essential for maintaining the health and performance of distributed syst"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_26"]
+script = ExtResource("1_7hrog")
+id = "26"
+term = "Process"
+keyword = "Process"
+definition = "A program in execution, with its own memory space and resources, managed by the operating system."
+simple_terms = "A running program."
+examples = ["A web browser instance", "A word processor application", "A background service"]
+accepted_terms = []
+difficulty = 1
+related_to = ["Threads", "Operating System"]
+tof_statement = {
+"false": "A process is the program code itself, before it is run.", 
+"true": "A process is an instance of a program that is currently being executed."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_27"]
+script = ExtResource("1_7hrog")
+id = "27"
+term = "Thread"
+keyword = "Thread"
+definition = "A lightweight unit of execution within a process that shares the process's resources but has its own execution path."
+simple_terms = "A part of a running program that does a task."
+examples = ["A UI thread in a graphical application", "A network handling thread", "A background worker thread"]
+accepted_terms = []
+difficulty = 1
+related_to = ["Process", "Concurrency"]
+tof_statement = {
+"false": "Each thread requires its own separate memory space.", 
+"true": "Threads allow a single process to perform multiple tasks concurrently."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_28"]
+script = ExtResource("1_7hrog")
+id = "28"
+term = "Inter-Process Communication IPC"
+keyword = "Inter-Process Communication (IPC)"
+definition = "Mechanisms that allow different processes to communicate and exchange data with each other."
+simple_terms = "How different running programs talk."
+examples = ["Pipes", "Shared memory", "Message queues"]
+accepted_terms = ["IPC"]
+difficulty = 2
+related_to = ["Process", "Thread", "Communication"]
+tof_statement = {
+"false": "IPC is only used when processes are running on different machines.", 
+"true": "IPC is necessary for processes to share information when they cannot directly access each other's me"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_29"]
+script = ExtResource("1_7hrog")
+id = "29"
+term = "Context Switch"
+keyword = "Context Switch"
+definition = "The process of saving the state of a currently running process or thread and restoring the state of another to allow it to execute."
+simple_terms = "Switching the CPU's attention to a different task."
+examples = ["Switching between applications", "Switching between threads", "Interrupt handling"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Process", "Thread", "Concurrency"]
+tof_statement = {
+"false": "Context switches are only performed between different physical CPUs.", 
+"true": "A context switch is required when the CPU needs to stop executing one task and start executing anoth"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_30"]
+script = ExtResource("1_7hrog")
+id = "30"
+term = "User-Level Threads"
+keyword = "User-Level Threads"
+definition = "Threads managed entirely by a library at the application level, unknown to the operating system kernel."
+simple_terms = "Threads managed by the program itself."
+examples = ["Many older threading libraries", "Green threads", "User-Level Threads"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Thread", "Kernel-Level Threads"]
+tof_statement = {
+"false": "User-level threads are managed directly by the OS kernel for efficiency.", 
+"true": "User-level threads offer fast switching but can cause the entire process to block if one thread make"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_31"]
+script = ExtResource("1_7hrog")
+id = "31"
+term = "Kernel-Level Threads"
+keyword = "Kernel-Level Threads"
+definition = "Threads managed directly by the operating system kernel, allowing for better scheduling and handling of blocking calls."
+simple_terms = "Threads managed by the operating system."
+examples = ["Modern operating system threads (e.g., Linux, Windows)", "Many programming language thread implementations", "Kernel-Level Threads"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Thread", "User-Level Threads"]
+tof_statement = {
+"false": "Kernel-level threads are faster to switch between than user-level threads.", 
+"true": "Kernel-level threads allow the OS to schedule other threads from the same process if one thread bloc"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_32"]
+script = ExtResource("1_7hrog")
+id = "32"
+term = "Hybrid Thread Model"
+keyword = "Hybrid Thread Model"
+definition = "A thread management model that combines user-level and kernel-level threads, often multiplexing many user threads onto fewer kernel threads."
+simple_terms = "A mix of program-managed and OS-managed threads."
+examples = ["Many-to-many threading model", "Lightweight Processes (LWP)", "Hybrid Thread Model"]
+accepted_terms = ["Lightweight Processes"]
+difficulty = 3
+related_to = ["Thread", "User-Level Threads", "Kernel-Level Threads"]
+tof_statement = {
+"false": "The hybrid thread model only uses user-level threads.", 
+"true": "The hybrid thread model aims to balance the advantages of user-level and kernel-level threading."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_33"]
+script = ExtResource("1_7hrog")
+id = "33"
+term = "Thread Pool"
+keyword = "Thread Pool"
+definition = "A collection of pre-created threads ready to execute tasks, used to improve performance by avoiding the overhead of creating and destroying threads for each request."
+simple_terms = "A ready group of threads for tasks."
+examples = ["Web server thread pools", "Database connection pools", "Task execution pools"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Thread", "Scalability"]
+tof_statement = {
+"false": "Thread pools create a new thread for every single request to ensure maximum parallelism.", 
+"true": "Thread pools reduce overhead by reusing existing threads instead of creating new ones for every task"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_34"]
+script = ExtResource("1_7hrog")
+id = "34"
+term = "Naming in Distributed Systems"
+keyword = "Naming"
+definition = "The process of assigning unique names to entities in a distributed system to facilitate identification, location, and resource sharing."
+simple_terms = "Giving unique names to things in a network."
+examples = ["Domain Name System (DNS)", "Uniform Resource Locators (URLs)", "File paths"]
+accepted_terms = ["Distributed Naming"]
+difficulty = 2
+related_to = ["Distributed System", "Name Resolution"]
+tof_statement = {
+"false": "Naming is only relevant for user interfaces and not for system operations.", 
+"true": "Naming is crucial for uniquely identifying and locating resources in distributed systems."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_35"]
+script = ExtResource("1_7hrog")
+id = "35"
+term = "Name Resolution"
+keyword = "Name Resolution"
+definition = "The process of translating a name into a specific entity or address in a distributed system."
+simple_terms = "Finding where something is based on its name."
+examples = ["DNS lookup", "Resolving a hostname to an IP address", "Finding a file by its path"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Naming in Distributed Systems", "Distributed System"]
+tof_statement = {
+"false": "Name resolution is the process of creating new names for entities.", 
+"true": "Name resolution is the core function of any naming system, mapping names to entities."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_36"]
+script = ExtResource("1_7hrog")
+id = "36"
+term = "Location Independence"
+keyword = "Location Independence"
+definition = "The ability for names in a distributed system to refer to entities regardless of their physical location, allowing entities to move without breaking references."
+simple_terms = "Names work even if the thing moves."
+examples = ["Using a hostname instead of an IP address", "Cloud object storage references", "Mobile device identification"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Naming in Distributed Systems", "Transparency"]
+tof_statement = {
+"false": "Location independence means all entities are located in the same physical place.", 
+"true": "Location independence ensures that references to entities remain valid even if their network address"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_37"]
+script = ExtResource("1_7hrog")
+id = "37"
+term = "True Identifiers"
+keyword = "True Identifiers"
+definition = "Unambiguous identifiers in a distributed system that uniquely refer to at most one entity and are never reused."
+simple_terms = "Unique, never-reused IDs."
+examples = ["Universally Unique Identifiers (UUIDs)", "Globally Unique Identifiers (GUIDs)", "Unique database primary keys"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Naming in Distributed Systems", "Security"]
+tof_statement = {
+"false": "True identifiers can be reused after an entity is deleted.", 
+"true": "True identifiers guarantee uniqueness and prevent ambiguity in identifying entities."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_38"]
+script = ExtResource("1_7hrog")
+id = "38"
+term = "Flat Naming"
+keyword = "Flat Naming"
+definition = "A naming scheme where entities are referred to by identifiers with no inherent meaning or structure, requiring special routing mechanisms."
+simple_terms = "Names with no meaning or order."
+examples = ["Chord protocol identifiers", "Some peer-to-peer network IDs", "Broadcasting identifiers"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Naming in Distributed Systems", "Distributed Hash Tables (DHTs)"]
+tof_statement = {
+"false": "Flat naming organizes entities in a hierarchical tree structure.", 
+"true": "Flat naming uses unstructured identifiers and relies on routing mechanisms to locate entities."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_39"]
+script = ExtResource("1_7hrog")
+id = "39"
+term = "Structured Naming"
+keyword = "Structured Naming"
+definition = "A naming scheme that organizes names into a hierarchical structure, often resembling a tree, with readable path names."
+simple_terms = "Names organized like a file system."
+examples = ["Domain Name System (DNS)", "File system paths", "LDAP directories"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Naming in Distributed Systems", "Name Resolution"]
+tof_statement = {
+"false": "Structured naming uses random, meaningless identifiers.", 
+"true": "Structured naming uses hierarchical organization, making names more human-readable and easier to res"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_40"]
+script = ExtResource("1_7hrog")
+id = "40"
+term = "Attribute-Based Naming"
+keyword = "Attribute-Based Naming"
+definition = "A naming scheme where resources are looked up by evaluating (attribute, value) pairs rather than single distinct names."
+simple_terms = "Finding things by describing them."
+examples = ["Searching for files by date and size", "LDAP queries", "Resource Description Framework (RDF)"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Naming in Distributed Systems", "Descriptive Lookup"]
+tof_statement = {
+"false": "Attribute-based naming uses unique identifiers for each resource.", 
+"true": "Attribute-based naming allows searching for resources based on their characteristics."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_41"]
+script = ExtResource("1_7hrog")
+id = "41"
+term = "Message-Oriented Communication"
+keyword = "Message-Oriented Communication"
+definition = "A communication paradigm where processes exchange information by sending and receiving discrete messages, often asynchronously."
+simple_terms = "Talking by sending messages."
+examples = ["Message Queuing Systems (MQS)", "AMQP", "Publish-subscribe systems"]
+accepted_terms = ["MOM"]
+difficulty = 2
+related_to = ["Communication", "Middleware", "Asynchronous Processing"]
+tof_statement = {
+"false": "Message-oriented communication requires senders and receivers to be active simultaneously.", 
+"true": "Message-oriented communication decouples senders and receivers in time and space."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_42"]
+script = ExtResource("1_7hrog")
+id = "42"
+term = "Transient Messaging"
+keyword = "Transient Messaging"
+definition = "A form of message-oriented communication where messages are lost if the recipient is offline or fails, typically used for direct, high-speed communication."
+simple_terms = "Messages that disappear if not received immediately."
+examples = ["Sockets", "Message-Passing Interface (MPI)", "Transient Messaging"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Message-Oriented Communication", "Fault Tolerance"]
+tof_statement = {
+"false": "Transient messaging guarantees message delivery even if the recipient is offline.", 
+"true": "Transient messaging prioritizes speed over reliability, as messages may be lost."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_43"]
+script = ExtResource("1_7hrog")
+id = "43"
+term = "Persistent Messaging"
+keyword = "Persistent Messaging"
+definition = "A form of message-oriented communication where messages are stored in queues until they can be delivered, ensuring reliability even if recipients are temporarily unavailable."
+simple_terms = "Messages that are saved until delivered."
+examples = ["Message Queuing Systems (MQS)", "AMQP", "IBM WebSphere MQ"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Message-Oriented Communication", "Fault Tolerance"]
+tof_statement = {
+"false": "Persistent messaging is as fast as transient messaging.", 
+"true": "Persistent messaging ensures message delivery by storing messages in queues until they are received."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_44"]
+script = ExtResource("1_7hrog")
+id = "44"
+term = "Stream-Oriented Communication"
+keyword = "Stream-Oriented Communication"
+definition = "A communication method designed for continuous data flow, used for real-time data like audio and video, where timing and synchronization are critical."
+simple_terms = "Continuous flow of data, like a video stream."
+examples = ["Video streaming", "Audio conferencing", "Real-time data feeds"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Communication", "Quality of Service (QoS)"]
+tof_statement = {
+"false": "Stream-oriented communication is best for sending discrete, small messages.", 
+"true": "Stream-oriented communication is suitable for continuous data transfer where timing is crucial."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_45"]
+script = ExtResource("1_7hrog")
+id = "45"
+term = "Multicast Communication"
+keyword = "Multicast Communication"
+definition = "A communication method where a single sender transmits data to multiple receivers simultaneously."
+simple_terms = "Sending one message to many people at once."
+examples = ["Live video broadcasting", "Stock market data distribution", "Online gaming updates"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Communication", "Application-Level Multicast (ALM)"]
+tof_statement = {
+"false": "Multicast communication requires a separate message to be sent to each receiver.", 
+"true": "Multicast communication allows efficient one-to-many data dissemination."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_46"]
+script = ExtResource("1_7hrog")
+id = "46"
+term = "Remote Procedure Call RPC"
+keyword = "Remote Procedure Call (RPC)"
+definition = "A communication protocol that allows a program on one computer to execute a procedure or function on another computer as if it were a local call."
+simple_terms = "Calling a function on another computer."
+examples = ["gRPC", "Java RMI", "SOAP (historically)"]
+accepted_terms = ["RPC"]
+difficulty = 2
+related_to = ["Communication", "Middleware", "Client Server Architecture"]
+tof_statement = {
+"false": "RPC requires the client and server to be written in the same programming language.", 
+"true": "RPC enables programs to invoke procedures on remote machines seamlessly."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_47"]
+script = ExtResource("1_7hrog")
+id = "47"
+term = "Client Stub"
+keyword = "Client Stub"
+definition = "A piece of code on the client side that acts as a proxy for the remote procedure, handling parameter packing and unpacking for RPC."
+simple_terms = "Client's helper for remote calls."
+examples = ["Generated code by RPC tools", "Proxy objects in RMI", "Client Stub"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Remote Procedure Call (RPC)", "Client Server Architecture"]
+tof_statement = {
+"false": "The client stub is responsible for executing the remote procedure on the server.", 
+"true": "The client stub masks the complexity of network communication during RPC."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_48"]
+script = ExtResource("1_7hrog")
+id = "48"
+term = "Server Stub"
+keyword = "Server Stub"
+definition = "A piece of code on the server side that receives RPC requests, unpacks parameters, calls the actual procedure, and packs the results."
+simple_terms = "Server's helper for remote calls."
+examples = ["Generated code by RPC tools", "Skeleton code in RMI", "Server Stub"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Remote Procedure Call (RPC)", "Client Server Architecture"]
+tof_statement = {
+"false": "The server stub initiates the RPC request to the client.", 
+"true": "The server stub acts as an intermediary between the RPC runtime and the actual server procedure."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_49"]
+script = ExtResource("1_7hrog")
+id = "49"
+term = "RPC Runtime"
+keyword = "RPC Runtime"
+definition = "The core component of an RPC system responsible for message transmission, routing, and handling acknowledgements between client and server."
+simple_terms = "The engine that makes RPC work."
+examples = ["gRPC runtime library", "Java RMI runtime", "RPC Runtime"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Remote Procedure Call (RPC)", "Middleware"]
+tof_statement = {
+"false": "The RPC runtime only handles the packing and unpacking of parameters.", 
+"true": "The RPC runtime manages the underlying communication protocols for RPC calls."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_50"]
+script = ExtResource("1_7hrog")
+id = "50"
+term = "Synchronous RPC"
+keyword = "Synchronous RPC"
+definition = "An RPC communication pattern where the client waits for the server's response before continuing its own execution."
+simple_terms = "Client waits for server's answer."
+examples = ["Standard function calls", "Many traditional RPC implementations", "Synchronous RPC"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Remote Procedure Call (RPC)", "Asynchronous RPC"]
+tof_statement = {
+"false": "Synchronous RPC allows the client to continue execution immediately after sending a request.", 
+"true": "Synchronous RPC simplifies programming by mimicking local function calls, but can lead to blocking."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_51"]
+script = ExtResource("1_7hrog")
+id = "51"
+term = "Asynchronous RPC"
+keyword = "Asynchronous RPC"
+definition = "An RPC communication pattern where the client does not wait for the server's response and can continue its execution immediately after sending the request."
+simple_terms = "Client sends request and keeps working."
+examples = ["Non-blocking I/O operations", "Callback-based RPC frameworks", "Asynchronous RPC"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Remote Procedure Call (RPC)", "Synchronous RPC"]
+tof_statement = {
+"false": "Asynchronous RPC requires the client to handle responses in the same order they were sent.", 
+"true": "Asynchronous RPC improves responsiveness by allowing the client to perform other tasks while waiting"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_52"]
+script = ExtResource("1_7hrog")
+id = "52"
+term = "One-Way RPC"
+keyword = "One-Way RPC"
+definition = "A 'fire-and-forget' RPC pattern where the client sends a request but does not expect or wait for any response or acknowledgement."
+simple_terms = "Send and don't wait for reply."
+examples = ["Logging events", "Sending notifications", "Firewall rule updates"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Remote Procedure Call (RPC)", "Reliability"]
+tof_statement = {
+"false": "One-way RPC guarantees that the server has processed the request.", 
+"true": "One-way RPC offers maximum performance but lacks reliability as there is no confirmation of delivery"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_53"]
+script = ExtResource("1_7hrog")
+id = "53"
+term = "Layered Protocols"
+keyword = "Layered Protocols"
+definition = "A set of communication rules organized into layers, where each layer provides services to the layer above it and uses services from the layer below it."
+simple_terms = "Rules organized in stacked levels."
+examples = ["OSI Model", "TCP/IP model", "HTTP over TCP"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Communication", "OSI Model", "Middleware"]
+tof_statement = {
+"false": "Layered protocols require each layer to know the details of all other layers.", 
+"true": "Layered protocols simplify network communication by breaking it down into manageable layers."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_54"]
+script = ExtResource("1_7hrog")
+id = "54"
+term = "OSI Model"
+keyword = "OSI Model"
+definition = "A conceptual framework that standardizes the functions of a telecommunication or computing system in terms of seven layers of abstraction."
+simple_terms = "A 7-layer model for network communication."
+examples = ["Physical Layer", "Data Link Layer", "Network Layer"]
+accepted_terms = ["Open Systems Interconnection Model"]
+difficulty = 2
+related_to = ["Layered Protocols", "Communication"]
+tof_statement = {
+"false": "The OSI model is a physical implementation of network hardware.", 
+"true": "The OSI model provides a standardized way to understand and design network communication protocols."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_55"]
+script = ExtResource("1_7hrog")
+id = "55"
+term = "Transport Layer"
+keyword = "Transport Layer"
+definition = "The fourth layer of the OSI model, responsible for reliable end-to-end data transfer between applications, including ordering and error checking."
+simple_terms = "Ensures data arrives correctly."
+examples = ["TCP (Transmission Control Protocol)", "UDP (User Datagram Protocol)", "Transport Layer"]
+accepted_terms = ["Layer 4"]
+difficulty = 2
+related_to = ["OSI Model", "TCP", "UDP"]
+tof_statement = {
+"false": "The Transport Layer is responsible for the physical transmission of data over cables.", 
+"true": "The Transport Layer ensures reliable data delivery and manages the connection between applications."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_56"]
+script = ExtResource("1_7hrog")
+id = "56"
+term = "Application Layer"
+keyword = "Application Layer"
+definition = "The topmost layer (Layer 7) of the OSI model, where distributed applications reside and interact with the network."
+simple_terms = "Where applications use the network."
+examples = ["HTTP (Hypertext Transfer Protocol)", "FTP (File Transfer Protocol)", "SMTP (Simple Mail Transfer Protocol)"]
+accepted_terms = ["Layer 7"]
+difficulty = 1
+related_to = ["OSI Model", "Distributed System"]
+tof_statement = {
+"false": "The Application Layer is concerned with the physical transmission of data.", 
+"true": "The Application Layer provides network services directly to end-user applications."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_57"]
+script = ExtResource("1_7hrog")
+id = "57"
+term = "Middleware Gap"
+keyword = "Middleware Gap"
+definition = "The space between the Transport layer and the Application layer in modern distributed systems, where middleware services reside."
+simple_terms = "The space between transport and apps where middleware fits."
+examples = ["RPC services", "Naming services", "Security services"]
+accepted_terms = []
+difficulty = 3
+related_to = ["Middleware", "OSI Model", "Remote Procedure Call (RPC)"]
+tof_statement = {
+"false": "The 'middleware gap' refers to a physical deficiency in network cables.", 
+"true": "Middleware fills the gap in the OSI model to provide higher-level communication services for distrib"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_58"]
+script = ExtResource("1_7hrog")
+id = "58"
+term = "Naming Services"
+keyword = "Naming Services"
+definition = "Middleware services that provide a way to look up servers or resources by name rather than by their numerical IP address."
+simple_terms = "Services that find things by name."
+examples = ["Domain Name System (DNS)", "Service discovery tools", "Directory services"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Middleware", "Naming in Distributed Systems", "DNS"]
+tof_statement = {
+"false": "Naming services are only used for local network resources.", 
+"true": "Naming services abstract away the complexity of IP addresses by allowing users to use human-readable"
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_59"]
+script = ExtResource("1_7hrog")
+id = "59"
+term = "Security"
+keyword = "Security"
+definition = "In the context of middleware, refers to mechanisms like encryption that protect communication between nodes in a distributed system."
+simple_terms = "Protecting data in transit."
+examples = ["SSL/TLS encryption", "IPsec", "Secure communication protocols"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Middleware", "Distributed System", "Encryption"]
+tof_statement = {
+"false": "Security in middleware only applies to user authentication.", 
+"true": "Middleware security mechanisms protect data from unauthorized access during network transmission."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_60"]
+script = ExtResource("1_7hrog")
+id = "60"
+term = "Horizontal Scaling"
+keyword = "Horizontal Scaling"
+definition = "A method of scaling a system by adding more machines (nodes) to distribute the workload, rather than upgrading existing machines."
+simple_terms = "Adding more machines to handle load."
+examples = ["Adding more web servers behind a load balancer", "Distributing database read replicas", "Increasing the number of nodes in a cluster"]
+accepted_terms = []
+difficulty = 2
+related_to = ["Scalability", "Distributed System", "Load Balancing"]
+tof_statement = {
+"false": "Horizontal scaling involves upgrading individual components to be more powerful.", 
+"true": "Horizontal scaling increases capacity by adding more instances of existing components."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "Distributed Systems"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34"), SubResource("Resource_35"), SubResource("Resource_36"), SubResource("Resource_37"), SubResource("Resource_38"), SubResource("Resource_39"), SubResource("Resource_40"), SubResource("Resource_41"), SubResource("Resource_42"), SubResource("Resource_43"), SubResource("Resource_44"), SubResource("Resource_45"), SubResource("Resource_46"), SubResource("Resource_47"), SubResource("Resource_48"), SubResource("Resource_49"), SubResource("Resource_50"), SubResource("Resource_51"), SubResource("Resource_52"), SubResource("Resource_53"), SubResource("Resource_54"), SubResource("Resource_55"), SubResource("Resource_56"), SubResource("Resource_57"), SubResource("Resource_58"), SubResource("Resource_59"), SubResource("Resource_60")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"

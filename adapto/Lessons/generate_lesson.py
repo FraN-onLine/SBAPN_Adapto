@@ -39,7 +39,7 @@ SEED_EXAMPLES = [
 ]
 
 
-GEMINI_PROMPT_TEMPLATE = """Create exactly {count} lesson items about "{topic}" using this strict JSON schema and constraints.
+GEMINI_PROMPT_TEMPLATE = """Create exactly {count} x 2 lesson items about "{topic}" using this strict JSON schema and constraints.
 
 Return ONLY valid JSON that matches the schema exactly. Do NOT include markdown, commentary, or extra fields.
 
@@ -63,15 +63,15 @@ SCHEMA (JSON):
 }}
 
 STRICT RULES:
-1. `term` MUST be between 3 and 34 characters. No all-uppercase acronyms in `term` (if a concept is commonly an acronym, place it in `accepted_terms` instead).
+1. `term` MUST be between 3 and 34 characters. No all-uppercase acronyms in `term` (if a concept is commonly an acronym, place it in `accepted_terms` instead), do not append any form of acronym in the term.
 2. `definition` should be concise (aim 60-120 characters). Longer definitions are allowed up to 240 characters when necessary; avoid newlines or markdown.
-3. `simple_terms` 20-60 characters.
+3. `simple_terms` 20-60 characters. do not use the term itself.
 4. `examples` MUST contain exactly 3 items, each 5-25 chars.
-5. `accepted_terms` OPTIONAL, max 3 items; use only for acronyms/variants/synonyms.
+5. `accepted_terms` OPTIONAL, max 5 items; use only for acronyms/variants/synonyms/plurals/with or withour hyphen and the like.
 6. `type_of_information` MUST contain 3-5 items from: definition, explain, apply, list, defined.
 7. `related_to` should reuse the same 3-5 category tags across all items in this response.
 8. `id` should follow the ABC_01 numbering pattern (ABC = first 3 letters of the topic, uppercase).
-
+9. 'keyword' does not use the term itself.
 SEED STYLE EXAMPLES (follow tone/format):
 {seed_json}
 
@@ -388,7 +388,7 @@ if __name__ == "__main__":
         folder = folder_arg if folder_arg else pdf_name
 
         # Fixed type_of_information in prompt to request 3 distinct categories
-        pdf_prompt = f"""Analyze this PDF document and create {count} lesson items based on its content.
+        pdf_prompt = f"""Analyze this PDF document and create 60 or more lesson items (depending on how much possible content there is to create, create as much as possible, covering all bases) based on its content.
 Return ONLY valid JSON, no markdown fences.
 Schema:
 {{
@@ -416,6 +416,7 @@ Schema:
 Rules:
 - `term` must be 3-34 chars and use only letters, numbers, spaces, and hyphens.
 - Return a JSON object only.
+- terms must not have acronyms accompanying them or with parenthesis (acronyms), instead acronyms, plurals and other similar will be at accepted terms
 """
 
         body = {

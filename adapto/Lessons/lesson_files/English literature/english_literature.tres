@@ -1,0 +1,280 @@
+[gd_resource type="Resource" script_class="Lesson" load_steps=17 format=3 uid="uid://hnftgsx7mkmbj"]
+
+[ext_resource type="Script" uid="uid://dadne10e1geqd" path="res://Lessons/lesson_item.gd" id="1_7hrog"]
+[ext_resource type="Script" uid="uid://7kxviye2bk4p" path="res://Lessons/lesson.gd" id="2_bkryn"]
+
+[sub_resource type="Resource" id="Resource_eng_01"]
+script = ExtResource("1_7hrog")
+id = "ENG_01"
+term = "The Canterbury Tales"
+keyword = "pilgrimage"
+definition = "A collection of stories told by a group of pilgrims on their way to Canterbury Cathedral."
+simple_terms = "Medieval stories on a journey to a shrine."
+examples = ["General Prologue", "Wife of Bath's Tale", "Pardoner's Tale"]
+accepted_terms = ["Canterbury Tales"]
+difficulty = 1
+related_to = ["medieval", "narrative", "poetry", "prose"]
+tof_statement = {
+"false": "The Canterbury Tales are a single epic poem about a knight.", 
+"true": "The Canterbury Tales are a set of stories from a medieval pilgrimage."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_02"]
+script = ExtResource("1_7hrog")
+id = "ENG_02"
+term = "Shakespearean Sonnet"
+keyword = "poem"
+definition = "A poem of fourteen lines, typically in iambic pentameter, with a specific rhyme scheme."
+simple_terms = "14-line poem with rhyming pattern."
+examples = ["Sonnet 18", "Sonnet 116", "Sonnet 130"]
+accepted_terms = ["sonnet"]
+difficulty = 1
+related_to = ["poetry", "renaissance", "verse", "rhyme"]
+tof_statement = {
+"false": "A Shakespearean sonnet is a play with three acts.", 
+"true": "A Shakespearean sonnet has 14 lines and a specific rhyme scheme."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_03"]
+script = ExtResource("1_7hrog")
+id = "ENG_03"
+term = "Iambic Pentameter"
+keyword = "rhythm"
+definition = "A line of verse with five metrical feet, each consisting of one short (or unstressed) syllable followed by one long (or stressed) syllable."
+simple_terms = "Ten syllables per line, alternating unstressed/stressed."
+examples = ["da-DUM da-DUM da-DUM", "To be or not to be", "Shall I compare thee"]
+accepted_terms = []
+difficulty = 2
+related_to = ["poetry", "meter", "verse", "rhythm"]
+tof_statement = {
+"false": "Iambic pentameter is a type of prose writing style.", 
+"true": "Iambic pentameter has ten syllables with an alternating stress pattern."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_04"]
+script = ExtResource("1_7hrog")
+id = "ENG_04"
+term = "Gothic Literature"
+keyword = "dark"
+definition = "A genre characterized by mystery, horror, suspense, and supernatural elements, often set in desolate locations."
+simple_terms = "Scary stories with old castles and ghosts."
+examples = ["Frankenstein", "Dracula", "The Raven"]
+accepted_terms = ["Gothic novel"]
+difficulty = 1
+related_to = ["romanticism", "horror", "suspense", "genre"]
+tof_statement = {
+"false": "Gothic literature is always a comedy set in a modern city.", 
+"true": "Gothic literature often features dark settings and supernatural themes."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_05"]
+script = ExtResource("1_7hrog")
+id = "ENG_05"
+term = "Modernism"
+keyword = "change"
+definition = "A literary movement that rejected traditional forms and embraced experimentation in response to rapid societal changes."
+simple_terms = "New writing styles after WWI."
+examples = ["Ulysses", "The Waste Land", "Mrs. Dalloway"]
+accepted_terms = []
+difficulty = 2
+related_to = ["experimental", "prose", "poetry", "20th century"]
+tof_statement = {
+"false": "Modernism was a return to classical forms of writing.", 
+"true": "Modernism involved breaking from traditional literary styles."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_06"]
+script = ExtResource("1_7hrog")
+id = "ENG_06"
+term = "Stream of Consciousness"
+keyword = "thoughts"
+definition = "A narrative mode that depicts the multitudinous thoughts and feelings which pass through the mind."
+simple_terms = "Writing like unfiltered thoughts."
+examples = ["Faulkner", "Joyce", "Woolf"]
+accepted_terms = ["SOC"]
+difficulty = 2
+related_to = ["modernism", "experimental", "prose", "psychology"]
+tof_statement = {
+"false": "Stream of consciousness is a formal dialogue between characters.", 
+"true": "Stream of consciousness mimics the flow of inner thoughts."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_07"]
+script = ExtResource("1_7hrog")
+id = "ENG_07"
+term = "Tragedy"
+keyword = "downfall"
+definition = "A genre of drama based on human suffering that invokes catharsis or pleasure in audiences through pity and fear."
+simple_terms = "A story with a sad ending and a fall."
+examples = ["Hamlet", "Oedipus Rex", "Macbeth"]
+accepted_terms = []
+difficulty = 1
+related_to = ["drama", "greek", "shakespeare", "genre"]
+tof_statement = {
+"false": "Tragedy is a genre focused on happy endings and celebration.", 
+"true": "Tragedy involves a protagonist's downfall and evokes strong emotions."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_08"]
+script = ExtResource("1_7hrog")
+id = "ENG_08"
+term = "Satire"
+keyword = "ridicule"
+definition = "The use of humor, irony, exaggeration, or ridicule to expose and criticize people's stupidity or vices."
+simple_terms = "Making fun of flaws with humor."
+examples = ["Gulliver's Travels", "Animal Farm", "The Simpsons"]
+accepted_terms = []
+difficulty = 1
+related_to = ["irony", "humor", "criticism", "genre"]
+tof_statement = {
+"false": "Satire is a genre that always ends with a moral lesson.", 
+"true": "Satire uses humor to criticize societal flaws."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_09"]
+script = ExtResource("1_7hrog")
+id = "ENG_09"
+term = "Metaphor"
+keyword = "comparison"
+definition = "A figure of speech in which a word or phrase is applied to an object or action to which it is not literally applicable."
+simple_terms = "Saying something IS something else."
+examples = ["The world's a stage", "He's a shining star", "Her eyes were pools"]
+accepted_terms = []
+difficulty = 1
+related_to = ["figurative language", "poetry", "prose", "literary device"]
+tof_statement = {
+"false": "A metaphor uses 'like' or 'as' to make a comparison.", 
+"true": "A metaphor directly compares two unlike things without using 'like' or 'as'."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_10"]
+script = ExtResource("1_7hrog")
+id = "ENG_10"
+term = "Allegory"
+keyword = "symbolism"
+definition = "A story, poem, or picture that can be interpreted to reveal a hidden meaning, typically a moral or political one."
+simple_terms = "A story with a hidden, symbolic meaning."
+examples = ["Animal Farm", "Pilgrim's Progress", "The Faerie Queene"]
+accepted_terms = []
+difficulty = 2
+related_to = ["symbolism", "narrative", "meaning", "genre"]
+tof_statement = {
+"false": "Allegory is a straightforward, literal narrative.", 
+"true": "Allegory uses symbols to convey a deeper meaning."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_11"]
+script = ExtResource("1_7hrog")
+id = "ENG_11"
+term = "Romanticism"
+keyword = "emotion"
+definition = "A literary and artistic movement emphasizing emotion, individualism, and glorification of the past and nature."
+simple_terms = "Focus on feelings, nature, and the individual."
+examples = ["Wordsworth", "Coleridge", "Keats"]
+accepted_terms = []
+difficulty = 1
+related_to = ["emotion", "nature", "individualism", "movement"]
+tof_statement = {
+"false": "Romanticism focused on logic and industrial progress.", 
+"true": "Romanticism valued emotion and individual experience highly."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_12"]
+script = ExtResource("1_7hrog")
+id = "ENG_12"
+term = "Alliteration"
+keyword = "repetition"
+definition = "The occurrence of the same letter or sound at the beginning of adjacent or closely connected words."
+simple_terms = "Repeating the same starting sound."
+examples = ["Peter Piper picked", "She sells seashells", "Silent, silver stars"]
+accepted_terms = []
+difficulty = 1
+related_to = ["poetry", "sound devices", "literary device", "verse"]
+tof_statement = {
+"false": "Alliteration repeats the vowel sounds within words.", 
+"true": "Alliteration repeats the initial sound in nearby words."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_13"]
+script = ExtResource("1_7hrog")
+id = "ENG_13"
+term = "Protagonist"
+keyword = "main character"
+definition = "The leading character or one of the major characters in a drama, movie, novel, or other fictional text."
+simple_terms = "The main hero or heroine."
+examples = ["Hamlet", "Elizabeth Bennet", "Harry Potter"]
+accepted_terms = []
+difficulty = 1
+related_to = ["character", "narrative", "role", "archetype"]
+tof_statement = {
+"false": "The protagonist is always the villain of the story.", 
+"true": "The protagonist is the central character of a story."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_14"]
+script = ExtResource("1_7hrog")
+id = "ENG_14"
+term = "Antagonist"
+keyword = "opposes"
+definition = "A character or force in conflict with the protagonist."
+simple_terms = "The character who opposes the main one."
+examples = ["Iago", "Voldemort", "Sauron"]
+accepted_terms = []
+difficulty = 1
+related_to = ["character", "conflict", "narrative", "role"]
+tof_statement = {
+"false": "The antagonist is always the main character's best friend.", 
+"true": "The antagonist actively works against the protagonist."
+}
+type_of_information = ["definition", "explain", "apply"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[sub_resource type="Resource" id="Resource_eng_15"]
+script = ExtResource("1_7hrog")
+id = "ENG_15"
+term = "Victorian Novel"
+keyword = "social issues"
+definition = "Novels written during Queen Victoria's reign, often exploring social issues, class, and morality."
+simple_terms = "Novels from the 1800s about society."
+examples = ["Pride and Prejudice", "Great Expectations", "Jane Eyre"]
+accepted_terms = []
+difficulty = 1
+related_to = ["realism", "social commentary", "19th century", "prose"]
+tof_statement = {
+"false": "Victorian novels exclusively focus on fantasy and magic.", 
+"true": "Victorian novels frequently address societal norms and problems."
+}
+type_of_information = ["definition", "explain", "list"]
+metadata/_custom_type_script = "uid://dadne10e1geqd"
+
+[resource]
+script = ExtResource("2_bkryn")
+lesson_title = "English literature"
+lesson_items = Array[ExtResource("1_7hrog")]([SubResource("Resource_eng_01"), SubResource("Resource_eng_02"), SubResource("Resource_eng_03"), SubResource("Resource_eng_04"), SubResource("Resource_eng_05"), SubResource("Resource_eng_06"), SubResource("Resource_eng_07"), SubResource("Resource_eng_08"), SubResource("Resource_eng_09"), SubResource("Resource_eng_10"), SubResource("Resource_eng_11"), SubResource("Resource_eng_12"), SubResource("Resource_eng_13"), SubResource("Resource_eng_14"), SubResource("Resource_eng_15")])
+metadata/_custom_type_script = "uid://7kxviye2bk4p"
